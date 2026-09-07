@@ -1717,7 +1717,7 @@ git commit -m "feat: complete landing page narrative"
 - Observes: `#hero-primary-cta` and `#final-primary-cta`.
 - Produces: a fixed CTA visible only below the hero and before the final CTA, hidden from tablet widths upward.
 
-- [ ] **Step 1: Write the failing visibility test**
+- [x] **Step 1: Write the failing visibility test**
 
 ```tsx
 // components/landing/MobileStickyCta.test.tsx
@@ -1763,13 +1763,13 @@ it("appears after the hero and disappears when the final CTA is visible", () => 
 });
 ```
 
-- [ ] **Step 2: Verify the test fails**
+- [x] **Step 2: Verify the test fails**
 
 Run: `npm test -- components/landing/MobileStickyCta.test.tsx`
 
 Expected: FAIL because `MobileStickyCta` does not exist.
 
-- [ ] **Step 3: Implement one shared observer and accessible CTA**
+- [x] **Step 3: Implement one shared observer and accessible CTA**
 
 ```tsx
 // components/landing/MobileStickyCta.tsx
@@ -1817,7 +1817,7 @@ export function MobileStickyCta({ campaign }: { campaign: LandingCampaign }) {
 }
 ```
 
-- [ ] **Step 4: Compose and style without covering content**
+- [x] **Step 4: Compose and style without covering content**
 
 Render `MobileStickyCta` after `SiteFooter`, and wrap the page in `<div className={styles.siteShell}>`. Do not make the full viewport edge clickable.
 
@@ -1833,7 +1833,7 @@ Render `MobileStickyCta` after `SiteFooter`, and wrap the page in `<div classNam
 }
 ```
 
-- [ ] **Step 5: Run checks and commit**
+- [x] **Step 5: Run checks and commit**
 
 ```powershell
 npm test -- components/landing/MobileStickyCta.test.tsx

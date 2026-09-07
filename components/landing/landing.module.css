@@ -1,5 +1,6 @@
 .siteShell {
   min-width: 0;
+  padding-bottom: calc(5rem + env(safe-area-inset-bottom));
 }
 
 .header {
@@ -626,7 +627,43 @@
   color: inherit;
 }
 
+.mobileSticky {
+  position: fixed;
+  z-index: 40;
+  inset-inline: 0;
+  bottom: 0;
+  padding: 0.75rem var(--space-4) max(0.75rem, env(safe-area-inset-bottom));
+  pointer-events: none;
+}
+
+.mobileSticky[hidden] {
+  display: none;
+}
+
+.mobileStickyLink {
+  display: flex;
+  min-height: 3.25rem;
+  align-items: center;
+  justify-content: center;
+  max-width: 32rem;
+  margin-inline: auto;
+  padding: 0.8rem var(--space-4);
+  background: var(--brand-primary);
+  color: var(--on-dark);
+  box-shadow: 0 0.5rem 1.5rem rgb(52 37 34 / 24%);
+  font-weight: 800;
+  text-decoration: none;
+  pointer-events: auto;
+}
+
 @media (min-width: 48rem) {
+  .siteShell {
+    padding-bottom: 0;
+  }
+
+  .mobileSticky {
+    display: none;
+  }
   .headerInner {
     grid-template-columns: 15rem minmax(0, 1fr) auto;
     max-width: var(--content);
