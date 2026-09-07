@@ -28,7 +28,7 @@ export function LandingPage({ campaign }: { campaign: LandingCampaign }) {
         <ProcessFaq process={campaign.process} faq={campaign.faq} />
         <FinalCta campaign={campaign} />
       </main>
-      <SiteFooter />
+      <SiteFooter campaign={campaign} />
       <MobileStickyCta campaign={campaign} />
       <MotionLoader />
     </div>

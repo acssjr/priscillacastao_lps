@@ -16,10 +16,14 @@ describe("forro-do-zero campaign", () => {
 
   it("labels every fictitious testimonial as demonstration content", () => {
     expect(forroDoZeroCampaign.proof.status).toBe("demonstration");
-    expect(forroDoZeroCampaign.proof.disclaimer).toMatch(/fictícios/i);
     expect(forroDoZeroCampaign.proof.testimonials).toHaveLength(3);
     expect(forroDoZeroCampaign.proof.testimonials.every((item) => !item.verified)).toBe(true);
     expect(forroDoZeroCampaign.proof.testimonials.every((item) => /fictíci/i.test(item.name))).toBe(true);
+  });
+
+  it("provides a distinct prefilled message for each contact intent", () => {
+    expect(Object.keys(forroDoZeroCampaign.whatsapp.messages)).toEqual(["individual", "dupla", "grupo-workshop"]);
+    expect(new Set(Object.values(forroDoZeroCampaign.whatsapp.messages)).size).toBe(3);
   });
 
   it("keeps navigation targets unique", () => {

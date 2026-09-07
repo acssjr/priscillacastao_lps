@@ -3,7 +3,7 @@ import { readConsent } from "./consent";
 
 export type TrackingEvent =
   | { name: "page_view" }
-  | { name: "whatsapp_click"; placement: "header" | "hero" | "proof" | "format" | "sticky" | "closing"; offer: OfferKey }
+  | { name: "whatsapp_click"; placement: "header" | "mobile_menu" | "hero" | "proof" | "format" | "format_alternative" | "sticky" | "closing" | "footer"; offer: OfferKey }
   | { name: "format_select"; offer: OfferKey }
   | { name: "proof_open"; source: "instagram" }
   | { name: "faq_open"; question: string }

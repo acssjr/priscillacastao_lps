@@ -48,8 +48,7 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
     title: "Aprenda forró do zero, no seu ritmo.",
     titleHighlight: "do zero,",
     body: [
-      "Uma aula particular para você começar com segurança, mesmo sem saber nenhum passo ou levar um par.",
-      "Priscilla acompanha cada fundamento de perto, em um ambiente reservado para perguntar, repetir e aprender com tranquilidade.",
+      "Aula particular, ambiente reservado, explicação no ritmo do aluno, possibilidade de repetir os movimentos com mais calma e você não precisa levar um par.",
     ],
     image: heroImage,
     cta: "AGENDAR MINHA AULA",
@@ -71,53 +70,45 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
   },
   method: {
     eyebrow: "Como Priscilla ensina",
-    title: "Primeiro, você entende o corpo. Depois, o movimento começa a fazer sentido.",
+    title: "Antes de decorar passos, você aprende a base que faz o movimento funcionar.",
     body: [
-      "A aula não começa por uma coleção de passos para decorar. Priscilla trabalha fundamentos que ajudam você a perceber o que está fazendo e a construir segurança aos poucos.",
+      "Priscilla mostra como apoiar os pés, transferir o peso, manter o equilíbrio e perceber os sinais do par. Você pratica cada parte com calma antes de juntar tudo na dança.",
     ],
     pillars: [
       {
-        title: "Consciência corporal",
-        body: "Transferência de peso, base e equilíbrio ajudam a organizar o movimento e a perceber onde o corpo está em cada passo.",
+        title: "Base e equilíbrio",
+        body: "Você pratica onde apoiar os pés e como transferir o peso sem perder o equilíbrio durante o passo.",
       },
       {
-        title: "Escuta e comunicação",
-        body: "O forró acontece como uma conversa. Você aprende a perceber os sinais do par e a responder com mais clareza e conforto.",
+        title: "Como dançar com o par",
+        body: "Você aprende a perceber a condução, responder aos sinais e ajustar a distância para dançar com mais conforto.",
       },
       {
-        title: "Musicalidade e presença",
-        body: "Reconhecer a pulsação e escutar a música ajuda o movimento a ganhar intenção, fluidez e menos rigidez.",
+        title: "Como acompanhar a música",
+        body: "Você reconhece a marcação da música e pratica como coordenar os passos sem precisar correr para alcançar o ritmo.",
       },
     ],
     image: methodImage,
   },
   proof: {
-    eyebrow: "Dança vivida, ensino com escuta",
-    title: "A forma de ensinar nasce da relação de Priscilla com o forró.",
-    context: "Em seu primeiro ensaio profissional como professora, Priscilla falou sobre estudo, treino, escuta e as trocas construídas com cada aluno. Sua comunicação pública retoma esses mesmos fundamentos quando explica corpo, conexão e musicalidade.",
+    eyebrow: "Experiências de alunos",
+    title: "Quem começa do zero precisa de tempo para perguntar, praticar e repetir.",
     poster: proofPoster,
-    sourceUrl: "https://www.instagram.com/p/DJxh-HRu21yEMWmeg31HRckKDKDxPU8-dQ7Tk40/",
-    sourceLabel: "Ver Priscilla dançando no Instagram",
     status: "demonstration",
-    label: "Depoimentos demonstrativos para apresentação do projeto",
-    disclaimer: "Os textos abaixo são fictícios. Eles mostram como relatos reais poderão aparecer na página e precisam ser substituídos antes da publicação.",
     testimonials: [
       {
         name: "Marina S. · nome fictício",
         quote: "Eu nunca tinha dançado e tinha receio de não acompanhar. Na aula particular, consegui entender cada movimento com calma e perguntar sem pressa.",
-        context: "Texto demonstrativo",
         verified: false,
       },
       {
         name: "Carlos M. · nome fictício",
         quote: "A aula me ajudou a perceber a transferência de peso em vez de tentar copiar passos. Quando entendi isso, fiquei mais à vontade para continuar aprendendo.",
-        context: "Texto demonstrativo",
         verified: false,
       },
       {
         name: "Ana e Rafael · nomes fictícios",
         quote: "Queríamos aprender juntos, mas cada um tinha uma dificuldade diferente. Priscilla ajustou a aula para que os dois participassem sem um apressar o outro.",
-        context: "Texto demonstrativo",
         verified: false,
       },
     ],
@@ -127,6 +118,12 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
     eyebrow: "Escolha como quer começar",
     title: "A mesma atenção próxima, em dois formatos particulares.",
     note: "O local, os horários e o investimento são combinados depois que Priscilla entende a necessidade de vocês.",
+    alternative: {
+      key: "grupo-workshop",
+      title: "Precisa de uma aula em grupo ou workshop?",
+      body: "Priscilla também conversa sobre aulas para grupos e workshops. Conte o formato, o número de pessoas e o que você pretende organizar.",
+      cta: "CONVERSAR SOBRE GRUPO OU WORKSHOP",
+    },
   },
   offers: [
     {
@@ -181,17 +178,18 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
   },
   closing: {
     eyebrow: "Seu primeiro passo",
-    title: "Você pode começar o forró com tempo para entender, repetir e ganhar segurança.",
+    title: "Você pode aprender forró com tempo para entender, repetir e ganhar segurança.",
     body: [
       "Conte a Priscilla o que você procura. Ela vai explicar as aulas particulares e combinar com você o formato, o local, os horários e o investimento.",
     ],
-    cta: "Conversar sobre minha primeira aula",
+    cta: "AGENDAR MINHA PRIMEIRA AULA",
   },
   whatsapp: {
     phone: "5575981234176",
     messages: {
-      individual: "Oi, Priscilla! Vim pela página de aulas para iniciantes e quero entender como funciona a aula particular individual.",
-      dupla: "Oi, Priscilla! Vim pela página de aulas para iniciantes e quero entender como funciona a aula particular em dupla.",
+      individual: "Oi, Priscilla! Vim pela página de aulas e quero agendar uma aula particular individual. Estou começando do zero e gostaria de saber sobre locais, horários e valores.",
+      dupla: "Oi, Priscilla! Vim pela página de aulas e quero agendar uma aula particular em dupla. Gostaria de saber sobre locais, horários e valores.",
+      "grupo-workshop": "Oi, Priscilla! Vim pela página de aulas e gostaria de conversar sobre uma aula em grupo ou workshop. Pode me explicar os formatos, a disponibilidade e os valores?",
     },
   },
 });

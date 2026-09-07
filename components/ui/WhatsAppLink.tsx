@@ -17,7 +17,7 @@ type Props = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href" | "onClick"> &
 
 export function WhatsAppLink({ phone, message, placement, offer, children, ...props }: Props) {
   const handleClick = () => {
-    if (placement === "format") trackEvent({ name: "format_select", offer });
+    if (placement === "format" || placement === "format_alternative") trackEvent({ name: "format_select", offer });
     trackEvent({ name: "whatsapp_click", placement, offer });
   };
 

@@ -1,16 +1,18 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { forroDoZeroCampaign } from "@/content/landing-pages/forro-do-zero";
 import { SiteHeader } from "./SiteHeader";
 
-describe("SiteHeader", () => {
-  it("keeps the brand, navigation and WhatsApp action available", () => {
-    render(<SiteHeader campaign={forroDoZeroCampaign} />);
+it("opens an accessible mobile navigation and closes it after selecting a section", async () => {
+  render(<SiteHeader campaign={forroDoZeroCampaign} />);
 
-    expect(screen.getByRole("img", { name: "Priscilla Castão" })).toHaveAttribute("data-brand-color", "#64121f");
-    expect(screen.getByRole("navigation", { hidden: true })).toHaveAttribute("aria-label", "Navegação principal");
-    expect(screen.getByRole("link", { name: "Conversar" })).toHaveAttribute(
-      "href",
-      expect.stringContaining("wa.me/5575981234176"),
-    );
-  });
+  await userEvent.click(screen.getByRole("button", { name: "Abrir menu" }));
+  expect(screen.getByRole("dialog", { name: "Menu" })).toBeInTheDocument();
+  const mobileNavigation = screen.getByRole("navigation", { name: "Menu mobile" });
+  for (const item of forroDoZeroCampaign.navigation) {
+    expect(mobileNavigation).toHaveTextContent(item.label);
+  }
+
+  await userEvent.click(within(mobileNavigation).getByRole("link", { name: forroDoZeroCampaign.navigation[0].label }));
+  await waitFor(() => expect(screen.queryByRole("dialog", { name: "Menu" })).not.toBeInTheDocument());
 });

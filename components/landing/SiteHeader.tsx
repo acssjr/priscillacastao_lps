@@ -1,5 +1,6 @@
 import type { LandingCampaign } from "@/content/landing-pages/schema";
 import { WhatsAppLink } from "@/components/ui/WhatsAppLink";
+import { MobileMenu } from "./MobileMenu";
 import styles from "./landing.module.css";
 
 export function SiteHeader({ campaign }: { campaign: LandingCampaign }) {
@@ -15,6 +16,7 @@ export function SiteHeader({ campaign }: { campaign: LandingCampaign }) {
         <WhatsAppLink className={styles.headerCta} phone={campaign.whatsapp.phone} message={campaign.whatsapp.messages.individual} placement="header" offer="individual">
           Conversar
         </WhatsAppLink>
+        <MobileMenu campaign={campaign} />
       </div>
     </header>
   );

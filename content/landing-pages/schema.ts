@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const OfferKeySchema = z.enum(["individual", "dupla"]);
+export const OfferKeySchema = z.enum(["individual", "dupla", "grupo-workshop"]);
 export type OfferKey = z.infer<typeof OfferKeySchema>;
 
 const ImageSchema = z.object({
@@ -19,7 +19,6 @@ const RichSectionSchema = z.object({
 const TestimonialSchema = z.object({
   name: z.string().min(2),
   quote: z.string().min(20),
-  context: z.string().min(2),
   verified: z.boolean(),
 });
 
@@ -54,13 +53,8 @@ export const LandingCampaignSchema = z.object({
   proof: z.object({
     eyebrow: z.string().min(1),
     title: z.string().min(1),
-    context: z.string().min(20),
     poster: ImageSchema,
-    sourceUrl: z.string().url(),
-    sourceLabel: z.string().min(2),
     status: z.enum(["verified", "demonstration"]),
-    label: z.string().min(2),
-    disclaimer: z.string().min(20),
     testimonials: z.array(TestimonialSchema).min(2).max(4),
     cta: z.string().min(2),
   }).superRefine((proof, context) => {
@@ -72,9 +66,15 @@ export const LandingCampaignSchema = z.object({
     eyebrow: z.string().min(1),
     title: z.string().min(1),
     note: z.string().min(10),
+    alternative: z.object({
+      key: z.literal("grupo-workshop"),
+      title: z.string().min(1),
+      body: z.string().min(10),
+      cta: z.string().min(2),
+    }),
   }),
   offers: z.array(z.object({
-    key: OfferKeySchema,
+    key: z.enum(["individual", "dupla"]),
     title: z.string().min(1),
     audience: z.string().min(1),
     body: z.string().min(1),
