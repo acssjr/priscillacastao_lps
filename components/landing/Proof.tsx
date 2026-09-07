@@ -36,10 +36,10 @@ export function Proof({ content }: { content: LandingCampaign["proof"] }) {
           {content.testimonials.map((testimonial) => (
             <blockquote key={`${testimonial.name}-${testimonial.quote}`}>
               <p>“{testimonial.quote}”</p>
-              <footer>
+              <div className={styles.quoteAttribution}>
                 <cite>{testimonial.name}</cite>
                 {testimonial.context && <small>{testimonial.context}</small>}
-              </footer>
+              </div>
             </blockquote>
           ))}
         </div>

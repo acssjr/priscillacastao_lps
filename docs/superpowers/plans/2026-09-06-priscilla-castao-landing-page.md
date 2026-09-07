@@ -1521,7 +1521,7 @@ git commit -m "feat: add labeled demo proof and lesson formats"
 - Consumes: `campaign.about`, `campaign.process`, `campaign.faq`, `campaign.closing` and WhatsApp messages.
 - Produces: `#sobre`, `#como-comecar`, `#duvidas`, final CTA ID `#final-primary-cta` and complete landmarks.
 
-- [ ] **Step 1: Write failing closing-section tests**
+- [x] **Step 1: Write failing closing-section tests**
 
 ```tsx
 // components/landing/ClosingSections.test.tsx
@@ -1546,13 +1546,13 @@ it("has one main landmark and a labeled footer", () => {
 });
 ```
 
-- [ ] **Step 2: Verify tests fail**
+- [x] **Step 2: Verify tests fail**
 
 Run: `npm test -- components/landing/ClosingSections.test.tsx`
 
 Expected: FAIL because the closing components do not exist.
 
-- [ ] **Step 3: Implement About and ProcessFaq as Server Components**
+- [x] **Step 3: Implement About and ProcessFaq as Server Components**
 
 `About` renders the third portrait and only approved paragraphs. `ProcessFaq` uses an ordered list for the five steps and the tracked native disclosure from Task 4.
 
@@ -1602,7 +1602,7 @@ export function ProcessFaq({ process, faq }: Props) {
 }
 ```
 
-- [ ] **Step 4: Implement FinalCta and SiteFooter**
+- [x] **Step 4: Implement FinalCta and SiteFooter**
 
 ```tsx
 // components/landing/FinalCta.tsx
@@ -1646,7 +1646,7 @@ export function SiteFooter() {
 
 External links receive an explicit accessible name. Keep only confirmed identity/location facts in the footer.
 
-- [ ] **Step 5: Complete the LandingPage order**
+- [x] **Step 5: Complete the LandingPage order**
 
 ```tsx
 <>
@@ -1665,7 +1665,7 @@ External links receive an explicit accessible name. Keep only confirmed identity
 </>
 ```
 
-- [ ] **Step 6: Add exact closing-section styles**
+- [x] **Step 6: Add exact closing-section styles**
 
 ```css
 /* append to components/landing/landing.module.css */
@@ -1694,7 +1694,7 @@ External links receive an explicit accessible name. Keep only confirmed identity
 }
 ```
 
-- [ ] **Step 7: Run the full component suite and commit**
+- [x] **Step 7: Run the full component suite and commit**
 
 ```powershell
 npm test -- components/landing
