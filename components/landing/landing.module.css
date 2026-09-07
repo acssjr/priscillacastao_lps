@@ -1,0 +1,76 @@
+.siteShell {
+  min-width: 0;
+}
+
+.header {
+  position: absolute;
+  z-index: 30;
+  inset: 0 0 auto;
+  color: var(--brand-dark);
+}
+
+.headerInner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: var(--header-height);
+  padding: var(--space-3) var(--space-4);
+}
+
+.brandLink,
+.headerCta,
+.desktopNav a {
+  min-height: 3rem;
+}
+
+.brandLink {
+  display: inline-flex;
+  align-items: center;
+  width: min(11.5rem, 100%);
+}
+
+.brandLogo {
+  width: 100%;
+  height: auto;
+}
+
+.desktopNav {
+  display: none;
+}
+
+.headerCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1rem;
+  background: var(--brand-primary);
+  color: var(--on-dark);
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+@media (min-width: 48rem) {
+  .headerInner {
+    grid-template-columns: 15rem minmax(0, 1fr) auto;
+    max-width: var(--content);
+    margin-inline: auto;
+    padding-inline: var(--space-8);
+  }
+
+  .desktopNav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(0.75rem, 2vw, 1.75rem);
+  }
+
+  .desktopNav a {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+}

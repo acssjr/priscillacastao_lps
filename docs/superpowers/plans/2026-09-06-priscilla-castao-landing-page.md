@@ -124,8 +124,8 @@
 
 ### Public assets
 
-- `public/brand/priscilla-castao-logo.svg`: lockup horizontal do cabeçalho.
-- `public/brand/priscilla-castao-mark.svg`: marca quadrada para ícones.
+- `public/brand/priscilla-castao-logo.webp`: lockup horizontal otimizado do cabeçalho.
+- `public/brand/priscilla-castao-mark.webp`: marca quadrada otimizada para ícones.
 - `public/images/priscilla-castao-ensaio-01.webp`: hero.
 - `public/images/priscilla-castao-ensaio-02.webp`: método.
 - `public/images/priscilla-castao-ensaio-03.webp`: sobre.
@@ -971,8 +971,8 @@ git commit -m "feat: add resilient WhatsApp and tracking primitives"
 ### Task 5: Add assets, fonts, tokens and the application shell
 
 **Files:**
-- Create: `public/brand/priscilla-castao-logo.svg`
-- Create: `public/brand/priscilla-castao-mark.svg`
+- Create: `public/brand/priscilla-castao-logo.webp`
+- Create: `public/brand/priscilla-castao-mark.webp`
 - Create: `public/images/priscilla-castao-ensaio-01.webp`
 - Create: `public/images/priscilla-castao-ensaio-02.webp`
 - Create: `public/images/priscilla-castao-ensaio-03.webp`
@@ -988,7 +988,7 @@ git commit -m "feat: add resilient WhatsApp and tracking primitives"
 - Consumes: `LandingCampaign`, `WhatsAppLink` and approved local assets.
 - Produces: global design tokens, local fonts, stable public asset paths and the page composition boundary.
 
-- [ ] **Step 1: Write failing asset tests**
+- [x] **Step 1: Write failing asset tests**
 
 ```ts
 // tests/assets.test.ts
@@ -996,8 +996,8 @@ import { access, stat } from "node:fs/promises";
 import { describe, expect, it } from "vitest";
 
 const assets = [
-  "public/brand/priscilla-castao-logo.svg",
-  "public/brand/priscilla-castao-mark.svg",
+  "public/brand/priscilla-castao-logo.webp",
+  "public/brand/priscilla-castao-mark.webp",
   "public/images/priscilla-castao-ensaio-01.webp",
   "public/images/priscilla-castao-ensaio-02.webp",
   "public/images/priscilla-castao-ensaio-03.webp",
@@ -1014,25 +1014,24 @@ describe("production assets", () => {
 });
 ```
 
-- [ ] **Step 2: Verify the asset tests fail**
+- [x] **Step 2: Verify the asset tests fail**
 
 Run: `npm test -- tests/assets.test.ts`
 
 Expected: FAIL because `public/` assets do not exist.
 
-- [ ] **Step 3: Copy only approved production assets**
+- [x] **Step 3: Copy only approved production assets**
 
 ```powershell
 New-Item -ItemType Directory -Force -Path public/brand,public/images
-Copy-Item -LiteralPath assets/brand/priscilla-castao-marca-02.svg -Destination public/brand/priscilla-castao-logo.svg
-Copy-Item -LiteralPath assets/brand/priscilla-castao-marca-04.svg -Destination public/brand/priscilla-castao-mark.svg
+Convert the source SVG assets to transparent WebP derivatives at 1200x300 and 768x768, preserving alpha at maximum quality.
 Copy-Item -LiteralPath assets/instagram/DW1kXWEkYEa/webp/priscilla-castao-ensaio-01.webp -Destination public/images/priscilla-castao-ensaio-01.webp
 Copy-Item -LiteralPath assets/instagram/DW1kXWEkYEa/webp/priscilla-castao-ensaio-02.webp -Destination public/images/priscilla-castao-ensaio-02.webp
 Copy-Item -LiteralPath assets/instagram/DW1kXWEkYEa/webp/priscilla-castao-ensaio-03.webp -Destination public/images/priscilla-castao-ensaio-03.webp
 Copy-Item -LiteralPath assets/instagram/DJxh-HRu21yEMWmeg31HRckKDKDxPU8-dQ7Tk40/webp/priscilla-castao-forro-roots-capa.webp -Destination public/images/priscilla-castao-forro-roots-capa.webp
 ```
 
-- [ ] **Step 4: Define fonts and root layout**
+- [x] **Step 4: Define fonts and root layout**
 
 ```tsx
 // app/layout.tsx
@@ -1063,7 +1062,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
 
 Use Plus Jakarta Sans for every functional label and paragraph. Restrict Newsreader initially to large quotations or one editorial phrase through `var(--font-editorial)`. Do not use weights below 400 for running text.
 
-- [ ] **Step 5: Implement global tokens and accessible defaults**
+- [x] **Step 5: Implement global tokens and accessible defaults**
 
 ```css
 /* app/globals.css */
@@ -1101,7 +1100,7 @@ button, a { touch-action: manipulation; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 ```
 
-- [ ] **Step 6: Implement the header and composition boundary**
+- [x] **Step 6: Implement the header and composition boundary**
 
 `SiteHeader` receives `campaign: LandingCampaign`, renders the horizontal logo, hides nonessential anchor navigation below 768 px, and exposes a 48 px CTA. `LandingPage` receives one campaign and owns section order only. Do not put campaign copy inside these components.
 
@@ -1116,7 +1115,7 @@ export function SiteHeader({ campaign }: { campaign: LandingCampaign }) {
   return (
     <header className={styles.header}>
       <a href="#inicio" aria-label="Priscilla Castão, início">
-        <Image src="/brand/priscilla-castao-logo.svg" alt="Priscilla Castão" width={240} height={60} priority />
+        <Image src="/brand/priscilla-castao-logo.webp" alt="Priscilla Castão" width={240} height={60} priority />
       </a>
       <nav className={styles.desktopNav} aria-label="Navegação principal">
         {campaign.navigation.map((item) => <a href={item.target} key={item.target}>{item.label}</a>)}
@@ -1152,7 +1151,7 @@ export function LandingPage({ campaign }: { campaign: LandingCampaign }) {
 
 Update `app/page.tsx` to call `getCampaign("forro-do-zero")` and render `LandingPage`.
 
-- [ ] **Step 7: Verify assets, shell and build**
+- [x] **Step 7: Verify assets, shell and build**
 
 ```powershell
 npm test -- tests/assets.test.ts tests/smoke.test.tsx
@@ -1163,7 +1162,7 @@ npm run build
 
 Expected: all pass; generated HTML uses `lang="pt-BR"` and local public assets.
 
-- [ ] **Step 8: Commit the visual foundation**
+- [x] **Step 8: Commit the visual foundation**
 
 ```powershell
 git add public app components/landing tests/assets.test.ts
@@ -1633,7 +1632,7 @@ import styles from "./landing.module.css";
 export function SiteFooter() {
   return (
     <footer className={styles.footer}>
-      <Image src="/brand/priscilla-castao-mark.svg" alt="" width={64} height={64} />
+      <Image src="/brand/priscilla-castao-mark.webp" alt="" width={64} height={64} />
       <p>Priscilla Castão · Professora de forró · Salvador, BA</p>
       <nav aria-label="Links do rodapé">
         <a href="https://www.instagram.com/priscillacastao_danca/" target="_blank" rel="noreferrer" aria-label="Instagram de Priscilla Castão (abre em nova aba)">Instagram</a>
@@ -2290,7 +2289,7 @@ export const contentType = "image/png";
 
 export default function OpenGraphImage() {
   const campaign = getCampaign("forro-do-zero");
-  const mark = new URL("/brand/priscilla-castao-mark.svg", getSiteUrl()).toString();
+  const mark = new URL("/brand/priscilla-castao-mark.webp", getSiteUrl()).toString();
   return new ImageResponse(
     <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", gap: 56, padding: 72, background: "#4B0D17", color: "#FAF5EC", fontFamily: "sans-serif" }}>
       <img src={mark} alt="" width="170" height="170" />

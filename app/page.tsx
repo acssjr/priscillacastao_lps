@@ -1,3 +1,6 @@
+import { LandingPage } from "@/components/landing/LandingPage";
+import { getCampaign } from "@/content/landing-pages/registry";
+
 export default function HomePage() {
-  return <main id="conteudo">Landing page em construção</main>;
+  return <LandingPage campaign={getCampaign("forro-do-zero")} />;
 }

@@ -1,5 +1,6 @@
 .worktrees/
 .next/
+.artifacts/
 node_modules/
 coverage/
 playwright-report/
