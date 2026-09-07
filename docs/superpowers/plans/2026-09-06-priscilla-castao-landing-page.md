@@ -730,7 +730,7 @@ git commit -m "feat: add validated forro do zero campaign content"
 - Consumes: `OfferKey` and campaign messages from Task 3.
 - Produces: `normalizeWhatsAppPhone`, `buildWhatsAppUrl`, `readConsent`, `writeConsent`, `trackEvent`, `WhatsAppLink`, `TrackedExternalLink` and `TrackedDetails`.
 
-- [ ] **Step 1: Write failing WhatsApp tests**
+- [x] **Step 1: Write failing WhatsApp tests**
 
 ```ts
 // lib/whatsapp.test.ts
@@ -753,7 +753,7 @@ describe("WhatsApp URL", () => {
 });
 ```
 
-- [ ] **Step 2: Write failing consent and analytics tests**
+- [x] **Step 2: Write failing consent and analytics tests**
 
 ```ts
 // lib/analytics.test.ts
@@ -782,13 +782,13 @@ describe("trackEvent", () => {
 });
 ```
 
-- [ ] **Step 3: Run the tests to verify they fail**
+- [x] **Step 3: Run the tests to verify they fail**
 
 Run: `npm test -- lib/whatsapp.test.ts lib/analytics.test.ts lib/consent.test.ts`
 
 Expected: FAIL because the libraries do not exist.
 
-- [ ] **Step 4: Implement phone and URL validation**
+- [x] **Step 4: Implement phone and URL validation**
 
 ```ts
 // lib/whatsapp.ts
@@ -807,7 +807,7 @@ export function buildWhatsAppUrl(phone: string, message: string): string {
 }
 ```
 
-- [ ] **Step 5: Implement the consent store**
+- [x] **Step 5: Implement the consent store**
 
 ```ts
 // lib/consent.ts
@@ -836,7 +836,7 @@ export function writeConsent(value: ConsentValue): void {
 
 Add tests that invalid stored values return `null`, accepted/rejected values round-trip, and storage exceptions do not throw.
 
-- [ ] **Step 6: Implement the typed privacy-safe event layer**
+- [x] **Step 6: Implement the typed privacy-safe event layer**
 
 ```ts
 // lib/analytics.ts
@@ -867,7 +867,7 @@ export function trackEvent(event: TrackingEvent): void {
 }
 ```
 
-- [ ] **Step 7: Write and implement the resilient link component**
+- [x] **Step 7: Write and implement the resilient link component**
 
 ```tsx
 // components/ui/WhatsAppLink.test.tsx
@@ -922,7 +922,7 @@ export function WhatsAppLink({ phone, message, placement, offer, children, ...pr
 }
 ```
 
-- [ ] **Step 8: Add proof and FAQ event boundaries**
+- [x] **Step 8: Add proof and FAQ event boundaries**
 
 ```tsx
 // components/ui/TrackedExternalLink.tsx
@@ -958,7 +958,7 @@ export function TrackedDetails({ question, children }: { question: string; child
 
 Test with `userEvent`: accepting consent and clicking a format CTA emits `format_select` followed by `whatsapp_click`; opening `TrackedDetails` emits one `faq_open`; clicking `TrackedExternalLink` emits `proof_open`; all retain native link/disclosure behavior.
 
-- [ ] **Step 9: Run checks and commit**
+- [x] **Step 9: Run checks and commit**
 
 ```powershell
 npm test -- lib components/ui
