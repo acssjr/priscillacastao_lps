@@ -541,6 +541,8 @@ git commit -m "chore: bootstrap tested Next.js landing app"
 
 ### Task 3: Define and validate the campaign content model
 
+**Execution note (2026-09-07):** The proof model now carries `status`, `disclaimer` and per-testimonial `verified` fields. A cross-field refinement rejects any campaign that labels unverified quotes as verified proof.
+
 **Files:**
 - Create: `content/landing-pages/schema.ts`
 - Create: `content/landing-pages/forro-do-zero.ts`
@@ -552,7 +554,7 @@ git commit -m "chore: bootstrap tested Next.js landing app"
 - Consumes: approved copy fields from Task 1.
 - Produces: `LandingCampaign`, `OfferKey`, `getCampaign(id)` and `forroDoZeroCampaign`.
 
-- [ ] **Step 1: Write failing schema and registry tests**
+- [x] **Step 1: Write failing schema and registry tests**
 
 ```ts
 // content/landing-pages/schema.test.ts
@@ -583,13 +585,13 @@ describe("forro-do-zero campaign", () => {
 });
 ```
 
-- [ ] **Step 2: Run the tests to verify they fail**
+- [x] **Step 2: Run the tests to verify they fail**
 
 Run: `npm test -- content/landing-pages/schema.test.ts`
 
 Expected: FAIL because schema, campaign and registry do not exist.
 
-- [ ] **Step 3: Implement exact schemas and types**
+- [x] **Step 3: Implement exact schemas and types**
 
 ```ts
 // content/landing-pages/schema.ts
@@ -641,7 +643,7 @@ export const LandingCampaignSchema = z.object({
 export type LandingCampaign = z.infer<typeof LandingCampaignSchema>;
 ```
 
-- [ ] **Step 4: Transcribe the approved copy into the campaign object**
+- [x] **Step 4: Transcribe the approved copy into the campaign object**
 
 Create `forro-do-zero.ts` with `LandingCampaignSchema.parse({...})`. Copy every string verbatim from `docs/content/forro-do-zero-copy.md`. Use these fixed asset records:
 
@@ -675,7 +677,7 @@ const proofPoster = {
 };
 ```
 
-- [ ] **Step 5: Implement the closed registry**
+- [x] **Step 5: Implement the closed registry**
 
 ```ts
 // content/landing-pages/registry.ts
@@ -690,7 +692,7 @@ export function getCampaign(id: CampaignId): LandingCampaign {
 }
 ```
 
-- [ ] **Step 6: Run schema, type and lint checks**
+- [x] **Step 6: Run schema, type and lint checks**
 
 Run:
 
@@ -702,7 +704,7 @@ npm run lint
 
 Expected: all pass and Zod accepts the approved campaign.
 
-- [ ] **Step 7: Commit the campaign domain**
+- [x] **Step 7: Commit the campaign domain**
 
 ```powershell
 git add content/landing-pages
