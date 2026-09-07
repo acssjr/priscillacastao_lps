@@ -712,28 +712,61 @@
   z-index: 40;
   inset-inline: 0;
   bottom: 0;
-  padding: 0.75rem var(--space-4) max(0.75rem, env(safe-area-inset-bottom));
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.65rem;
+  align-items: center;
+  padding: 0.7rem max(0.75rem, env(safe-area-inset-right))
+    max(0.7rem, env(safe-area-inset-bottom)) max(0.75rem, env(safe-area-inset-left));
+  border-top: 1px solid rgb(241 226 201 / 28%);
+  background: var(--brand-dark);
+  color: var(--surface-cream);
+  box-shadow: 0 -0.5rem 1.5rem rgb(52 37 34 / 18%);
+  transform: translateY(110%);
+  transition: transform 200ms var(--ease-out);
   pointer-events: none;
 }
 
-.mobileSticky[hidden] {
-  display: none;
+.mobileSticky[data-visible="true"] {
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.mobileStickyCopy {
+  display: grid;
+  gap: 0.18rem;
+  min-width: 0;
+  line-height: 1.15;
+}
+
+.mobileStickyCopy strong {
+  font-size: clamp(0.75rem, 3.4vw, 0.9rem);
+  font-weight: 800;
+}
+
+.mobileStickyCopy small {
+  font-size: clamp(0.65rem, 2.8vw, 0.75rem);
 }
 
 .mobileStickyLink {
-  display: flex;
-  min-height: 3.25rem;
+  display: inline-flex;
+  min-height: 3rem;
   align-items: center;
   justify-content: center;
-  max-width: 32rem;
-  margin-inline: auto;
-  padding: 0.8rem var(--space-4);
-  background: var(--brand-primary);
-  color: var(--on-dark);
-  box-shadow: 0 0.5rem 1.5rem rgb(52 37 34 / 24%);
+  padding: 0.7rem 0.85rem;
+  background: var(--surface-cream);
+  color: var(--brand-dark);
+  font-size: clamp(0.7rem, 3vw, 0.8rem);
   font-weight: 800;
+  line-height: 1.05;
+  white-space: nowrap;
   text-decoration: none;
-  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobileSticky {
+    transition: none;
+  }
 }
 
 @media (min-width: 48rem) {

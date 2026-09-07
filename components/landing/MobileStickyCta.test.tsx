@@ -24,12 +24,17 @@ afterEach(() => vi.unstubAllGlobals());
 it("appears after the hero and disappears when the final CTA is visible", () => {
   render(<MobileStickyCta campaign={forroDoZeroCampaign} />);
   const bar = screen.getByTestId("mobile-sticky-cta");
-  expect(bar).toHaveAttribute("hidden");
+  const link = screen.getByRole("link", { name: "AGENDAR MINHA AULA", hidden: true });
+  expect(screen.getByText("Aula particular para iniciantes")).toBeInTheDocument();
+  expect(screen.getByText("Você combina tudo pelo WhatsApp")).toBeInTheDocument();
+  expect(bar).toHaveAttribute("aria-hidden", "true");
+  expect(link).toHaveAttribute("tabindex", "-1");
 
   const hero = document.querySelector("#hero-primary-cta")!;
   const finalCta = document.querySelector("#final-primary-cta")!;
   act(() => callbacks[0]([{ target: hero, isIntersecting: false } as IntersectionObserverEntry], {} as IntersectionObserver));
-  expect(bar).not.toHaveAttribute("hidden");
+  expect(bar).toHaveAttribute("aria-hidden", "false");
+  expect(link).toHaveAttribute("tabindex", "0");
   act(() => callbacks[0]([{ target: finalCta, isIntersecting: true } as IntersectionObserverEntry], {} as IntersectionObserver));
-  expect(bar).toHaveAttribute("hidden");
+  expect(bar).toHaveAttribute("aria-hidden", "true");
 });

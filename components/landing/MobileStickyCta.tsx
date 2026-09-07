@@ -25,16 +25,28 @@ export function MobileStickyCta({ campaign }: { campaign: LandingCampaign }) {
     return () => observer.disconnect();
   }, []);
 
+  const visible = !heroVisible && !finalVisible;
+
   return (
-    <aside className={styles.mobileSticky} data-testid="mobile-sticky-cta" hidden={heroVisible || finalVisible}>
+    <aside
+      className={styles.mobileSticky}
+      data-testid="mobile-sticky-cta"
+      data-visible={visible}
+      aria-hidden={!visible}
+    >
+      <span className={styles.mobileStickyCopy}>
+        <strong>Aula particular para iniciantes</strong>
+        <small>Você combina tudo pelo WhatsApp</small>
+      </span>
       <WhatsAppLink
         className={styles.mobileStickyLink}
         phone={campaign.whatsapp.phone}
         message={campaign.whatsapp.messages.individual}
         placement="sticky"
         offer="individual"
+        tabIndex={visible ? 0 : -1}
       >
-        Conversar sobre uma aula
+        AGENDAR MINHA AULA
       </WhatsAppLink>
     </aside>
   );
