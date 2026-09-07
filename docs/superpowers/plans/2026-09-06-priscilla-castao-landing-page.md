@@ -245,6 +245,8 @@ git commit -m "docs: approve forro do zero campaign copy"
 
 ### Task 2: Bootstrap the tested Next.js application
 
+**Execution note (2026-09-07):** `jsdom` was pinned to `29.1.1` because `30.0.1` requires Node 24.15 while this workspace runs Node 24.12. ESLint was pinned to `9.39.5`, the newest line accepted by the plugins bundled with Next 16.3.4. Vitest uses `import.meta.dirname` and explicit global types to keep its output warning-free.
+
 **Files:**
 - Create: `.gitignore`
 - Create: `.env.example`
@@ -265,7 +267,7 @@ git commit -m "docs: approve forro do zero campaign copy"
 - Consumes: Node.js `>=20.9.0` and npm.
 - Produces: application scripts `dev`, `build`, `start`, `lint`, `typecheck`, `test`, `test:e2e` and `analyze`.
 
-- [ ] **Step 1: Write the failing smoke test**
+- [x] **Step 1: Write the failing smoke test**
 
 ```tsx
 // tests/smoke.test.tsx
@@ -280,7 +282,7 @@ describe("HomePage", () => {
 });
 ```
 
-- [ ] **Step 2: Create package and tool configuration**
+- [x] **Step 2: Create package and tool configuration**
 
 Use exact versions:
 
@@ -289,6 +291,7 @@ Use exact versions:
   "name": "priscilla-castao-lps",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "engines": { "node": ">=20.9.0" },
   "scripts": {
     "dev": "next dev",
@@ -323,9 +326,9 @@ Use exact versions:
     "@types/react-dom": "19.2.7",
     "@vitejs/plugin-react": "6.1.1",
     "cross-env": "10.1.0",
-    "eslint": "10.10.0",
+    "eslint": "9.39.5",
     "eslint-config-next": "16.3.4",
-    "jsdom": "30.0.1",
+    "jsdom": "29.1.1",
     "typescript": "5.9.3",
     "vite": "8.2.2",
     "vitest": "5.0.0"
@@ -348,8 +351,9 @@ Use exact versions:
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
+    "types": ["vitest/globals", "node"],
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     "plugins": [{ "name": "next" }],
     "paths": { "@/*": ["./*"] }
@@ -363,13 +367,12 @@ Configure Vitest:
 
 ```ts
 // vitest.config.ts
-import path from "node:path";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   plugins: [react()],
-  resolve: { alias: { "@": path.resolve(__dirname, ".") } },
+  resolve: { alias: { "@": import.meta.dirname } },
   test: {
     environment: "jsdom",
     globals: true,
@@ -403,7 +406,7 @@ export default defineConfig([
 ]);
 ```
 
-- [ ] **Step 3: Add repository hygiene before installing**
+- [x] **Step 3: Add repository hygiene before installing**
 
 ```gitignore
 .next/
@@ -411,6 +414,7 @@ node_modules/
 coverage/
 playwright-report/
 test-results/
+*.tsbuildinfo
 .vercel/
 .lighthouseci/
 .env*
@@ -431,7 +435,7 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 NEXT_PUBLIC_GTM_ID=
 ```
 
-- [ ] **Step 4: Install dependencies and verify the test fails**
+- [x] **Step 4: Install dependencies and verify the test fails**
 
 Run:
 
@@ -442,7 +446,7 @@ npm test -- tests/smoke.test.tsx
 
 Expected: FAIL because `app/page.tsx` does not exist.
 
-- [ ] **Step 5: Add the minimal server-rendered shell**
+- [x] **Step 5: Add the minimal server-rendered shell**
 
 ```tsx
 // app/layout.tsx
@@ -480,7 +484,7 @@ img { display: block; max-width: 100%; height: auto; }
 button, a { touch-action: manipulation; }
 ```
 
-- [ ] **Step 6: Add Next.js, ESLint and Playwright configuration**
+- [x] **Step 6: Add Next.js, ESLint and Playwright configuration**
 
 ```ts
 // next.config.ts
@@ -515,7 +519,7 @@ export default defineConfig({
 });
 ```
 
-- [ ] **Step 7: Run the complete foundation checks**
+- [x] **Step 7: Run the complete foundation checks**
 
 Run:
 
@@ -528,7 +532,7 @@ npm run build
 
 Expected: all commands exit `0`.
 
-- [ ] **Step 8: Commit the foundation**
+- [x] **Step 8: Commit the foundation**
 
 ```powershell
 git add .gitignore .env.example package.json package-lock.json next.config.ts tsconfig.json next-env.d.ts eslint.config.mjs vitest.config.ts vitest.setup.ts playwright.config.ts app tests/smoke.test.tsx
