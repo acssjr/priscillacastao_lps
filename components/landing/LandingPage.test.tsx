@@ -22,4 +22,13 @@ describe("LandingPage core story", () => {
       expect(screen.getByRole("heading", { name: pillar.title })).toBeInTheDocument();
     }
   });
+
+  it("exposes a rich but progressive motion contract", () => {
+    const { container } = render(<LandingPage campaign={forroDoZeroCampaign} />);
+
+    expect(container.querySelector("[data-motion-root]")).toBeInTheDocument();
+    expect(container.querySelectorAll("[data-reveal]").length).toBeGreaterThanOrEqual(8);
+    expect(container.querySelectorAll("[data-parallax]").length).toBeGreaterThanOrEqual(3);
+    expect(container.querySelectorAll("[data-stagger-group]").length).toBeGreaterThanOrEqual(4);
+  });
 });

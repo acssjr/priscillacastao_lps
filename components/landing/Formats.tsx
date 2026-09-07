@@ -5,12 +5,12 @@ import styles from "./landing.module.css";
 export function Formats({ campaign }: { campaign: LandingCampaign }) {
   return (
     <section className={styles.formats} id="aulas" aria-labelledby="formats-title">
-      <div className={styles.formatsHeading}>
+      <div className={styles.formatsHeading} data-reveal="section">
         <p className={styles.eyebrow}>{campaign.formats.eyebrow}</p>
         <h2 id="formats-title">{campaign.formats.title}</h2>
         <p>{campaign.formats.note}</p>
       </div>
-      <div className={styles.formatGrid}>
+      <div className={styles.formatGrid} data-stagger-group>
         {campaign.offers.map((offer) => (
           <article className={offer.primary ? styles.formatPrimary : styles.formatSecondary} key={offer.key}>
             <p className={styles.formatAudience}>{offer.audience}</p>

@@ -8,7 +8,7 @@ export function Hero({ campaign }: { campaign: LandingCampaign }) {
 
   return (
     <section className={styles.hero} id="inicio" aria-labelledby="hero-title">
-      <div className={styles.heroCopy} data-hero-copy data-motion="hero">
+      <div className={styles.heroCopy} data-hero-copy data-motion="hero" data-reveal="hero">
         <p className={styles.eyebrow}>{hero.eyebrow}</p>
         <h1 id="hero-title">{hero.title}</h1>
         {hero.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
@@ -25,7 +25,7 @@ export function Hero({ campaign }: { campaign: LandingCampaign }) {
         </WhatsAppLink>
         <p className={styles.ctaNote}>{hero.ctaNote}</p>
       </div>
-      <div className={styles.heroMedia} data-hero-media>
+      <div className={styles.heroMedia} data-hero-media data-parallax="hero">
         <Image
           src={hero.image.src}
           alt={hero.image.alt}

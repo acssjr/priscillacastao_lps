@@ -4,7 +4,7 @@ import styles from "./landing.module.css";
 
 export function FinalCta({ campaign }: { campaign: LandingCampaign }) {
   return (
-    <section className={styles.finalCta} aria-labelledby="closing-title">
+    <section className={styles.finalCta} aria-labelledby="closing-title" data-reveal="closing">
       <p className={styles.eyebrow}>{campaign.closing.eyebrow}</p>
       <h2 id="closing-title">{campaign.closing.title}</h2>
       {campaign.closing.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}

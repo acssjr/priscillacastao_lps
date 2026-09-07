@@ -6,7 +6,7 @@ import styles from "./landing.module.css";
 export function Proof({ content }: { content: LandingCampaign["proof"] }) {
   return (
     <section className={styles.proof} id="depoimentos" aria-labelledby="proof-title" data-motion="proof">
-      <div className={styles.proofMedia}>
+      <div className={styles.proofMedia} data-parallax="poster">
         <Image
           src={content.poster.src}
           alt={content.poster.alt}
@@ -24,7 +24,7 @@ export function Proof({ content }: { content: LandingCampaign["proof"] }) {
           {content.sourceLabel}
         </TrackedExternalLink>
       </div>
-      <div className={styles.proofCopy}>
+      <div className={styles.proofCopy} data-reveal="section">
         <p className={styles.eyebrow}>{content.eyebrow}</p>
         <h2 id="proof-title">{content.title}</h2>
         <p className={styles.proofContext}>{content.context}</p>
@@ -32,7 +32,7 @@ export function Proof({ content }: { content: LandingCampaign["proof"] }) {
           <strong>{content.label}</strong>
           <p>{content.disclaimer}</p>
         </aside>
-        <div className={styles.testimonials}>
+        <div className={styles.testimonials} data-stagger-group>
           {content.testimonials.map((testimonial) => (
             <blockquote key={`${testimonial.name}-${testimonial.quote}`}>
               <p>“{testimonial.quote}”</p>

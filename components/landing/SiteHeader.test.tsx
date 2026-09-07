@@ -6,7 +6,7 @@ describe("SiteHeader", () => {
   it("keeps the brand, navigation and WhatsApp action available", () => {
     render(<SiteHeader campaign={forroDoZeroCampaign} />);
 
-    expect(screen.getByRole("img", { name: "Priscilla Castão" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "Priscilla Castão" })).toHaveAttribute("data-brand-color", "#64121f");
     expect(screen.getByRole("navigation", { hidden: true })).toHaveAttribute("aria-label", "Navegação principal");
     expect(screen.getByRole("link", { name: "Conversar" })).toHaveAttribute(
       "href",

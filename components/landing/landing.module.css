@@ -32,8 +32,12 @@
 }
 
 .brandLogo {
+  display: block;
   width: 100%;
-  height: auto;
+  aspect-ratio: 4 / 1;
+  background: var(--brand-primary);
+  mask: url("/brand/priscilla-castao-logo.webp") center / contain no-repeat;
+  -webkit-mask: url("/brand/priscilla-castao-logo.webp") center / contain no-repeat;
 }
 
 .desktopNav {
@@ -188,6 +192,11 @@
   height: 2px;
   margin: -1px auto;
   background: linear-gradient(90deg, var(--brand-soft), var(--brand-primary));
+  will-change: transform;
+}
+
+.siteShell [data-parallax] img {
+  will-change: transform;
 }
 
 .method {

@@ -15,7 +15,7 @@ import styles from "./landing.module.css";
 
 export function LandingPage({ campaign }: { campaign: LandingCampaign }) {
   return (
-    <div className={styles.siteShell}>
+    <div className={styles.siteShell} data-motion-root>
       <SiteHeader campaign={campaign} />
       <main id="conteudo" data-campaign={campaign.id}>
         <Hero campaign={campaign} />

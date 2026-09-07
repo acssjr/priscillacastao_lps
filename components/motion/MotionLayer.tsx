@@ -8,31 +8,74 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 export function MotionLayer() {
   useGSAP(() => {
+    const root = document.querySelector<HTMLElement>("[data-motion-root]");
     const media = gsap.matchMedia();
+
     media.add("(prefers-reduced-motion: reduce)", () => {
-      gsap.set("[data-motion], [data-connection-line]", { clearProps: "all" });
+      if (root) gsap.set(root.querySelectorAll("[data-motion], [data-reveal], [data-parallax], [data-stagger-group] > *, [data-connection-line]"), { clearProps: "all" });
     });
+
     media.add("(prefers-reduced-motion: no-preference)", () => {
-      gsap.from("[data-motion='hero'] > *", {
-        autoAlpha: 0,
-        y: 18,
-        duration: 0.55,
-        stagger: 0.08,
-        ease: "power2.out",
-      });
-      gsap.fromTo("[data-connection-line]", { scaleX: 0 }, {
+      if (!root) return;
+
+      const header = root.querySelector("header");
+      const heroCopy = root.querySelector("[data-motion='hero']");
+      const heroMedia = root.querySelector("[data-hero-media]");
+      const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
+      intro
+        .from(header, { autoAlpha: 0, y: -18, duration: 0.55 })
+        .from(heroCopy?.children ?? [], { autoAlpha: 0, y: 34, duration: 0.72, stagger: 0.075 }, "<0.08")
+        .from(heroMedia, { autoAlpha: 0, xPercent: 7, scale: 0.94, duration: 1.05 }, "<0.12");
+
+      const connectionLine = root.querySelector("[data-connection-line]");
+      gsap.fromTo(connectionLine, { scaleX: 0 }, {
         scaleX: 1,
         transformOrigin: "left center",
         ease: "none",
-        scrollTrigger: { trigger: "[data-connection-line]", start: "top 85%", end: "bottom 55%", scrub: 0.5 },
+        scrollTrigger: { trigger: connectionLine, start: "top 85%", end: "bottom 55%", scrub: 0.5 },
       });
-      gsap.from("[data-motion='proof']", {
-        autoAlpha: 0,
-        y: 24,
-        duration: 0.6,
-        scrollTrigger: { trigger: "[data-motion='proof']", start: "top 82%", once: true },
+
+      root.querySelectorAll<HTMLElement>("[data-reveal='section']").forEach((section, index) => {
+        gsap.timeline({
+          defaults: { ease: "power3.out" },
+          scrollTrigger: { trigger: section, start: "clamp(top 84%)", once: true, refreshPriority: index + 1 },
+        })
+          .from(section.children, { autoAlpha: 0, y: 42, duration: 0.7, stagger: 0.09 })
+          .from(section, { scaleY: 0.985, transformOrigin: "center bottom", duration: 0.8 }, 0);
       });
+
+      root.querySelectorAll<HTMLElement>("[data-stagger-group]").forEach((group, index) => {
+        gsap.from(group.children, {
+          autoAlpha: 0,
+          y: 38,
+          rotationX: 7,
+          transformOrigin: "center bottom",
+          duration: 0.72,
+          stagger: 0.1,
+          ease: "power3.out",
+          scrollTrigger: { trigger: group, start: "clamp(top 86%)", once: true, refreshPriority: index + 10 },
+        });
+      });
+
+      root.querySelectorAll<HTMLElement>("[data-parallax]").forEach((frame, index) => {
+        const image = frame.querySelector("img");
+        if (!image) return;
+        gsap.fromTo(image, { yPercent: -3, scale: 1.06 }, {
+          yPercent: 5,
+          scale: 1.015,
+          ease: "none",
+          scrollTrigger: { trigger: frame, start: "clamp(top bottom)", end: "clamp(bottom top)", scrub: 0.8, refreshPriority: index + 20 },
+        });
+      });
+
+      const closing = root.querySelector("[data-reveal='closing']");
+      gsap.timeline({ scrollTrigger: { trigger: closing, start: "clamp(top 78%)", once: true } })
+        .from(closing?.children ?? [], { autoAlpha: 0, y: 32, scale: 0.98, duration: 0.7, stagger: 0.1, ease: "power3.out" });
+
+      const refreshFrame = requestAnimationFrame(() => ScrollTrigger.refresh());
+      return () => cancelAnimationFrame(refreshFrame);
     });
+
     return () => media.revert();
   });
   return null;

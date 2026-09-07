@@ -11,11 +11,11 @@ export function ProcessFaq({ process, faq }: Props) {
   return (
     <>
       <section className={styles.process} id="como-comecar" aria-labelledby="process-title">
-        <div className={styles.sectionHeading}>
+        <div className={styles.sectionHeading} data-reveal="section">
           <p className={styles.eyebrow}>{process.eyebrow}</p>
           <h2 id="process-title">{process.title}</h2>
         </div>
-        <ol className={styles.processSteps}>
+        <ol className={styles.processSteps} data-stagger-group>
           {process.steps.map((step) => (
             <li key={step.title}>
               <h3>{step.title}</h3>
@@ -25,11 +25,11 @@ export function ProcessFaq({ process, faq }: Props) {
         </ol>
       </section>
       <section className={styles.faq} id="duvidas" aria-labelledby="faq-title">
-        <div className={styles.sectionHeading}>
+        <div className={styles.sectionHeading} data-reveal="section">
           <p className={styles.eyebrow}>{faq.eyebrow}</p>
           <h2 id="faq-title">{faq.title}</h2>
         </div>
-        <div className={styles.faqList}>
+        <div className={styles.faqList} data-stagger-group>
           {faq.items.map((item) => (
             <TrackedDetails question={item.question} key={item.question}>
               <summary>{item.question}</summary>
