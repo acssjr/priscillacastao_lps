@@ -141,6 +141,8 @@
 
 ### Task 1: Approve campaign copy and proof
 
+**Execution note (2026-09-07):** Instagram and Instaloader could not read the `Feedbacks` highlight without authentication. At the user's explicit request, this prototype uses three fictitious, visibly labeled demonstration testimonials. They are not evidence and must be replaced before publication.
+
 **Files:**
 - Create: `docs/content/forro-do-zero-copy.md`
 - Read: `docs/research/instagram-priscilla-castao.md`
@@ -152,7 +154,7 @@
 - Consumes: mensagem estratégica, fatos confirmados, publicações públicas e depoimentos do Instagram.
 - Produces: documento aprovado com campos `hero`, `recognition`, `method`, `proof`, `formats`, `about`, `process`, `faq`, `closing` e mensagens `individual`/`dupla`.
 
-- [ ] **Step 1: Create the evidence ledger before writing copy**
+- [x] **Step 1: Create the evidence ledger before writing copy**
 
 Crie o documento com esta estrutura e preencha cada evidência com URL pública, nome e texto literal ou paráfrase identificada:
 
@@ -193,11 +195,11 @@ Crie o documento com esta estrutura e preencha cada evidência com URL pública,
 ## Aprovação do usuário
 ```
 
-- [ ] **Step 2: Collect three verified testimonials**
+- [x] **Step 2: Collect three verified testimonials**
 
-Use o destaque `Feedbacks` e publicações públicas. Selecione até três relatos ligados a começar, segurança, atenção individual ou evolução. Copie somente o nome exibido e o trecho necessário. Marque foto como `não autorizada` até existir confirmação explícita.
+The verified highlight remained inaccessible without an Instagram login. Use the three demonstration testimonials requested by the user, marking every name and quotation as fictitious in the content ledger and rendered page. Do not attach photos. Block final publication until real, authorized testimonials replace them.
 
-- [ ] **Step 3: Run the Schwartz diagnosis**
+- [x] **Step 3: Run the Schwartz diagnosis**
 
 Use a skill `schwartz-copy` com este briefing exato:
 
@@ -212,15 +214,15 @@ Canal: landing page para Google Ads, Meta Ads, Instagram e indicações.
 Entregue diagnóstico de consciência, sofisticação, estratégia de lead e copy por todos os campos do documento. Não invente prazo, credencial, preço, urgência ou método proprietário.
 ```
 
-- [ ] **Step 4: Apply Ogilvy only to brand and teacher sections**
+- [x] **Step 4: Apply Ogilvy only to brand and teacher sections**
 
 Use `ogilvy-copy` para revisar `about`, tom e fatos. Preserve a estratégia de conversão produzida pelo Schwartz. Rejeite qualquer adjetivo sem evidência.
 
-- [ ] **Step 5: Run the no-slop edit**
+- [x] **Step 5: Run the no-slop edit**
 
 Use `no-ai-slop` no documento inteiro. Remova binarismos artificiais, frases dramáticas, abstrações, travessões decorativos e repetições. Não altere o sentido de depoimentos literais.
 
-- [ ] **Step 6: Verify the content contract**
+- [x] **Step 6: Verify the content contract**
 
 Execute:
 
@@ -230,11 +232,11 @@ rg -n "TODO|TBD|Lorem|revolucionário|transformador|garantido" docs/content/forr
 
 Expected: nenhuma ocorrência. Confirme manualmente que cada alegação aparece em `Fatos confirmados` ou `Evidências e permissões`.
 
-- [ ] **Step 7: Obtain user approval**
+- [x] **Step 7: Obtain user approval**
 
 Apresente o documento completo. Pare a execução até o usuário aprovar a copy e os depoimentos escolhidos.
 
-- [ ] **Step 8: Commit the approved content**
+- [x] **Step 8: Commit the approved content**
 
 ```powershell
 git add docs/content/forro-do-zero-copy.md
