@@ -250,6 +250,205 @@
   color: rgb(52 37 34 / 78%);
 }
 
+.proof {
+  display: grid;
+  gap: var(--space-10);
+  padding: var(--space-16) var(--space-4);
+  background: var(--brand-primary);
+  color: var(--on-dark);
+}
+
+.proofMedia,
+.proofCopy {
+  min-width: 0;
+}
+
+.proofMedia img {
+  width: 100%;
+  max-height: 38rem;
+  object-fit: cover;
+  border-radius: 10rem 10rem var(--radius-lg) var(--radius-lg);
+}
+
+.instagramLink {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  margin-top: var(--space-3);
+  border-bottom: 1px solid currentColor;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-underline-offset: 0.25rem;
+}
+
+.proofCopy {
+  display: grid;
+  align-content: start;
+  gap: var(--space-4);
+}
+
+.proofCopy .eyebrow {
+  color: var(--brand-soft);
+}
+
+.proofCopy h2,
+.formatsHeading h2 {
+  margin: 0;
+  font-size: clamp(2rem, 7.8vw, 4.5rem);
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+.proofContext {
+  max-width: 62ch;
+  margin: var(--space-2) 0 var(--space-4);
+  color: rgb(250 245 236 / 82%);
+}
+
+.demoNotice {
+  padding: var(--space-4);
+  border: 1px solid rgb(250 245 236 / 34%);
+  background: rgb(75 13 23 / 35%);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.demoNotice strong,
+.demoNotice p {
+  margin: 0;
+}
+
+.demoNotice p {
+  margin-top: var(--space-2);
+  color: rgb(250 245 236 / 78%);
+}
+
+.testimonials {
+  display: grid;
+  margin-top: var(--space-2);
+}
+
+.testimonials blockquote {
+  margin: 0;
+  padding: var(--space-6) 0;
+  border-top: 1px solid rgb(250 245 236 / 24%);
+}
+
+.testimonials blockquote > p {
+  max-width: 46ch;
+  margin: 0;
+  font-family: var(--font-editorial), serif;
+  font-size: clamp(1.35rem, 5vw, 1.8rem);
+  line-height: 1.3;
+}
+
+.testimonials footer {
+  margin-top: var(--space-4);
+}
+
+.testimonials cite,
+.testimonials small {
+  display: block;
+  font-family: var(--font-sans), sans-serif;
+  font-style: normal;
+}
+
+.testimonials cite {
+  font-size: 0.875rem;
+  font-weight: 800;
+}
+
+.testimonials small {
+  color: rgb(250 245 236 / 68%);
+  font-size: 0.75rem;
+}
+
+.formats {
+  padding: var(--space-16) var(--space-4);
+  background: var(--surface-paper);
+}
+
+.formatsHeading,
+.formatGrid {
+  max-width: var(--content);
+  margin-inline: auto;
+}
+
+.formatsHeading > p:last-child {
+  max-width: 60ch;
+  margin: var(--space-6) 0 var(--space-10);
+}
+
+.formatGrid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.formatPrimary,
+.formatSecondary {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--space-8);
+}
+
+.formatPrimary {
+  background: var(--brand-primary);
+  color: var(--on-dark);
+}
+
+.formatSecondary {
+  border: 1px solid rgb(100 18 31 / 32%);
+}
+
+.formatPrimary h3,
+.formatSecondary h3 {
+  margin: var(--space-3) 0 var(--space-4);
+  font-size: clamp(1.6rem, 6vw, 2.4rem);
+  line-height: 1.08;
+}
+
+.formatPrimary > p:not(.formatAudience),
+.formatSecondary > p:not(.formatAudience) {
+  flex: 1;
+  margin: 0 0 var(--space-8);
+}
+
+.formatAudience {
+  margin: 0;
+  color: inherit;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+
+.primaryCtaLight,
+.secondaryCta {
+  display: inline-flex;
+  min-height: 3.25rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.2rem;
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+}
+
+.primaryCtaLight {
+  background: var(--surface-cream);
+  color: var(--brand-dark);
+}
+
+.secondaryCta {
+  border: 1px solid currentColor;
+  color: var(--brand-dark);
+}
+
 @media (min-width: 48rem) {
   .headerInner {
     grid-template-columns: 15rem minmax(0, 1fr) auto;
@@ -304,5 +503,23 @@
     gap: clamp(3rem, 7vw, 7rem);
     padding-block: clamp(5rem, 9vw, 8rem);
     padding-inline: max(var(--space-8), calc((100vw - var(--content)) / 2));
+  }
+
+  .proof {
+    grid-template-columns: minmax(18rem, 0.7fr) minmax(0, 1fr);
+    gap: clamp(3rem, 7vw, 7rem);
+    padding-block: clamp(5rem, 9vw, 8rem);
+    padding-inline: max(var(--space-8), calc((100vw - var(--content)) / 2));
+  }
+
+  .proofMedia {
+    position: sticky;
+    top: calc(var(--header-height) + var(--space-4));
+    align-self: start;
+  }
+
+  .formatGrid {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: stretch;
   }
 }

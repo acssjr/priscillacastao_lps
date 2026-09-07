@@ -1365,7 +1365,7 @@ git commit -m "feat: add hero recognition and teaching method"
 - Consumes: `campaign.proof`, `campaign.offers`, `campaign.whatsapp`.
 - Produces: `#depoimentos`, `#aulas`, event `proof_open` and one WhatsApp path per `OfferKey`.
 
-- [ ] **Step 1: Write failing proof and format tests**
+- [x] **Step 1: Write failing proof and format tests**
 
 ```tsx
 // components/landing/ProofFormats.test.tsx
@@ -1390,13 +1390,13 @@ it("keeps individual first and links both formats", () => {
 });
 ```
 
-- [ ] **Step 2: Verify tests fail**
+- [x] **Step 2: Verify tests fail**
 
 Run: `npm test -- components/landing/ProofFormats.test.tsx`
 
 Expected: FAIL because `Proof` and `Formats` do not exist.
 
-- [ ] **Step 3: Implement static, attributable proof**
+- [x] **Step 3: Implement static, attributable proof**
 
 `Proof` renders the poster through `next/image`, testimonial `blockquote` elements, names in `cite`, and the tracked secondary link created in Task 4.
 
@@ -1436,7 +1436,7 @@ The external link opens a new tab, includes `rel="noreferrer"`, has an explicit 
 
 Do not render stars, invented ratings, anonymous avatars, autoplay media or a fake play button.
 
-- [ ] **Step 4: Implement offer cards with individual dominance**
+- [x] **Step 4: Implement offer cards with individual dominance**
 
 ```tsx
 // components/landing/Formats.tsx
@@ -1470,7 +1470,7 @@ export function Formats({ campaign }: { campaign: LandingCampaign }) {
 }
 ```
 
-- [ ] **Step 5: Style proof and formats without horizontal interaction**
+- [x] **Step 5: Style proof and formats without horizontal interaction**
 
 Append these selectors to `landing.module.css`. Testimonial blocks remain static and wrap normally; there is no horizontal interaction.
 
@@ -1495,7 +1495,7 @@ Append these selectors to `landing.module.css`. Testimonial blocks remain static
 }
 ```
 
-- [ ] **Step 6: Compose, run checks and commit**
+- [x] **Step 6: Compose, run checks and commit**
 
 ```powershell
 npm test -- components/landing/ProofFormats.test.tsx components/landing/LandingPage.test.tsx
@@ -1503,7 +1503,7 @@ npm run typecheck
 npm run lint
 npm run build
 git add components/landing
-git commit -m "feat: add verified proof and lesson formats"
+git commit -m "feat: add labeled demo proof and lesson formats"
 ```
 
 ### Task 8: Complete the page narrative and accessible FAQ
