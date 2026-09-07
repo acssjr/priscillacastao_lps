@@ -36,7 +36,11 @@ export const LandingCampaignSchema = z.object({
     titleHighlight: z.string().min(1),
     image: ImageSchema,
     cta: z.string().min(2),
-    ctaNote: z.string().min(10),
+    ctaNote: z.object({
+      lead: z.string().min(5),
+      bridge: z.string().min(5),
+      details: z.string().min(5),
+    }),
     location: z.string().min(2),
   }).refine((hero) => hero.title.includes(hero.titleHighlight), {
     message: "Hero title must contain its highlighted text",

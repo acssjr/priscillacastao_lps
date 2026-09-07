@@ -32,7 +32,6 @@ export function ProcessFaq({ process, faq }: Props) {
         <div className={styles.faqList} data-stagger-group>
           {faq.items.map((item) => (
             <TrackedDetails question={item.question} key={item.question}>
-              <summary>{item.question}</summary>
               <p>{item.answer}</p>
             </TrackedDetails>
           ))}

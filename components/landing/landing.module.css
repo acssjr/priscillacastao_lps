@@ -89,11 +89,12 @@
 
 .heroHighlight {
   display: table;
-  margin-block: 0.08em;
+  margin-block: 0.16em 0.03em;
   padding: 0.03em 0.13em 0.08em;
   background: var(--brand-primary);
   color: var(--surface-paper);
   letter-spacing: -0.035em;
+  text-transform: uppercase;
 }
 
 .heroCopy > p:not(.eyebrow, .location, .ctaNote) {
@@ -149,9 +150,14 @@
 .ctaNote {
   max-width: 46ch;
   margin: var(--space-3) 0 0;
-  color: rgb(52 37 34 / 76%);
-  font-size: 0.8125rem;
+  color: var(--ink-warm);
+  font-size: 0.875rem;
   line-height: 1.5;
+}
+
+.ctaNote strong {
+  color: var(--brand-dark);
+  font-weight: 800;
 }
 
 .heroMedia {
@@ -180,7 +186,7 @@
 }
 
 .recognition .eyebrow {
-  color: var(--brand-soft);
+  color: inherit;
 }
 
 .recognition h2,
@@ -200,7 +206,7 @@
 
 .recognitionBody p {
   margin: 0;
-  color: rgb(250 245 236 / 82%);
+  color: inherit;
 }
 
 .connectionLine {
@@ -323,7 +329,7 @@
 }
 
 .proofCopy .eyebrow {
-  color: var(--brand-soft);
+  color: inherit;
 }
 
 .proofCopy h2,
@@ -338,7 +344,7 @@
 .proofContext {
   max-width: 62ch;
   margin: var(--space-2) 0 var(--space-4);
-  color: rgb(250 245 236 / 82%);
+  color: inherit;
 }
 
 .demoNotice {
@@ -356,7 +362,7 @@
 
 .demoNotice p {
   margin-top: var(--space-2);
-  color: rgb(250 245 236 / 78%);
+  color: inherit;
 }
 
 .testimonials {
@@ -395,7 +401,7 @@
 }
 
 .testimonials small {
-  color: rgb(250 245 236 / 68%);
+  color: inherit;
   font-size: 0.75rem;
 }
 
@@ -596,14 +602,45 @@
 }
 
 .faqList summary {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+  justify-content: space-between;
   min-height: 3.5rem;
-  padding: var(--space-4) 2rem var(--space-4) 0;
+  padding: var(--space-4) 0;
   color: var(--brand-dark);
   cursor: pointer;
   font-weight: 800;
+  list-style: none;
 }
 
-.faqList details p {
+.faqList summary::-webkit-details-marker {
+  display: none;
+}
+
+.faqList [data-faq-indicator] {
+  display: grid;
+  width: 1.75rem;
+  height: 1.75rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1;
+  transition: transform 200ms var(--ease-out);
+}
+
+.faqList details[open] [data-faq-indicator] {
+  transform: rotate(45deg);
+}
+
+.faqList [data-faq-panel] {
+  overflow: hidden;
+}
+
+.faqList [data-faq-panel] p {
   max-width: 60ch;
   margin: 0;
   padding: 0 0 var(--space-6);
@@ -619,7 +656,7 @@
 }
 
 .finalCta .eyebrow {
-  color: var(--brand-soft);
+  color: inherit;
 }
 
 .finalCta > p:not(.eyebrow) {
@@ -633,14 +670,17 @@
   gap: var(--space-4);
   justify-items: start;
   padding: var(--space-8) var(--space-4) 7rem;
-  background: var(--ink-warm);
-  color: var(--on-dark);
+  background: var(--surface-cream);
+  color: var(--brand-dark);
 }
 
-.footer img {
+.footerMark {
+  display: block;
   width: 3.5rem;
   height: 3.5rem;
-  filter: invert(1);
+  background: var(--brand-primary);
+  mask: url("/brand/priscilla-castao-mark.webp") center / contain no-repeat;
+  -webkit-mask: url("/brand/priscilla-castao-mark.webp") center / contain no-repeat;
 }
 
 .footer p,
@@ -659,6 +699,12 @@
   min-height: 3rem;
   align-items: center;
   color: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faqList [data-faq-indicator] {
+    transition: none;
+  }
 }
 
 .mobileSticky {

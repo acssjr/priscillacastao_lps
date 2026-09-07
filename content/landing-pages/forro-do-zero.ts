@@ -52,8 +52,12 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
       "Priscilla acompanha cada fundamento de perto, em um ambiente reservado para perguntar, repetir e aprender com tranquilidade.",
     ],
     image: heroImage,
-    cta: "Conversar com Priscilla",
-    ctaNote: "Ela vai entender seu objetivo, explicar os formatos e combinar local, horários e investimento.",
+    cta: "AGENDAR MINHA AULA",
+    ctaNote: {
+      lead: "Priscilla vai entender seu objetivo",
+      bridge: "explicar as opções de aula e",
+      details: "combinar local, horário e investimento",
+    },
     location: "Salvador, Bahia",
   },
   recognition: {

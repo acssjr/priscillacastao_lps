@@ -1,11 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
 import styles from "./landing.module.css";
 
 export function SiteFooter() {
   return (
     <footer className={styles.footer}>
-      <Image src="/brand/priscilla-castao-mark.webp" alt="" width={64} height={64} />
+      <span className={styles.footerMark} aria-hidden="true" data-footer-brand-mark />
       <p>Priscilla Castão · Professora de forró · Salvador, BA</p>
       <nav aria-label="Links do rodapé">
         <a

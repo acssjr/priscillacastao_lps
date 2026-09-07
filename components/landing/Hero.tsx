@@ -31,7 +31,10 @@ export function Hero({ campaign }: { campaign: LandingCampaign }) {
         >
           {hero.cta}
         </WhatsAppLink>
-        <p className={styles.ctaNote}>{hero.ctaNote}</p>
+        <p className={styles.ctaNote} data-cta-note>
+          <strong>{hero.ctaNote.lead}</strong>, {hero.ctaNote.bridge}{" "}
+          <strong>{hero.ctaNote.details}</strong>.
+        </p>
       </div>
       <div className={styles.heroMedia} data-hero-media data-parallax="hero">
         <Image

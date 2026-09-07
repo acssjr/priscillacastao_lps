@@ -13,7 +13,7 @@ it("renders the five-step process and native FAQ controls", () => {
 });
 
 it("has one main landmark and a labeled footer", () => {
-  render(<LandingPage campaign={forroDoZeroCampaign} />);
+  const { container } = render(<LandingPage campaign={forroDoZeroCampaign} />);
 
   expect(screen.getAllByRole("main")).toHaveLength(1);
   expect(screen.getByRole("contentinfo")).toBeInTheDocument();
@@ -21,4 +21,5 @@ it("has one main landmark and a labeled footer", () => {
     "href",
     "/politica-de-privacidade",
   );
+  expect(container.querySelector("[data-footer-brand-mark]")).toBeInTheDocument();
 });

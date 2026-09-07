@@ -11,6 +11,8 @@ describe("LandingPage core story", () => {
     expect(container.querySelector("[data-hero-highlight]")).toHaveTextContent("do zero");
     expect(screen.queryByText(forroDoZeroCampaign.hero.location)).not.toBeInTheDocument();
     expect(screen.getByText(/uma aula particular para você começar com segurança/i)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "AGENDAR MINHA AULA" })).toBeInTheDocument();
+    expect(container.querySelectorAll("[data-cta-note] strong")).toHaveLength(2);
     expect(screen.getByRole("link", { name: forroDoZeroCampaign.hero.cta })).toHaveAttribute(
       "href",
       expect.stringContaining("wa.me/5575981234176"),

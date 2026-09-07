@@ -31,7 +31,6 @@ it("tracks a FAQ only when it opens", () => {
   render(
     <main data-campaign="forro-do-zero">
       <TrackedDetails question="Preciso levar um par?">
-        <summary>Preciso levar um par?</summary>
         <p>Não.</p>
       </TrackedDetails>
     </main>,
@@ -44,4 +43,19 @@ it("tracks a FAQ only when it opens", () => {
     campaign: "forro-do-zero",
     question: "Preciso levar um par?",
   });
+});
+
+it("opens and closes the FAQ disclosure from its summary", async () => {
+  render(
+    <TrackedDetails question="Onde acontecem as aulas?">
+      <p>Em Salvador.</p>
+    </TrackedDetails>,
+  );
+
+  const summary = screen.getByText("Onde acontecem as aulas?");
+  const details = summary.closest("details")!;
+  await userEvent.click(summary);
+  expect(details).toHaveAttribute("open");
+  await userEvent.click(summary);
+  expect(details).not.toHaveAttribute("open");
 });
