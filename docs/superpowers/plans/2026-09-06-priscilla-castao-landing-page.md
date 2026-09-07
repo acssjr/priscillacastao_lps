@@ -1856,7 +1856,7 @@ git commit -m "feat: add conditional mobile whatsapp action"
 - Consumes: stable data hooks `data-motion="hero"`, `data-motion="proof"`, and `data-connection-line`.
 - Produces: three enhancement moments only; all content remains visible and usable before JavaScript.
 
-- [ ] **Step 1: Write a failing reduced-motion contract test**
+- [x] **Step 1: Write a failing reduced-motion contract test**
 
 ```tsx
 // components/motion/MotionLayer.test.tsx
@@ -1880,13 +1880,13 @@ it("registers an explicit reduced-motion branch and renders no blocking layer", 
 });
 ```
 
-- [ ] **Step 2: Verify the test fails**
+- [x] **Step 2: Verify the test fails**
 
 Run: `npm test -- components/motion/MotionLayer.test.tsx`
 
 Expected: FAIL because the motion layer does not exist.
 
-- [ ] **Step 3: Implement a dynamically loaded client enhancement**
+- [x] **Step 3: Implement a dynamically loaded client enhancement**
 
 ```tsx
 // components/motion/MotionLoader.tsx
@@ -1942,11 +1942,11 @@ export function MotionLayer() {
 }
 ```
 
-- [ ] **Step 4: Add stable hooks and a nonessential connection line**
+- [x] **Step 4: Add stable hooks and a nonessential connection line**
 
 Add `data-motion="hero"` to the hero content wrapper and `data-motion="proof"` to the proof grid. Insert `<span className={styles.connectionLine} data-connection-line aria-hidden="true" />` between Recognition and Method. Its unanimated CSS state is complete and visible. Render `<MotionLoader />` after the main content so animation code is excluded from the critical server render.
 
-- [ ] **Step 5: Verify behavior and bundle impact**
+- [x] **Step 5: Verify behavior and bundle impact**
 
 ```powershell
 npm test -- components/motion/MotionLayer.test.tsx
@@ -1958,7 +1958,7 @@ npm run analyze
 
 Expected: tests pass; the landing route remains server rendered; GSAP appears in a lazy client chunk, not the initial server HTML dependency chain.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```powershell
 git add components/motion components/landing

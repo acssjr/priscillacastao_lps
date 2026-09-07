@@ -1,4 +1,5 @@
 import type { LandingCampaign } from "@/content/landing-pages/schema";
+import { MotionLoader } from "@/components/motion/MotionLoader";
 import { About } from "./About";
 import { FinalCta } from "./FinalCta";
 import { Hero } from "./Hero";
@@ -19,6 +20,7 @@ export function LandingPage({ campaign }: { campaign: LandingCampaign }) {
       <main id="conteudo" data-campaign={campaign.id}>
         <Hero campaign={campaign} />
         <Recognition content={campaign.recognition} />
+        <span className={styles.connectionLine} data-connection-line aria-hidden="true" />
         <Method content={campaign.method} />
         <Proof content={campaign.proof} />
         <Formats campaign={campaign} />
@@ -28,6 +30,7 @@ export function LandingPage({ campaign }: { campaign: LandingCampaign }) {
       </main>
       <SiteFooter />
       <MobileStickyCta campaign={campaign} />
+      <MotionLoader />
     </div>
   );
 }

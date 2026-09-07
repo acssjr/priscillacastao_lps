@@ -8,7 +8,7 @@ export function Hero({ campaign }: { campaign: LandingCampaign }) {
 
   return (
     <section className={styles.hero} id="inicio" aria-labelledby="hero-title">
-      <div className={styles.heroCopy} data-hero-copy>
+      <div className={styles.heroCopy} data-hero-copy data-motion="hero">
         <p className={styles.eyebrow}>{hero.eyebrow}</p>
         <h1 id="hero-title">{hero.title}</h1>
         {hero.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
