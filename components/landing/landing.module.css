@@ -35,7 +35,7 @@
   display: block;
   width: 100%;
   aspect-ratio: 4 / 1;
-  background: var(--brand-primary);
+  background: #64121f;
   mask: url("/brand/priscilla-castao-logo.webp") center / contain no-repeat;
   -webkit-mask: url("/brand/priscilla-castao-logo.webp") center / contain no-repeat;
 }
@@ -82,15 +82,32 @@
 .heroCopy h1 {
   margin: 0 0 var(--space-4);
   color: var(--brand-dark);
-  font-size: clamp(2.55rem, 12vw, 6.25rem);
+  font-size: clamp(2.45rem, 11vw, 5.75rem);
   line-height: 0.98;
   letter-spacing: -0.052em;
+}
+
+.heroHighlight {
+  display: table;
+  margin-block: 0.08em;
+  padding: 0.03em 0.13em 0.08em;
+  background: var(--brand-primary);
+  color: var(--surface-paper);
+  letter-spacing: -0.035em;
 }
 
 .heroCopy > p:not(.eyebrow, .location, .ctaNote) {
   max-width: 55ch;
   margin: 0 0 var(--space-6);
   font-size: clamp(1rem, 2vw, 1.125rem);
+}
+
+.heroCopy > .heroSubheadline {
+  margin-bottom: var(--space-3);
+  color: var(--brand-dark);
+  font-size: clamp(1.08rem, 2.6vw, 1.35rem);
+  font-weight: 750;
+  line-height: 1.45;
 }
 
 .eyebrow {
@@ -265,7 +282,7 @@
 
 .pillars p {
   margin-top: var(--space-2);
-  color: rgb(52 37 34 / 78%);
+  color: var(--brand-dark);
 }
 
 .proof {

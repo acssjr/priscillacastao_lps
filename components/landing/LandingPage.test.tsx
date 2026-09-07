@@ -3,11 +3,14 @@ import { forroDoZeroCampaign } from "@/content/landing-pages/forro-do-zero";
 import { LandingPage } from "./LandingPage";
 
 describe("LandingPage core story", () => {
-  it("renders one h1, Salvador context and the real WhatsApp link", () => {
-    render(<LandingPage campaign={forroDoZeroCampaign} />);
+  it("renders a compact highlighted hero without the redundant location line", () => {
+    const { container } = render(<LandingPage campaign={forroDoZeroCampaign} />);
 
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
-    expect(screen.getByText(forroDoZeroCampaign.hero.location)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Aprenda forró do zero, no seu ritmo.");
+    expect(container.querySelector("[data-hero-highlight]")).toHaveTextContent("do zero");
+    expect(screen.queryByText(forroDoZeroCampaign.hero.location)).not.toBeInTheDocument();
+    expect(screen.getByText(/uma aula particular para você começar com segurança/i)).toBeInTheDocument();
     expect(screen.getByRole("link", { name: forroDoZeroCampaign.hero.cta })).toHaveAttribute(
       "href",
       expect.stringContaining("wa.me/5575981234176"),

@@ -45,9 +45,11 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
   ],
   hero: {
     eyebrow: "Aulas particulares de forró em Salvador",
-    title: "Aprenda forró do zero com uma aula particular feita no seu ritmo.",
+    title: "Aprenda forró do zero, no seu ritmo.",
+    titleHighlight: "do zero,",
     body: [
-      "Você não precisa saber nenhum passo nem levar um par. Priscilla acompanha cada fundamento de perto, em um ambiente reservado para perguntar, repetir e aprender com tranquilidade.",
+      "Uma aula particular para você começar com segurança, mesmo sem saber nenhum passo ou levar um par.",
+      "Priscilla acompanha cada fundamento de perto, em um ambiente reservado para perguntar, repetir e aprender com tranquilidade.",
     ],
     image: heroImage,
     cta: "Conversar com Priscilla",
