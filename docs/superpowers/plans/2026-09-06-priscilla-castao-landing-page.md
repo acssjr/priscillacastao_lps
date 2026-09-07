@@ -1183,7 +1183,7 @@ git commit -m "feat: add branded mobile-first page foundation"
 - Consumes: `campaign.hero`, `campaign.recognition`, `campaign.method` and `campaign.whatsapp`.
 - Produces: section IDs `#inicio`, `#metodo` and stable CTA ID `#hero-primary-cta`.
 
-- [ ] **Step 1: Write failing semantic tests**
+- [x] **Step 1: Write failing semantic tests**
 
 ```tsx
 // components/landing/LandingPage.test.tsx
@@ -1211,13 +1211,13 @@ describe("LandingPage core story", () => {
 });
 ```
 
-- [ ] **Step 2: Verify tests fail**
+- [x] **Step 2: Verify tests fail**
 
 Run: `npm test -- components/landing/LandingPage.test.tsx`
 
 Expected: FAIL because the sections are not rendered.
 
-- [ ] **Step 3: Implement the server-rendered hero**
+- [x] **Step 3: Implement the server-rendered hero**
 
 ```tsx
 // components/landing/Hero.tsx
@@ -1261,7 +1261,7 @@ export function Hero({ campaign }: { campaign: LandingCampaign }) {
 }
 ```
 
-- [ ] **Step 4: Implement recognition and method as semantic sections**
+- [x] **Step 4: Implement recognition and method as semantic sections**
 
 Both components receive only their section data. Never set hidden initial CSS.
 
@@ -1304,7 +1304,7 @@ export function Method({ content }: { content: LandingCampaign["method"] }) {
 }
 ```
 
-- [ ] **Step 5: Compose the first three sections**
+- [x] **Step 5: Compose the first three sections**
 
 ```tsx
 <main id="conteudo" data-campaign={campaign.id}>
@@ -1314,7 +1314,7 @@ export function Method({ content }: { content: LandingCampaign["method"] }) {
 </main>
 ```
 
-- [ ] **Step 6: Add mobile-first section CSS**
+- [x] **Step 6: Add mobile-first section CSS**
 
 ```css
 .hero { min-height: 100dvh; display: grid; align-items: center; gap: var(--space-8); padding: 6rem 1rem 3rem; background: var(--surface-paper); overflow: clip; }
@@ -1341,7 +1341,7 @@ export function Method({ content }: { content: LandingCampaign["method"] }) {
 
 Verify 320 px without masking layout errors with global `overflow-x: hidden`.
 
-- [ ] **Step 7: Run checks and commit**
+- [x] **Step 7: Run checks and commit**
 
 ```powershell
 npm test -- components/landing/LandingPage.test.tsx
