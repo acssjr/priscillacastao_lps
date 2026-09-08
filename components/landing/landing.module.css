@@ -2,6 +2,15 @@
   min-width: 0;
   padding-bottom: 0;
   overflow-x: clip;
+  transform: scale(1);
+  transition: filter 220ms var(--ease-out), transform 220ms var(--ease-out);
+}
+
+body[data-mobile-menu-open="true"] .siteShell,
+body:has(.mobileMenuPopup) .siteShell {
+  filter: blur(0.5rem) saturate(82%);
+  transform: scale(1.012);
+  will-change: filter, transform;
 }
 
 .header {
@@ -363,9 +372,9 @@
 .primaryCtaCircuit {
   position: absolute;
   z-index: 1;
-  inset: -0.42rem;
-  width: calc(100% + 0.84rem);
-  height: calc(100% + 0.84rem);
+  inset: -0.48rem;
+  width: calc(100% + 0.96rem);
+  height: calc(100% + 0.96rem);
   overflow: visible;
   pointer-events: none;
 }
@@ -377,17 +386,17 @@
 }
 
 .primaryCtaCircuitBase {
-  stroke: rgb(100 18 31 / 30%);
-  stroke-width: 1;
+  stroke: rgb(52 37 34 / 72%);
+  stroke-width: 2;
 }
 
 .primaryCtaCircuitRunner {
-  stroke: var(--brand-primary);
-  stroke-dasharray: 12 88;
+  stroke: #d14a59;
+  stroke-dasharray: 28 72;
   stroke-linecap: round;
-  stroke-width: 2.5;
-  filter: drop-shadow(0 0 0.22rem rgb(174 102 100 / 75%));
-  animation: primary-cta-lap 2.8s linear infinite;
+  stroke-width: 4;
+  filter: drop-shadow(0 0 0.26rem rgb(209 74 89 / 72%));
+  animation: primary-cta-lap 2.4s linear infinite;
 }
 
 @keyframes primary-cta-lap {
@@ -1147,6 +1156,15 @@
   }
 
   .mobileMenuTrigger:active {
+    transform: none;
+  }
+
+  .siteShell {
+    transition: filter 160ms var(--ease-out);
+  }
+
+  body[data-mobile-menu-open="true"] .siteShell,
+  body:has(.mobileMenuPopup) .siteShell {
     transform: none;
   }
 
