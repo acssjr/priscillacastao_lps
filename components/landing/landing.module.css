@@ -18,11 +18,12 @@ body[data-mobile-menu-open="true"] .siteShell > :is(header, main, footer, aside)
   z-index: 30;
   inset: 0 0 auto;
   color: var(--surface-paper);
-  background: var(--brand-primary);
+  background: rgb(100, 18, 31);
   box-shadow: 0 2px 16px rgb(52 37 34 / 15%);
 }
 
 .headerInner {
+  background: rgb(100, 18, 31);
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
