@@ -14,11 +14,9 @@ describe("forro-do-zero campaign", () => {
     expect(campaign.whatsapp.phone).toBe("5575981234176");
   });
 
-  it("labels every fictitious testimonial as demonstration content", () => {
-    expect(forroDoZeroCampaign.proof.status).toBe("demonstration");
-    expect(forroDoZeroCampaign.proof.testimonials).toHaveLength(3);
-    expect(forroDoZeroCampaign.proof.testimonials.every((item) => !item.verified)).toBe(true);
-    expect(forroDoZeroCampaign.proof.testimonials.every((item) => /fictíci/i.test(item.name))).toBe(true);
+  it("uses benefit statements instead of fabricated testimonial attribution", () => {
+    expect(forroDoZeroCampaign.proof.slides).toHaveLength(3);
+    expect(JSON.stringify(forroDoZeroCampaign.proof)).not.toMatch(/fictíci|verified|name/i);
   });
 
   it("provides a distinct prefilled message for each contact intent", () => {
@@ -29,15 +27,6 @@ describe("forro-do-zero campaign", () => {
   it("keeps navigation targets unique", () => {
     const targets = forroDoZeroCampaign.navigation.map((item) => item.target);
     expect(new Set(targets).size).toBe(targets.length);
-  });
-
-  it("rejects demonstration quotes presented as verified proof", () => {
-    const misleadingCampaign = {
-      ...forroDoZeroCampaign,
-      proof: { ...forroDoZeroCampaign.proof, status: "verified" as const },
-    };
-
-    expect(LandingCampaignSchema.safeParse(misleadingCampaign).success).toBe(false);
   });
 
   it("returns the registered campaign", () => {

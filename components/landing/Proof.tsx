@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { LandingCampaign } from "@/content/landing-pages/schema";
-import { TestimonialCarousel } from "./TestimonialCarousel";
+import { BenefitCarousel } from "./BenefitCarousel";
 import styles from "./landing.module.css";
 
 export function Proof({ content }: { content: LandingCampaign["proof"] }) {
@@ -18,7 +18,7 @@ export function Proof({ content }: { content: LandingCampaign["proof"] }) {
       <div className={styles.proofCopy} data-reveal="section">
         <p className={styles.eyebrow}>{content.eyebrow}</p>
         <h2 id="proof-title">{content.title}</h2>
-        <TestimonialCarousel testimonials={content.testimonials} />
+        <BenefitCarousel slides={content.slides} />
       </div>
     </section>
   );

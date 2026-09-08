@@ -4,20 +4,20 @@ import { forroDoZeroCampaign } from "@/content/landing-pages/forro-do-zero";
 import { Formats } from "./Formats";
 import { Proof } from "./Proof";
 
-it("presents the disclosed testimonials in an accessible carousel without outbound proof links", async () => {
+it("presents concrete benefits in an accessible carousel without fabricated attribution", async () => {
   const { container } = render(<Proof content={forroDoZeroCampaign.proof} />);
 
-  const carousel = screen.getByRole("region", { name: "Depoimentos de alunos" });
+  const carousel = screen.getByRole("region", { name: "Benefícios da aula particular" });
   expect(carousel).toHaveAttribute("aria-roledescription", "carousel");
-  expect(screen.getByText("Depoimento 1 de 3")).toBeInTheDocument();
-  expect(screen.getByText(forroDoZeroCampaign.proof.testimonials[0].name)).toBeInTheDocument();
+  expect(screen.getByText("Benefício 1 de 3")).toBeInTheDocument();
+  expect(screen.getByText(forroDoZeroCampaign.proof.slides[0].title)).toBeInTheDocument();
 
-  await userEvent.click(screen.getByRole("button", { name: "Próximo depoimento" }));
-  expect(screen.getByText("Depoimento 2 de 3")).toBeInTheDocument();
-  expect(screen.getByText(forroDoZeroCampaign.proof.testimonials[1].name)).toBeInTheDocument();
-  expect(screen.queryByText(/demonstrativ/i)).not.toBeInTheDocument();
+  await userEvent.click(screen.getByRole("button", { name: "Próximo benefício" }));
+  expect(screen.getByText("Benefício 2 de 3")).toBeInTheDocument();
+  expect(screen.getByText(forroDoZeroCampaign.proof.slides[1].title)).toBeInTheDocument();
+  expect(screen.queryByText(/fictíci|demonstrativ/i)).not.toBeInTheDocument();
   expect(screen.queryByRole("link", { name: /instagram/i })).not.toBeInTheDocument();
-  expect(container.querySelectorAll("[data-testimonial-slide]")).toHaveLength(3);
+  expect(container.querySelectorAll("[data-benefit-slide]")).toHaveLength(3);
 });
 
 it("keeps individual first and provides prefilled WhatsApp paths for every format", () => {
@@ -29,6 +29,6 @@ it("keeps individual first and provides prefilled WhatsApp paths for every forma
     screen.getAllByRole("link").every((link) => link.getAttribute("href")?.includes("wa.me/5575981234176")),
   ).toBe(true);
   expect(screen.getByRole("heading", { name: "Precisa de uma aula em grupo ou workshop?" })).toBeInTheDocument();
-  expect(decodeURIComponent(screen.getByRole("link", { name: /grupo ou workshop/i }).getAttribute("href") ?? "")).toContain("aula em grupo ou workshop");
+  expect(decodeURIComponent(screen.getByRole("link", { name: /outro formato/i }).getAttribute("href") ?? "")).toContain("aula em grupo ou workshop");
   expect(container.querySelectorAll("[data-format-brand-mark]")).toHaveLength(2);
 });

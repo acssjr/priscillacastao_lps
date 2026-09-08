@@ -38,7 +38,7 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
   },
   navigation: [
     { label: "Como funciona", target: "#metodo" },
-    { label: "Depoimentos", target: "#depoimentos" },
+    { label: "Como ajuda", target: "#depoimentos" },
     { label: "Formatos", target: "#aulas" },
     { label: "Sobre Priscilla", target: "#sobre" },
     { label: "Dúvidas", target: "#duvidas" },
@@ -91,25 +91,21 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
     image: methodImage,
   },
   proof: {
-    eyebrow: "Experiências de alunos",
-    title: "Quem começa do zero precisa de tempo para perguntar, praticar e repetir.",
+    eyebrow: "Aula no seu ritmo",
+    title: "A aula particular tira a pressa de aprender.",
     poster: proofPoster,
-    status: "demonstration",
-    testimonials: [
+    slides: [
       {
-        name: "Marina S. · nome fictício",
-        quote: "Eu nunca tinha dançado e tinha receio de não acompanhar. Na aula particular, consegui entender cada movimento com calma e perguntar sem pressa.",
-        verified: false,
+        title: "Repita sem pressa",
+        body: "Priscilla retoma o movimento quantas vezes você precisar.",
       },
       {
-        name: "Carlos M. · nome fictício",
-        quote: "A aula me ajudou a perceber a transferência de peso em vez de tentar copiar passos. Quando entendi isso, fiquei mais à vontade para continuar aprendendo.",
-        verified: false,
+        title: "Comece sem levar um par",
+        body: "Na aula individual, Priscilla acompanha os exercícios com você.",
       },
       {
-        name: "Ana e Rafael · nomes fictícios",
-        quote: "Queríamos aprender juntos, mas cada um tinha uma dificuldade diferente. Priscilla ajustou a aula para que os dois participassem sem um apressar o outro.",
-        verified: false,
+        title: "Aprenda sem acompanhar uma turma",
+        body: "A explicação e a prática seguem o seu nível de experiência.",
       },
     ],
     cta: "Quero entender as aulas",
@@ -121,7 +117,7 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
     alternative: {
       key: "grupo-workshop",
       title: "Precisa de uma aula em grupo ou workshop?",
-      cta: "CONVERSAR SOBRE GRUPO OU WORKSHOP",
+      cta: "FALAR SOBRE OUTRO FORMATO",
     },
   },
   offers: [
@@ -144,23 +140,19 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
   ],
   about: {
     eyebrow: "Quem é Priscilla Castão",
-    title: "Uma professora que trata o forró como movimento, escuta e comunicação.",
+    title: "Priscilla ensina forró universitário e roots em Salvador.",
     body: [
-      "Priscilla Castão é professora de forró universitário e roots. Em suas aulas e conteúdos, ela trabalha consciência corporal, transferência de peso, musicalidade e a comunicação que acontece entre duas pessoas enquanto dançam.",
-      "Ela descreve sua trajetória como uma construção feita com estudo, treino e troca com os alunos. Essa escuta orienta uma aula próxima, na qual a explicação pode mudar conforme a necessidade de quem está aprendendo.",
-      "Para quem começa do zero, isso significa aprender fundamentos antes de se preocupar em acompanhar uma turma ou acumular passos.",
+      "Nas aulas particulares, ela trabalha base, transferência de peso, musicalidade e comunicação com o par. As explicações e o ritmo da prática são ajustados à experiência de cada aluno.",
     ],
     image: aboutImage,
   },
   process: {
     eyebrow: "Como começar",
-    title: "A primeira conversa ajuda Priscilla a entender qual aula faz sentido para você.",
+    title: "Da primeira mensagem à aula em três passos.",
     steps: [
-      { title: "Chame no WhatsApp", body: "A mensagem já informa que você veio pela página de aulas para iniciantes." },
-      { title: "Conte o que procura", body: "Priscilla pergunta sobre seu objetivo, experiência e formato de interesse." },
-      { title: "Combine o local", body: "O atendimento é em Salvador, e o local é definido conforme a necessidade." },
-      { title: "Veja horários e investimento", body: "Essas informações são apresentadas depois que ela entende a aula procurada." },
-      { title: "Agende a aula", body: "Com os detalhes combinados, vocês escolhem o próximo passo." },
+      { title: "Conte o que procura", body: "Envie a mensagem pronta e diga se prefere aula individual, em dupla ou outro formato." },
+      { title: "Combine os detalhes", body: "Priscilla conversa com você sobre objetivo, local, horários e investimento." },
+      { title: "Agende sua aula", body: "Escolha a melhor opção e confirme a primeira aula pelo WhatsApp." },
     ],
   },
   faq: {

@@ -16,12 +16,6 @@ const RichSectionSchema = z.object({
   body: z.array(z.string().min(1)).min(1),
 });
 
-const TestimonialSchema = z.object({
-  name: z.string().min(2),
-  quote: z.string().min(20),
-  verified: z.boolean(),
-});
-
 export const LandingCampaignSchema = z.object({
   id: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
   route: z.string().startsWith("/"),
@@ -54,13 +48,11 @@ export const LandingCampaignSchema = z.object({
     eyebrow: z.string().min(1),
     title: z.string().min(1),
     poster: ImageSchema,
-    status: z.enum(["verified", "demonstration"]),
-    testimonials: z.array(TestimonialSchema).min(2).max(4),
+    slides: z.array(z.object({
+      title: z.string().min(2),
+      body: z.string().min(10),
+    })).length(3),
     cta: z.string().min(2),
-  }).superRefine((proof, context) => {
-    if (proof.status === "verified" && proof.testimonials.some((testimonial) => !testimonial.verified)) {
-      context.addIssue({ code: "custom", message: "Verified proof cannot contain demonstration testimonials" });
-    }
   }),
   formats: z.object({
     eyebrow: z.string().min(1),
@@ -84,7 +76,7 @@ export const LandingCampaignSchema = z.object({
   process: z.object({
     eyebrow: z.string().min(1),
     title: z.string().min(1),
-    steps: z.array(z.object({ title: z.string().min(1), body: z.string().min(1) })).length(5),
+    steps: z.array(z.object({ title: z.string().min(1), body: z.string().min(1) })).length(3),
   }),
   faq: z.object({
     eyebrow: z.string().min(1),

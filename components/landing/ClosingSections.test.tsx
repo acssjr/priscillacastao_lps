@@ -2,12 +2,13 @@ import { render, screen } from "@testing-library/react";
 import { forroDoZeroCampaign } from "@/content/landing-pages/forro-do-zero";
 import { LandingPage } from "./LandingPage";
 
-it("renders the five-step process and native FAQ controls", () => {
+it("renders the three-step process and native FAQ controls", () => {
   const { container } = render(<LandingPage campaign={forroDoZeroCampaign} />);
 
   for (const step of forroDoZeroCampaign.process.steps) {
     expect(screen.getByRole("heading", { name: step.title })).toBeInTheDocument();
   }
+  expect(forroDoZeroCampaign.process.steps).toHaveLength(3);
   expect(container.querySelectorAll("details")).toHaveLength(forroDoZeroCampaign.faq.items.length);
   expect(container.querySelectorAll("summary")).toHaveLength(forroDoZeroCampaign.faq.items.length);
 });

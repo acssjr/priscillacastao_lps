@@ -4,12 +4,12 @@ import { useRef, useState, type PointerEvent } from "react";
 import type { LandingCampaign } from "@/content/landing-pages/schema";
 import styles from "./landing.module.css";
 
-type Testimonials = LandingCampaign["proof"]["testimonials"];
+type Slides = LandingCampaign["proof"]["slides"];
 
-export function TestimonialCarousel({ testimonials }: { testimonials: Testimonials }) {
+export function BenefitCarousel({ slides }: { slides: Slides }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const pointerStart = useRef<number | null>(null);
-  const total = testimonials.length;
+  const total = slides.length;
 
   const show = (index: number) => setActiveIndex((index + total) % total);
   const previous = () => show(activeIndex - 1);
@@ -30,51 +30,50 @@ export function TestimonialCarousel({ testimonials }: { testimonials: Testimonia
 
   return (
     <div
-      className={styles.testimonialCarousel}
+      className={styles.benefitCarousel}
       role="region"
       aria-roledescription="carousel"
-      aria-label="Depoimentos de alunos"
+      aria-label="Benefícios da aula particular"
     >
       <div
-        className={styles.testimonialViewport}
+        className={styles.benefitViewport}
         onPointerDown={handlePointerDown}
         onPointerUp={handlePointerUp}
         onPointerCancel={() => { pointerStart.current = null; }}
       >
         <div
-          className={styles.testimonialTrack}
+          className={styles.benefitTrack}
           style={{ transform: `translateX(-${activeIndex * 100}%)` }}
         >
-          {testimonials.map((testimonial, index) => (
-            <blockquote
-              key={`${testimonial.name}-${testimonial.quote}`}
-              aria-hidden={index !== activeIndex}
-              data-testimonial-slide
-            >
-              <p>“{testimonial.quote}”</p>
-              <cite>{testimonial.name}</cite>
-            </blockquote>
+          {slides.map((slide, index) => (
+            <article key={slide.title} aria-hidden={index !== activeIndex} data-benefit-slide>
+              <h3>{slide.title}</h3>
+              <p>{slide.body}</p>
+            </article>
           ))}
         </div>
       </div>
-      <div className={styles.testimonialControls}>
+      <div className={styles.benefitControls}>
         <p className={styles.carouselStatus} aria-live="polite">
-          Depoimento {activeIndex + 1} de {total}
+          Benefício {activeIndex + 1} de {total}
         </p>
-        <div className={styles.carouselDots} aria-label="Selecionar depoimento">
-          {testimonials.map((testimonial, index) => (
+        <span className={styles.carouselCount} aria-hidden="true">
+          {String(activeIndex + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+        </span>
+        <div className={styles.carouselDots} aria-label="Selecionar benefício">
+          {slides.map((slide, index) => (
             <button
               type="button"
-              key={testimonial.name}
-              aria-label={`Ir para depoimento ${index + 1}`}
+              key={slide.title}
+              aria-label={`Ir para benefício ${index + 1}`}
               aria-current={index === activeIndex ? "true" : undefined}
               onClick={() => show(index)}
             />
           ))}
         </div>
         <div className={styles.carouselArrows}>
-          <button type="button" aria-label="Depoimento anterior" onClick={previous}>←</button>
-          <button type="button" aria-label="Próximo depoimento" onClick={next}>→</button>
+          <button type="button" aria-label="Benefício anterior" onClick={previous}>←</button>
+          <button type="button" aria-label="Próximo benefício" onClick={next}>→</button>
         </div>
       </div>
     </div>
