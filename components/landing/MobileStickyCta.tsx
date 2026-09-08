@@ -36,7 +36,7 @@ export function MobileStickyCta({ campaign }: { campaign: LandingCampaign }) {
     >
       <span className={styles.mobileStickyCopy}>
         <strong>Aula particular para iniciantes</strong>
-        <small>Você combina tudo pelo WhatsApp</small>
+        <small>Não precisa levar par.</small>
       </span>
       <WhatsAppLink
         className={styles.mobileStickyLink}
