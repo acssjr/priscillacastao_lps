@@ -104,8 +104,8 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
         body: "Na aula individual, Priscilla acompanha os exercícios com você.",
       },
       {
-        title: "Aprenda sem acompanhar uma turma",
-        body: "A explicação e a prática seguem o seu nível de experiência.",
+        title: "Aprenda com atenção individualizada",
+        body: "Priscilla ajusta a explicação e a prática ao seu nível de experiência.",
       },
     ],
     cta: "Quero entender as aulas",
@@ -127,7 +127,7 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
       audience: "Para quem quer começar sozinho, receber atenção integral e avançar no próprio ritmo.",
       body: "A aula acontece entre você e Priscilla. Você não precisa levar par, e cada explicação pode ser ajustada ao que o seu corpo precisa entender naquele momento.",
       primary: true,
-      cta: "Conversar sobre aula individual",
+      cta: "AGENDAR MINHA AULA PARTICULAR",
     },
     {
       key: "dupla",
@@ -135,7 +135,7 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
       audience: "Para duas pessoas que já querem aprender juntas.",
       body: "Priscilla acompanha os dois alunos, observa a comunicação da dupla e ajusta os fundamentos às necessidades de cada pessoa.",
       primary: false,
-      cta: "Conversar sobre aula em dupla",
+      cta: "AGENDAR AULA EM DUPLA",
     },
   ],
   about: {

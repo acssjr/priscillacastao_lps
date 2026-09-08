@@ -72,8 +72,16 @@ export function BenefitCarousel({ slides }: { slides: Slides }) {
           ))}
         </div>
         <div className={styles.carouselArrows}>
-          <button type="button" aria-label="Benefício anterior" onClick={previous}>←</button>
-          <button type="button" aria-label="Próximo benefício" onClick={next}>→</button>
+          <button type="button" aria-label="Benefício anterior" onClick={previous}>
+            <svg aria-hidden="true" viewBox="0 0 20 20">
+              <path d="m12.5 4.5-5.5 5.5 5.5 5.5" />
+            </svg>
+          </button>
+          <button type="button" aria-label="Próximo benefício" onClick={next}>
+            <svg aria-hidden="true" viewBox="0 0 20 20">
+              <path d="m7.5 4.5 5.5 5.5-5.5 5.5" />
+            </svg>
+          </button>
         </div>
       </div>
     </div>

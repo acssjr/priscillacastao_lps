@@ -71,6 +71,14 @@
   color: var(--brand-dark);
   cursor: pointer;
   font: inherit;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    transform 160ms var(--ease-out);
+}
+
+.mobileMenuTrigger:active {
+  transform: scale(0.97);
 }
 
 .menuIcon {
@@ -97,9 +105,11 @@
   position: fixed;
   z-index: 70;
   inset: 0;
-  background: rgb(52 37 34 / 52%);
+  background: rgb(52 37 34 / 38%);
+  backdrop-filter: blur(0.5rem) saturate(112%);
   opacity: 1;
-  transition: opacity 250ms var(--ease-out);
+  transition: opacity 220ms var(--ease-out);
+  -webkit-backdrop-filter: blur(0.5rem) saturate(112%);
 }
 
 .mobileMenuBackdrop[data-starting-style],
@@ -121,19 +131,26 @@
   width: min(25rem, 100%);
   max-height: calc(100dvh - var(--space-6));
   overflow-y: auto;
+  overscroll-behavior: contain;
   padding: var(--space-4);
+  border: 1px solid rgb(255 255 255 / 62%);
   border-radius: var(--radius-lg);
-  background: var(--surface-paper);
+  background: rgb(250 245 236 / 88%);
   color: var(--brand-dark);
-  box-shadow: 0 1.5rem 4rem rgb(52 37 34 / 30%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 72%),
+    0 1.75rem 5rem rgb(52 37 34 / 28%);
+  backdrop-filter: blur(1.5rem) saturate(145%);
   transform-origin: top right;
   transition: opacity 250ms var(--ease-out), transform 250ms var(--ease-out);
+  will-change: opacity, transform;
+  -webkit-backdrop-filter: blur(1.5rem) saturate(145%);
 }
 
 .mobileMenuPopup[data-starting-style],
 .mobileMenuPopup[data-ending-style] {
   opacity: 0;
-  transform: translateY(-0.5rem) scale(0.97);
+  transform: translateY(-0.65rem) scale(0.965);
 }
 
 .mobileMenuTopline {
@@ -193,6 +210,29 @@
   font-size: 1.125rem;
   font-weight: 750;
   text-decoration: none;
+  transition: opacity 220ms var(--ease-out), transform 220ms var(--ease-out);
+}
+
+.mobileNavigation a:nth-child(2) {
+  transition-delay: 35ms;
+}
+
+.mobileNavigation a:nth-child(3) {
+  transition-delay: 70ms;
+}
+
+.mobileNavigation a:nth-child(4) {
+  transition-delay: 105ms;
+}
+
+.mobileMenuPopup[data-starting-style] .mobileNavigation a,
+.mobileMenuPopup[data-ending-style] .mobileNavigation a {
+  opacity: 0;
+  transform: translateY(-0.3rem);
+}
+
+.mobileMenuPopup[data-ending-style] .mobileNavigation a {
+  transition-delay: 0ms;
 }
 
 .mobileNavigation small {
@@ -290,6 +330,7 @@
 }
 
 .primaryCta {
+  position: relative;
   display: inline-flex;
   min-height: 3.25rem;
   align-items: center;
@@ -302,6 +343,28 @@
   text-align: center;
   text-decoration: none;
   border-radius: 999px;
+  isolation: isolate;
+  box-shadow: 0 0.6rem 1.5rem rgb(100 18 31 / 14%);
+}
+
+.primaryCta::before {
+  position: absolute;
+  z-index: -1;
+  inset: -0.32rem;
+  content: "";
+  border: 1px solid rgb(100 18 31 / 44%);
+  border-radius: inherit;
+  opacity: 0.45;
+  transform: scale(0.985);
+  animation: primary-cta-aura 2.8s var(--ease-in-out) infinite;
+  pointer-events: none;
+}
+
+@keyframes primary-cta-aura {
+  50% {
+    opacity: 0.9;
+    transform: scale(1.025);
+  }
 }
 
 .primaryCta:hover,
@@ -463,8 +526,9 @@
 
 .proofMedia img {
   width: 100%;
-  max-height: 38rem;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
+  object-position: center 42%;
   border-radius: 10rem 10rem var(--radius-lg) var(--radius-lg);
 }
 
@@ -489,7 +553,7 @@
 
 .benefitCarousel {
   max-width: 38rem;
-  margin-top: var(--space-4);
+  margin-top: var(--space-2);
   overflow: hidden;
   border-radius: var(--radius-lg);
   background: var(--surface-cream);
@@ -512,8 +576,8 @@
   flex: 0 0 100%;
   align-content: center;
   min-width: 0;
-  min-height: 13rem;
-  padding: var(--space-6);
+  min-height: 10rem;
+  padding: var(--space-5, 1.25rem) var(--space-6);
 }
 
 .benefitTrack h3,
@@ -523,7 +587,7 @@
 
 .benefitTrack h3 {
   max-width: 20ch;
-  font-size: clamp(1.5rem, 6vw, 2rem);
+  font-size: clamp(1.35rem, 5.5vw, 1.75rem);
   line-height: 1.08;
 }
 
@@ -598,9 +662,22 @@
   background: transparent;
   color: inherit;
   cursor: pointer;
-  font: inherit;
-  font-size: 1.125rem;
   transition: transform 140ms var(--ease-out), background-color 140ms ease;
+}
+
+.carouselArrows svg {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  overflow: visible;
+}
+
+.carouselArrows path {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.6;
 }
 
 .carouselArrows button:active {
@@ -836,7 +913,7 @@
 
 .processSteps p {
   margin-top: var(--space-2);
-  color: rgb(52 37 34 / 75%);
+  color: var(--brand-dark);
   font-size: 0.9rem;
 }
 
@@ -919,7 +996,7 @@
 }
 
 .finalCta {
-  padding: calc(var(--space-16) * 1.35) var(--space-4);
+  padding: var(--space-12) var(--space-4);
   background:
     radial-gradient(circle at 50% 0%, rgb(174 102 100 / 28%), transparent 45%),
     var(--brand-dark);
@@ -1019,11 +1096,32 @@
 
 @media (prefers-reduced-motion: reduce) {
   .faqList [data-faq-indicator],
-  .mobileMenuBackdrop,
-  .mobileMenuPopup,
   .benefitTrack,
   .carouselArrows button {
     transition: none;
+  }
+
+  .mobileMenuBackdrop {
+    transition: opacity 160ms var(--ease-out);
+  }
+
+  .mobileMenuPopup,
+  .mobileNavigation a {
+    transition: opacity 160ms var(--ease-out);
+  }
+
+  .mobileMenuTrigger {
+    transition: background-color 160ms ease, border-color 160ms ease;
+  }
+
+  .mobileMenuTrigger:active {
+    transform: none;
+  }
+
+  .primaryCta::before {
+    animation: none;
+    opacity: 0.65;
+    transform: none;
   }
 
   .mobileMenuPopup[data-starting-style],
@@ -1179,6 +1277,11 @@
     align-self: start;
   }
 
+  .proofMedia img {
+    aspect-ratio: 3 / 4;
+    max-height: 34rem;
+  }
+
   .formatGrid {
     grid-template-columns: 1.1fr 0.9fr;
     align-items: stretch;
@@ -1211,6 +1314,10 @@
   .finalCta,
   .footer {
     padding-inline: max(var(--space-8), calc((100vw - var(--content)) / 2));
+  }
+
+  .finalCta {
+    padding-block: var(--space-16);
   }
 
   .processSteps {

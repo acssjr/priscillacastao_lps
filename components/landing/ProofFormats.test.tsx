@@ -18,6 +18,7 @@ it("presents concrete benefits in an accessible carousel without fabricated attr
   expect(screen.queryByText(/fictíci|demonstrativ/i)).not.toBeInTheDocument();
   expect(screen.queryByRole("link", { name: /instagram/i })).not.toBeInTheDocument();
   expect(container.querySelectorAll("[data-benefit-slide]")).toHaveLength(3);
+  expect(screen.getByText("Aprenda com atenção individualizada")).toBeInTheDocument();
 });
 
 it("keeps individual first and provides prefilled WhatsApp paths for every format", () => {
@@ -25,6 +26,8 @@ it("keeps individual first and provides prefilled WhatsApp paths for every forma
 
   const headings = screen.getAllByRole("heading", { level: 3 });
   expect(headings[0]).toHaveTextContent(forroDoZeroCampaign.offers[0].title);
+  expect(screen.getByRole("link", { name: "AGENDAR MINHA AULA PARTICULAR" })).toBeInTheDocument();
+  expect(screen.getByRole("link", { name: "AGENDAR AULA EM DUPLA" })).toBeInTheDocument();
   expect(
     screen.getAllByRole("link").every((link) => link.getAttribute("href")?.includes("wa.me/5575981234176")),
   ).toBe(true);
