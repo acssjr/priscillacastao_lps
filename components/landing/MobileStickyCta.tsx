@@ -40,6 +40,7 @@ export function MobileStickyCta({ campaign }: { campaign: LandingCampaign }) {
       </span>
       <WhatsAppLink
         className={styles.mobileStickyLink}
+        glow
         phone={campaign.whatsapp.phone}
         message={campaign.whatsapp.messages.individual}
         placement="sticky"

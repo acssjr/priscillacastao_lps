@@ -38,3 +38,15 @@ it("emits format selection before the WhatsApp click", async () => {
     { event: "whatsapp_click", campaign: "forro-do-zero", placement: "format", offer: "dupla" },
   ]);
 });
+
+it("renders the default-on glow without changing the accessible name or href", () => {
+  render(
+    <WhatsAppLink glow phone="5575981234176" message="Oi, Priscilla!" placement="hero" offer="individual">
+      AGENDAR MINHA AULA
+    </WhatsAppLink>,
+  );
+  const link = screen.getByRole("link", { name: "AGENDAR MINHA AULA" });
+  expect(link).toHaveAttribute("href", "https://wa.me/5575981234176?text=Oi%2C%20Priscilla!");
+  expect(link.querySelector('[aria-hidden="true"] > span')).toBeInTheDocument();
+  expect(link).not.toHaveAttribute("glow");
+});

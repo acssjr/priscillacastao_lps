@@ -23,6 +23,7 @@ export function Hero({ campaign }: { campaign: LandingCampaign }) {
         ))}
         <WhatsAppLink
           id="hero-primary-cta"
+          glow
           className={styles.primaryCta}
           phone={whatsapp.phone}
           message={whatsapp.messages.individual}

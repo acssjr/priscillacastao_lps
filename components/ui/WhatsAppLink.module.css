@@ -1,0 +1,80 @@
+.glowingLink {
+  position: relative;
+  isolation: isolate;
+}
+
+.glow {
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--brand-soft);
+  border-radius: inherit;
+  box-shadow:
+    0 0 3px 1px rgb(250 245 236 / 65%),
+    0 0 9px 2px rgb(174 102 100 / 65%),
+    0 0 22px 3px rgb(100 18 31 / 24%),
+    inset 0 0 8px rgb(174 102 100 / 40%);
+}
+
+/* The pill-shaped mask stays still; only its oversized light source rotates. */
+.rim {
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  border-radius: inherit;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+}
+
+.rim::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(100% + 1rem);
+  aspect-ratio: 1;
+  background: conic-gradient(
+    from 215deg,
+    var(--brand-soft) 0deg,
+    var(--surface-cream) 48deg,
+    var(--surface-paper) 65deg,
+    var(--surface-cream) 82deg,
+    var(--brand-soft) 110deg,
+    var(--brand-primary) 168deg,
+    var(--brand-soft) 205deg,
+    var(--surface-paper) 245deg,
+    var(--surface-cream) 262deg,
+    var(--brand-soft) 295deg,
+    var(--brand-primary) 330deg,
+    var(--brand-soft) 360deg
+  );
+  transform: translate(-50%, -50%) rotate(0turn);
+  animation: perimeterLight 4s linear infinite;
+}
+
+@keyframes perimeterLight {
+  to {
+    transform: translate(-50%, -50%) rotate(1turn);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rim::before {
+    animation: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .glow {
+    display: none;
+  }
+}

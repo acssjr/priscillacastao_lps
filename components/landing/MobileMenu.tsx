@@ -65,6 +65,7 @@ export function MobileMenu({ campaign }: { campaign: LandingCampaign }) {
             </nav>
             <WhatsAppLink
               className={styles.mobileMenuCta}
+              glow
               phone={campaign.whatsapp.phone}
               message={campaign.whatsapp.messages.individual}
               placement="mobile_menu"
