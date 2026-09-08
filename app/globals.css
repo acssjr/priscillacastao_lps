@@ -34,9 +34,36 @@
 
 html {
   color-scheme: light;
+  background: var(--surface-paper);
+  overflow-x: clip;
+  scrollbar-width: thin;
+  scrollbar-color: var(--brand-soft) var(--surface-paper);
   scrollbar-gutter: stable;
   scroll-padding-top: var(--header-height);
   text-size-adjust: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-paper);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--brand-soft);
+  border: 2px solid var(--surface-paper);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-primary);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--surface-paper);
 }
 
 body {

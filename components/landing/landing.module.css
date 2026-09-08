@@ -2,15 +2,12 @@
   min-width: 0;
   padding-bottom: 0;
   overflow-x: clip;
-  transform: scale(1);
-  transition: filter 220ms var(--ease-out), transform 220ms var(--ease-out);
+  transition: filter 220ms var(--ease-out);
 }
 
-body[data-mobile-menu-open="true"] .siteShell,
-body:has(.mobileMenuPopup) .siteShell {
+body[data-mobile-menu-open="true"] .siteShell {
   filter: blur(0.5rem) saturate(82%);
-  transform: scale(1.012);
-  will-change: filter, transform;
+  will-change: filter;
 }
 
 .header {
@@ -364,42 +361,6 @@ body:has(.mobileMenuPopup) .siteShell {
 .primaryCtaLabel {
   position: relative;
   z-index: 2;
-}
-
-.primaryCtaCircuit {
-  position: absolute;
-  z-index: 1;
-  inset: -0.48rem;
-  width: calc(100% + 0.96rem);
-  height: calc(100% + 0.96rem);
-  overflow: visible;
-  pointer-events: none;
-}
-
-.primaryCtaCircuitBase,
-.primaryCtaCircuitRunner {
-  fill: none;
-  vector-effect: non-scaling-stroke;
-}
-
-.primaryCtaCircuitBase {
-  stroke: rgb(52 37 34 / 72%);
-  stroke-width: 2;
-}
-
-.primaryCtaCircuitRunner {
-  stroke: #d14a59;
-  stroke-dasharray: 28 72;
-  stroke-linecap: round;
-  stroke-width: 4;
-  filter: drop-shadow(0 0 0.26rem rgb(209 74 89 / 72%));
-  animation: primary-cta-lap 2.4s linear infinite;
-}
-
-@keyframes primary-cta-lap {
-  to {
-    stroke-dashoffset: -100;
-  }
 }
 
 .primaryCta:hover,
@@ -1178,16 +1139,6 @@ body:has(.mobileMenuPopup) .siteShell {
 
   .siteShell {
     transition: filter 160ms var(--ease-out);
-  }
-
-  body[data-mobile-menu-open="true"] .siteShell,
-  body:has(.mobileMenuPopup) .siteShell {
-    transform: none;
-  }
-
-  .primaryCtaCircuitRunner {
-    animation: none;
-    opacity: 0;
   }
 
   .mobileMenuPopup[data-starting-style],
