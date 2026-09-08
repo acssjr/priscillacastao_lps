@@ -8,6 +8,7 @@ it("opens an accessible mobile navigation and closes it after selecting a sectio
 
   await userEvent.click(screen.getByRole("button", { name: "Abrir menu" }));
   expect(screen.getByRole("dialog", { name: "Menu" })).toBeInTheDocument();
+  expect(document.querySelector("[data-mobile-menu-brand]")).toBeInTheDocument();
   const mobileNavigation = screen.getByRole("navigation", { name: "Menu mobile" });
   for (const item of forroDoZeroCampaign.navigation) {
     expect(mobileNavigation).toHaveTextContent(item.label);

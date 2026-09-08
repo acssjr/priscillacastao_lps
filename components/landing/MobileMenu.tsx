@@ -23,6 +23,7 @@ export function MobileMenu({ campaign }: { campaign: LandingCampaign }) {
         <Dialog.Viewport className={styles.mobileMenuViewport}>
           <Dialog.Popup className={styles.mobileMenuPopup}>
             <div className={styles.mobileMenuTopline}>
+              <span className={styles.mobileMenuBrand} aria-hidden="true" data-mobile-menu-brand />
               <Dialog.Title className={styles.mobileMenuTitle}>Menu</Dialog.Title>
               <Dialog.Close className={styles.mobileMenuClose} aria-label="Fechar menu">
                 <span aria-hidden="true" />

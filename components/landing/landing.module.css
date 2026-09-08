@@ -2,6 +2,12 @@
   min-width: 0;
   padding-bottom: 0;
   overflow-x: clip;
+  transition: filter 220ms var(--ease-out);
+}
+
+body:has(.mobileMenuPopup) .siteShell {
+  filter: blur(0.25rem);
+  will-change: filter;
 }
 
 .header {
@@ -105,11 +111,9 @@
   position: fixed;
   z-index: 70;
   inset: 0;
-  background: rgb(52 37 34 / 38%);
-  backdrop-filter: blur(0.5rem) saturate(112%);
+  background: rgb(52 37 34 / 30%);
   opacity: 1;
   transition: opacity 220ms var(--ease-out);
-  -webkit-backdrop-filter: blur(0.5rem) saturate(112%);
 }
 
 .mobileMenuBackdrop[data-starting-style],
@@ -133,18 +137,16 @@
   overflow-y: auto;
   overscroll-behavior: contain;
   padding: var(--space-4);
-  border: 1px solid rgb(255 255 255 / 62%);
+  border: 1px solid rgb(100 18 31 / 12%);
   border-radius: var(--radius-lg);
-  background: rgb(250 245 236 / 88%);
+  background: var(--surface-paper);
   color: var(--brand-dark);
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 72%),
-    0 1.75rem 5rem rgb(52 37 34 / 28%);
-  backdrop-filter: blur(1.5rem) saturate(145%);
+    inset 0 1px 0 rgb(255 255 255 / 90%),
+    0 1.75rem 5rem rgb(52 37 34 / 26%);
   transform-origin: top right;
   transition: opacity 250ms var(--ease-out), transform 250ms var(--ease-out);
   will-change: opacity, transform;
-  -webkit-backdrop-filter: blur(1.5rem) saturate(145%);
 }
 
 .mobileMenuPopup[data-starting-style],
@@ -154,6 +156,7 @@
 }
 
 .mobileMenuTopline {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -162,11 +165,23 @@
 }
 
 .mobileMenuTitle {
-  margin: 0;
-  font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.mobileMenuBrand {
+  display: block;
+  width: 3rem;
+  height: 3rem;
+  background: var(--brand-primary);
+  mask: url("/brand/priscilla-castao-mark.webp") center / contain no-repeat;
+  -webkit-mask: url("/brand/priscilla-castao-mark.webp") center / contain no-repeat;
 }
 
 .mobileMenuClose {
@@ -1116,6 +1131,10 @@
 
   .mobileMenuTrigger:active {
     transform: none;
+  }
+
+  .siteShell {
+    transition: filter 160ms var(--ease-out);
   }
 
   .primaryCta::before {
