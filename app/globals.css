@@ -40,6 +40,7 @@ html {
   scrollbar-color: var(--brand-soft) var(--surface-paper);
   scrollbar-gutter: stable;
   scroll-padding-top: var(--header-height);
+  scroll-behavior: smooth;
   text-size-adjust: 100%;
 }
 
