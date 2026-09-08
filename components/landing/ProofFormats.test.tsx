@@ -1,8 +1,11 @@
-import { render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { afterEach, vi } from "vitest";
 import { forroDoZeroCampaign } from "@/content/landing-pages/forro-do-zero";
 import { Formats } from "./Formats";
 import { Proof } from "./Proof";
+
+afterEach(() => vi.useRealTimers());
 
 it("presents concrete benefits in an accessible carousel without fabricated attribution", async () => {
   const { container } = render(<Proof content={forroDoZeroCampaign.proof} />);
@@ -19,6 +22,25 @@ it("presents concrete benefits in an accessible carousel without fabricated attr
   expect(screen.queryByRole("link", { name: /instagram/i })).not.toBeInTheDocument();
   expect(container.querySelectorAll("[data-benefit-slide]")).toHaveLength(3);
   expect(screen.getByText("Aprenda com atenção individualizada")).toBeInTheDocument();
+});
+
+it("advances benefits automatically and pauses while the carousel is being explored", () => {
+  vi.useFakeTimers();
+  render(<Proof content={forroDoZeroCampaign.proof} />);
+
+  const carousel = screen.getByRole("region", { name: "Benefícios da aula particular" });
+  expect(screen.getByText("Benefício 1 de 3")).toBeInTheDocument();
+
+  act(() => vi.advanceTimersByTime(5_000));
+  expect(screen.getByText("Benefício 2 de 3")).toBeInTheDocument();
+
+  fireEvent.mouseEnter(carousel);
+  act(() => vi.advanceTimersByTime(5_000));
+  expect(screen.getByText("Benefício 2 de 3")).toBeInTheDocument();
+
+  fireEvent.mouseLeave(carousel);
+  act(() => vi.advanceTimersByTime(5_000));
+  expect(screen.getByText("Benefício 3 de 3")).toBeInTheDocument();
 });
 
 it("keeps individual first and provides prefilled WhatsApp paths for every format", () => {

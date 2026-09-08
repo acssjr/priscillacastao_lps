@@ -49,8 +49,8 @@ body[data-mobile-menu-open="true"] .siteShell > :is(header, main, footer, aside)
   width: 100%;
   aspect-ratio: 4 / 1;
   background: var(--surface-paper);
-  mask: url("/brand/priscilla-castao-logo.webp") center / contain no-repeat;
-  -webkit-mask: url("/brand/priscilla-castao-logo.webp") center / contain no-repeat;
+  mask: url("/brand/priscilla-castao-logo.svg") center / contain no-repeat;
+  -webkit-mask: url("/brand/priscilla-castao-logo.svg") center / contain no-repeat;
 }
 
 .desktopNav {
@@ -187,8 +187,8 @@ body[data-mobile-menu-open="true"] .siteShell > :is(header, main, footer, aside)
   width: 3rem;
   height: 3rem;
   background: var(--brand-primary);
-  mask: url("/brand/priscilla-castao-mark.webp") center / contain no-repeat;
-  -webkit-mask: url("/brand/priscilla-castao-mark.webp") center / contain no-repeat;
+  mask: url("/brand/priscilla-castao-mark.svg") center / contain no-repeat;
+  -webkit-mask: url("/brand/priscilla-castao-mark.svg") center / contain no-repeat;
 }
 
 .mobileMenuClose {
@@ -1046,8 +1046,8 @@ body[data-mobile-menu-open="true"] .siteShell > :is(header, main, footer, aside)
   width: min(13rem, 100%);
   aspect-ratio: 4 / 1;
   background: var(--brand-primary);
-  mask: url("/brand/priscilla-castao-logo.webp") left center / contain no-repeat;
-  -webkit-mask: url("/brand/priscilla-castao-logo.webp") left center / contain no-repeat;
+  mask: url("/brand/priscilla-castao-logo.svg") left center / contain no-repeat;
+  -webkit-mask: url("/brand/priscilla-castao-logo.svg") left center / contain no-repeat;
 }
 
 .footerIntro p,

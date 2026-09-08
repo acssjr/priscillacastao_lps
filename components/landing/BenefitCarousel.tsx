@@ -1,19 +1,36 @@
 "use client";
 
-import { useRef, useState, type PointerEvent } from "react";
+import { useEffect, useRef, useState, type FocusEvent, type PointerEvent } from "react";
 import type { LandingCampaign } from "@/content/landing-pages/schema";
 import styles from "./landing.module.css";
 
 type Slides = LandingCampaign["proof"]["slides"];
+const autoplayDelay = 5_000;
 
 export function BenefitCarousel({ slides }: { slides: Slides }) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const pointerStart = useRef<number | null>(null);
   const total = slides.length;
 
   const show = (index: number) => setActiveIndex((index + total) % total);
   const previous = () => show(activeIndex - 1);
   const next = () => show(activeIndex + 1);
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+    if (total < 2 || isPaused || prefersReducedMotion) return;
+
+    const timeout = window.setTimeout(() => {
+      setActiveIndex((current) => (current + 1) % total);
+    }, autoplayDelay);
+
+    return () => window.clearTimeout(timeout);
+  }, [activeIndex, isPaused, total]);
+
+  const handleBlur = (event: FocusEvent<HTMLDivElement>) => {
+    if (!event.currentTarget.contains(event.relatedTarget)) setIsPaused(false);
+  };
 
   const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
     pointerStart.current = event.clientX;
@@ -34,6 +51,10 @@ export function BenefitCarousel({ slides }: { slides: Slides }) {
       role="region"
       aria-roledescription="carousel"
       aria-label="Benefícios da aula particular"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onFocusCapture={() => setIsPaused(true)}
+      onBlurCapture={handleBlur}
     >
       <div
         className={styles.benefitViewport}
