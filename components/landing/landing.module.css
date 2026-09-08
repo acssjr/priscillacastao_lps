@@ -2,12 +2,6 @@
   min-width: 0;
   padding-bottom: 0;
   overflow-x: clip;
-  transition: filter 220ms var(--ease-out);
-}
-
-body:has(.mobileMenuPopup) .siteShell {
-  filter: blur(0.25rem);
-  will-change: filter;
 }
 
 .header {
@@ -145,13 +139,12 @@ body:has(.mobileMenuPopup) .siteShell {
     inset 0 1px 0 rgb(255 255 255 / 90%),
     0 1.75rem 5rem rgb(52 37 34 / 26%);
   transform-origin: top right;
-  transition: opacity 250ms var(--ease-out), transform 250ms var(--ease-out);
-  will-change: opacity, transform;
+  transition: transform 250ms var(--ease-out);
+  will-change: transform;
 }
 
 .mobileMenuPopup[data-starting-style],
 .mobileMenuPopup[data-ending-style] {
-  opacity: 0;
   transform: translateY(-0.65rem) scale(0.965);
 }
 
@@ -362,23 +355,44 @@ body:has(.mobileMenuPopup) .siteShell {
   box-shadow: 0 0.6rem 1.5rem rgb(100 18 31 / 14%);
 }
 
-.primaryCta::before {
+.primaryCtaLabel {
+  position: relative;
+  z-index: 2;
+}
+
+.primaryCtaCircuit {
   position: absolute;
-  z-index: -1;
-  inset: -0.32rem;
-  content: "";
-  border: 1px solid rgb(100 18 31 / 44%);
-  border-radius: inherit;
-  opacity: 0.45;
-  transform: scale(0.985);
-  animation: primary-cta-aura 2.8s var(--ease-in-out) infinite;
+  z-index: 1;
+  inset: -0.42rem;
+  width: calc(100% + 0.84rem);
+  height: calc(100% + 0.84rem);
+  overflow: visible;
   pointer-events: none;
 }
 
-@keyframes primary-cta-aura {
-  50% {
-    opacity: 0.9;
-    transform: scale(1.025);
+.primaryCtaCircuitBase,
+.primaryCtaCircuitRunner {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+}
+
+.primaryCtaCircuitBase {
+  stroke: rgb(100 18 31 / 30%);
+  stroke-width: 1;
+}
+
+.primaryCtaCircuitRunner {
+  stroke: var(--brand-primary);
+  stroke-dasharray: 12 88;
+  stroke-linecap: round;
+  stroke-width: 2.5;
+  filter: drop-shadow(0 0 0.22rem rgb(174 102 100 / 75%));
+  animation: primary-cta-lap 2.8s linear infinite;
+}
+
+@keyframes primary-cta-lap {
+  to {
+    stroke-dashoffset: -100;
   }
 }
 
@@ -1120,9 +1134,12 @@ body:has(.mobileMenuPopup) .siteShell {
     transition: opacity 160ms var(--ease-out);
   }
 
-  .mobileMenuPopup,
   .mobileNavigation a {
     transition: opacity 160ms var(--ease-out);
+  }
+
+  .mobileMenuPopup {
+    transition: none;
   }
 
   .mobileMenuTrigger {
@@ -1133,14 +1150,9 @@ body:has(.mobileMenuPopup) .siteShell {
     transform: none;
   }
 
-  .siteShell {
-    transition: filter 160ms var(--ease-out);
-  }
-
-  .primaryCta::before {
+  .primaryCtaCircuitRunner {
     animation: none;
-    opacity: 0.65;
-    transform: none;
+    opacity: 0;
   }
 
   .mobileMenuPopup[data-starting-style],

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { CSSProperties } from "react";
 import { Dialog } from "@base-ui/react/dialog";
 import type { LandingCampaign } from "@/content/landing-pages/schema";
 import { WhatsAppLink } from "@/components/ui/WhatsAppLink";
@@ -8,6 +9,10 @@ import styles from "./landing.module.css";
 
 export function MobileMenu({ campaign }: { campaign: LandingCampaign }) {
   const [open, setOpen] = useState(false);
+  const backdropStyle: CSSProperties = {
+    backdropFilter: "blur(4px)",
+    WebkitBackdropFilter: "blur(4px)",
+  };
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
@@ -19,7 +24,7 @@ export function MobileMenu({ campaign }: { campaign: LandingCampaign }) {
         <span className={styles.menuTriggerLabel}>Menu</span>
       </Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Backdrop className={styles.mobileMenuBackdrop} />
+        <Dialog.Backdrop className={styles.mobileMenuBackdrop} style={backdropStyle} />
         <Dialog.Viewport className={styles.mobileMenuViewport}>
           <Dialog.Popup className={styles.mobileMenuPopup}>
             <div className={styles.mobileMenuTopline}>
