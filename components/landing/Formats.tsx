@@ -22,6 +22,7 @@ export function Formats({ campaign }: { campaign: LandingCampaign }) {
             <h3>{offer.title}</h3>
             <p>{offer.body}</p>
             <WhatsAppLink
+              glow
               className={offer.primary ? styles.primaryCtaLight : styles.secondaryCta}
               phone={campaign.whatsapp.phone}
               message={campaign.whatsapp.messages[offer.key]}
