@@ -26,7 +26,7 @@ it("appears after the hero and disappears when the final CTA is visible", () => 
   const bar = screen.getByTestId("mobile-sticky-cta");
   const link = screen.getByRole("link", { name: "AGENDAR MINHA AULA", hidden: true });
   expect(screen.getByText("Aula particular para iniciantes")).toBeInTheDocument();
-  expect(screen.getByText("Você combina tudo pelo WhatsApp")).toBeInTheDocument();
+  expect(screen.getByText("Não precisa levar par.")).toBeInTheDocument();
   expect(bar).toHaveAttribute("aria-hidden", "true");
   expect(link).toHaveAttribute("tabindex", "-1");
 
