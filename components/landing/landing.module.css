@@ -148,13 +148,15 @@ body:has(.mobileMenuPopup) .siteShell {
     inset 0 1px 0 rgb(255 255 255 / 90%),
     0 1.75rem 5rem rgb(52 37 34 / 26%);
   transform-origin: top right;
-  transition: transform 250ms var(--ease-out);
+  clip-path: inset(0 0 0 0 round var(--radius-lg));
+  transition: transform 250ms var(--ease-out), clip-path 250ms var(--ease-out);
   will-change: transform;
 }
 
 .mobileMenuPopup[data-starting-style],
 .mobileMenuPopup[data-ending-style] {
   transform: translateY(-0.65rem) scale(0.965);
+  clip-path: inset(0 0 100% 0 round var(--radius-lg));
 }
 
 .mobileMenuTopline {
@@ -242,14 +244,9 @@ body:has(.mobileMenuPopup) .siteShell {
   transition-delay: 105ms;
 }
 
-.mobileMenuPopup[data-starting-style] .mobileNavigation a,
-.mobileMenuPopup[data-ending-style] .mobileNavigation a {
+.mobileMenuPopup[data-starting-style] .mobileNavigation a {
   opacity: 0;
   transform: translateY(-0.3rem);
-}
-
-.mobileMenuPopup[data-ending-style] .mobileNavigation a {
-  transition-delay: 0ms;
 }
 
 .mobileNavigation small {
@@ -1050,6 +1047,26 @@ body:has(.mobileMenuPopup) .siteShell {
   max-width: 55ch;
   margin: var(--space-6) auto var(--space-8);
   color: inherit;
+}
+
+.scrollFill {
+  position: relative;
+  display: inline-block;
+  padding: 0.02em 0.1em 0.08em;
+  color: inherit;
+  max-width: 100%;
+  vertical-align: bottom;
+}
+
+.scrollFillOverlay {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  padding: inherit;
+  border-radius: 0.12em;
+  background: var(--brand-primary);
+  color: var(--surface-paper);
+  clip-path: inset(0 0 0 0);
 }
 
 .footer {

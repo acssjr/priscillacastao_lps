@@ -10,9 +10,13 @@ export function Formats({ campaign }: { campaign: LandingCampaign }) {
         <h2 id="formats-title">{campaign.formats.title}</h2>
         <p>{campaign.formats.note}</p>
       </div>
-      <div className={styles.formatGrid} data-stagger-group>
+      <div className={styles.formatGrid} data-format-cards>
         {campaign.offers.map((offer) => (
-          <article className={offer.primary ? styles.formatPrimary : styles.formatSecondary} key={offer.key}>
+          <article
+            className={offer.primary ? styles.formatPrimary : styles.formatSecondary}
+            data-format-card
+            key={offer.key}
+          >
             <span className={styles.formatMark} aria-hidden="true" data-format-brand-mark />
             <p className={styles.formatAudience}>{offer.audience}</p>
             <h3>{offer.title}</h3>

@@ -12,7 +12,7 @@ export function MotionLayer() {
     const media = gsap.matchMedia();
 
     media.add("(prefers-reduced-motion: reduce)", () => {
-      if (root) gsap.set(root.querySelectorAll("[data-motion], [data-reveal], [data-parallax], [data-stagger-group] > *, [data-connection-line]"), { clearProps: "all" });
+      if (root) gsap.set(root.querySelectorAll("[data-motion], [data-reveal], [data-parallax], [data-stagger-group] > *, [data-connection-line], [data-format-card], [data-scroll-fill]"), { clearProps: "all" });
     });
 
     media.add("(prefers-reduced-motion: no-preference)", () => {
@@ -57,6 +57,66 @@ export function MotionLayer() {
         });
       });
 
+      const formatGroup = root.querySelector<HTMLElement>("[data-format-cards]");
+      const formatCards = formatGroup?.querySelectorAll<HTMLElement>("[data-format-card]");
+      if (formatGroup && formatCards?.length === 2) {
+        const desktop = window.matchMedia("(min-width: 48rem)").matches;
+        if (!desktop) {
+          formatCards.forEach((card, index) => {
+            gsap.fromTo(card, {
+              y: 26, rotationZ: index === 0 ? -1.5 : 1.5,
+              transformOrigin: "center bottom",
+            }, {
+              y: 0, rotationZ: 0, ease: "none",
+              scrollTrigger: { trigger: card, start: "clamp(top 92%)", end: "clamp(top 55%)", scrub: 0.5 },
+            });
+          });
+        } else {
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: formatGroup,
+            start: "clamp(top 88%)",
+            end: "clamp(top 48%)",
+            scrub: 0.7,
+          },
+        })
+          .fromTo(formatCards[0], {
+            x: desktop ? -42 : -14,
+            y: desktop ? 20 : 26,
+            rotationX: desktop ? 9 : 0,
+            rotationY: desktop ? 14 : 0,
+            rotationZ: desktop ? -2.5 : -1.5,
+            transformPerspective: 1200,
+            transformOrigin: "center bottom",
+          }, {
+            x: 0,
+            y: 0,
+            rotationX: 0,
+            rotationY: 0,
+            rotationZ: 0,
+            duration: 1,
+            ease: "none",
+          }, 0)
+          .fromTo(formatCards[1], {
+            x: desktop ? 42 : 14,
+            y: desktop ? 20 : 26,
+            rotationX: desktop ? 9 : 0,
+            rotationY: desktop ? -14 : 0,
+            rotationZ: desktop ? 2.5 : 1.5,
+            transformPerspective: 1200,
+            transformOrigin: "center bottom",
+          }, {
+            x: 0,
+            y: 0,
+            rotationX: 0,
+            rotationY: 0,
+            rotationZ: 0,
+            duration: 1,
+            ease: "none",
+          }, 0.16);
+        }
+      }
+
       root.querySelectorAll<HTMLElement>("[data-parallax]").forEach((frame, index) => {
         const image = frame.querySelector("img");
         if (!image) return;
@@ -71,6 +131,19 @@ export function MotionLayer() {
       const closing = root.querySelector("[data-reveal='closing']");
       gsap.timeline({ scrollTrigger: { trigger: closing, start: "clamp(top 78%)", once: true } })
         .from(closing?.children ?? [], { autoAlpha: 0, y: 32, scale: 0.98, duration: 0.7, stagger: 0.1, ease: "power3.out" });
+
+      root.querySelectorAll<HTMLElement>("[data-scroll-fill]").forEach((scrollFill) => {
+        gsap.fromTo(scrollFill.querySelector("[data-fill-overlay]"), { clipPath: "inset(0 100% 0 0)" }, {
+          clipPath: "inset(0 0% 0 0)",
+          ease: "none",
+          scrollTrigger: {
+            trigger: scrollFill,
+            start: "clamp(top 80%)",
+            end: "clamp(top 40%)",
+            scrub: 0.5,
+          },
+        });
+      });
 
       const refreshFrame = requestAnimationFrame(() => ScrollTrigger.refresh());
       return () => cancelAnimationFrame(refreshFrame);

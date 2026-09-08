@@ -37,5 +37,7 @@ describe("LandingPage core story", () => {
     expect(container.querySelectorAll("[data-reveal]").length).toBeGreaterThanOrEqual(8);
     expect(container.querySelectorAll("[data-parallax]").length).toBeGreaterThanOrEqual(3);
     expect(container.querySelectorAll("[data-stagger-group]").length).toBeGreaterThanOrEqual(4);
+    expect(container.querySelectorAll("[data-format-card]")).toHaveLength(2);
+    expect(container.querySelectorAll("[data-scroll-fill]")).toHaveLength(2);
   });
 });

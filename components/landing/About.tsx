@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ScrollHighlight } from "./ScrollHighlight";
 import type { LandingCampaign } from "@/content/landing-pages/schema";
 import styles from "./landing.module.css";
 
@@ -16,7 +17,7 @@ export function About({ content }: { content: LandingCampaign["about"] }) {
       </div>
       <div className={styles.aboutCopy} data-reveal="section">
         <p className={styles.eyebrow}>{content.eyebrow}</p>
-        <h2 id="about-title">{content.title}</h2>
+        <h2 id="about-title"><ScrollHighlight text={content.title} phrase="forró universitário e roots" /></h2>
         {content.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
       </div>
     </section>
