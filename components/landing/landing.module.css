@@ -1209,6 +1209,10 @@ body[data-mobile-menu-open="true"] .siteShell > :is(header, main, footer, aside)
   border-radius: 999px;
 }
 
+.mobileStickyLabelDesktop {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .mobileSticky {
     transition: none;
@@ -1221,7 +1225,30 @@ body[data-mobile-menu-open="true"] .siteShell > :is(header, main, footer, aside)
   }
 
   .mobileSticky {
+    inset-inline: auto var(--space-6);
+    bottom: var(--space-6);
+    display: grid;
+    grid-template-columns: auto;
+    width: auto;
+    padding: 0;
+    border-top: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .mobileStickyCopy,
+  .mobileStickyLabelMobile {
     display: none;
+  }
+
+  .mobileStickyLabelDesktop {
+    display: inline;
+  }
+
+  .mobileStickyLink {
+    min-height: 3.25rem;
+    padding: 0.85rem 1.25rem;
+    font-size: 0.875rem;
   }
   .headerInner {
     grid-template-columns: 15rem minmax(0, 1fr) auto;

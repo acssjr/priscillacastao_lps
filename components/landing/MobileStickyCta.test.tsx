@@ -24,9 +24,11 @@ afterEach(() => vi.unstubAllGlobals());
 it("appears after the hero and disappears when the final CTA is visible", () => {
   render(<MobileStickyCta campaign={forroDoZeroCampaign} />);
   const bar = screen.getByTestId("mobile-sticky-cta");
-  const link = screen.getByRole("link", { name: "AGENDAR MINHA AULA", hidden: true });
+  const link = screen.getByRole("link", { name: "AGENDAR AULA", hidden: true });
   expect(screen.getByText("Aula particular para iniciantes")).toBeInTheDocument();
   expect(screen.getByText("Não precisa levar par.")).toBeInTheDocument();
+  expect(screen.getByText("AGENDAR MINHA AULA")).toBeInTheDocument();
+  expect(screen.getByText("AGENDAR AULA")).toBeInTheDocument();
   expect(bar).toHaveAttribute("aria-hidden", "true");
   expect(link).toHaveAttribute("tabindex", "-1");
 

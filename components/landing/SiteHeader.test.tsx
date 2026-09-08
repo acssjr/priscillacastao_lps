@@ -6,6 +6,9 @@ import { SiteHeader } from "./SiteHeader";
 it("opens an accessible mobile navigation and closes it after selecting a section", async () => {
   render(<SiteHeader campaign={forroDoZeroCampaign} />);
 
+  expect(screen.getByText("AGENDAR")).toBeInTheDocument();
+  expect(screen.queryByText("Conversar")).not.toBeInTheDocument();
+
   await userEvent.click(screen.getByRole("button", { name: "Abrir menu" }));
   expect(screen.getByRole("dialog", { name: "Menu" })).toBeInTheDocument();
   expect(document.querySelector("[data-mobile-menu-brand]")).toBeInTheDocument();

@@ -34,5 +34,8 @@ it("keeps individual first and provides prefilled WhatsApp paths for every forma
   expect(screen.getByRole("heading", { name: "Precisa de uma aula em grupo ou workshop?" })).toBeInTheDocument();
   expect(decodeURIComponent(screen.getByRole("link", { name: /outro formato/i }).getAttribute("href") ?? "")).toContain("aula em grupo ou workshop");
   expect(container.querySelectorAll("[data-format-brand-mark]")).toHaveLength(2);
-  expect(container.querySelectorAll('[data-format-card] a > [aria-hidden="true"]')).toHaveLength(2);
+  const individualLink = screen.getByRole("link", { name: "AGENDAR MINHA AULA PARTICULAR" });
+  const duoLink = screen.getByRole("link", { name: "AGENDAR AULA EM DUPLA" });
+  expect(individualLink.querySelector('[aria-hidden="true"]')).toBeInTheDocument();
+  expect(duoLink.querySelector('[aria-hidden="true"]')).not.toBeInTheDocument();
 });

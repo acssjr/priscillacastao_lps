@@ -14,7 +14,7 @@ export function SiteHeader({ campaign }: { campaign: LandingCampaign }) {
           {campaign.navigation.map((item) => <a href={item.target} key={item.target}>{item.label}</a>)}
         </nav>
         <WhatsAppLink glow className={styles.headerCta} phone={campaign.whatsapp.phone} message={campaign.whatsapp.messages.individual} placement="header" offer="individual">
-          Conversar
+          AGENDAR
         </WhatsAppLink>
         <MobileMenu campaign={campaign} />
       </div>

@@ -39,6 +39,7 @@ export function MobileStickyCta({ campaign }: { campaign: LandingCampaign }) {
         <small>Não precisa levar par.</small>
       </span>
       <WhatsAppLink
+        aria-label="AGENDAR AULA"
         className={styles.mobileStickyLink}
         glow
         phone={campaign.whatsapp.phone}
@@ -47,7 +48,8 @@ export function MobileStickyCta({ campaign }: { campaign: LandingCampaign }) {
         offer="individual"
         tabIndex={visible ? 0 : -1}
       >
-        AGENDAR MINHA AULA
+        <span className={styles.mobileStickyLabelMobile} aria-hidden="true">AGENDAR MINHA AULA</span>
+        <span className={styles.mobileStickyLabelDesktop} aria-hidden="true">AGENDAR AULA</span>
       </WhatsAppLink>
     </aside>
   );
