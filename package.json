@@ -15,6 +15,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
+    "test:menu-glow": "node scripts/check-menu-glow.mjs",
     "analyze": "cross-env ANALYZE=true next build",
     "lighthouse": "lhci autorun"
   },

@@ -29,6 +29,8 @@
   inset: 0;
   padding: 1.5px;
   border-radius: inherit;
+  /* A mask hides paint, but does not contain the rotating layer's scroll overflow. */
+  overflow: clip;
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
