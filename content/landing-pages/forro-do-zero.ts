@@ -121,7 +121,6 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
     alternative: {
       key: "grupo-workshop",
       title: "Precisa de uma aula em grupo ou workshop?",
-      body: "Priscilla também conversa sobre aulas para grupos e workshops. Conte o formato, o número de pessoas e o que você pretende organizar.",
       cta: "CONVERSAR SOBRE GRUPO OU WORKSHOP",
     },
   },

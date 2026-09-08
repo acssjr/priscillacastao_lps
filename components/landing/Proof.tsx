@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { LandingCampaign } from "@/content/landing-pages/schema";
+import { TestimonialCarousel } from "./TestimonialCarousel";
 import styles from "./landing.module.css";
 
 export function Proof({ content }: { content: LandingCampaign["proof"] }) {
@@ -17,16 +18,7 @@ export function Proof({ content }: { content: LandingCampaign["proof"] }) {
       <div className={styles.proofCopy} data-reveal="section">
         <p className={styles.eyebrow}>{content.eyebrow}</p>
         <h2 id="proof-title">{content.title}</h2>
-        <div className={styles.testimonials} data-stagger-group>
-          {content.testimonials.map((testimonial) => (
-            <blockquote key={`${testimonial.name}-${testimonial.quote}`}>
-              <p>“{testimonial.quote}”</p>
-              <div className={styles.quoteAttribution}>
-                <cite>{testimonial.name}</cite>
-              </div>
-            </blockquote>
-          ))}
-        </div>
+        <TestimonialCarousel testimonials={content.testimonials} />
       </div>
     </section>
   );

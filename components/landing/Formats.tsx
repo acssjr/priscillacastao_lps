@@ -30,10 +30,7 @@ export function Formats({ campaign }: { campaign: LandingCampaign }) {
         ))}
       </div>
       <aside className={styles.formatAlternative} data-reveal="section">
-        <div>
-          <h3>{campaign.formats.alternative.title}</h3>
-          <p>{campaign.formats.alternative.body}</p>
-        </div>
+        <h3>{campaign.formats.alternative.title}</h3>
         <WhatsAppLink
           className={styles.secondaryCta}
           phone={campaign.whatsapp.phone}

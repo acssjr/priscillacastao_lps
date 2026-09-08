@@ -69,7 +69,6 @@ export const LandingCampaignSchema = z.object({
     alternative: z.object({
       key: z.literal("grupo-workshop"),
       title: z.string().min(1),
-      body: z.string().min(10),
       cta: z.string().min(2),
     }),
   }),

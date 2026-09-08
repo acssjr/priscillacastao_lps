@@ -12,8 +12,10 @@ export function MobileMenu({ campaign }: { campaign: LandingCampaign }) {
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger className={styles.mobileMenuTrigger} aria-label="Abrir menu">
-        <span aria-hidden="true" />
-        <span aria-hidden="true" />
+        <span className={styles.menuIcon} aria-hidden="true">
+          <span />
+          <span />
+        </span>
         <span className={styles.menuTriggerLabel}>Menu</span>
       </Dialog.Trigger>
       <Dialog.Portal>

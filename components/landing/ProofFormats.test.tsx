@@ -1,17 +1,23 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { forroDoZeroCampaign } from "@/content/landing-pages/forro-do-zero";
 import { Formats } from "./Formats";
 import { Proof } from "./Proof";
 
-it("keeps fictitious names disclosed without repetitive demonstration labels or outbound proof links", () => {
+it("presents the disclosed testimonials in an accessible carousel without outbound proof links", async () => {
   const { container } = render(<Proof content={forroDoZeroCampaign.proof} />);
 
-  for (const testimonial of forroDoZeroCampaign.proof.testimonials) {
-    expect(screen.getByText(testimonial.name)).toBeInTheDocument();
-  }
+  const carousel = screen.getByRole("region", { name: "Depoimentos de alunos" });
+  expect(carousel).toHaveAttribute("aria-roledescription", "carousel");
+  expect(screen.getByText("Depoimento 1 de 3")).toBeInTheDocument();
+  expect(screen.getByText(forroDoZeroCampaign.proof.testimonials[0].name)).toBeInTheDocument();
+
+  await userEvent.click(screen.getByRole("button", { name: "Próximo depoimento" }));
+  expect(screen.getByText("Depoimento 2 de 3")).toBeInTheDocument();
+  expect(screen.getByText(forroDoZeroCampaign.proof.testimonials[1].name)).toBeInTheDocument();
   expect(screen.queryByText(/demonstrativ/i)).not.toBeInTheDocument();
   expect(screen.queryByRole("link", { name: /instagram/i })).not.toBeInTheDocument();
-  expect(container.querySelector("[aria-roledescription='carousel']")).toBeNull();
+  expect(container.querySelectorAll("[data-testimonial-slide]")).toHaveLength(3);
 });
 
 it("keeps individual first and provides prefilled WhatsApp paths for every format", () => {
