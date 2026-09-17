@@ -1,10 +1,10 @@
 import { LandingCampaignSchema } from "./schema";
 
 const heroImage = {
-  src: "/images/priscilla-castao-ensaio-01.webp",
-  alt: "Priscilla Castão em movimento durante ensaio de dança",
-  width: 1170,
-  height: 1560,
+  src: "/images/cutouts/priscilla-castao-ensaio-02-cutout.webp",
+  alt: "Priscilla Castão em pose de forró com os braços elevados",
+  width: 1086,
+  height: 1449,
 };
 
 const methodImage = {
