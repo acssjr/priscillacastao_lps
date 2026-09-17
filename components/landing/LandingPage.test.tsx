@@ -46,6 +46,10 @@ describe("LandingPage core story", () => {
     expect(container.querySelectorAll("[data-portrait-card]")).toHaveLength(3);
     expect(container.querySelectorAll('[data-portrait-card="proof"]')).toHaveLength(1);
     expect(container.querySelectorAll('[data-portrait-card="about"]')).toHaveLength(1);
+    expect(screen.getByAltText("Retrato de Priscilla Castão, professora de forró em Salvador")).toHaveAttribute(
+      "src",
+      expect.stringContaining("priscilla-castao-instagram-DYf07MJEQ9z-01.webp"),
+    );
   });
 
   it("exposes a rich but progressive motion contract", () => {

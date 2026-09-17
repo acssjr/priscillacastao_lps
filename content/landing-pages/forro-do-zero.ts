@@ -15,10 +15,10 @@ const methodImage = {
 };
 
 const aboutImage = {
-  src: "/images/cutouts/priscilla-castao-ensaio-01-cutout.webp",
+  src: "/images/priscilla-castao-instagram-DYf07MJEQ9z-01.webp",
   alt: "Retrato de Priscilla Castão, professora de forró em Salvador",
-  width: 1170,
-  height: 1560,
+  width: 900,
+  height: 1200,
 };
 
 const proofPoster = {
@@ -48,7 +48,7 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
     title: "Aprenda forró do zero, no seu ritmo.",
     titleHighlight: "do zero,",
     body: [
-      "Aprenda com calma e avance no seu tempo.",
+      "Repita cada movimento até ele fazer sentido no seu corpo.",
     ],
     image: heroImage,
     cta: "AGENDAR MINHA AULA",
@@ -148,11 +148,11 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
   },
   process: {
     eyebrow: "Como começar",
-    title: "Da primeira mensagem à aula em três passos.",
+    title: "Sua primeira aula começa com uma conversa simples.",
     steps: [
-      { title: "Conte o que procura", body: "Diga se está começando e qual formato prefere." },
-      { title: "Combine os detalhes", body: "Converse sobre objetivo, local, horários e investimento." },
-      { title: "Agende sua aula", body: "Confirme a melhor opção pelo WhatsApp." },
+      { title: "Conte de onde você parte", body: "Diga se está começando e se prefere aula individual ou em dupla." },
+      { title: "Combine o que precisa", body: "Objetivo, local, horários e investimento entram na conversa." },
+      { title: "Escolha e confirme", body: "Quando fizer sentido para você, confirme a primeira aula pelo WhatsApp." },
     ],
   },
   faq: {
