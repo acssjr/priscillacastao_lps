@@ -325,48 +325,54 @@ body[data-mobile-menu-open="true"] .siteShell > :is(header, main, footer, aside)
 }
 
 .heroTitleVisual {
+  --hero-title-size: clamp(3rem, 12.6vw, 4.25rem);
+
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: auto minmax(0, 1fr);
+  align-content: start;
   align-items: start;
+  column-gap: 0.18em;
+  row-gap: 0.12em;
   color: var(--surface-paper);
-  font-weight: 850;
-  line-height: 0.82;
-  letter-spacing: -0.04em;
-  text-transform: uppercase;
+  font-weight: 780;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
 }
 
 .heroLead {
-  display: none;
+  display: block;
+  grid-column: 1;
+  font-size: var(--hero-title-size);
 }
 
 .heroSubject {
-  grid-column: 1 / -1;
-  font-size: clamp(5.75rem, 25.5vw, 9rem);
+  grid-column: 2;
+  font-size: var(--hero-title-size);
   white-space: nowrap;
 }
 
 .heroHighlight {
-  grid-column: 1;
+  grid-column: 1 / -1;
   align-self: start;
   width: fit-content;
-  margin-top: 0.05em;
   padding: 0.13em 0.18em 0.17em;
   background: var(--surface-cream);
   color: var(--brand-dark);
-  font-size: clamp(2.5rem, 11.5vw, 4.25rem);
+  font-size: clamp(2.4rem, 10.5vw, 3.5rem);
   letter-spacing: -0.04em;
   line-height: 0.9;
+  text-transform: uppercase;
   border-radius: 0.18em;
 }
 
 .heroClose {
-  grid-column: 1;
-  max-width: 4.6ch;
-  margin: 0.38em 0 0 0.08em;
-  font-size: clamp(2.65rem, 12vw, 4.25rem);
-  line-height: 0.88;
+  grid-column: 1 / -1;
+  max-width: none;
+  margin-top: 0.1em;
+  font-size: var(--hero-title-size);
+  line-height: 0.95;
 }
 
 .heroPortrait {
@@ -1619,22 +1625,20 @@ body[data-mobile-menu-open="true"] .siteShell > :is(header, main, footer, aside)
   }
 
   .heroTitleVisual {
-    grid-template-columns: minmax(0, 1fr);
-  }
+    --hero-title-size: clamp(4rem, 5.4vw, 5.5rem);
 
-  .heroSubject {
-    font-size: clamp(5.7rem, 9vw, 8.25rem);
+    grid-template-columns: auto minmax(0, 1fr);
   }
 
   .heroHighlight {
-    grid-column: 1;
-    font-size: clamp(3rem, 4.6vw, 4.3rem);
+    grid-column: 1 / -1;
+    font-size: clamp(2.75rem, 3.6vw, 3.5rem);
   }
 
   .heroClose {
-    grid-column: 1;
-    margin: var(--space-3) 0 0;
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    grid-column: 1 / -1;
+    margin-top: 0.15em;
+    font-size: var(--hero-title-size);
   }
 
   .heroPortrait {
