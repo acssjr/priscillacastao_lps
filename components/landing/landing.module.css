@@ -441,6 +441,10 @@ body[data-mobile-menu-open="true"] .siteShell > :is(header, main, footer, aside)
   pointer-events: none;
 }
 
+.portraitCardHero .portraitCardImage {
+  bottom: 1.25rem;
+}
+
 .portraitCardArrow {
   position: absolute;
   z-index: 4;
@@ -529,7 +533,7 @@ body[data-mobile-menu-open="true"] .siteShell > :is(header, main, footer, aside)
 }
 
 .portraitCardProof .portraitCardImage {
-  bottom: -8.5rem;
+  bottom: -10rem;
   height: calc(100% + 10rem);
   padding-inline: 0.35rem;
   object-position: center top;
@@ -1222,7 +1226,7 @@ body[data-mobile-menu-open="true"] .siteShell > :is(header, main, footer, aside)
 .processSteps li {
   position: relative;
   isolation: isolate;
-  padding: var(--space-5);
+  padding: 1.35rem 1.4rem 1.5rem;
   overflow: hidden;
   border: 1px solid rgb(100 18 31 / 20%);
   border-radius: var(--radius-lg);
@@ -1249,7 +1253,8 @@ body[data-mobile-menu-open="true"] .siteShell > :is(header, main, footer, aside)
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: var(--space-5);
+  min-height: 4.65rem;
+  margin-bottom: 0.85rem;
 }
 
 .processIcon {
@@ -1285,6 +1290,12 @@ body[data-mobile-menu-open="true"] .siteShell > :is(header, main, footer, aside)
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+
+.processStepContent {
+  position: relative;
+  z-index: 1;
+  padding-inline: 0.15rem;
 }
 
 .processSteps h3,

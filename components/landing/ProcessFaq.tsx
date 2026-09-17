@@ -30,8 +30,10 @@ export function ProcessFaq({ process, faq }: Props) {
                 </span>
                 <span className={styles.processStepLabel}>Passo {index + 1}</span>
               </div>
-              <h3>{step.title}</h3>
-              <p>{step.body}</p>
+              <div className={styles.processStepContent} data-process-content>
+                <h3>{step.title}</h3>
+                <p>{step.body}</p>
+              </div>
             </li>
           ))}
         </ol>

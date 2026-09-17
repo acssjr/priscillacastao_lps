@@ -11,6 +11,7 @@ it("renders the three-step process and native FAQ controls", () => {
   expect(forroDoZeroCampaign.process.steps).toHaveLength(3);
   expect(container.querySelectorAll("[data-process-step]")).toHaveLength(3);
   expect(container.querySelectorAll("[data-process-icon]")).toHaveLength(3);
+  expect(container.querySelectorAll("[data-process-content]")).toHaveLength(3);
   expect(container.querySelectorAll("#duvidas details")).toHaveLength(forroDoZeroCampaign.faq.items.length);
   expect(container.querySelectorAll("#duvidas summary")).toHaveLength(forroDoZeroCampaign.faq.items.length);
 });
