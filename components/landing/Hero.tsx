@@ -36,7 +36,7 @@ export function Hero({ campaign }: { campaign: LandingCampaign }) {
           </span>
         </h1>
 
-        <div className={styles.heroPortrait} data-hero-portrait>
+        <div className={styles.heroPortrait} data-hero-portrait data-hero-portrait-card>
           <Image
             src={hero.image.src}
             alt={hero.image.alt}
@@ -45,6 +45,15 @@ export function Hero({ campaign }: { campaign: LandingCampaign }) {
             sizes="(max-width: 832px) 76vw, (max-width: 1088px) 46vw, 34rem"
             priority
           />
+          <a className={styles.heroPortraitArrow} href="#sobre" aria-label="Conhecer Priscilla">
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <path d="M7 17 17 7M9 7h8v8" />
+            </svg>
+          </a>
+          <div className={styles.heroPortraitIdentity}>
+            <strong>Priscilla Castão</strong>
+            <span>Professora de forró</span>
+          </div>
         </div>
 
         <div className={styles.heroActions} data-hero-actions>

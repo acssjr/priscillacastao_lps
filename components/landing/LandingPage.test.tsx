@@ -14,6 +14,9 @@ describe("LandingPage core story", () => {
     expect(container.querySelector('[data-hero-word="forro"]')).toHaveTextContent("forró");
     expect(container.querySelector("[data-hero-highlight]")).toHaveTextContent(/^do zero$/i);
     expect(container.querySelector("[data-hero-portrait]")).toBeInTheDocument();
+    expect(container.querySelector("[data-hero-portrait-card]")).toBeInTheDocument();
+    expect(screen.getByText("Professora de forró")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Conhecer Priscilla" })).toHaveAttribute("href", "#sobre");
     expect(container.querySelector("[data-hero-actions]")).toBeInTheDocument();
     expect(screen.queryByText(forroDoZeroCampaign.hero.location)).not.toBeInTheDocument();
     expect(screen.getByText(forroDoZeroCampaign.hero.body[0])).toBeInTheDocument();
