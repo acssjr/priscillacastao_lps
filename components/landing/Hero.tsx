@@ -60,7 +60,14 @@ export function Hero({ campaign }: { campaign: LandingCampaign }) {
             offer="individual"
           >
             <span className={styles.primaryCtaLabel}>{hero.cta}</span>
-            <span className={styles.primaryCtaArrow} aria-hidden="true">→</span>
+            <svg
+              className={styles.primaryCtaArrow}
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <path d="M5 12h14M14 7l5 5-5 5" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
+            </svg>
           </WhatsAppLink>
           <p className={styles.ctaNote} data-cta-note>
             {hero.ctaNote.lead}, {hero.ctaNote.bridge} {hero.ctaNote.details}.
