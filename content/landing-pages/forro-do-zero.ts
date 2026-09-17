@@ -8,24 +8,24 @@ const heroImage = {
 };
 
 const methodImage = {
-  src: "/images/priscilla-castao-ensaio-02.webp",
+  src: "/images/cutouts/priscilla-castao-ensaio-02-cutout.webp",
   alt: "Priscilla Castão demonstrando expressão corporal no forró",
   width: 1170,
   height: 1560,
 };
 
 const aboutImage = {
-  src: "/images/priscilla-castao-ensaio-03.webp",
+  src: "/images/cutouts/priscilla-castao-ensaio-01-cutout.webp",
   alt: "Retrato de Priscilla Castão, professora de forró em Salvador",
   width: 1170,
   height: 1560,
 };
 
 const proofPoster = {
-  src: "/images/priscilla-castao-forro-roots-capa.webp",
+  src: "/images/cutouts/priscilla-castao-forro-roots-cutout.webp",
   alt: "Priscilla Castão dançando forró roots com um parceiro",
-  width: 720,
-  height: 1280,
+  width: 941,
+  height: 1672,
 };
 
 export const forroDoZeroCampaign = LandingCampaignSchema.parse({
@@ -63,29 +63,29 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
     eyebrow: "Para quem está começando",
     title: "Começar fica mais leve quando você não precisa acompanhar o ritmo de uma turma.",
     body: [
-      "Numa aula particular, há tempo para entender o movimento antes de tentar fazê-lo mais rápido.",
-      "Você pode perguntar, repetir e ajustar quantas vezes precisar. A aula acompanha o seu momento, sem comparação com outras pessoas.",
-      "Na modalidade individual, Priscilla faz o papel de par durante o aprendizado. Você pode começar mesmo que ninguém vá com você.",
+      "Aprenda no seu tempo, sem acompanhar o ritmo de uma turma.",
+      "Pergunte, repita e ajuste quantas vezes precisar.",
+      "Na aula individual, Priscilla também faz o papel de par.",
     ],
   },
   method: {
     eyebrow: "Como Priscilla ensina",
     title: "Antes de decorar passos, você aprende a base que faz o movimento funcionar.",
     body: [
-      "Priscilla mostra como apoiar os pés, transferir o peso, manter o equilíbrio e perceber os sinais do par. Você pratica cada parte com calma antes de juntar tudo na dança.",
+      "Você entende cada fundamento antes de juntar tudo na dança.",
     ],
     pillars: [
       {
         title: "Base e equilíbrio",
-        body: "Você pratica onde apoiar os pés e como transferir o peso sem perder o equilíbrio durante o passo.",
+        body: "Apoio dos pés e transferência de peso sem perder o equilíbrio.",
       },
       {
         title: "Como dançar com o par",
-        body: "Você aprende a perceber a condução, responder aos sinais e ajustar a distância para dançar com mais conforto.",
+        body: "Condução, resposta e distância para dançar com conforto.",
       },
       {
         title: "Como acompanhar a música",
-        body: "Você reconhece a marcação da música e pratica como coordenar os passos sem precisar correr para alcançar o ritmo.",
+        body: "Marcação musical e coordenação sem correr atrás do ritmo.",
       },
     ],
     image: methodImage,
@@ -113,7 +113,7 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
   formats: {
     eyebrow: "Escolha como quer começar",
     title: "A mesma atenção próxima, em dois formatos particulares.",
-    note: "O local, os horários e o investimento são combinados depois que Priscilla entende a necessidade de vocês.",
+    note: "Local, horários e investimento são combinados diretamente com Priscilla.",
     alternative: {
       key: "grupo-workshop",
       title: "Precisa de uma aula em grupo ou workshop?",
@@ -124,8 +124,8 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
     {
       key: "individual",
       title: "Aula particular individual",
-      audience: "Para quem quer começar sozinho, receber atenção integral e avançar no próprio ritmo.",
-      body: "A aula acontece entre você e Priscilla. Você não precisa levar par, e cada explicação pode ser ajustada ao que o seu corpo precisa entender naquele momento.",
+      audience: "Para começar sozinho e receber atenção integral.",
+      body: "Você não precisa levar par. A explicação acompanha o que seu corpo precisa entender.",
       primary: true,
       cta: "AGENDAR MINHA AULA PARTICULAR",
     },
@@ -133,7 +133,7 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
       key: "dupla",
       title: "Aula particular em dupla",
       audience: "Para duas pessoas que já querem aprender juntas.",
-      body: "Priscilla acompanha os dois alunos, observa a comunicação da dupla e ajusta os fundamentos às necessidades de cada pessoa.",
+      body: "Priscilla acompanha a comunicação da dupla e ajusta os fundamentos para cada pessoa.",
       primary: false,
       cta: "AGENDAR AULA EM DUPLA",
     },
@@ -142,7 +142,7 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
     eyebrow: "Quem é Priscilla Castão",
     title: "Priscilla ensina forró universitário e roots em Salvador.",
     body: [
-      "Nas aulas particulares, ela trabalha base, transferência de peso, musicalidade e comunicação com o par. As explicações e o ritmo da prática são ajustados à experiência de cada aluno.",
+      "Base, transferência de peso, musicalidade e comunicação com o par — no ritmo de cada aluno.",
     ],
     image: aboutImage,
   },
@@ -150,9 +150,9 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
     eyebrow: "Como começar",
     title: "Da primeira mensagem à aula em três passos.",
     steps: [
-      { title: "Conte o que procura", body: "Envie a mensagem pronta e diga se prefere aula individual, em dupla ou outro formato." },
-      { title: "Combine os detalhes", body: "Priscilla conversa com você sobre objetivo, local, horários e investimento." },
-      { title: "Agende sua aula", body: "Escolha a melhor opção e confirme a primeira aula pelo WhatsApp." },
+      { title: "Conte o que procura", body: "Diga se está começando e qual formato prefere." },
+      { title: "Combine os detalhes", body: "Converse sobre objetivo, local, horários e investimento." },
+      { title: "Agende sua aula", body: "Confirme a melhor opção pelo WhatsApp." },
     ],
   },
   faq: {

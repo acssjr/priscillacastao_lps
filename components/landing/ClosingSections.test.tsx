@@ -9,8 +9,9 @@ it("renders the three-step process and native FAQ controls", () => {
     expect(screen.getByRole("heading", { name: step.title })).toBeInTheDocument();
   }
   expect(forroDoZeroCampaign.process.steps).toHaveLength(3);
-  expect(container.querySelectorAll("details")).toHaveLength(forroDoZeroCampaign.faq.items.length);
-  expect(container.querySelectorAll("summary")).toHaveLength(forroDoZeroCampaign.faq.items.length);
+  expect(container.querySelectorAll("[data-process-step]")).toHaveLength(3);
+  expect(container.querySelectorAll("#duvidas details")).toHaveLength(forroDoZeroCampaign.faq.items.length);
+  expect(container.querySelectorAll("#duvidas summary")).toHaveLength(forroDoZeroCampaign.faq.items.length);
 });
 
 it("has one main landmark and a labeled footer", () => {

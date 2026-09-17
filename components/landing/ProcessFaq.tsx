@@ -17,7 +17,7 @@ export function ProcessFaq({ process, faq }: Props) {
         </div>
         <ol className={styles.processSteps} data-stagger-group>
           {process.steps.map((step) => (
-            <li key={step.title}>
+            <li key={step.title} data-process-step>
               <h3>{step.title}</h3>
               <p>{step.body}</p>
             </li>

@@ -11,7 +11,8 @@ describe("LandingPage core story", () => {
       "Aprenda forró do zero, no seu ritmo.",
     );
     expect(container.querySelector("[data-hero-poster]")).toBeInTheDocument();
-    expect(container.querySelector('[data-hero-word="forro"]')).toHaveTextContent("forró");
+    expect(container.querySelectorAll("[data-hero-title-block]")).toHaveLength(1);
+    expect(container.querySelector("[data-hero-title-block]")).toHaveTextContent("Aprenda forró");
     expect(container.querySelector("[data-hero-highlight]")).toHaveTextContent(/^do zero$/i);
     expect(container.querySelector("[data-hero-portrait]")).toBeInTheDocument();
     expect(container.querySelector("[data-hero-portrait-card]")).toBeInTheDocument();
@@ -27,13 +28,23 @@ describe("LandingPage core story", () => {
   });
 
   it("renders exactly three method pillars", () => {
-    render(<LandingPage campaign={forroDoZeroCampaign} />);
+    const { container } = render(<LandingPage campaign={forroDoZeroCampaign} />);
 
     expect(forroDoZeroCampaign.method.pillars).toHaveLength(3);
     expect(screen.getByRole("heading", { name: "Antes de decorar passos, você aprende a base que faz o movimento funcionar." })).toBeInTheDocument();
     for (const pillar of forroDoZeroCampaign.method.pillars) {
       expect(screen.getByRole("heading", { name: pillar.title })).toBeInTheDocument();
     }
+    expect(container.querySelectorAll('[data-portrait-card="method"]')).toHaveLength(1);
+  });
+
+  it("alternates concise cards and portrait-led sections", () => {
+    const { container } = render(<LandingPage campaign={forroDoZeroCampaign} />);
+
+    expect(container.querySelectorAll("[data-recognition-card]")).toHaveLength(3);
+    expect(container.querySelectorAll("[data-portrait-card]")).toHaveLength(4);
+    expect(container.querySelectorAll('[data-portrait-card="proof"]')).toHaveLength(1);
+    expect(container.querySelectorAll('[data-portrait-card="about"]')).toHaveLength(1);
   });
 
   it("exposes a rich but progressive motion contract", () => {
