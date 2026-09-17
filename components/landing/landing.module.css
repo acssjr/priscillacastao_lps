@@ -296,7 +296,7 @@ body[data-mobile-menu-open="true"] .siteShell > :is(header, main, footer, aside)
 .heroStage {
   position: relative;
   display: grid;
-  grid-template-rows: auto auto minmax(24rem, 1fr) auto;
+  grid-template-rows: auto auto minmax(12rem, 1fr) auto;
   width: min(100%, 40rem);
   min-height: calc(max(100svh, 52rem) - var(--header-height) - var(--space-12));
   margin-inline: auto;
@@ -327,8 +327,8 @@ body[data-mobile-menu-open="true"] .siteShell > :is(header, main, footer, aside)
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: end;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
   color: var(--surface-paper);
   font-weight: 850;
   line-height: 0.82;
@@ -337,48 +337,46 @@ body[data-mobile-menu-open="true"] .siteShell > :is(header, main, footer, aside)
 }
 
 .heroLead {
-  grid-column: 1 / -1;
-  margin-bottom: 0.25rem;
-  font-size: clamp(0.78rem, 2.6vw, 1rem);
-  letter-spacing: 0.18em;
-  line-height: 1;
+  display: none;
 }
 
 .heroSubject {
   grid-column: 1 / -1;
-  font-size: clamp(5.7rem, 27vw, 10rem);
+  font-size: clamp(5.75rem, 25.5vw, 9rem);
   white-space: nowrap;
 }
 
 .heroHighlight {
+  grid-column: 1;
   align-self: start;
   width: fit-content;
-  margin-top: -0.08em;
+  margin-top: 0.05em;
   padding: 0.13em 0.18em 0.17em;
   background: var(--surface-cream);
   color: var(--brand-dark);
-  font-size: clamp(2.15rem, 10.5vw, 4rem);
+  font-size: clamp(2.5rem, 11.5vw, 4.25rem);
   letter-spacing: -0.04em;
   line-height: 0.9;
   border-radius: 0.18em;
 }
 
 .heroClose {
-  max-width: 5.4ch;
-  margin-left: var(--space-3);
-  font-size: clamp(1.65rem, 8vw, 3.1rem);
+  grid-column: 1;
+  max-width: 4.6ch;
+  margin: 0.38em 0 0 0.08em;
+  font-size: clamp(2.65rem, 12vw, 4.25rem);
   line-height: 0.88;
 }
 
 .heroPortrait {
   position: absolute;
   z-index: 3;
-  top: clamp(9.75rem, 25vw, 12rem);
-  right: 1%;
+  top: clamp(7.5rem, 20vw, 9.5rem);
+  right: -12%;
   bottom: 9.25rem;
-  left: 12%;
+  left: -2%;
   display: grid;
-  place-items: center;
+  place-items: center end;
   pointer-events: none;
 }
 
@@ -400,12 +398,16 @@ body[data-mobile-menu-open="true"] .siteShell > :is(header, main, footer, aside)
   padding-top: var(--space-4);
 }
 
+.heroActions .ctaNote {
+  display: none;
+}
+
 .heroSubheadline {
-  max-width: 33ch;
+  max-width: 22ch;
   margin: 0 0 var(--space-4);
   color: var(--surface-paper);
-  font-size: clamp(0.98rem, 3vw, 1.125rem);
-  font-weight: 520;
+  font-size: clamp(1.05rem, 4.5vw, 1.2rem);
+  font-weight: 450;
   line-height: 1.45;
 }
 

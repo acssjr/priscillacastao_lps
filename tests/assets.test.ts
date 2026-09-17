@@ -10,6 +10,7 @@ const assets = [
   "public/images/priscilla-castao-ensaio-03.webp",
   "public/images/priscilla-castao-forro-roots-capa.webp",
   "public/images/cutouts/priscilla-castao-ensaio-02-cutout.webp",
+  "public/images/cutouts/priscilla-castao-ensaio-03-cutout.webp",
   "public/favicon.svg",
   "public/favicon-96x96.png",
   "public/favicon.ico",
@@ -44,6 +45,12 @@ describe("production assets", () => {
     expect(css).toContain('/brand/priscilla-castao-mark.svg');
     expect(css).toMatch(/\.formatMark\s*\{[\s\S]*?priscilla-castao-mark\.webp/);
     expect(css).not.toContain('/brand/priscilla-castao-logo.webp');
+  });
+
+  it("keeps the detailed lateral hero cutout below 120 KB", async () => {
+    expect(
+      (await stat("public/images/cutouts/priscilla-castao-ensaio-03-cutout.webp")).size,
+    ).toBeLessThan(120_000);
   });
 
   it("keeps the desktop navigation uppercase and on one line at compact widths", async () => {

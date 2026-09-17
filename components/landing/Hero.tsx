@@ -11,6 +11,7 @@ export function Hero({ campaign }: { campaign: LandingCampaign }) {
   const titleBeforeWords = titleBefore.split(/\s+/);
   const titleSubject = titleBeforeWords.pop() ?? "";
   const titleLead = titleBeforeWords.join(" ");
+  const titleHighlightVisual = hero.titleHighlight.replace(/,\s*$/, "");
 
   return (
     <section
@@ -30,7 +31,7 @@ export function Hero({ campaign }: { campaign: LandingCampaign }) {
           <span className={styles.heroTitleVisual} aria-hidden="true">
             <span className={styles.heroLead}>{titleLead}</span>
             <span className={styles.heroSubject} data-hero-word="forro">{titleSubject}</span>
-            <span className={styles.heroHighlight} data-hero-highlight>{hero.titleHighlight}</span>
+            <span className={styles.heroHighlight} data-hero-highlight>{titleHighlightVisual}</span>
             <span className={styles.heroClose}>{titleAfter}</span>
           </span>
         </h1>

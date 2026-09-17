@@ -1,8 +1,8 @@
 import { LandingCampaignSchema } from "./schema";
 
 const heroImage = {
-  src: "/images/cutouts/priscilla-castao-ensaio-02-cutout.webp",
-  alt: "Priscilla Castão em pose de forró com os braços elevados",
+  src: "/images/cutouts/priscilla-castao-ensaio-03-cutout.webp",
+  alt: "Priscilla Castão em pose de forró com um braço estendido",
   width: 1086,
   height: 1449,
 };
@@ -44,11 +44,11 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
     { label: "Dúvidas", target: "#duvidas" },
   ],
   hero: {
-    eyebrow: "Aulas particulares de forró em Salvador",
+    eyebrow: "Aulas particulares de forró",
     title: "Aprenda forró do zero, no seu ritmo.",
     titleHighlight: "do zero,",
     body: [
-      "Aula particular, ambiente reservado, explicação no ritmo do aluno, possibilidade de repetir os movimentos com mais calma e você não precisa levar um par.",
+      "Aprenda com calma e avance no seu tempo.",
     ],
     image: heroImage,
     cta: "AGENDAR MINHA AULA",
