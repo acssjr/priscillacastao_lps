@@ -373,10 +373,10 @@ body[data-mobile-menu-open="true"] .siteShell > :is(header, main, footer, aside)
 .heroPortrait {
   position: absolute;
   z-index: 3;
-  top: clamp(12.5rem, 30vw, 16rem);
-  right: 2%;
-  bottom: 10.5rem;
-  left: 21%;
+  top: clamp(9.75rem, 25vw, 12rem);
+  right: 1%;
+  bottom: 9.25rem;
+  left: 12%;
   display: grid;
   place-items: center;
   pointer-events: none;
