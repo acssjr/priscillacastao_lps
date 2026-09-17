@@ -1,5 +1,4 @@
 import { ScrollHighlight } from "./ScrollHighlight";
-import { PortraitCard } from "./PortraitCard";
 import type { LandingCampaign } from "@/content/landing-pages/schema";
 import styles from "./landing.module.css";
 
@@ -21,13 +20,6 @@ export function Method({ content }: { content: LandingCampaign["method"] }) {
           ))}
         </ol>
       </div>
-      <PortraitCard
-        className={styles.methodMedia}
-        data-parallax="portrait"
-        image={content.image}
-        sizes="(max-width: 767px) 92vw, 38vw"
-        variant="method"
-      />
     </section>
   );
 }

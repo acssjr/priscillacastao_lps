@@ -8,9 +8,8 @@ export function Recognition({ content }: { content: LandingCampaign["recognition
         <p className={styles.eyebrow}>{content.eyebrow}</p>
         <h2 id="recognition-title">{content.title}</h2>
         <div className={styles.recognitionBody} data-stagger-group>
-          {content.body.map((paragraph, index) => (
+          {content.body.map((paragraph) => (
             <article key={paragraph} data-recognition-card>
-              <span aria-hidden="true">0{index + 1}</span>
               <p>{paragraph}</p>
             </article>
           ))}

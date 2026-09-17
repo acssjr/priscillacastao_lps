@@ -35,14 +35,15 @@ describe("LandingPage core story", () => {
     for (const pillar of forroDoZeroCampaign.method.pillars) {
       expect(screen.getByRole("heading", { name: pillar.title })).toBeInTheDocument();
     }
-    expect(container.querySelectorAll('[data-portrait-card="method"]')).toHaveLength(1);
+    expect(container.querySelectorAll('[data-portrait-card="method"]')).toHaveLength(0);
   });
 
   it("alternates concise cards and portrait-led sections", () => {
     const { container } = render(<LandingPage campaign={forroDoZeroCampaign} />);
 
     expect(container.querySelectorAll("[data-recognition-card]")).toHaveLength(3);
-    expect(container.querySelectorAll("[data-portrait-card]")).toHaveLength(4);
+    expect(container.querySelectorAll("[data-recognition-card] > span")).toHaveLength(0);
+    expect(container.querySelectorAll("[data-portrait-card]")).toHaveLength(3);
     expect(container.querySelectorAll('[data-portrait-card="proof"]')).toHaveLength(1);
     expect(container.querySelectorAll('[data-portrait-card="about"]')).toHaveLength(1);
   });
@@ -55,6 +56,6 @@ describe("LandingPage core story", () => {
     expect(container.querySelectorAll("[data-parallax]").length).toBeGreaterThanOrEqual(2);
     expect(container.querySelectorAll("[data-stagger-group]").length).toBeGreaterThanOrEqual(4);
     expect(container.querySelectorAll("[data-format-card]")).toHaveLength(2);
-    expect(container.querySelectorAll("[data-scroll-fill]")).toHaveLength(2);
+    expect(container.querySelectorAll("[data-scroll-fill]")).toHaveLength(1);
   });
 });
