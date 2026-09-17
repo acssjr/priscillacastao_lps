@@ -302,7 +302,7 @@ body[data-mobile-menu-open="true"] .siteShell > :is(header, main, footer, aside)
   margin-inline: auto;
 }
 
-.heroEyebrow {
+.eyebrow.heroEyebrow {
   position: relative;
   z-index: 5;
   width: fit-content;

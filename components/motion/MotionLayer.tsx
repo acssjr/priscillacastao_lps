@@ -20,7 +20,7 @@ export function MotionLayer() {
 
       const header = root.querySelector("header");
       const heroCopy = root.querySelector("[data-motion='hero']");
-      const heroMedia = root.querySelector("[data-hero-media]");
+      const heroMedia = root.querySelector("[data-hero-portrait]");
       const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
       intro
         .from(header, { autoAlpha: 0, y: -18, duration: 0.55 })
