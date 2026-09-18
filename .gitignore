@@ -18,3 +18,4 @@ assets/instagram/**/_diagnosticos/
 assets/instagram/**/webp/
 assets/brand/
 *.json.xz
+.vercel
