@@ -23,6 +23,14 @@ describe("LandingPage core story", () => {
     }
     expect(container.querySelector("[data-hero-portrait]")).toBeInTheDocument();
     expect(container.querySelector("[data-hero-portrait-card]")).toBeInTheDocument();
+    expect(screen.getByAltText("Priscilla Castão em pose de forró com um braço estendido")).toHaveAttribute(
+      "fetchpriority",
+      "high",
+    );
+    expect(screen.getByAltText("Priscilla Castão em pose de forró com um braço estendido")).toHaveAttribute(
+      "loading",
+      "eager",
+    );
     expect(screen.getByText("Professora de forró")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Conhecer Priscilla" })).toHaveAttribute("href", "#sobre");
     expect(container.querySelector("[data-hero-actions]")).toBeInTheDocument();

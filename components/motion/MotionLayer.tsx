@@ -18,15 +18,6 @@ export function MotionLayer() {
     media.add("(prefers-reduced-motion: no-preference)", () => {
       if (!root) return;
 
-      const header = root.querySelector("header");
-      const heroCopy = root.querySelector("[data-motion='hero']");
-      const heroMedia = root.querySelector("[data-hero-portrait]");
-      const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
-      intro
-        .from(header, { autoAlpha: 0, y: -18, duration: 0.55 })
-        .from(heroCopy?.children ?? [], { autoAlpha: 0, y: 34, duration: 0.72, stagger: 0.075 }, "<0.08")
-        .from(heroMedia, { autoAlpha: 0, xPercent: 7, scale: 0.94, duration: 1.05 }, "<0.12");
-
       const connectionLine = root.querySelector("[data-connection-line]");
       gsap.fromTo(connectionLine, { scaleX: 0 }, {
         scaleX: 1,
@@ -133,8 +124,10 @@ export function MotionLayer() {
       });
 
       const closing = root.querySelector("[data-reveal='closing']");
-      gsap.timeline({ scrollTrigger: { trigger: closing, start: "clamp(top 78%)", once: true } })
-        .from(closing?.children ?? [], { autoAlpha: 0, y: 32, scale: 0.98, duration: 0.7, stagger: 0.1, ease: "power3.out" });
+      if (closing) {
+        gsap.timeline({ scrollTrigger: { trigger: closing, start: "clamp(top 78%)", once: true } })
+          .from(closing.children, { autoAlpha: 0, y: 32, scale: 0.98, duration: 0.7, stagger: 0.1, ease: "power3.out" });
+      }
 
       root.querySelectorAll<HTMLElement>("[data-scroll-fill]").forEach((scrollFill) => {
         gsap.fromTo(scrollFill.querySelector("[data-fill-overlay]"), { clipPath: "inset(0 100% 0 0)" }, {

@@ -41,7 +41,7 @@ it("keeps the proof poster below its clipping edge throughout parallax", () => {
   );
 });
 
-it("animates the current poster portrait instead of a removed hero media node", () => {
+it("does not replay above-the-fold content after hydration", () => {
   document.body.innerHTML = `
     <main data-motion-root>
       <header></header>
@@ -55,9 +55,6 @@ it("animates the current poster portrait instead of a removed hero media node", 
   expect(noPreference).toBeTypeOf("function");
   noPreference();
 
-  expect(timelineFrom).toHaveBeenCalledWith(
-    portrait,
-    expect.objectContaining({ autoAlpha: 0, scale: 0.94 }),
-    "<0.12",
-  );
+  expect(timelineFrom.mock.calls.some(([target]) => target === portrait)).toBe(false);
+  expect(timelineFrom.mock.calls.some(([target]) => target === document.querySelector("header"))).toBe(false);
 });

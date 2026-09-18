@@ -54,7 +54,8 @@ export function PortraitCard({
           width={image.width}
           height={image.height}
           sizes={sizes}
-          priority={priority}
+          fetchPriority={priority ? "high" : undefined}
+          loading={priority ? "eager" : undefined}
         />
       </div>
       {href && linkLabel ? (
