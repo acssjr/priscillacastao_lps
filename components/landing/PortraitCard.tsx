@@ -46,15 +46,17 @@ export function PortraitCard({
       data-portrait-card={variant}
       {...props}
     >
-      <Image
-        className={styles.portraitCardImage}
-        src={image.src}
-        alt={image.alt}
-        width={image.width}
-        height={image.height}
-        sizes={sizes}
-        priority={priority}
-      />
+      <div className={styles.portraitCardMedia}>
+        <Image
+          className={styles.portraitCardImage}
+          src={image.src}
+          alt={image.alt}
+          width={image.width}
+          height={image.height}
+          sizes={sizes}
+          priority={priority}
+        />
+      </div>
       {href && linkLabel ? (
         <a className={styles.portraitCardArrow} href={href} aria-label={linkLabel}>
           <svg aria-hidden="true" viewBox="0 0 24 24">

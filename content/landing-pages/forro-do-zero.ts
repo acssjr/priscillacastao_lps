@@ -44,11 +44,15 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
     { label: "Dúvidas", target: "#duvidas" },
   ],
   hero: {
-    eyebrow: "Aulas particulares de forró",
-    title: "Aprenda forró do zero, no seu ritmo.",
-    titleHighlight: "do zero,",
+    eyebrow: "Aulas particulares de forró em Salvador — BA",
+    title: "Aprenda forró do zero com acompanhamento individualizado.",
+    titleEmphasis: "forró do zero",
     body: [
-      "Repita cada movimento até ele fazer sentido no seu corpo.",
+      "Você aprende a base com Priscilla, pratica com ela e repete cada movimento quantas vezes precisar.",
+    ],
+    proofPoints: [
+      "Você não precisa levar par",
+      "Aula particular para iniciantes",
     ],
     image: heroImage,
     cta: "AGENDAR MINHA AULA",
@@ -61,9 +65,9 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
   },
   recognition: {
     eyebrow: "Para quem está começando",
-    title: "Começar fica mais leve quando você não precisa acompanhar o ritmo de uma turma.",
+    title: "Um movimento de cada vez. Até o corpo entender.",
     body: [
-      "Aprenda no seu tempo, sem acompanhar o ritmo de uma turma.",
+      "Aprenda desde a base, com atenção em cada movimento.",
       "Pergunte, repita e ajuste quantas vezes precisar.",
       "Na aula individual, Priscilla também faz o papel de par.",
     ],
@@ -85,13 +89,13 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
       },
       {
         title: "Como acompanhar a música",
-        body: "Marcação musical e coordenação sem correr atrás do ritmo.",
+        body: "Marcação musical e coordenação para entender onde o movimento entra na música.",
       },
     ],
     image: methodImage,
   },
   proof: {
-    eyebrow: "Aula no seu ritmo",
+    eyebrow: "Acompanhamento de perto",
     title: "A aula particular tira a pressa de aprender.",
     poster: proofPoster,
     slides: [
@@ -142,7 +146,7 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
     eyebrow: "Quem é Priscilla Castão",
     title: "Priscilla ensina forró universitário e roots em Salvador.",
     body: [
-      "Base, transferência de peso, musicalidade e comunicação com o par — no ritmo de cada aluno.",
+      "Base, transferência de peso, musicalidade e comunicação com o par, com atenção ao jeito de aprender de cada aluno.",
     ],
     image: aboutImage,
   },

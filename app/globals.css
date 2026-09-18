@@ -11,6 +11,7 @@
   --space-2: 0.5rem;
   --space-3: 0.75rem;
   --space-4: 1rem;
+  --space-5: 1.25rem;
   --space-6: 1.5rem;
   --space-8: 2rem;
   --space-10: 2.5rem;
@@ -20,6 +21,7 @@
   --content: 72rem;
   --header-height: 4.75rem;
   --radius-sm: 0.5rem;
+  --radius-md: 1rem;
   --radius-lg: 1.5rem;
   --focus: 3px solid #7a1d2a;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -36,35 +38,17 @@ html {
   color-scheme: light;
   background: var(--surface-paper);
   overflow-x: clip;
-  scrollbar-width: thin;
-  scrollbar-color: var(--brand-soft) var(--surface-paper);
-  scrollbar-gutter: stable;
+  overflow-y: auto;
+  scrollbar-width: none;
+  scrollbar-gutter: auto;
   scroll-padding-top: var(--header-height);
   scroll-behavior: smooth;
   text-size-adjust: 100%;
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--surface-paper);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--brand-soft);
-  border: 2px solid var(--surface-paper);
-  border-radius: 999px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--brand-primary);
-}
-
-::-webkit-scrollbar-corner {
-  background: var(--surface-paper);
+  width: 0;
+  height: 0;
 }
 
 body {

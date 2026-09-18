@@ -1,4 +1,5 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { forroDoZeroCampaign } from "@/content/landing-pages/forro-do-zero";
 import { LandingPage } from "./LandingPage";
 
@@ -8,12 +9,18 @@ describe("LandingPage core story", () => {
 
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
     expect(screen.getByRole("heading", { level: 1 })).toHaveAccessibleName(
-      "Aprenda forró do zero, no seu ritmo.",
+      "Aprenda forró do zero com acompanhamento individualizado.",
     );
     expect(container.querySelector("[data-hero-poster]")).toBeInTheDocument();
     expect(container.querySelectorAll("[data-hero-title-block]")).toHaveLength(1);
     expect(container.querySelector("[data-hero-title-block]")).toHaveTextContent("Aprenda forró");
-    expect(container.querySelector("[data-hero-highlight]")).toHaveTextContent(/^do zero$/i);
+    expect(container.querySelector("[data-hero-emphasis]")).toHaveTextContent(/^forró do zero$/i);
+    expect(screen.getByText("Aulas particulares de forró em Salvador — BA")).toBeInTheDocument();
+    expect(screen.getByText("Acompanhamento de perto")).toBeInTheDocument();
+    const heroProofPoints = screen.getByRole("list", { name: "Diferenciais da aula" });
+    for (const point of forroDoZeroCampaign.hero.proofPoints) {
+      expect(within(heroProofPoints).getByText(point)).toBeInTheDocument();
+    }
     expect(container.querySelector("[data-hero-portrait]")).toBeInTheDocument();
     expect(container.querySelector("[data-hero-portrait-card]")).toBeInTheDocument();
     expect(screen.getByText("Professora de forró")).toBeInTheDocument();
@@ -25,6 +32,7 @@ describe("LandingPage core story", () => {
       "href",
       expect.stringContaining("wa.me/5575981234176"),
     );
+    expect(screen.getByRole("link", { name: forroDoZeroCampaign.hero.cta }).querySelector('[aria-hidden="true"]')).toBeInTheDocument();
   });
 
   it("renders exactly three method pillars", () => {
@@ -38,11 +46,30 @@ describe("LandingPage core story", () => {
     expect(container.querySelectorAll('[data-portrait-card="method"]')).toHaveLength(0);
   });
 
-  it("alternates concise cards and portrait-led sections", () => {
+  it("exposes the method details through accessible expandable controls", async () => {
+    const user = userEvent.setup();
+    render(<LandingPage campaign={forroDoZeroCampaign} />);
+
+    const trigger = screen.getByRole("button", { name: "Base e equilíbrio" });
+    const regionId = trigger.getAttribute("aria-controls");
+    const region = document.getElementById(regionId ?? "");
+
+    expect(trigger).toHaveAttribute("aria-expanded", "false");
+    expect(region).not.toBeNull();
+    expect(region).toHaveAttribute("aria-hidden", "true");
+
+    await user.click(trigger);
+
+    expect(trigger).toHaveAttribute("aria-expanded", "true");
+    expect(region).toHaveAttribute("aria-hidden", "false");
+  });
+
+  it("alternates a concise recognition ticker and portrait-led sections", () => {
     const { container } = render(<LandingPage campaign={forroDoZeroCampaign} />);
 
     expect(container.querySelectorAll("[data-recognition-card]")).toHaveLength(3);
-    expect(container.querySelectorAll("[data-recognition-card] > span")).toHaveLength(0);
+    expect(screen.getByRole("heading", { name: "Um movimento de cada vez. Até o corpo entender." })).toBeInTheDocument();
+    expect(screen.getByRole("list", { name: "Como a aula ajuda quem está começando" })).toBeInTheDocument();
     expect(container.querySelectorAll("[data-portrait-card]")).toHaveLength(3);
     expect(container.querySelectorAll('[data-portrait-card="proof"]')).toHaveLength(1);
     expect(container.querySelectorAll('[data-portrait-card="about"]')).toHaveLength(1);
@@ -56,9 +83,10 @@ describe("LandingPage core story", () => {
     const { container } = render(<LandingPage campaign={forroDoZeroCampaign} />);
 
     expect(container.querySelector("[data-motion-root]")).toBeInTheDocument();
+    expect(container.querySelector("[data-overlay-scrollbar]")).toBeInTheDocument();
     expect(container.querySelectorAll("[data-reveal]").length).toBeGreaterThanOrEqual(8);
     expect(container.querySelectorAll("[data-parallax]").length).toBeGreaterThanOrEqual(2);
-    expect(container.querySelectorAll("[data-stagger-group]").length).toBeGreaterThanOrEqual(4);
+    expect(container.querySelectorAll("[data-stagger-group]").length).toBeGreaterThanOrEqual(2);
     expect(container.querySelectorAll("[data-format-card]")).toHaveLength(2);
     expect(container.querySelectorAll("[data-scroll-fill]")).toHaveLength(1);
   });

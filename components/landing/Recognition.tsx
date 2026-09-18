@@ -5,14 +5,24 @@ export function Recognition({ content }: { content: LandingCampaign["recognition
   return (
     <section className={styles.recognition} id="para-quem" aria-labelledby="recognition-title">
       <div className={styles.recognitionInner} data-reveal="section">
-        <p className={styles.eyebrow}>{content.eyebrow}</p>
-        <h2 id="recognition-title">{content.title}</h2>
-        <div className={styles.recognitionBody} data-stagger-group>
-          {content.body.map((paragraph) => (
-            <article key={paragraph} data-recognition-card>
-              <p>{paragraph}</p>
-            </article>
-          ))}
+        <div className={styles.recognitionHeading}>
+          <p className={styles.eyebrow}>{content.eyebrow}</p>
+          <h2 id="recognition-title">{content.title}</h2>
+        </div>
+
+        <div className={styles.recognitionViewport}>
+          <div className={styles.recognitionRail}>
+            <ul className={styles.recognitionBody} aria-label="Como a aula ajuda quem está começando">
+              {content.body.map((paragraph) => (
+                <li key={paragraph} data-recognition-card>{paragraph}</li>
+              ))}
+            </ul>
+            <ul className={styles.recognitionBody} aria-hidden="true">
+              {content.body.map((paragraph) => (
+                <li key={paragraph}>{paragraph}</li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>

@@ -26,7 +26,8 @@ export const LandingCampaignSchema = z.object({
   }),
   navigation: z.array(z.object({ label: z.string().min(1), target: z.string().startsWith("#") })).min(3),
   hero: RichSectionSchema.extend({
-    titleHighlight: z.string().min(1),
+    titleEmphasis: z.string().min(1),
+    proofPoints: z.array(z.string().min(1)).length(2),
     image: ImageSchema,
     cta: z.string().min(2),
     ctaNote: z.object({
@@ -35,9 +36,9 @@ export const LandingCampaignSchema = z.object({
       details: z.string().min(5),
     }),
     location: z.string().min(2),
-  }).refine((hero) => hero.title.includes(hero.titleHighlight), {
-    message: "Hero title must contain its highlighted text",
-    path: ["titleHighlight"],
+  }).refine((hero) => hero.title.toLocaleLowerCase("pt-BR").includes(hero.titleEmphasis.toLocaleLowerCase("pt-BR")), {
+    message: "Hero title must contain its emphasized text",
+    path: ["titleEmphasis"],
   }),
   recognition: RichSectionSchema,
   method: RichSectionSchema.extend({

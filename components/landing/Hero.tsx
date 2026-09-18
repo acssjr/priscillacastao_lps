@@ -5,10 +5,9 @@ import styles from "./landing.module.css";
 
 export function Hero({ campaign }: { campaign: LandingCampaign }) {
   const { hero, whatsapp } = campaign;
-  const highlightStart = hero.title.indexOf(hero.titleHighlight);
-  const titleBefore = hero.title.slice(0, highlightStart).trim();
-  const titleAfter = hero.title.slice(highlightStart + hero.titleHighlight.length).trim();
-  const titleHighlightVisual = hero.titleHighlight.replace(/,\s*$/, "");
+  const emphasisStart = hero.title.toLocaleLowerCase("pt-BR").indexOf(hero.titleEmphasis.toLocaleLowerCase("pt-BR"));
+  const titleBefore = hero.title.slice(0, emphasisStart);
+  const titleAfter = hero.title.slice(emphasisStart + hero.titleEmphasis.length);
 
   return (
     <section
@@ -22,15 +21,46 @@ export function Hero({ campaign }: { campaign: LandingCampaign }) {
       <div className={styles.heroBackdrop} aria-hidden="true" />
 
       <div className={styles.heroStage}>
-        <p className={`${styles.eyebrow} ${styles.heroEyebrow}`}>{hero.eyebrow}</p>
+        <div className={styles.heroCopy}>
+          <p className={`${styles.eyebrow} ${styles.heroEyebrow}`}>{hero.eyebrow}</p>
 
-        <h1 className={styles.heroTitle} id="hero-title" aria-label={hero.title}>
-          <span className={styles.heroTitleVisual} aria-hidden="true" data-hero-title-block>
-            <span className={styles.heroLead}>{titleBefore}</span>
-            <span className={styles.heroHighlight} data-hero-highlight>{titleHighlightVisual}</span>
-            <span className={styles.heroClose}>{titleAfter}</span>
-          </span>
-        </h1>
+          <h1 className={styles.heroTitle} id="hero-title" aria-label={hero.title}>
+            <span className={styles.heroTitleVisual} aria-hidden="true" data-hero-title-block>
+              {titleBefore}
+              <strong className={styles.heroTitleEmphasis} data-hero-emphasis>
+                {hero.titleEmphasis}
+              </strong>
+              {titleAfter}
+            </span>
+          </h1>
+
+          <div className={styles.heroActions} data-hero-actions>
+            {hero.body.map((paragraph) => (
+              <p className={styles.heroSubheadline} key={paragraph}>{paragraph}</p>
+            ))}
+
+            <ul className={styles.heroProofPoints} aria-label="Diferenciais da aula">
+              {hero.proofPoints.map((point) => (
+                <li key={point}>{point}</li>
+              ))}
+            </ul>
+
+            <WhatsAppLink
+              id="hero-primary-cta"
+              glow
+              className={styles.primaryCta}
+              phone={whatsapp.phone}
+              message={whatsapp.messages.individual}
+              placement="hero"
+              offer="individual"
+            >
+              <span className={styles.primaryCtaLabel}>{hero.cta}</span>
+            </WhatsAppLink>
+            <p className={styles.ctaNote} data-cta-note>
+              {hero.ctaNote.lead}, {hero.ctaNote.bridge} {hero.ctaNote.details}.
+            </p>
+          </div>
+        </div>
 
         <PortraitCard
           className={styles.heroPortrait}
@@ -44,34 +74,6 @@ export function Hero({ campaign }: { campaign: LandingCampaign }) {
           linkLabel="Conhecer Priscilla"
           identity={{ name: "Priscilla Castão", role: "Professora de forró" }}
         />
-
-        <div className={styles.heroActions} data-hero-actions>
-          {hero.body.map((paragraph) => (
-            <p className={styles.heroSubheadline} key={paragraph}>{paragraph}</p>
-          ))}
-          <WhatsAppLink
-            id="hero-primary-cta"
-            glow
-            className={styles.primaryCta}
-            phone={whatsapp.phone}
-            message={whatsapp.messages.individual}
-            placement="hero"
-            offer="individual"
-          >
-            <span className={styles.primaryCtaLabel}>{hero.cta}</span>
-            <svg
-              className={styles.primaryCtaArrow}
-              aria-hidden="true"
-              viewBox="0 0 24 24"
-              fill="none"
-            >
-              <path d="M5 12h14M14 7l5 5-5 5" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
-            </svg>
-          </WhatsAppLink>
-          <p className={styles.ctaNote} data-cta-note>
-            {hero.ctaNote.lead}, {hero.ctaNote.bridge} {hero.ctaNote.details}.
-          </p>
-        </div>
       </div>
     </section>
   );

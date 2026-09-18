@@ -6,6 +6,7 @@ import { Hero } from "./Hero";
 import { Formats } from "./Formats";
 import { Method } from "./Method";
 import { MobileStickyCta } from "./MobileStickyCta";
+import { OverlayScrollbar } from "./OverlayScrollbar";
 import { Proof } from "./Proof";
 import { ProcessFaq } from "./ProcessFaq";
 import { Recognition } from "./Recognition";
@@ -30,6 +31,7 @@ export function LandingPage({ campaign }: { campaign: LandingCampaign }) {
       </main>
       <SiteFooter campaign={campaign} />
       <MobileStickyCta campaign={campaign} />
+      <OverlayScrollbar />
       <MotionLoader />
     </div>
   );
