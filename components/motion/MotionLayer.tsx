@@ -120,9 +120,13 @@ export function MotionLayer() {
       root.querySelectorAll<HTMLElement>("[data-parallax]").forEach((frame, index) => {
         const image = frame.querySelector("img");
         if (!image) return;
-        gsap.fromTo(image, { yPercent: -3, scale: 1.06 }, {
-          yPercent: 5,
-          scale: 1.015,
+        const isPoster = frame.dataset.parallax === "poster";
+        gsap.fromTo(image, {
+          yPercent: isPoster ? 0 : -3,
+          scale: isPoster ? 1.015 : 1.06,
+        }, {
+          yPercent: isPoster ? 3.5 : 5,
+          scale: isPoster ? 1 : 1.015,
           ease: "none",
           scrollTrigger: { trigger: frame, start: "clamp(top bottom)", end: "clamp(bottom top)", scrub: 0.8, refreshPriority: index + 20 },
         });

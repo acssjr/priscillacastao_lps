@@ -16,7 +16,7 @@ describe("LandingPage core story", () => {
     expect(container.querySelector("[data-hero-title-block]")).toHaveTextContent("Aprenda forró");
     expect(container.querySelector("[data-hero-emphasis]")).toHaveTextContent(/^forró do zero$/i);
     expect(screen.getByText("Aulas particulares de forró em Salvador — BA")).toBeInTheDocument();
-    expect(screen.getByText("Acompanhamento de perto")).toBeInTheDocument();
+    expect(screen.getAllByText("Acompanhamento de perto")).toHaveLength(1);
     const heroProofPoints = screen.getByRole("list", { name: "Diferenciais da aula" });
     for (const point of forroDoZeroCampaign.hero.proofPoints) {
       expect(within(heroProofPoints).getByText(point)).toBeInTheDocument();
@@ -44,6 +44,16 @@ describe("LandingPage core story", () => {
       expect(screen.getByRole("heading", { name: pillar.title })).toBeInTheDocument();
     }
     expect(container.querySelectorAll('[data-portrait-card="method"]')).toHaveLength(0);
+  });
+
+  it("presents a concrete three-step path to a scheduled first lesson", () => {
+    render(<LandingPage campaign={forroDoZeroCampaign} />);
+
+    expect(screen.getByRole("heading", { name: "Conte o que você quer aprender" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Defina os detalhes da aula" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Escolha o horário e agende" })).toBeInTheDocument();
+    expect(screen.getByText(/deixe sua primeira aula marcada/i)).toBeInTheDocument();
+    expect(screen.queryByText(/quando fizer sentido para você/i)).not.toBeInTheDocument();
   });
 
   it("exposes the method details through accessible expandable controls", async () => {

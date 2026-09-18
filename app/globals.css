@@ -76,6 +76,15 @@ a {
   touch-action: manipulation;
 }
 
+@media (hover: none) and (pointer: coarse) {
+  a,
+  button,
+  summary,
+  [role="button"] {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
 :focus-visible {
   outline: var(--focus);
   outline-offset: 3px;

@@ -1,9 +1,7 @@
 import Link from "next/link";
-import type { LandingCampaign } from "@/content/landing-pages/schema";
-import { WhatsAppLink } from "@/components/ui/WhatsAppLink";
 import styles from "./landing.module.css";
 
-export function SiteFooter({ campaign }: { campaign: LandingCampaign }) {
+export function SiteFooter() {
   return (
     <footer className={styles.footer}>
       <div className={styles.footerIntro}>
@@ -21,20 +19,6 @@ export function SiteFooter({ campaign }: { campaign: LandingCampaign }) {
               Instagram
             </a>
           </nav>
-        </section>
-        <section aria-labelledby="footer-booking-title">
-          <h2 id="footer-booking-title">Agendamento</h2>
-          <p>O primeiro contato e o agendamento acontecem pelo WhatsApp.</p>
-          <p>Local, horários e valores são combinados diretamente com Priscilla.</p>
-          <WhatsAppLink
-            className={styles.footerCta}
-            phone={campaign.whatsapp.phone}
-            message={campaign.whatsapp.messages.individual}
-            placement="footer"
-            offer="individual"
-          >
-            FALAR COM PRISCILLA
-          </WhatsAppLink>
         </section>
       </div>
       <div className={styles.footerLegal}>

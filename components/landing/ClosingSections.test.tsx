@@ -26,6 +26,7 @@ it("has one main landmark and a labeled footer", () => {
     "/politica-de-privacidade",
   );
   expect(container.querySelector("[data-footer-brand-logo]")).toBeInTheDocument();
-  expect(screen.getByRole("heading", { name: "Agendamento" })).toBeInTheDocument();
+  expect(screen.queryByRole("heading", { name: "Agendamento" })).not.toBeInTheDocument();
+  expect(screen.queryByRole("link", { name: "FALAR COM PRISCILLA" })).not.toBeInTheDocument();
   expect(screen.getByRole("link", { name: "AGENDAR MINHA PRIMEIRA AULA" })).toBeInTheDocument();
 });

@@ -42,7 +42,7 @@ describe("production assets", () => {
   it("uses the new logos while preserving the monogram in the format cards", async () => {
     const css = await readFile("components/landing/landing.module.css", "utf8");
     expect(css).toContain('/brand/priscilla-castao-logo.svg');
-    expect(css).toContain('/brand/priscilla-castao-mark.svg');
+    expect(css).toMatch(/\.mobileMenuBrand\s*\{[\s\S]*?priscilla-castao-mark\.webp/);
     expect(css).toMatch(/\.formatMark\s*\{[\s\S]*?priscilla-castao-mark\.webp/);
     expect(css).not.toContain('/brand/priscilla-castao-logo.webp');
   });
@@ -53,14 +53,14 @@ describe("production assets", () => {
     ).toBeLessThan(120_000);
   });
 
-  it("keeps the desktop navigation uppercase and on one line at compact widths", async () => {
+  it("keeps the desktop navigation in title case and on one line at compact widths", async () => {
     const css = await readFile("components/landing/landing.module.css", "utf8");
     const navigationRules = [...css.matchAll(/\.desktopNav a\s*\{([^}]*)\}/g)]
       .map((match) => match[1])
       .join("\n");
 
     expect(navigationRules).toContain("white-space: nowrap");
-    expect(navigationRules).toContain("text-transform: uppercase");
+    expect(navigationRules).not.toContain("text-transform: uppercase");
     expect(css).toContain("@media (min-width: 52rem)");
     expect(css).toContain("@media (min-width: 68rem)");
   });

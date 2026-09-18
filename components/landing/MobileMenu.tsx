@@ -20,7 +20,7 @@ export function MobileMenu({ campaign }: { campaign: LandingCampaign }) {
   }, [open]);
 
   return (
-    <Dialog.Root open={open} onOpenChange={setOpen} onOpenChangeComplete={(isOpen) => {
+    <Dialog.Root modal="trap-focus" open={open} onOpenChange={setOpen} onOpenChangeComplete={(isOpen) => {
       if (isOpen || !pendingSection.current) return;
       const hash = pendingSection.current;
       pendingSection.current = null;
@@ -43,7 +43,7 @@ export function MobileMenu({ campaign }: { campaign: LandingCampaign }) {
         <Dialog.Viewport className={styles.mobileMenuViewport}>
           <Dialog.Popup className={styles.mobileMenuPopup}>
             <div className={styles.mobileMenuTopline}>
-              <span className={styles.mobileMenuBrand} aria-hidden="true" data-mobile-menu-brand />
+              <span className={styles.mobileMenuBrand} aria-hidden="true" data-mobile-menu-mark />
               <Dialog.Title className={styles.mobileMenuTitle}>Menu</Dialog.Title>
               <Dialog.Close className={styles.mobileMenuClose} aria-label="Fechar menu">
                 <span aria-hidden="true" />

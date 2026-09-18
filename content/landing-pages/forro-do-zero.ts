@@ -37,10 +37,10 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
     ogAlt: "Priscilla Castão apresenta aulas particulares de forró para iniciantes em Salvador.",
   },
   navigation: [
-    { label: "Como funciona", target: "#metodo" },
-    { label: "Como ajuda", target: "#depoimentos" },
-    { label: "Formatos", target: "#aulas" },
-    { label: "Sobre Priscilla", target: "#sobre" },
+    { label: "Início", target: "#inicio" },
+    { label: "Método", target: "#metodo" },
+    { label: "Aulas", target: "#aulas" },
+    { label: "Sobre", target: "#sobre" },
     { label: "Dúvidas", target: "#duvidas" },
   ],
   hero: {
@@ -154,9 +154,18 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
     eyebrow: "Como começar",
     title: "Sua primeira aula começa com uma conversa simples.",
     steps: [
-      { title: "Conte de onde você parte", body: "Diga se está começando e se prefere aula individual ou em dupla." },
-      { title: "Combine o que precisa", body: "Objetivo, local, horários e investimento entram na conversa." },
-      { title: "Escolha e confirme", body: "Quando fizer sentido para você, confirme a primeira aula pelo WhatsApp." },
+      {
+        title: "Conte o que você quer aprender",
+        body: "Priscilla entende seu ponto de partida, seu objetivo e se a aula será individual ou em dupla.",
+      },
+      {
+        title: "Defina os detalhes da aula",
+        body: "Vocês combinam o formato, o local, os horários disponíveis e o investimento.",
+      },
+      {
+        title: "Escolha o horário e agende",
+        body: "Com tudo definido, escolha uma opção disponível e deixe sua primeira aula marcada.",
+      },
     ],
   },
   faq: {
