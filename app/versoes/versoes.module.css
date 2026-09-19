@@ -1,0 +1,208 @@
+.page {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 82% 18%, rgb(174 102 100 / 28%), transparent 30rem),
+    linear-gradient(145deg, #4b0d17 0%, #64121f 52%, #7a1d2a 100%);
+  color: var(--surface-paper);
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  opacity: 0.18;
+  background-image:
+    linear-gradient(120deg, transparent 0 48%, rgb(250 245 236 / 16%) 49% 49.5%, transparent 50%),
+    linear-gradient(30deg, transparent 0 72%, rgb(250 245 236 / 10%) 73% 73.4%, transparent 74%);
+  background-size: 22rem 22rem, 30rem 30rem;
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  width: min(100% - 2rem, 72rem);
+  margin-inline: auto;
+  padding: 1.25rem 0 2rem;
+}
+
+.header {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 4rem;
+}
+
+.brand {
+  display: grid;
+  line-height: 1;
+}
+
+.brand span {
+  font-family: var(--font-editorial), serif;
+  font-size: clamp(1.35rem, 4vw, 1.8rem);
+  font-style: italic;
+  font-weight: 700;
+}
+
+.brand small {
+  margin-top: 0.35rem;
+  color: var(--surface-cream);
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.internalLabel,
+.eyebrow {
+  margin: 0;
+  color: var(--surface-cream);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.internalLabel {
+  padding: 0.55rem 0.8rem;
+  border: 1px solid rgb(250 245 236 / 22%);
+  border-radius: 999px;
+}
+
+.intro {
+  max-width: 48rem;
+  padding: clamp(4rem, 10vw, 7.5rem) 0 clamp(2.5rem, 6vw, 4rem);
+}
+
+.intro h1 {
+  max-width: 46rem;
+  margin: 0.9rem 0 1.1rem;
+  color: var(--surface-paper);
+  font-size: clamp(2.45rem, 7vw, 5rem);
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+  text-wrap: balance;
+}
+
+.intro > p:last-child {
+  max-width: 42rem;
+  margin: 0;
+  color: rgb(250 245 236 / 78%);
+  font-size: clamp(1rem, 2vw, 1.12rem);
+  line-height: 1.65;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  display: flex;
+  min-height: 22rem;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(1.3rem, 3vw, 1.8rem);
+  border: 1px solid rgb(250 245 236 / 20%);
+  border-radius: 1.4rem;
+  background: linear-gradient(155deg, rgb(250 245 236 / 13%), rgb(250 245 236 / 5%));
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 12%);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 180ms var(--ease-out), border-color 180ms ease, background-color 180ms ease;
+}
+
+.card:hover {
+  border-color: rgb(241 226 201 / 55%);
+  background-color: rgb(250 245 236 / 8%);
+  transform: translateY(-0.35rem);
+}
+
+.cardTopline,
+.cardFooter {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.version {
+  color: var(--surface-cream);
+  font-size: 0.78rem;
+  font-weight: 850;
+  letter-spacing: 0.14em;
+}
+
+.audience {
+  color: rgb(250 245 236 / 72%);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-align: right;
+}
+
+.card h2 {
+  margin: 0 0 0.85rem;
+  color: var(--surface-paper);
+  font-size: clamp(1.65rem, 3vw, 2.15rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+
+.card p {
+  margin: 0;
+  color: rgb(250 245 236 / 72%);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.cardFooter {
+  padding-top: 1.25rem;
+  border-top: 1px solid rgb(250 245 236 / 14%);
+}
+
+.cardFooter code {
+  color: var(--surface-cream);
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.78rem;
+  font-weight: 750;
+}
+
+.cardFooter span {
+  display: grid;
+  width: 2.2rem;
+  height: 2.2rem;
+  place-items: center;
+  border: 1px solid rgb(250 245 236 / 24%);
+  border-radius: 50%;
+}
+
+.footer {
+  padding: 2.5rem 0 0.5rem;
+  color: rgb(250 245 236 / 55%);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+@media (max-width: 52rem) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    min-height: 17rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+
+  .card:hover {
+    transform: none;
+  }
+}
