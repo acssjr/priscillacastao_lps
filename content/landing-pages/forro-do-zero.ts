@@ -43,6 +43,20 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
     { label: "Sobre", target: "#sobre" },
     { label: "Dúvidas", target: "#duvidas" },
   ],
+  ui: {
+    headerCta: "AGENDAR",
+    mobileMenuCta: "AGENDAR MINHA AULA",
+    recognitionAriaLabel: "Como a aula ajuda quem está começando",
+    footerDescription: "Aulas particulares de forró para iniciantes em Salvador.",
+    footerMethodLabel: "Como funciona",
+    sticky: {
+      title: "Aula particular para iniciantes",
+      note: "Não precisa levar par.",
+      ariaLabel: "AGENDAR AULA",
+      mobileLabel: "AGENDAR MINHA AULA",
+      desktopLabel: "AGENDAR AULA",
+    },
+  },
   hero: {
     eyebrow: "Aulas particulares de forró em Salvador — BA",
     title: "Aprenda forró do zero com acompanhamento individualizado.",
@@ -75,6 +89,7 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
   method: {
     eyebrow: "Como Priscilla ensina",
     title: "Antes de decorar passos, você aprende a base que faz o movimento funcionar.",
+    highlight: "você aprende a base",
     body: [
       "Você entende cada fundamento antes de juntar tudo na dança.",
     ],
@@ -95,6 +110,7 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
     image: methodImage,
   },
   proof: {
+    anchor: "depoimentos",
     eyebrow: "Acompanhamento de perto",
     title: "A aula particular tira a pressa de aprender.",
     poster: proofPoster,
@@ -191,6 +207,7 @@ export const forroDoZeroCampaign = LandingCampaignSchema.parse({
   whatsapp: {
     phone: "5575981234176",
     messages: {
+      general: "Oi, Priscilla! Vim pela página de aulas para iniciantes e quero começar a dançar forró. Gostaria de saber sobre formatos, locais, horários e valores.",
       individual: "Oi, Priscilla! Vim pela página de aulas e quero agendar uma aula particular individual. Estou começando do zero e gostaria de saber sobre locais, horários e valores.",
       dupla: "Oi, Priscilla! Vim pela página de aulas e quero agendar uma aula particular em dupla. Gostaria de saber sobre locais, horários e valores.",
       "grupo-workshop": "Oi, Priscilla! Vim pela página de aulas e gostaria de conversar sobre uma aula em grupo ou workshop. Pode me explicar os formatos, a disponibilidade e os valores?",

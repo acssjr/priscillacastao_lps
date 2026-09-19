@@ -20,7 +20,7 @@ export function LandingPage({ campaign }: { campaign: LandingCampaign }) {
       <SiteHeader campaign={campaign} />
       <main id="conteudo" data-campaign={campaign.id}>
         <Hero campaign={campaign} />
-        <Recognition content={campaign.recognition} />
+        <Recognition content={campaign.recognition} ariaLabel={campaign.ui.recognitionAriaLabel} />
         <span className={styles.connectionLine} data-connection-line aria-hidden="true" />
         <Method content={campaign.method} />
         <Proof content={campaign.proof} />
@@ -29,7 +29,7 @@ export function LandingPage({ campaign }: { campaign: LandingCampaign }) {
         <ProcessFaq process={campaign.process} faq={campaign.faq} />
         <FinalCta campaign={campaign} />
       </main>
-      <SiteFooter />
+      <SiteFooter campaign={campaign} />
       <MobileStickyCta campaign={campaign} />
       <OverlayScrollbar />
       <MotionLoader />

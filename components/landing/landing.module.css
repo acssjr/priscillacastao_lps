@@ -385,10 +385,47 @@
   font-weight: 850;
   letter-spacing: -0.025em;
   text-transform: uppercase;
-  text-decoration: underline;
-  text-decoration-color: rgb(231 95 66 / 75%);
-  text-decoration-thickness: 0.08em;
-  text-underline-offset: 0.1em;
+  text-decoration: none;
+  background: linear-gradient(
+    105deg,
+    var(--surface-cream) 20%,
+    var(--surface-paper) 38%,
+    #ffd7b5 48%,
+    var(--surface-paper) 58%,
+    var(--surface-cream) 76%
+  );
+  background-position: 120% 50%;
+  background-size: 240% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: heroTitleShimmer 4.8s ease-in-out infinite;
+}
+
+@keyframes heroTitleShimmer {
+  0%,
+  22% {
+    background-position: 120% 50%;
+  }
+
+  68%,
+  100% {
+    background-position: -120% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroTitleEmphasis {
+    animation: none;
+    background-position: 50% 50%;
+  }
+}
+
+@media (forced-colors: active) {
+  .heroTitleEmphasis {
+    background: none;
+    -webkit-text-fill-color: currentcolor;
+  }
 }
 
 .portraitCard {

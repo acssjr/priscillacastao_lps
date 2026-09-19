@@ -1,7 +1,7 @@
 import type { LandingCampaign } from "@/content/landing-pages/schema";
 import styles from "./landing.module.css";
 
-export function Recognition({ content }: { content: LandingCampaign["recognition"] }) {
+export function Recognition({ content, ariaLabel }: { content: LandingCampaign["recognition"]; ariaLabel: string }) {
   return (
     <section className={styles.recognition} id="para-quem" aria-labelledby="recognition-title">
       <div className={styles.recognitionInner} data-reveal="section">
@@ -12,7 +12,7 @@ export function Recognition({ content }: { content: LandingCampaign["recognition
 
         <div className={styles.recognitionViewport}>
           <div className={styles.recognitionRail}>
-            <ul className={styles.recognitionBody} aria-label="Como a aula ajuda quem está começando">
+            <ul className={styles.recognitionBody} aria-label={ariaLabel}>
               {content.body.map((paragraph) => (
                 <li key={paragraph} data-recognition-card>{paragraph}</li>
               ))}

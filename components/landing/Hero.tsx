@@ -50,7 +50,7 @@ export function Hero({ campaign }: { campaign: LandingCampaign }) {
               glow
               className={styles.primaryCta}
               phone={whatsapp.phone}
-              message={whatsapp.messages.individual}
+              message={whatsapp.messages.general}
               placement="hero"
               offer="individual"
             >

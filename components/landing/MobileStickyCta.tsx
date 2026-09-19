@@ -35,21 +35,21 @@ export function MobileStickyCta({ campaign }: { campaign: LandingCampaign }) {
       aria-hidden={!visible}
     >
       <span className={styles.mobileStickyCopy}>
-        <strong>Aula particular para iniciantes</strong>
-        <small>Não precisa levar par.</small>
+        <strong>{campaign.ui.sticky.title}</strong>
+        <small>{campaign.ui.sticky.note}</small>
       </span>
       <WhatsAppLink
-        aria-label="AGENDAR AULA"
+        aria-label={campaign.ui.sticky.ariaLabel}
         className={styles.mobileStickyLink}
         glow
         phone={campaign.whatsapp.phone}
-        message={campaign.whatsapp.messages.individual}
+        message={campaign.whatsapp.messages.general}
         placement="sticky"
         offer="individual"
         tabIndex={visible ? 0 : -1}
       >
-        <span className={styles.mobileStickyLabelMobile} aria-hidden="true">AGENDAR MINHA AULA</span>
-        <span className={styles.mobileStickyLabelDesktop} aria-hidden="true">AGENDAR AULA</span>
+        <span className={styles.mobileStickyLabelMobile} aria-hidden="true">{campaign.ui.sticky.mobileLabel}</span>
+        <span className={styles.mobileStickyLabelDesktop} aria-hidden="true">{campaign.ui.sticky.desktopLabel}</span>
       </WhatsAppLink>
     </aside>
   );

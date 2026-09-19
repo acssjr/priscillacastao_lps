@@ -5,7 +5,7 @@ import styles from "./landing.module.css";
 
 export function Proof({ content }: { content: LandingCampaign["proof"] }) {
   return (
-    <section className={styles.proof} id="depoimentos" aria-labelledby="proof-title" data-motion="proof">
+    <section className={styles.proof} id={content.anchor} aria-labelledby="proof-title" data-motion="proof">
       <PortraitCard
         className={styles.proofMedia}
         data-parallax="poster"

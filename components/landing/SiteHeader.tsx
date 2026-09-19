@@ -13,8 +13,8 @@ export function SiteHeader({ campaign }: { campaign: LandingCampaign }) {
         <nav className={styles.desktopNav} aria-label="Navegação principal">
           {campaign.navigation.map((item) => <a href={item.target} key={item.target}>{item.label}</a>)}
         </nav>
-        <WhatsAppLink glow className={styles.headerCta} phone={campaign.whatsapp.phone} message={campaign.whatsapp.messages.individual} placement="header" offer="individual">
-          AGENDAR
+        <WhatsAppLink glow className={styles.headerCta} phone={campaign.whatsapp.phone} message={campaign.whatsapp.messages.general} placement="header" offer="individual">
+          {campaign.ui.headerCta}
         </WhatsAppLink>
         <MobileMenu campaign={campaign} />
       </div>

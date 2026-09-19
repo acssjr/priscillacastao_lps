@@ -8,7 +8,7 @@ const editorial = Newsreader({ subsets: ["latin"], variable: "--font-editorial",
 
 export const metadata: Metadata = {
   title: "Priscilla Castão | Aulas particulares de forró em Salvador",
-  description: "Aulas particulares de forró para quem quer começar do zero com segurança em Salvador.",
+  description: "Aulas particulares de forró com Priscilla Castão em Salvador.",
   applicationName: "Priscilla Castão",
   manifest: "/site.webmanifest",
   icons: {

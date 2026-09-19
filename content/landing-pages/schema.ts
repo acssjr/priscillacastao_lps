@@ -25,6 +25,20 @@ export const LandingCampaignSchema = z.object({
     ogAlt: z.string().min(8),
   }),
   navigation: z.array(z.object({ label: z.string().min(1), target: z.string().startsWith("#") })).min(3),
+  ui: z.object({
+    headerCta: z.string().min(2),
+    mobileMenuCta: z.string().min(2),
+    recognitionAriaLabel: z.string().min(5),
+    footerDescription: z.string().min(10),
+    footerMethodLabel: z.string().min(2),
+    sticky: z.object({
+      title: z.string().min(2),
+      note: z.string().min(2),
+      ariaLabel: z.string().min(5),
+      mobileLabel: z.string().min(2),
+      desktopLabel: z.string().min(2),
+    }),
+  }),
   hero: RichSectionSchema.extend({
     titleEmphasis: z.string().min(1),
     proofPoints: z.array(z.string().min(1)).length(2),
@@ -42,10 +56,15 @@ export const LandingCampaignSchema = z.object({
   }),
   recognition: RichSectionSchema,
   method: RichSectionSchema.extend({
+    highlight: z.string().min(1),
     pillars: z.array(z.object({ title: z.string().min(1), body: z.string().min(1) })).length(3),
     image: ImageSchema,
+  }).refine((method) => method.title.toLocaleLowerCase("pt-BR").includes(method.highlight.toLocaleLowerCase("pt-BR")), {
+    message: "Method title must contain its highlighted text",
+    path: ["highlight"],
   }),
   proof: z.object({
+    anchor: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
     eyebrow: z.string().min(1),
     title: z.string().min(1),
     poster: ImageSchema,
@@ -87,7 +106,12 @@ export const LandingCampaignSchema = z.object({
   closing: RichSectionSchema.extend({ cta: z.string().min(2) }),
   whatsapp: z.object({
     phone: z.literal("5575981234176"),
-    messages: z.record(OfferKeySchema, z.string().min(20)),
+    messages: z.object({
+      general: z.string().min(20),
+      individual: z.string().min(20),
+      dupla: z.string().min(20),
+      "grupo-workshop": z.string().min(20),
+    }),
   }),
 });
 

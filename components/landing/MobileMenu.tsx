@@ -67,11 +67,11 @@ export function MobileMenu({ campaign }: { campaign: LandingCampaign }) {
               className={styles.mobileMenuCta}
               glow
               phone={campaign.whatsapp.phone}
-              message={campaign.whatsapp.messages.individual}
+              message={campaign.whatsapp.messages.general}
               placement="mobile_menu"
               offer="individual"
             >
-              AGENDAR MINHA AULA
+              {campaign.ui.mobileMenuCta}
             </WhatsAppLink>
           </Dialog.Popup>
         </Dialog.Viewport>

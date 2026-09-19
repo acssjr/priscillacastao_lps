@@ -12,7 +12,7 @@ export function FinalCta({ campaign }: { campaign: LandingCampaign }) {
         id="final-primary-cta"
         className={styles.primaryCtaLight}
         phone={campaign.whatsapp.phone}
-        message={campaign.whatsapp.messages.individual}
+        message={campaign.whatsapp.messages.general}
         placement="closing"
         offer="individual"
       >
