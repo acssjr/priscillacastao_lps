@@ -19,6 +19,9 @@ export function SiteFooter({ campaign }: { campaign: LandingCampaign }) {
             <a href="https://www.instagram.com/priscillacastao_danca/" target="_blank" rel="noreferrer">
               Instagram
             </a>
+            <Link href="/versoes" rel="nofollow">
+              Painel de versões
+            </Link>
           </nav>
         </section>
       </div>

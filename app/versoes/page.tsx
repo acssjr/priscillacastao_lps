@@ -47,17 +47,14 @@ export default function VersionsPage() {
       <div className={styles.backdrop} aria-hidden="true" />
       <div className={styles.content}>
         <header className={styles.header}>
-          <div className={styles.brand} aria-label="Priscilla Castão">
-            <span>Priscilla Castão</span>
-            <small>Profª de forró</small>
-          </div>
+          <span className={styles.brandLogo} role="img" aria-label="Priscilla Castão, professora de forró" />
           <p className={styles.internalLabel}>Painel interno</p>
         </header>
 
         <section className={styles.intro} aria-labelledby="versions-title">
           <p className={styles.eyebrow}>Landing pages</p>
           <h1 id="versions-title">Escolha a versão que deseja visualizar.</h1>
-          <p>As três campanhas estão publicadas no mesmo projeto e podem ser abertas por este painel.</p>
+          <p>As três campanhas da Priscilla, reunidas em um só lugar.</p>
         </section>
 
         <nav className={styles.grid} aria-label="Versões das landing pages">

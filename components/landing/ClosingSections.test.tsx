@@ -25,6 +25,7 @@ it("has one main landmark and a labeled footer", () => {
     "href",
     "/politica-de-privacidade",
   );
+  expect(screen.getByRole("link", { name: "Painel de versões" })).toHaveAttribute("href", "/versoes");
   expect(container.querySelector("[data-footer-brand-logo]")).toBeInTheDocument();
   expect(screen.queryByRole("heading", { name: "Agendamento" })).not.toBeInTheDocument();
   expect(screen.queryByRole("link", { name: "FALAR COM PRISCILLA" })).not.toBeInTheDocument();
