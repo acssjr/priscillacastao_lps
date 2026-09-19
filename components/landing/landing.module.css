@@ -385,32 +385,36 @@
   font-weight: 850;
   letter-spacing: -0.025em;
   text-transform: uppercase;
-  text-decoration: none;
+  text-decoration: none !important;
+  text-decoration-line: none !important;
+  border-block-end: 0;
   background: linear-gradient(
     105deg,
-    var(--surface-cream) 20%,
-    var(--surface-paper) 38%,
-    #ffd7b5 48%,
-    var(--surface-paper) 58%,
-    var(--surface-cream) 76%
+    var(--surface-cream) 0%,
+    var(--surface-cream) 34%,
+    #fff 44%,
+    #ffd1ad 50%,
+    #fff 56%,
+    var(--surface-cream) 66%,
+    var(--surface-cream) 100%
   );
-  background-position: 120% 50%;
-  background-size: 240% 100%;
+  background-position: 140% 50%;
+  background-size: 260% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: heroTitleShimmer 4.8s ease-in-out infinite;
+  animation: heroTitleShimmer 4.2s ease-in-out infinite;
 }
 
 @keyframes heroTitleShimmer {
   0%,
-  22% {
-    background-position: 120% 50%;
+  24% {
+    background-position: 140% 50%;
   }
 
-  68%,
+  72%,
   100% {
-    background-position: -120% 50%;
+    background-position: -140% 50%;
   }
 }
 
