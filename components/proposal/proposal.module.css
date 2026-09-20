@@ -2219,3 +2219,13 @@
 .coverFooter {
   top: 6.8cqh;
 }
+
+/* Keep the cover's centering transforms intact during its entrance. */
+.slideMotion:not(.instant) .cover > * {
+  animation-name: coverReveal;
+}
+
+@keyframes coverReveal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
