@@ -296,11 +296,6 @@ export function ProposalDeck() {
             <p>Valor único para colocar a estrutura em operação.</p>
           </div>
         </div>
-        <div className={styles.optionalCare}>
-          <span>Acompanhamento opcional</span>
-          <strong>R$ 440/mês</strong>
-          <p>Equivalente ao pacote de 4 aulas: análise, correções e pequenas evoluções dentro do limite combinado.</p>
-        </div>
         <Source>Domínio, hospedagem e ferramentas pagas são aprovados antes e permanecem no nome de Priscilla.</Source>
       </section>,
 
