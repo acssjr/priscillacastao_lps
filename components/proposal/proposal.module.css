@@ -909,6 +909,7 @@
   }
 }
 
+
 /* Premium presentation system ------------------------------------------------ */
 
 .page {
@@ -2202,4 +2203,19 @@
     animation: premiumFade 180ms ease both;
     animation-delay: 0ms;
   }
+}
+
+/* Cover alignment ------------------------------------------------------------ */
+.coverCopy {
+  top: 43%;
+  transform: translateY(-50%);
+}
+
+.coverMark {
+  top: 43%;
+  transform: translateY(-50%);
+}
+
+.coverFooter {
+  top: 6.8cqh;
 }
