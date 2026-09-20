@@ -1986,3 +1986,220 @@
     transition: none;
   }
 }
+
+/* Final presentation rules --------------------------------------------------- */
+
+/* Secondary copy must remain fully legible on the wine background. */
+.page {
+  --proposal-muted: var(--proposal-paper);
+}
+
+.slide p:not(.kicker),
+.slide li,
+.slide small,
+.slide blockquote,
+.slide .sideNote,
+.slide .source,
+.slide .darkFootnote,
+.slide .pageAnatomy span,
+.slide .awarenessRail span,
+.slide .marketStack span,
+.slide .offerRevealGrid li,
+.slide .pricePanel p,
+.slide .optionalCare span,
+.slide .optionalCare p,
+.slide .pricePanel del,
+.chrome > p {
+  color: var(--proposal-paper);
+}
+
+.source,
+.darkFootnote {
+  color: var(--proposal-paper);
+}
+
+.pageAnatomy {
+  gap: 0.75cqw;
+  margin-top: 7.5cqh;
+  border-top: 0;
+}
+
+.pageAnatomy div,
+.pageAnatomy div + div {
+  min-height: 30cqh;
+  padding: 3cqh 1.15cqw 2.4cqh;
+  border: 0.08cqw solid rgb(255 255 255 / 0.16);
+  border-radius: 0.9cqw;
+  background: linear-gradient(145deg, rgb(255 255 255 / 0.09), rgb(255 255 255 / 0.025));
+}
+
+.pageAnatomy strong {
+  margin-top: 3.2cqh;
+}
+
+.pageAnatomy span {
+  margin-top: 2.4cqh;
+  padding-right: 0.15cqw;
+}
+
+.relationshipFlow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.1cqw;
+  margin-top: 5cqh;
+}
+
+.relationshipFlow > div {
+  min-height: 25cqh;
+  padding: 2.7cqh 1.5cqw;
+  border: 0.08cqw solid rgb(255 255 255 / 0.16);
+  border-radius: 1.1cqw;
+  background: linear-gradient(145deg, rgb(255 255 255 / 0.1), rgb(255 255 255 / 0.03));
+  box-shadow: inset 0 0.08cqw 0 rgb(255 255 255 / 0.11), 0 1.3cqw 3.2cqw rgb(0 0 0 / 0.16);
+}
+
+.relationshipFlow span,
+.relationshipFlow strong,
+.relationshipFlow small {
+  display: block;
+}
+
+.relationshipFlow span {
+  color: #ed9bad;
+  font-size: 0.82cqw;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.relationshipFlow strong {
+  margin-top: 2cqh;
+  color: var(--proposal-paper);
+  font-size: 1.38cqw;
+  line-height: 1.2;
+}
+
+.relationshipFlow small {
+  margin-top: 1.8cqh;
+  color: var(--proposal-paper);
+  font-size: 1.02cqw;
+  line-height: 1.35;
+}
+
+.rootsNote {
+  margin-top: 3cqh !important;
+  padding: 1.7cqh 1.3cqw;
+  border: 0.08cqw solid rgb(237 155 173 / 0.34);
+  border-radius: 0.85cqw;
+  background: rgb(159 54 80 / 0.13);
+  color: var(--proposal-paper);
+  font-size: 1.08cqw;
+  line-height: 1.35;
+}
+
+.rootsNote b {
+  color: #ed9bad;
+}
+
+.performanceEvidence {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.performanceEvidence span {
+  min-height: 11cqh;
+  font-size: 1.12cqw;
+}
+
+.performanceEvidence b {
+  display: block;
+  margin-bottom: 0.8cqh;
+  color: #f2a6b7;
+  font-size: 2.2cqw;
+  line-height: 1;
+}
+
+.marketStack strong {
+  text-align: right;
+}
+
+.offerRevealGrid li {
+  color: var(--proposal-paper);
+  font-size: 1cqw;
+}
+
+/* The deck transition communicates spatial direction between screens. */
+.slideMotion {
+  animation-duration: 420ms;
+}
+
+@keyframes enterNext {
+  from { opacity: 0; transform: translate3d(9%, 0, 0) scale(0.985); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@keyframes enterPrevious {
+  from { opacity: 0; transform: translate3d(-9%, 0, 0) scale(0.985); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+.slideMotion:not(.instant) .slide > * {
+  animation-duration: 440ms;
+}
+
+.auroraOne {
+  opacity: 0.95;
+  animation-duration: 14s;
+}
+
+.auroraTwo {
+  opacity: 0.9;
+  animation-duration: 18s;
+}
+
+.auroraThree {
+  opacity: 0.88;
+  animation-duration: 13s;
+}
+
+.gridTexture {
+  animation: gridDrift 26s linear infinite;
+}
+
+@keyframes auroraDriftOne {
+  0%, 100% { transform: translate3d(-3%, -2%, 0) scale(1); }
+  50% { transform: translate3d(18%, 12%, 0) scale(1.14); }
+}
+
+@keyframes auroraDriftTwo {
+  0%, 100% { transform: translate3d(5%, 5%, 0) scale(1.08); }
+  50% { transform: translate3d(-17%, -13%, 0) scale(0.94); }
+}
+
+@keyframes auroraPulse {
+  0%, 100% { transform: translate3d(4%, -3%, 0) scale(0.92); opacity: 0.68; }
+  50% { transform: translate3d(-14%, 15%, 0) scale(1.13); opacity: 1; }
+}
+
+@keyframes gridDrift {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(5.5cqw, 5.5cqw, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auroraOne,
+  .auroraTwo,
+  .auroraThree,
+  .gridTexture {
+    animation: none;
+  }
+
+  .slideMotion,
+  .slideMotion[data-direction="previous"] {
+    animation: premiumFade 180ms ease both;
+  }
+
+  .slideMotion:not(.instant) .slide > * {
+    animation: premiumFade 180ms ease both;
+    animation-delay: 0ms;
+  }
+}

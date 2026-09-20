@@ -4,8 +4,6 @@ import Image from "next/image";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import styles from "./proposal.module.css";
 
-type NavigationSource = "button" | "keyboard";
-
 const slideMeta = [
   "Abertura",
   "Oportunidade",
@@ -15,9 +13,9 @@ const slideMeta = [
   "Mensagens",
   "Estrutura",
   "Funil",
-  "Escada de valor",
-  "Medição",
-  "Performance",
+  "Recorrência",
+  "Rastreamento",
+  "Intenção digital",
   "Evidências",
   "Valor comparável",
   "Proposta",
@@ -43,9 +41,9 @@ export function ProposalDeck() {
   const total = slideMeta.length;
 
   const move = useCallback(
-    (step: -1 | 1, source: NavigationSource = "button") => {
+    (step: -1 | 1) => {
       setDirection(step > 0 ? "next" : "previous");
-      setInstant(source === "keyboard");
+      setInstant(false);
       setIndex((current) => Math.max(0, Math.min(total - 1, current + step)));
       setMotionKey((current) => current + 1);
     },
@@ -66,11 +64,11 @@ export function ProposalDeck() {
 
       if (["ArrowRight", "PageDown", " "].includes(event.key)) {
         event.preventDefault();
-        move(1, "keyboard");
+        move(1);
       }
       if (["ArrowLeft", "PageUp"].includes(event.key)) {
         event.preventDefault();
-        move(-1, "keyboard");
+        move(-1);
       }
       if (event.key === "Home") {
         event.preventDefault();
@@ -213,41 +211,44 @@ export function ProposalDeck() {
 
       <section className={styles.slide} aria-labelledby="ladder-title" key="ladder">
         <div className={styles.titleRow}>
-          <div><p className={styles.kicker}>Escada de valor</p><h2 id="ladder-title">Cada etapa aprofunda a relação.</h2></div>
-          <p className={styles.sideNote}>Mais valor exige mais entrega e mais proximidade.</p>
+          <div><p className={styles.kicker}>Relacionamento e recorrência</p><h2 id="ladder-title">O valor cresce quando a aluna continua.</h2></div>
+          <p className={styles.sideNote}>Roots é uma modalidade, não um degrau.</p>
         </div>
-        <div className={styles.valueLadder}>
-          <div><span>Descoberta</span><strong>Conteúdo e indicação</strong><small>Contato inicial</small></div>
-          <div><span>Primeira experiência</span><strong>Aula individual</strong><small>R$ 120</small></div>
-          <div><span>Continuidade</span><strong>Pacote de 4 aulas</strong><small>R$ 440</small></div>
-          <div className={styles.hypothesis}><span>Aprofundamento</span><strong>Aulas de Roots</strong><small>Oferta já disponível</small></div>
+        <div className={styles.relationshipFlow}>
+          <div><span>Portas de entrada</span><strong>Instagram, Google, indicação e conteúdo</strong><small>A descoberta pode começar por caminhos diferentes.</small></div>
+          <div><span>Primeira experiência</span><strong>Aula individual · R$ 120</strong><small>Forró tradicional ou Roots, conforme o objetivo.</small></div>
+          <div><span>Fidelização</span><strong>Pacote de 4 aulas · R$ 440</strong><small>Continuidade, evolução e recorrência.</small></div>
         </div>
-        <Source>Referência: Value Ladder, Russell Brunson. A escada organiza as formas atuais de conhecer e continuar o trabalho com Priscilla.</Source>
+        <p className={styles.rootsNote}><b>Onde entra o Roots?</b> Na aula individual ou no pacote. Um novo degrau de valor só deve ser criado depois, com base em demanda real.</p>
+        <Source>Referência: Value Ladder, Russell Brunson. Aqui, a lógica organiza entrada, conversão e fidelização sem transformar modalidades em níveis de valor.</Source>
       </section>,
 
       <section className={styles.slide} aria-labelledby="measurement-title" key="measurement">
-        <p className={styles.kicker}>O ciclo de aprendizagem</p>
-        <h2 id="measurement-title">O site mostra interesse. A agenda mostra resultado.</h2>
+        <p className={styles.kicker}>Rastreamento da jornada</p>
+        <h2 id="measurement-title">Rastreamento mostra de onde veio o interesse e onde ele virou aula.</h2>
         <div className={styles.measurementLoop}>
-          <div><b>01</b><strong>Visita</strong><span>Por onde a pessoa chegou.</span></div>
-          <div><b>02</b><strong>Interesse</strong><span>Qual página e chamada despertaram ação.</span></div>
+          <div><b>01</b><strong>Origem</strong><span>Instagram, Google, indicação ou outro canal.</span></div>
+          <div><b>02</b><strong>Ação</strong><span>Qual página e chamada geraram o clique.</span></div>
           <div><b>03</b><strong>Agendamento</strong><span>Quem marcou um horário pelo WhatsApp.</span></div>
-          <div><b>04</b><strong>Aula</strong><span>Quem realmente compareceu ou pagou.</span></div>
+          <div><b>04</b><strong>Resultado</strong><span>Qual contato se tornou uma aula realizada ou paga.</span></div>
         </div>
-        <p className={styles.measurementSummary}>Assim descobrimos quais mensagens trazem conversas e quais conversas realmente viram alunas.</p>
+        <p className={styles.measurementSummary}>Assim deixamos de depender de impressão: comparamos canais, mensagens, agendamentos e aulas.</p>
       </section>,
 
       <section className={styles.slide} aria-labelledby="performance-title" key="performance">
-        <p className={styles.kicker}>Performance</p>
+        <p className={styles.kicker}>Intenção e experiência digital</p>
         <div className={styles.performanceGrid}>
           <div>
-            <h2 id="performance-title">Velocidade preserva a atenção conquistada.</h2>
-            <p>Se a página demora para aparecer, parte das pessoas desiste antes mesmo de conhecer as aulas.</p>
+            <h2 id="performance-title">Quem busca perto costuma estar mais próxima de agir.</h2>
+            <p>Uma presença local clara capta essa intenção; uma página rápida evita perder parte dela antes do contato.</p>
           </div>
-          <div className={styles.metric}><strong>até 2,5 s</strong><span>Referência de uma boa experiência para o carregamento principal da página.</span></div>
+          <div className={styles.metric}><strong>53%</strong><span>das visitas móveis são abandonadas quando o carregamento passa de 3 segundos.</span></div>
         </div>
-        <div className={styles.performanceEvidence}><span><b>Imagens leves</b> para abrir mais rápido</span><span><b>Fontes locais</b> sem espera desnecessária</span><span><b>Hospedagem adequada</b> para manter estabilidade</span></div>
-        <Source>Referência: web.dev. A velocidade real será conferida depois da publicação, em celular e computador.</Source>
+        <div className={styles.performanceEvidence}>
+          <span><b>76%</b> de quem busca algo próximo no smartphone visita um negócio em até um dia.</span>
+          <span><b>28%</b> dessas buscas locais resultam em compra.</span>
+        </div>
+        <Source>Fontes: <a href="https://www.thinkwithgoogle.com/_qs/documents/1964/1008-Progressive-Web-Apps.pdf" target="_blank" rel="noreferrer">Google Data sobre velocidade móvel</a> e <a href="https://www.thinkwithgoogle.com/_qs/documents/620/mobile-search-trends-consumers-to-stores.pdf" target="_blank" rel="noreferrer">Google/Purchased sobre busca local</a> (2016). Referências de comportamento, não projeções para Priscilla.</Source>
       </section>,
 
       <section className={styles.slide} aria-labelledby="evidence-title" key="evidence">
@@ -256,7 +257,7 @@ export function ProposalDeck() {
         <div className={styles.statusTable}>
           <div><b>Já construído</b><ul><li>Identidade aplicada</li><li>Três páginas de venda</li><li>Versões para celular e computador</li><li>Chamadas específicas para cada aula</li></ul></div>
           <div><b>Próxima configuração</b><ul><li>Medição das visitas e cliques</li><li>Links identificando a origem</li><li>Página com links úteis</li><li>Publicação no endereço definitivo</li></ul></div>
-          <div><b>Decisões com Priscilla</b><ul><li>Quais aulas priorizar</li><li>Quantas alunas consegue atender</li><li>Como organizar os contatos</li><li>Quais evoluções vêm depois</li></ul></div>
+          <div><b>Decisões</b><ul><li>Quais aulas priorizar</li><li>Quantas alunas consegue atender</li><li>Como responder e acompanhar cada lead</li><li>Próximos passos</li></ul></div>
         </div>
         <p className={styles.evidenceRule}>A estratégia cresce de acordo com a capacidade real de atendimento.</p>
       </section>,
@@ -265,12 +266,12 @@ export function ProposalDeck() {
         <p className={styles.kicker}>Antes do preço, o valor comparável</p>
         <h2 id="partnership-title">Quanto custaria montar essas partes separadamente?</h2>
         <div className={styles.marketStack}>
-          <div><span>Landing personalizada, responsiva e orientada à conversão</span><strong>R$ 1.500</strong></div>
+          <div><span>Landing personalizada, responsiva e orientada à conversão</span><strong>R$ 900–1.500</strong></div>
           <div><span>Identidade visual aplicada: monograma, cor e tipografia</span><strong>R$ 800</strong></div>
           <div><span>Pesquisa, estratégia, arquitetura e copy das 3 mensagens</span><strong>R$ 600</strong></div>
           <div><span>Tracking, eventos e preparação para análise</span><strong>R$ 400</strong></div>
           <div><span>Página de links + configuração do Perfil da Empresa</span><strong>R$ 350</strong></div>
-          <div className={styles.marketTotal}><span>Referência de contratação avulsa</span><strong>R$ 3.650</strong></div>
+          <div className={styles.marketTotal}><span>Referência de contratação avulsa</span><strong>R$ 3.050–3.650</strong></div>
         </div>
         <Source>Referências públicas consultadas em 2026: <a href="https://duopus.com.br/blog/quanto-custa-landing-page" target="_blank" rel="noreferrer">landing pages de R$ 800 a R$ 4.000 entre freelancer e agência</a>; <a href="https://vitoracdesign.com.br/blog/2026/05/30/quanto-custa-identidade-visual-2026/" target="_blank" rel="noreferrer">identidade visual a partir de R$ 800</a>. Os demais itens são estimativas de escopo, não cotações de terceiros.</Source>
       </section>,
@@ -290,7 +291,7 @@ export function ProposalDeck() {
           </div>
           <div className={styles.pricePanel}>
             <span>Investimento de implantação</span>
-            <del>R$ 3.650</del>
+            <del>até R$ 3.650</del>
             <strong>R$ 997</strong>
             <p>Valor único para colocar a estrutura em operação.</p>
           </div>
