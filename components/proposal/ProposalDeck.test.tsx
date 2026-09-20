@@ -8,7 +8,7 @@ describe("ProposalDeck", () => {
 
     expect(screen.getByRole("heading", { name: /Da descoberta ao agendamento/i })).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: /Avançar/i }));
-    expect(screen.getByRole("heading", { name: /Você já viu a superfície/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /O site organiza o caminho/i })).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: /Voltar/i }));
     expect(screen.getByRole("heading", { name: /Da descoberta ao agendamento/i })).toBeInTheDocument();
   });
@@ -19,7 +19,7 @@ describe("ProposalDeck", () => {
     fireEvent.keyDown(window, { key: "ArrowLeft" });
     expect(screen.getByRole("heading", { name: /Da descoberta ao agendamento/i })).toBeInTheDocument();
     fireEvent.keyDown(window, { key: "ArrowRight" });
-    expect(screen.getByRole("heading", { name: /Você já viu a superfície/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /O site organiza o caminho/i })).toBeInTheDocument();
     fireEvent.keyDown(window, { key: "Home" });
     expect(screen.getByRole("heading", { name: /Da descoberta ao agendamento/i })).toBeInTheDocument();
   });

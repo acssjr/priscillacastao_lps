@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import styles from "./proposal.module.css";
 
@@ -20,7 +21,6 @@ const slideMeta = [
   "Evidências",
   "Valor comparável",
   "Proposta",
-  "Decisão",
 ] as const;
 
 function ArrowIcon({ direction }: { direction: "left" | "right" }) {
@@ -89,7 +89,9 @@ export function ProposalDeck() {
   const slides = useMemo(
     () => [
       <section className={`${styles.slide} ${styles.cover}`} aria-labelledby="proposal-cover" key="cover">
-        <div className={styles.coverMark} aria-hidden="true"><span>PC</span></div>
+        <div className={styles.coverMark} aria-hidden="true">
+          <Image src="/brand/priscilla-castao-mark.svg" alt="" width={180} height={180} priority />
+        </div>
         <div className={styles.coverCopy}>
           <p className={styles.kicker}>Proposta estratégica · 2026</p>
           <h1 id="proposal-cover" aria-label="Da descoberta ao agendamento.">Da descoberta<br /><em>ao agendamento.</em></h1>
@@ -102,20 +104,15 @@ export function ProposalDeck() {
       </section>,
 
       <section className={styles.slide} aria-labelledby="opportunity-title" key="opportunity">
-        <div className={styles.splitIntro}>
-          <div>
-            <p className={styles.kicker}>O ponto de partida</p>
-            <h2 id="opportunity-title">Você já viu a superfície.<br />Agora, a estrutura.</h2>
-          </div>
-          <div className={styles.statement}>
-            <p>A primeira apresentação confirmou interesse.</p>
-            <p>Esta conversa mostra como a experiência pode trabalhar a favor das aulas.</p>
-          </div>
+        <p className={styles.kicker}>O ponto de partida</p>
+        <h2 id="opportunity-title">O site organiza o caminho até a aula.</h2>
+        <p className={styles.slideIntro}>Uma pessoa pode chegar pelo Instagram, pelo Google ou por indicação. Em todos os casos, ela precisa entender a proposta, confiar e saber como agendar.</p>
+        <div className={styles.journeyGrid}>
+          <div><b>01</b><strong>Descobrir</strong><span>Encontrar Priscilla no momento certo.</span></div>
+          <div><b>02</b><strong>Entender</strong><span>Reconhecer qual aula atende ao seu objetivo.</span></div>
+          <div><b>03</b><strong>Confiar</strong><span>Perceber método, cuidado e acompanhamento.</span></div>
+          <div><b>04</b><strong>Agendar</strong><span>Chegar ao WhatsApp sabendo o próximo passo.</span></div>
         </div>
-        <div className={styles.decisionLine}>
-          <span>Presença</span><i /><span>Clareza</span><i /><span>Contato</span><i /><span>Aprendizado</span>
-        </div>
-        <Source>Evidência: reação relatada por Priscilla na reunião preliminar. Resultado comercial ainda não medido.</Source>
       </section>,
 
       <section className={styles.slide} aria-labelledby="product-title" key="product">
@@ -148,16 +145,28 @@ export function ProposalDeck() {
       </section>,
 
       <section className={styles.slide} aria-labelledby="matrix-title" key="matrix">
-        <p className={styles.kicker}>Uma distinção necessária</p>
-        <h2 id="matrix-title">Nível de dança não é nível de consciência.</h2>
-        <div className={styles.matrix} role="table" aria-label="Relação entre nível de dança e consciência de compra">
-          <div className={styles.matrixCorner} />
-          <div role="columnheader">Problema</div><div role="columnheader">Solução</div><div role="columnheader">Priscilla</div><div role="columnheader">Agendamento</div>
-          <div role="rowheader">Nunca dançou</div><span /><span /><span /><span />
-          <div role="rowheader">Já dança</div><span /><span /><span /><span />
-          <div role="rowheader">Busca Roots</div><span /><span /><span /><span />
+        <p className={styles.kicker}>A comunicação muda com o objetivo</p>
+        <h2 id="matrix-title">Três públicos. Três conversas mais claras.</h2>
+        <div className={styles.audiencePaths}>
+          <article>
+            <span>Quem nunca dançou</span>
+            <strong>Quer segurança para começar.</strong>
+            <p>Mostramos acolhimento, acompanhamento individual e primeiros passos.</p>
+            <b>V1 · Agendar aula</b>
+          </article>
+          <article>
+            <span>Quem já dança</span>
+            <strong>Quer mais fluidez e repertório.</strong>
+            <p>Falamos de musicalidade, conexão, movimentos e evolução.</p>
+            <b>V2 · Agendar aula</b>
+          </article>
+          <article>
+            <span>Quem busca Roots</span>
+            <strong>Quer aprofundar uma linguagem corporal.</strong>
+            <p>Destacamos jogo de pernas, tronco, quadril e identidade do Roots.</p>
+            <b>V3 · Agendar aula de Roots</b>
+          </article>
         </div>
-        <p className={styles.matrixCaption}>Cada público pode aparecer em diferentes pontos da decisão. As páginas segmentam a necessidade; a comunicação conduz a consciência.</p>
       </section>,
 
       <section className={styles.slide} aria-labelledby="messages-title" key="messages">
@@ -211,25 +220,21 @@ export function ProposalDeck() {
           <div><span>Descoberta</span><strong>Conteúdo e indicação</strong><small>Contato inicial</small></div>
           <div><span>Primeira experiência</span><strong>Aula individual</strong><small>R$ 120</small></div>
           <div><span>Continuidade</span><strong>Pacote de 4 aulas</strong><small>R$ 440</small></div>
-          <div className={styles.hypothesis}><span>Hipóteses futuras</span><strong>Roots, intensivos ou novas ofertas</strong><small>A validar</small></div>
+          <div className={styles.hypothesis}><span>Aprofundamento</span><strong>Aulas de Roots</strong><small>Oferta já disponível</small></div>
         </div>
-        <Source>Referência: Value Ladder, Russell Brunson. Os degraus futuros são hipóteses; as aulas e o pacote foram informados por Antônio.</Source>
+        <Source>Referência: Value Ladder, Russell Brunson. A escada organiza as formas atuais de conhecer e continuar o trabalho com Priscilla.</Source>
       </section>,
 
       <section className={styles.slide} aria-labelledby="measurement-title" key="measurement">
         <p className={styles.kicker}>O ciclo de aprendizagem</p>
-        <h2 id="measurement-title">Clique mostra interesse. Aula confirma resultado.</h2>
+        <h2 id="measurement-title">O site mostra interesse. A agenda mostra resultado.</h2>
         <div className={styles.measurementLoop}>
-          <div><strong>Visita</strong><span>Origem quando identificável</span></div>
-          <div><strong>WhatsApp</strong><span>Clique registrado</span></div>
-          <div><strong>Conversa</strong><span>Contato recebido</span></div>
-          <div><strong>Agendamento</strong><span>Horário confirmado</span></div>
-          <div><strong>Aula</strong><span>Realizada ou paga</span></div>
+          <div><b>01</b><strong>Visita</strong><span>Por onde a pessoa chegou.</span></div>
+          <div><b>02</b><strong>Interesse</strong><span>Qual página e chamada despertaram ação.</span></div>
+          <div><b>03</b><strong>Agendamento</strong><span>Quem marcou um horário pelo WhatsApp.</span></div>
+          <div><b>04</b><strong>Aula</strong><span>Quem realmente compareceu ou pagou.</span></div>
         </div>
-        <div className={styles.evidencePair}>
-          <p><b>Já existe</b><span>Eventos preparados no código com consentimento.</span></p>
-          <p><b>A configurar</b><span>Analytics, links de origem e registro simples do atendimento.</span></p>
-        </div>
+        <p className={styles.measurementSummary}>Assim descobrimos quais mensagens trazem conversas e quais conversas realmente viram alunas.</p>
       </section>,
 
       <section className={styles.slide} aria-labelledby="performance-title" key="performance">
@@ -237,23 +242,23 @@ export function ProposalDeck() {
         <div className={styles.performanceGrid}>
           <div>
             <h2 id="performance-title">Velocidade preserva a atenção conquistada.</h2>
-            <p>Hospedagem participa do resultado. Código, imagens, fontes, CDN, rede e dispositivo também.</p>
+            <p>Se a página demora para aparecer, parte das pessoas desiste antes mesmo de conhecer as aulas.</p>
           </div>
-          <div className={styles.metric}><strong>≤ 2,5 s</strong><span>LCP considerado bom no percentil 75, separado entre celular e computador.</span></div>
+          <div className={styles.metric}><strong>até 2,5 s</strong><span>Referência de uma boa experiência para o carregamento principal da página.</span></div>
         </div>
-        <div className={styles.performanceEvidence}><span>Layout responsivo</span><span>Imagens WebP</span><span>Build otimizado</span><span>Medição em campo</span></div>
-        <Source>Fonte técnica: web.dev, Largest Contentful Paint. A meta deve ser verificada após a publicação.</Source>
+        <div className={styles.performanceEvidence}><span><b>Imagens leves</b> para abrir mais rápido</span><span><b>Fontes locais</b> sem espera desnecessária</span><span><b>Hospedagem adequada</b> para manter estabilidade</span></div>
+        <Source>Referência: web.dev. A velocidade real será conferida depois da publicação, em celular e computador.</Source>
       </section>,
 
       <section className={styles.slide} aria-labelledby="evidence-title" key="evidence">
         <p className={styles.kicker}>O que é prova hoje</p>
-        <h2 id="evidence-title">A proposta separa implementado, pendente e hipótese.</h2>
+        <h2 id="evidence-title">O que já está pronto e o que vem a seguir.</h2>
         <div className={styles.statusTable}>
-          <div><b>Implementado</b><span>Identidade aplicada</span><span>3 landings</span><span>Mobile e desktop</span><span>CTAs contextuais</span></div>
-          <div><b>A configurar</b><span>Coleta analítica</span><span>Links de origem</span><span>Página de links</span><span>Publicação final</span></div>
-          <div><b>A validar</b><span>Prioridade das aulas</span><span>Capacidade mensal</span><span>Elegibilidade no Google</span><span>Ofertas futuras</span></div>
+          <div><b>Já construído</b><ul><li>Identidade aplicada</li><li>Três páginas de venda</li><li>Versões para celular e computador</li><li>Chamadas específicas para cada aula</li></ul></div>
+          <div><b>Próxima configuração</b><ul><li>Medição das visitas e cliques</li><li>Links identificando a origem</li><li>Página com links úteis</li><li>Publicação no endereço definitivo</li></ul></div>
+          <div><b>Decisões com Priscilla</b><ul><li>Quais aulas priorizar</li><li>Quantas alunas consegue atender</li><li>Como organizar os contatos</li><li>Quais evoluções vêm depois</li></ul></div>
         </div>
-        <p className={styles.evidenceRule}>Sem depoimentos inventados. Sem números de conversão antes de medir. Sem prometer escala além da agenda.</p>
+        <p className={styles.evidenceRule}>A estratégia cresce de acordo com a capacidade real de atendimento.</p>
       </section>,
 
       <section className={styles.slide} aria-labelledby="partnership-title" key="partnership">
@@ -298,23 +303,6 @@ export function ProposalDeck() {
         <Source>Domínio, hospedagem e ferramentas pagas são aprovados antes e permanecem no nome de Priscilla.</Source>
       </section>,
 
-      <section className={`${styles.slide} ${styles.closing}`} aria-labelledby="closing-title" key="closing">
-        <div>
-          <p className={styles.kicker}>Próxima decisão</p>
-          <h2 id="closing-title">Essa estrutura representa o que você precisa agora?</h2>
-          <p className={styles.closingQuestion}>O que precisa ser ajustado para a parceria fazer sentido para nós dois?</p>
-        </div>
-        <div className={styles.closingChecklist}>
-          <span>Prioridades e capacidade</span>
-          <span>Escopo inicial</span>
-          <span>Equivalência em aulas</span>
-          <span>Responsáveis e data</span>
-        </div>
-        <div className={styles.references}>
-          <p><b>Referências</b> Eugene M. Schwartz, <em>Breakthrough Advertising</em>. Russell Brunson, <em>DotCom Secrets</em> e <a href="https://www.clickfunnels.com/blog/sales-funnel/" target="_blank" rel="noreferrer">Value Ladder</a>. <a href="https://web.dev/articles/lcp" target="_blank" rel="noreferrer">web.dev, Core Web Vitals</a>.</p>
-          <p>Modelos usados para organizar hipóteses e decisões. Nenhum deles constitui garantia de resultado.</p>
-        </div>
-      </section>,
     ],
     [],
   );
