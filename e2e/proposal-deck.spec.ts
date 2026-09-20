@@ -15,7 +15,7 @@ test("keeps the proposal in 16:9 and navigates through all screens", async ({ pa
   await expect(previous).toBeDisabled();
 
   await next.click();
-  await expect(page.locator("p[aria-live=polite]")).toContainText("Tela 2 de 14");
+  await expect(page.locator("p[aria-live=polite]")).toContainText("Tela 2 de 15");
   await page.keyboard.press("End");
   await expect(next).toBeDisabled();
 

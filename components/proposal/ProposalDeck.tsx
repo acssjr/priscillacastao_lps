@@ -18,7 +18,8 @@ const slideMeta = [
   "Medição",
   "Performance",
   "Evidências",
-  "Parceria",
+  "Valor comparável",
+  "Proposta",
   "Decisão",
 ] as const;
 
@@ -88,11 +89,11 @@ export function ProposalDeck() {
   const slides = useMemo(
     () => [
       <section className={`${styles.slide} ${styles.cover}`} aria-labelledby="proposal-cover" key="cover">
-        <div className={styles.coverMark} aria-hidden="true">PC</div>
+        <div className={styles.coverMark} aria-hidden="true"><span>PC</span></div>
         <div className={styles.coverCopy}>
-          <p className={styles.kicker}>Proposta de parceria</p>
-          <h1 id="proposal-cover" aria-label="Da descoberta ao agendamento.">Da descoberta<br />ao agendamento.</h1>
-          <p className={styles.lead}>Uma estrutura digital para explicar as aulas, organizar caminhos e aprender com cada contato.</p>
+          <p className={styles.kicker}>Proposta estratégica · 2026</p>
+          <h1 id="proposal-cover" aria-label="Da descoberta ao agendamento.">Da descoberta<br /><em>ao agendamento.</em></h1>
+          <p className={styles.lead}>Produto digital, posicionamento e medição para transformar interesse em aulas.</p>
         </div>
         <div className={styles.coverFooter}>
           <strong>Antônio Júnior</strong>
@@ -256,14 +257,45 @@ export function ProposalDeck() {
       </section>,
 
       <section className={styles.slide} aria-labelledby="partnership-title" key="partnership">
-        <p className={styles.kicker}>Hipótese de parceria</p>
-        <h2 id="partnership-title">Valor e escopo precisam permanecer equilibrados.</h2>
-        <div className={styles.offerGrid}>
-          <article><span>Implantação</span><strong>R$ 1.320</strong><p>Equivalente a 12 aulas pelo valor do pacote.</p><small>Hipótese para negociação</small></article>
-          <article><span>Suporte essencial</span><strong>R$ 220/mês</strong><p>Duas aulas. Correções e uma pequena atualização.</p><small>Escopo reduzido</small></article>
-          <article className={styles.offerFocus}><span>Acompanhamento do produto</span><strong>R$ 440/mês</strong><p>Quatro aulas. Até 4 horas, análise e pequenas evoluções.</p><small>Recorrência recomendada</small></article>
+        <p className={styles.kicker}>Antes do preço, o valor comparável</p>
+        <h2 id="partnership-title">Quanto custaria montar essas partes separadamente?</h2>
+        <div className={styles.marketStack}>
+          <div><span>Landing personalizada, responsiva e orientada à conversão</span><strong>R$ 1.500</strong></div>
+          <div><span>Identidade visual aplicada: monograma, cor e tipografia</span><strong>R$ 800</strong></div>
+          <div><span>Pesquisa, estratégia, arquitetura e copy das 3 mensagens</span><strong>R$ 600</strong></div>
+          <div><span>Tracking, eventos e preparação para análise</span><strong>R$ 400</strong></div>
+          <div><span>Página de links + configuração do Perfil da Empresa</span><strong>R$ 350</strong></div>
+          <div className={styles.marketTotal}><span>Referência de contratação avulsa</span><strong>R$ 3.650</strong></div>
         </div>
-        <Source>Domínio, hospedagem e ferramentas ficam separados, aprovados e no nome de Priscilla.</Source>
+        <Source>Referências públicas consultadas em 2026: <a href="https://duopus.com.br/blog/quanto-custa-landing-page" target="_blank" rel="noreferrer">landing pages de R$ 800 a R$ 4.000 entre freelancer e agência</a>; <a href="https://vitoracdesign.com.br/blog/2026/05/30/quanto-custa-identidade-visual-2026/" target="_blank" rel="noreferrer">identidade visual a partir de R$ 800</a>. Os demais itens são estimativas de escopo, não cotações de terceiros.</Source>
+      </section>,
+
+      <section className={`${styles.slide} ${styles.offerReveal}`} aria-labelledby="offer-title" key="offer">
+        <div className={styles.offerHalo} aria-hidden="true" />
+        <p className={styles.kicker}>Condição desta parceria</p>
+        <div className={styles.offerRevealGrid}>
+          <div>
+            <h2 id="offer-title">Implementar o sistema completo.</h2>
+            <ul>
+              <li>Três landings para públicos e intenções diferentes</li>
+              <li>Identidade visual aplicada e experiência responsiva</li>
+              <li>Estratégia, copy, tracking e publicação</li>
+              <li>Página de links e apoio no Perfil da Empresa</li>
+            </ul>
+          </div>
+          <div className={styles.pricePanel}>
+            <span>Investimento de implantação</span>
+            <del>R$ 3.650</del>
+            <strong>R$ 997</strong>
+            <p>Valor único para colocar a estrutura em operação.</p>
+          </div>
+        </div>
+        <div className={styles.optionalCare}>
+          <span>Acompanhamento opcional</span>
+          <strong>R$ 440/mês</strong>
+          <p>Equivalente ao pacote de 4 aulas: análise, correções e pequenas evoluções dentro do limite combinado.</p>
+        </div>
+        <Source>Domínio, hospedagem e ferramentas pagas são aprovados antes e permanecem no nome de Priscilla.</Source>
       </section>,
 
       <section className={`${styles.slide} ${styles.closing}`} aria-labelledby="closing-title" key="closing">
@@ -290,6 +322,13 @@ export function ProposalDeck() {
   return (
     <main id="conteudo" className={styles.page}>
       <div className={styles.stage}>
+        <div className={styles.atmosphere} aria-hidden="true">
+          <span className={styles.auroraOne} />
+          <span className={styles.auroraTwo} />
+          <span className={styles.auroraThree} />
+          <span className={styles.gridTexture} />
+          <span className={styles.grainTexture} />
+        </div>
         <div
           key={`${index}-${motionKey}`}
           className={`${styles.slideMotion} ${instant ? styles.instant : ""}`}
@@ -298,7 +337,7 @@ export function ProposalDeck() {
           {slides[index]}
         </div>
 
-        <div className={`${styles.chrome} ${index === 7 || index === 13 ? styles.chromeDark : ""}`}>
+        <div className={styles.chrome}>
           <div className={styles.progress} aria-hidden="true">
             <span style={{ transform: `scaleX(${(index + 1) / total})` }} />
           </div>
@@ -310,6 +349,23 @@ export function ProposalDeck() {
             <button type="button" onClick={() => move(1)} disabled={index === total - 1} aria-label="Avançar para a próxima tela">
               <ArrowIcon direction="right" />
             </button>
+          </div>
+          <div className={styles.dotNav} aria-label="Navegação da apresentação">
+            {slideMeta.map((label, slideIndex) => (
+              <button
+                key={label}
+                type="button"
+                className={slideIndex === index ? styles.dotActive : ""}
+                onClick={() => {
+                  setDirection(slideIndex > index ? "next" : "previous");
+                  setInstant(false);
+                  setIndex(slideIndex);
+                  setMotionKey((current) => current + 1);
+                }}
+                aria-label={`Ir para a tela ${slideIndex + 1}: ${label}`}
+                aria-current={slideIndex === index ? "step" : undefined}
+              />
+            ))}
           </div>
         </div>
         <p className={styles.srOnly} aria-live="polite">Tela {index + 1} de {total}: {slideMeta[index]}</p>
