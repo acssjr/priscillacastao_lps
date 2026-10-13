@@ -27,6 +27,9 @@ export function MotionLayer() {
       });
 
       root.querySelectorAll<HTMLElement>("[data-reveal='section']").forEach((section, index) => {
+        // A deep link may already be beyond the entrance trigger when this deferred layer loads.
+        // Keep those sections visible instead of creating a completed once-only trigger.
+        if (section.getBoundingClientRect().top < window.innerHeight * 0.84) return;
         gsap.timeline({
           defaults: { ease: "power3.out" },
           scrollTrigger: { trigger: section, start: "clamp(top 84%)", once: true, refreshPriority: index + 1 },
@@ -36,6 +39,7 @@ export function MotionLayer() {
       });
 
       root.querySelectorAll<HTMLElement>("[data-stagger-group]").forEach((group, index) => {
+        if (group.getBoundingClientRect().top < window.innerHeight * 0.86) return;
         gsap.from(group.children, {
           autoAlpha: 0,
           y: 38,
@@ -124,7 +128,7 @@ export function MotionLayer() {
       });
 
       const closing = root.querySelector("[data-reveal='closing']");
-      if (closing) {
+      if (closing && closing.getBoundingClientRect().top >= window.innerHeight * 0.78) {
         gsap.timeline({ scrollTrigger: { trigger: closing, start: "clamp(top 78%)", once: true } })
           .from(closing.children, { autoAlpha: 0, y: 32, scale: 0.98, duration: 0.7, stagger: 0.1, ease: "power3.out" });
       }

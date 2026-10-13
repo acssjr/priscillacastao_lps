@@ -1,14 +1,17 @@
 "use client";
+import { CmsText, useVisualEditing } from "@/components/cms/edit-context";
 
 import { useEffect, useRef, type DetailsHTMLAttributes, type MouseEvent, type ReactNode } from "react";
 import { trackEvent } from "@/lib/analytics";
 
 type Props = Omit<DetailsHTMLAttributes<HTMLDetailsElement>, "onToggle"> & {
   question: string;
+  cmsField?: string;
   children: ReactNode;
 };
 
-export function TrackedDetails({ question, children, ...props }: Props) {
+export function TrackedDetails({ question, cmsField, children, ...props }: Props) {
+  const editing = useVisualEditing();
   const detailsRef = useRef<HTMLDetailsElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<Animation | null>(null);
@@ -55,6 +58,7 @@ export function TrackedDetails({ question, children, ...props }: Props) {
     };
   };
 
+  if (editing?.enabled && cmsField) return <div className="cms-faq-item"><div className="cms-faq-question"><CmsText field={cmsField} value={question} /></div><div data-faq-panel><div>{children}</div></div></div>;
   return (
     <details
       {...props}
@@ -64,7 +68,7 @@ export function TrackedDetails({ question, children, ...props }: Props) {
       }}
     >
       <summary onClick={handleSummaryClick}>
-        <span>{question}</span>
+        <span>{cmsField ? <CmsText field={cmsField} value={question} /> : question}</span>
         <span aria-hidden="true" data-faq-indicator>+</span>
       </summary>
       <div ref={panelRef} data-faq-panel>

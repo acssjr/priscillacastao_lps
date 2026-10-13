@@ -1,3 +1,4 @@
+import { CmsText } from "@/components/cms/edit-context";
 import type { LandingCampaign } from "@/content/landing-pages/schema";
 import { TrackedDetails } from "@/components/ui/TrackedDetails";
 import styles from "./landing.module.css";
@@ -18,12 +19,12 @@ export function ProcessFaq({ process, faq }: Props) {
     <>
       <section className={styles.process} id="como-comecar" aria-labelledby="process-title">
         <div className={styles.sectionHeading} data-reveal="section">
-          <p className={styles.eyebrow}>{process.eyebrow}</p>
-          <h2 id="process-title">{process.title}</h2>
+          <p className={styles.eyebrow}><CmsText field="process.eyebrow" value={process.eyebrow} /></p>
+          <h2 id="process-title"><CmsText field="process.title" value={process.title} /></h2>
         </div>
         <ol className={styles.processSteps} data-stagger-group>
           {process.steps.map((step, index) => (
-            <li key={step.title} data-process-step>
+            <li key={index} data-process-step>
               <div className={styles.processStepTop}>
                 <span className={styles.processIcon} data-process-icon aria-hidden="true">
                   <svg viewBox="0 0 24 24">{stepIcons[index]}</svg>
@@ -31,8 +32,8 @@ export function ProcessFaq({ process, faq }: Props) {
                 <span className={styles.processStepLabel}>Passo {index + 1}</span>
               </div>
               <div className={styles.processStepContent} data-process-content>
-                <h3>{step.title}</h3>
-                <p>{step.body}</p>
+                <h3><CmsText field={`process.steps.${index}.title`} value={step.title} /></h3>
+                <p><CmsText field={`process.steps.${index}.body`} value={step.body} /></p>
               </div>
             </li>
           ))}
@@ -40,13 +41,13 @@ export function ProcessFaq({ process, faq }: Props) {
       </section>
       <section className={styles.faq} id="duvidas" aria-labelledby="faq-title">
         <div className={styles.sectionHeading} data-reveal="section">
-          <p className={styles.eyebrow}>{faq.eyebrow}</p>
-          <h2 id="faq-title">{faq.title}</h2>
+          <p className={styles.eyebrow}><CmsText field="faq.eyebrow" value={faq.eyebrow} /></p>
+          <h2 id="faq-title"><CmsText field="faq.title" value={faq.title} /></h2>
         </div>
         <div className={styles.faqList} data-stagger-group>
-          {faq.items.map((item) => (
-            <TrackedDetails question={item.question} key={item.question}>
-              <p>{item.answer}</p>
+          {faq.items.map((item, index) => (
+            <TrackedDetails question={item.question} cmsField={`faq.items.${index}.question`} key={index}>
+              <p><CmsText field={`faq.items.${index}.answer`} value={item.answer} /></p>
             </TrackedDetails>
           ))}
         </div>

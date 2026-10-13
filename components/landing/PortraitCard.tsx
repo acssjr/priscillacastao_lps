@@ -7,10 +7,12 @@ type PortraitAsset = {
   alt: string;
   width: number;
   height: number;
+  position?: string;
 };
 
 type PortraitCardProps = Omit<HTMLAttributes<HTMLDivElement>, "children"> & {
   image: PortraitAsset;
+  cmsField?: string;
   sizes: string;
   variant: "hero" | "method" | "proof" | "about";
   priority?: boolean;
@@ -24,6 +26,7 @@ type PortraitCardProps = Omit<HTMLAttributes<HTMLDivElement>, "children"> & {
 
 export function PortraitCard({
   image,
+  cmsField,
   sizes,
   variant,
   priority = false,
@@ -49,10 +52,12 @@ export function PortraitCard({
       <div className={styles.portraitCardMedia}>
         <Image
           className={styles.portraitCardImage}
+          data-cms-image={cmsField}
           src={image.src}
           alt={image.alt}
           width={image.width}
           height={image.height}
+          style={image.position ? { objectPosition: image.position } : undefined}
           sizes={sizes}
           fetchPriority={priority ? "high" : undefined}
           loading={priority ? "eager" : undefined}

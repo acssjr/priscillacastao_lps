@@ -1,0 +1,34 @@
+html[data-visual-editor] { animation:none!important; overflow:auto!important; }
+html[data-visual-editor] [data-landing-intro],html[data-visual-editor] [class*="customCursor"] { display:none!important; }
+html[data-visual-editor] [data-landing-brand] { animation:none!important; }
+html[data-visual-editor] *,html[data-visual-editor] a,html[data-visual-editor] button { cursor:auto!important; }
+html[data-visual-editor] [data-cms-field] { outline:2px solid transparent; outline-offset:4px; border-radius:3px; transition:outline-color 125ms; }
+html[data-visual-editor] [data-cms-field]:hover { outline-color:#64121f80; cursor:pointer!important; }
+html[data-visual-editor] [data-cms-selected="true"],html[data-visual-editor] [data-cms-field]:focus { outline-color:#64121f; background-color:#64121f12; }
+html[data-visual-editor] [contenteditable] { cursor:text!important; min-width:1ch; }
+html[data-visual-editor] [data-editorial-carousel-track] { transform:none!important; animation:none!important; }
+html[data-visual-editor] [data-care-pillar] { opacity:1!important; visibility:visible!important; transform:none!important; }
+html[data-visual-editor] section,html[data-visual-editor] [data-cms-field] { scroll-margin-top:110px; }
+.cms-photo-action { position:fixed; z-index:9700; display:inline-flex; align-items:center; padding:11px 17px; min-height:44px; border:1px solid #fff9f180; border-radius:24px; background:#fff9f1ee; color:#342522; box-shadow:0 4px 20px #34252226; backdrop-filter:blur(10px); font-size:14px; font-weight:600; cursor:pointer!important; }
+.cms-photo-action:focus-visible { outline:3px solid #64121f; outline-offset:3px; }
+.cms-photo-action { transform-origin:top left; transform:scale(var(--cms-action-scale,1)) translateY(-100%); }
+
+html[data-visual-editor] [data-cms-field]:focus-visible { outline:3px solid #ae6664; outline-offset:4px; }
+html[data-visual-editor] [data-cms-image] { cursor:pointer!important; }
+html[data-visual-editor] [data-cms-image]:hover { outline:2px solid #ae6664; outline-offset:-2px; }
+html[data-visual-editor] [data-reveal],html[data-visual-editor] [data-scroll-fill] { opacity:1!important; visibility:visible!important; }
+html[data-visual-editor] [data-fill-overlay] { display:none!important; }
+html[data-visual-editor] [data-cms-field] { white-space:pre-wrap; }
+html[data-visual-editor] [class*="recognitionRail"] { animation:none!important; }
+html[data-visual-editor] [class*="recognitionRail"]>ul[aria-hidden=true] { display:none; }
+html[data-visual-editor] [class*="recognitionViewport"] { overflow:visible; }
+html[data-visual-editor] [class*="recognitionRail"] { width:auto; }
+html[data-visual-editor] [class*="recognitionBody"] { flex-wrap:wrap; }
+html[data-visual-editor] [class*="scrollFill"] { color:inherit!important; }
+html[data-visual-editor] [data-cms-field]::selection { background:#e8d4c6; color:#4b0d17; }
+html[data-visual-editor] [contenteditable] { caret-color:currentColor; }
+@media(prefers-reduced-motion:reduce) { html[data-visual-editor] [data-cms-field] { transition:none; } }
+
+html[data-visual-editor] .cms-faq-item { border-top:1px solid rgb(100 18 31 / 28%); }
+html[data-visual-editor] .cms-faq-item:last-child { border-bottom:1px solid rgb(100 18 31 / 28%); }
+html[data-visual-editor] .cms-faq-question { display:flex; align-items:center; min-height:3.5rem; padding:var(--space-4) 0; color:var(--brand-dark); font-weight:800; }

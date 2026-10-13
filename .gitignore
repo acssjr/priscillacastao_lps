@@ -19,3 +19,6 @@ assets/instagram/**/webp/
 assets/brand/
 *.json.xz
 .vercel
+.cms/
+.next-admin/
+.impeccable/review/

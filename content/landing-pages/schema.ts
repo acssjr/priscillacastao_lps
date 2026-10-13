@@ -4,10 +4,11 @@ export const OfferKeySchema = z.enum(["individual", "dupla", "grupo-workshop"]);
 export type OfferKey = z.infer<typeof OfferKeySchema>;
 
 const ImageSchema = z.object({
-  src: z.string().startsWith("/"),
+  src: z.string().regex(/^\/(?!\/)[a-zA-Z0-9/_.,%-]+$/),
   alt: z.string().min(8),
   width: z.number().int().positive(),
   height: z.number().int().positive(),
+  position: z.string().regex(/^\d{1,3}% \d{1,3}%$/).optional(),
 });
 
 const RichSectionSchema = z.object({
@@ -101,11 +102,11 @@ export const LandingCampaignSchema = z.object({
   faq: z.object({
     eyebrow: z.string().min(1),
     title: z.string().min(1),
-    items: z.array(z.object({ question: z.string().min(1), answer: z.string().min(1) })).min(5).max(8),
+    items: z.array(z.object({ question: z.string().min(1), answer: z.string().min(1) })).min(1).max(30),
   }),
   closing: RichSectionSchema.extend({ cta: z.string().min(2) }),
   whatsapp: z.object({
-    phone: z.literal("5575981234176"),
+    phone: z.string().regex(/^55\d{10,11}$/, "Informe o WhatsApp com 55, DDD e número."),
     messages: z.object({
       general: z.string().min(20),
       individual: z.string().min(20),
@@ -113,6 +114,7 @@ export const LandingCampaignSchema = z.object({
       "grupo-workshop": z.string().min(20),
     }),
   }),
+  instagram: z.string().url().refine(value => value.startsWith("https://"), "Use https://.").optional(),
 });
 
 export type LandingCampaign = z.infer<typeof LandingCampaignSchema>;

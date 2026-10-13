@@ -1,3 +1,4 @@
+import { CmsText } from "@/components/cms/edit-context";
 import type { LandingCampaign } from "@/content/landing-pages/schema";
 import { WhatsAppLink } from "@/components/ui/WhatsAppLink";
 import { PortraitCard } from "./PortraitCard";
@@ -22,26 +23,26 @@ export function Hero({ campaign }: { campaign: LandingCampaign }) {
 
       <div className={styles.heroStage}>
         <div className={styles.heroCopy}>
-          <p className={`${styles.eyebrow} ${styles.heroEyebrow}`}>{hero.eyebrow}</p>
+          <p className={`${styles.eyebrow} ${styles.heroEyebrow}`}><CmsText field="hero.eyebrow" value={hero.eyebrow} /></p>
 
           <h1 className={styles.heroTitle} id="hero-title" aria-label={hero.title}>
-            <span className={styles.heroTitleVisual} aria-hidden="true" data-hero-title-block>
-              {titleBefore}
+            <span className={styles.heroTitleVisual} data-hero-title-block>
+              <CmsText field="hero.title" value={hero.title} emphasis={{ phrase: hero.titleEmphasis, className: styles.heroTitleEmphasis }}>{titleBefore}
               <strong className={styles.heroTitleEmphasis} data-hero-emphasis>
                 {hero.titleEmphasis}
               </strong>
-              {titleAfter}
+              {titleAfter}</CmsText>
             </span>
           </h1>
 
           <div className={styles.heroActions} data-hero-actions>
-            {hero.body.map((paragraph) => (
-              <p className={styles.heroSubheadline} key={paragraph}>{paragraph}</p>
+            {hero.body.map((paragraph, index) => (
+              <p className={styles.heroSubheadline} key={index}><CmsText field={`hero.body.${index}`} value={paragraph} /></p>
             ))}
 
             <ul className={styles.heroProofPoints} aria-label="Diferenciais da aula">
-              {hero.proofPoints.map((point) => (
-                <li key={point}>{point}</li>
+              {hero.proofPoints.map((point, index) => (
+                <li key={index}><CmsText field={`hero.proofPoints.${index}`} value={point} /></li>
               ))}
             </ul>
 
@@ -54,10 +55,10 @@ export function Hero({ campaign }: { campaign: LandingCampaign }) {
               placement="hero"
               offer="individual"
             >
-              <span className={styles.primaryCtaLabel}>{hero.cta}</span>
+              <span className={styles.primaryCtaLabel}><CmsText field="hero.cta" value={hero.cta} /></span>
             </WhatsAppLink>
             <p className={styles.ctaNote} data-cta-note>
-              {hero.ctaNote.lead}, {hero.ctaNote.bridge} {hero.ctaNote.details}.
+              <CmsText field="hero.ctaNote.lead" value={hero.ctaNote.lead} />, <CmsText field="hero.ctaNote.bridge" value={hero.ctaNote.bridge} /> <CmsText field="hero.ctaNote.details" value={hero.ctaNote.details} />.
             </p>
           </div>
         </div>
@@ -67,6 +68,7 @@ export function Hero({ campaign }: { campaign: LandingCampaign }) {
           data-hero-portrait
           data-hero-portrait-card
           image={hero.image}
+          cmsField="hero.image"
           sizes="(max-width: 832px) 92vw, (max-width: 1088px) 46vw, 29rem"
           variant="hero"
           priority

@@ -14,7 +14,7 @@ import { SiteFooter } from "./SiteFooter";
 import { SiteHeader } from "./SiteHeader";
 import styles from "./landing.module.css";
 
-export function LandingPage({ campaign }: { campaign: LandingCampaign }) {
+export function LandingPage({ campaign, preview = false }: { campaign: LandingCampaign; preview?: boolean }) {
   return (
     <div className={styles.siteShell} data-motion-root>
       <SiteHeader campaign={campaign} />
@@ -32,7 +32,7 @@ export function LandingPage({ campaign }: { campaign: LandingCampaign }) {
       <SiteFooter campaign={campaign} />
       <MobileStickyCta campaign={campaign} />
       <OverlayScrollbar />
-      <MotionLoader />
+      {!preview && <MotionLoader />}
     </div>
   );
 }

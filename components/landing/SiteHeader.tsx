@@ -1,3 +1,4 @@
+import { CmsText } from "@/components/cms/edit-context";
 import type { LandingCampaign } from "@/content/landing-pages/schema";
 import { WhatsAppLink } from "@/components/ui/WhatsAppLink";
 import { MobileMenu } from "./MobileMenu";
@@ -11,10 +12,10 @@ export function SiteHeader({ campaign }: { campaign: LandingCampaign }) {
           <span className={styles.brandLogo} role="img" aria-label="Priscilla Castão" data-brand-color="#64121f" />
         </a>
         <nav className={styles.desktopNav} aria-label="Navegação principal">
-          {campaign.navigation.map((item) => <a href={item.target} key={item.target}>{item.label}</a>)}
+          {campaign.navigation.map((item, index) => <a href={item.target} key={item.target}><CmsText field={`navigation.${index}.label`} value={item.label} /></a>)}
         </nav>
         <WhatsAppLink glow className={styles.headerCta} phone={campaign.whatsapp.phone} message={campaign.whatsapp.messages.general} placement="header" offer="individual">
-          {campaign.ui.headerCta}
+          <CmsText field="ui.headerCta" value={campaign.ui.headerCta} />
         </WhatsAppLink>
         <MobileMenu campaign={campaign} />
       </div>

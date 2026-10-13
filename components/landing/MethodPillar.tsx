@@ -1,4 +1,5 @@
 "use client";
+import { CmsText, useVisualEditing } from "@/components/cms/edit-context";
 
 import { useEffect, useId, useRef, useState } from "react";
 import styles from "./landing.module.css";
@@ -6,9 +7,11 @@ import styles from "./landing.module.css";
 type MethodPillarProps = {
   title: string;
   body: string;
+  cmsField?: string;
 };
 
-export function MethodPillar({ title, body }: MethodPillarProps) {
+export function MethodPillar({ title, body, cmsField }: MethodPillarProps) {
+  const editing = useVisualEditing();
   const [open, setOpen] = useState(false);
   const [contentHeight, setContentHeight] = useState(0);
   const contentId = useId();
@@ -29,6 +32,7 @@ export function MethodPillar({ title, body }: MethodPillarProps) {
     return () => observer.disconnect();
   }, []);
 
+  if (editing?.enabled && cmsField) return <li data-open="true"><div className={styles.pillarButton}><h3><CmsText field={`${cmsField}.title`} value={title} /></h3></div><div className={styles.pillarContent} style={{height:"auto"}}><div className={styles.pillarContentInner}><p><CmsText field={`${cmsField}.body`} value={body} /></p></div></div></li>;
   return (
     <li data-open={open}>
       <button
@@ -39,7 +43,7 @@ export function MethodPillar({ title, body }: MethodPillarProps) {
         aria-controls={contentId}
         onClick={() => setOpen((current) => !current)}
       >
-        <h3>{title}</h3>
+        <h3>{cmsField ? <CmsText field={`${cmsField}.title`} value={title} /> : title}</h3>
         <span className={styles.pillarIndicator} aria-hidden="true" />
       </button>
       <div
@@ -51,7 +55,7 @@ export function MethodPillar({ title, body }: MethodPillarProps) {
         style={{ height: open ? `${contentHeight}px` : "0px" }}
       >
         <div ref={innerRef} className={styles.pillarContentInner}>
-          <p>{body}</p>
+          <p>{cmsField ? <CmsText field={`${cmsField}.body`} value={body} /> : body}</p>
         </div>
       </div>
     </li>

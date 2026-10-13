@@ -1,4 +1,5 @@
 "use client";
+import { CmsText } from "@/components/cms/edit-context";
 
 import { useEffect, useState } from "react";
 import type { LandingCampaign } from "@/content/landing-pages/schema";
@@ -35,8 +36,8 @@ export function MobileStickyCta({ campaign }: { campaign: LandingCampaign }) {
       aria-hidden={!visible}
     >
       <span className={styles.mobileStickyCopy}>
-        <strong>{campaign.ui.sticky.title}</strong>
-        <small>{campaign.ui.sticky.note}</small>
+        <strong><CmsText field="ui.sticky.title" value={campaign.ui.sticky.title} /></strong>
+        <small><CmsText field="ui.sticky.note" value={campaign.ui.sticky.note} /></small>
       </span>
       <WhatsAppLink
         aria-label={campaign.ui.sticky.ariaLabel}
@@ -48,8 +49,8 @@ export function MobileStickyCta({ campaign }: { campaign: LandingCampaign }) {
         offer="individual"
         tabIndex={visible ? 0 : -1}
       >
-        <span className={styles.mobileStickyLabelMobile} aria-hidden="true">{campaign.ui.sticky.mobileLabel}</span>
-        <span className={styles.mobileStickyLabelDesktop} aria-hidden="true">{campaign.ui.sticky.desktopLabel}</span>
+        <span className={styles.mobileStickyLabelMobile}><CmsText field="ui.sticky.mobileLabel" value={campaign.ui.sticky.mobileLabel} /></span>
+        <span className={styles.mobileStickyLabelDesktop}><CmsText field="ui.sticky.desktopLabel" value={campaign.ui.sticky.desktopLabel} /></span>
       </WhatsAppLink>
     </aside>
   );

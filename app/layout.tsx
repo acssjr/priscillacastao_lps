@@ -8,6 +8,7 @@ const sans = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-sans", di
 const editorial = Newsreader({ subsets: ["latin"], variable: "--font-editorial", display: "swap" });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3002"),
   title: "Priscilla Castão | Aulas particulares de forró em Salvador",
   description: "Aulas particulares de forró com Priscilla Castão em Salvador.",
   applicationName: "Priscilla Castão",
@@ -33,7 +34,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="pt-BR" className={`${sans.variable} ${editorial.variable}`}>
+    <html lang="pt-BR" data-scroll-behavior="smooth" className={`${sans.variable} ${editorial.variable}`}>
       <body>
         <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
         <PageTransition />

@@ -1,4 +1,6 @@
 "use client";
+import { CmsText } from "@/components/cms/edit-context";
+import { useVisualEditing } from "@/components/cms/edit-context";
 
 import { useEffect, useRef, useState, type FocusEvent, type PointerEvent } from "react";
 import type { LandingCampaign } from "@/content/landing-pages/schema";
@@ -8,6 +10,7 @@ type Slides = LandingCampaign["proof"]["slides"];
 const autoplayDelay = 5_000;
 
 export function BenefitCarousel({ slides }: { slides: Slides }) {
+  const editing = useVisualEditing();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const pointerStart = useRef<number | null>(null);
@@ -19,14 +22,14 @@ export function BenefitCarousel({ slides }: { slides: Slides }) {
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
-    if (total < 2 || isPaused || prefersReducedMotion) return;
+    if (total < 2 || isPaused || prefersReducedMotion || editing?.enabled) return;
 
     const timeout = window.setTimeout(() => {
       setActiveIndex((current) => (current + 1) % total);
     }, autoplayDelay);
 
     return () => window.clearTimeout(timeout);
-  }, [activeIndex, isPaused, total]);
+  }, [activeIndex, isPaused, total, editing?.enabled]);
 
   const handleBlur = (event: FocusEvent<HTMLDivElement>) => {
     if (!event.currentTarget.contains(event.relatedTarget)) setIsPaused(false);
@@ -67,9 +70,9 @@ export function BenefitCarousel({ slides }: { slides: Slides }) {
           style={{ transform: `translateX(-${activeIndex * 100}%)` }}
         >
           {slides.map((slide, index) => (
-            <article key={slide.title} aria-hidden={index !== activeIndex} data-benefit-slide>
-              <h3>{slide.title}</h3>
-              <p>{slide.body}</p>
+            <article key={index} aria-hidden={index !== activeIndex} data-benefit-slide>
+              <h3><CmsText field={`proof.slides.${index}.title`} value={slide.title} /></h3>
+              <p><CmsText field={`proof.slides.${index}.body`} value={slide.body} /></p>
             </article>
           ))}
         </div>
@@ -85,7 +88,7 @@ export function BenefitCarousel({ slides }: { slides: Slides }) {
           {slides.map((slide, index) => (
             <button
               type="button"
-              key={slide.title}
+              key={index}
               aria-label={`Ir para benefício ${index + 1}`}
               aria-current={index === activeIndex ? "true" : undefined}
               onClick={() => show(index)}

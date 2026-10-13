@@ -1,4 +1,5 @@
 "use client";
+import { CmsText } from "@/components/cms/edit-context";
 
 import { useEffect, useRef, useState } from "react";
 import { Dialog } from "@base-ui/react/dialog";
@@ -59,7 +60,7 @@ export function MobileMenu({ campaign }: { campaign: LandingCampaign }) {
                   setOpen(false);
                 }}>
                   <small aria-hidden="true">{String(index + 1).padStart(2, "0")}</small>
-                  <span>{item.label}</span>
+                  <span><CmsText field={`navigation.${index}.label`} value={item.label} /></span>
                 </a>
               ))}
             </nav>
@@ -71,7 +72,7 @@ export function MobileMenu({ campaign }: { campaign: LandingCampaign }) {
               placement="mobile_menu"
               offer="individual"
             >
-              {campaign.ui.mobileMenuCta}
+              <CmsText field="ui.mobileMenuCta" value={campaign.ui.mobileMenuCta} />
             </WhatsAppLink>
           </Dialog.Popup>
         </Dialog.Viewport>

@@ -1,0 +1,361 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-13T20:47:26.613709Z",
+  "title": "Design System: Priscilla Castão",
+  "extensions": {
+    "colorMeta": {
+      "brand-primary": {
+        "role": "primary",
+        "displayName": "Vinho principal"
+      },
+      "brand-dark": {
+        "role": "primary",
+        "displayName": "Vinho escuro"
+      },
+      "brand-mid": {
+        "role": "primary",
+        "displayName": "Vinho médio"
+      },
+      "brand-soft": {
+        "role": "primary",
+        "displayName": "Vinho suave"
+      },
+      "surface-cream": {
+        "role": "neutral",
+        "displayName": "Creme"
+      },
+      "surface-paper": {
+        "role": "neutral",
+        "displayName": "Papel"
+      },
+      "ink-warm": {
+        "role": "neutral",
+        "displayName": "Tinta quente"
+      },
+      "on-dark": {
+        "role": "neutral",
+        "displayName": "Papel sobre vinho"
+      },
+      "panel-paper": {
+        "role": "neutral",
+        "displayName": "Papel do painel"
+      },
+      "panel-line": {
+        "role": "neutral",
+        "displayName": "Linha do painel"
+      },
+      "panel-muted": {
+        "role": "neutral",
+        "displayName": "Texto secundário do painel"
+      },
+      "admin-sidebar": {
+        "role": "neutral",
+        "displayName": "Lateral de gestão",
+        "purpose": "Vocabulário operacional local; preserva a paleta pública."
+      },
+      "admin-nav-selected": {
+        "role": "neutral",
+        "displayName": "Seleção da navegação",
+        "purpose": "Vocabulário operacional local; preserva a paleta pública."
+      },
+      "editor-paper": {
+        "role": "neutral",
+        "displayName": "Papel do editor visual",
+        "purpose": "Vocabulário operacional local; preserva a paleta pública."
+      },
+      "editor-line": {
+        "role": "neutral",
+        "displayName": "Contorno do editor visual",
+        "purpose": "Vocabulário operacional local; preserva a paleta pública."
+      },
+      "editor-canvas": {
+        "role": "neutral",
+        "displayName": "Base do canvas",
+        "purpose": "Vocabulário operacional local; preserva a paleta pública."
+      },
+      "editor-caption": {
+        "role": "neutral",
+        "displayName": "Legenda do canvas",
+        "purpose": "Vocabulário operacional local; preserva a paleta pública."
+      },
+      "editor-muted": {
+        "role": "neutral",
+        "displayName": "Orientação do editor",
+        "purpose": "Vocabulário operacional local; preserva a paleta pública."
+      },
+      "editor-selection": {
+        "role": "neutral",
+        "displayName": "Campo selecionado",
+        "purpose": "Vocabulário operacional local; preserva a paleta pública."
+      },
+      "admin-scrollbar": {
+        "role": "neutral",
+        "displayName": "Trilha de rolagem",
+        "purpose": "Vocabulário operacional local; preserva a paleta pública."
+      },
+      "access-background": {
+        "role": "neutral",
+        "displayName": "Fundo de acesso",
+        "purpose": "Vocabulário operacional local; preserva a paleta pública."
+      },
+      "progress-track": {
+        "role": "neutral",
+        "displayName": "Trilha de progresso",
+        "purpose": "Vocabulário operacional local; preserva a paleta pública."
+      },
+      "publication-accent": {
+        "role": "secondary",
+        "displayName": "Terracota de publicação",
+        "purpose": "Vocabulário operacional local; preserva a paleta pública."
+      },
+      "publication-accent-hover": {
+        "role": "secondary",
+        "displayName": "Terracota em hover",
+        "purpose": "Vocabulário operacional local; preserva a paleta pública."
+      },
+      "publication-success": {
+        "role": "secondary",
+        "displayName": "Confirmação concluída",
+        "purpose": "Vocabulário operacional local; preserva a paleta pública."
+      },
+      "publication-success-surface": {
+        "role": "neutral",
+        "displayName": "Fundo de confirmação",
+        "purpose": "Vocabulário operacional local; preserva a paleta pública."
+      },
+      "photo-background": {
+        "role": "neutral",
+        "displayName": "Base de enquadramento",
+        "purpose": "Vocabulário operacional local; preserva a paleta pública."
+      }
+    },
+    "typographyMeta": {
+      "admin-body": {
+        "displayName": "Texto do painel",
+        "purpose": "Base efetiva da shell em 15px/1.55; acesso mantém 14px."
+      },
+      "display": {
+        "displayName": "Título principal",
+        "purpose": "Base móvel do hero; amplia em 30rem e 52rem."
+      },
+      "admin-title": {
+        "displayName": "Título de edição visual",
+        "purpose": "Clamp de 26px a 36px; demais páginas conservam títulos de 32px."
+      },
+      "admin-context-title": {
+        "displayName": "Título do contexto",
+        "purpose": "Inspetor em 20px/1.4."
+      },
+      "admin-toolbar-label": {
+        "displayName": "Rótulo de toolbar",
+        "purpose": "Seletores da edição visual em 13px semibold."
+      },
+      "access-title": {
+        "displayName": "Título do acesso",
+        "purpose": "Status focalizado com peso 500."
+      },
+      "publication-title": {
+        "displayName": "Título de publicação",
+        "purpose": "Revisão, andamento e resposta confirmada do servidor."
+      }
+    },
+    "shadows": [
+      {
+        "value": "0 20px 80px rgb(52 37 34 / 25%)",
+        "purpose": "Diálogos administrativos.",
+        "name": "admin-dialog"
+      },
+      {
+        "name": "mobile-selected-inspector",
+        "value": "0 -10px 35px #34252226",
+        "purpose": "Controles selecionados sobre o canvas no celular."
+      }
+    ],
+    "motion": [
+      {
+        "value": "cubic-bezier(0.23, 1, 0.32, 1)",
+        "purpose": "Transições da landing.",
+        "name": "ease-out"
+      },
+      {
+        "value": "background .18s ease,color .18s ease",
+        "purpose": "Botões do painel; removida sob prefers-reduced-motion.",
+        "name": "admin-controls"
+      },
+      {
+        "name": "admin-navigation",
+        "value": "260ms cubic-bezier(0.23, 1, 0.32, 1)",
+        "purpose": "GSAP anima fundo, área de trabalho, marca e rótulos; preferência persistente; teclado e movimento reduzido usam duração zero."
+      },
+      {
+        "name": "operational-progress",
+        "value": "1800ms linear infinite",
+        "purpose": "Barra indeterminada de acesso/publicação; movimento reduzido usa trilha estática."
+      },
+      {
+        "name": "publication-confirmation",
+        "value": "240ms var(--ease-out)",
+        "purpose": "Símbolo de sucesso somente após confirmação do servidor; sem animação sob movimento reduzido."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "landing-small",
+        "value": "30rem"
+      },
+      {
+        "name": "landing-columns",
+        "value": "48rem"
+      },
+      {
+        "name": "landing-desktop-nav",
+        "value": "52rem"
+      },
+      {
+        "name": "landing-wide",
+        "value": "68rem"
+      },
+      {
+        "name": "admin-phone",
+        "value": "767px",
+        "purpose": "Drawer, dispositivo Celular e toolbar flexível."
+      },
+      {
+        "name": "admin-tablet",
+        "value": "768px–1199px",
+        "purpose": "Canvas e inspetor empilhados; navegação recolhida por padrão sem preferência salva."
+      },
+      {
+        "name": "editor-selection-sheet",
+        "value": "800px",
+        "purpose": "Controles inferiores; anulado por posição estática entre 768px e 1199px."
+      },
+      {
+        "name": "editor-stacked",
+        "value": "900px",
+        "purpose": "Empilhamento geral; regra de tablet cobre até 1199px."
+      },
+      {
+        "name": "editor-wide",
+        "value": "1500px",
+        "purpose": "Inspetor de 370px em vez de 330px."
+      }
+    ],
+    "notes": [
+      "Primitivos normativos ficam no frontmatter de DESIGN.md; colorMeta registra os nomes e papéis dos valores locais realmente usados.",
+      "Paleta pública e fotografias preservadas; cores operacionais não estabelecem nova identidade de marca. Nenhum raster novo.",
+      "Navegação fixa 248px/80px, links 48px, canvas desktop 1280px ou celular 390px, zoom fit/100%; detalhes em DESIGN.md e surfaces/admin.md.",
+      "Tonal ramps não sintetizados: metadados não criam cores novas.",
+      "Foco global: outline var(--focus), offset 3px. Valores locais de módulos CSS são resolvidos em literais nos snippets.",
+      "CSS legado de formulários/guia não montado ou sobreposto não é canonizado. Eyebrows e scrollbar pública oculta permanecem drift sem reparo."
+    ]
+  },
+  "components": [
+    {
+      "refersTo": "admin-button-primary",
+      "kind": "button",
+      "description": "Ação principal administrativa.",
+      "html": "<button class=\"ds-primary\">Publicar</button>",
+      "name": "Publicar",
+      "css": ".ds-primary{font-family:var(--font-sans),sans-serif; font-size:15px;line-height:1.55;font-weight:600;border:1px solid var(--brand-primary);border-radius:8px;padding:10px 16px;min-height:44px;background:var(--brand-primary);color:var(--surface-paper);cursor:pointer;transition:background .18s ease,color .18s ease}.ds-primary:hover{background:var(--brand-dark)}.ds-primary:focus-visible{outline:var(--focus);outline-offset:3px} .ds-primary:disabled{opacity:.48;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none}}"
+    },
+    {
+      "refersTo": "admin-button-secondary",
+      "kind": "button",
+      "description": "Ação secundária administrativa.",
+      "html": "<button class=\"ds-secondary\">Salvar rascunho</button>",
+      "name": "Salvar rascunho",
+      "css": ".ds-secondary{font-family:var(--font-sans),sans-serif; font-size:15px;line-height:1.55;font-weight:600;border:1px solid #dbcfc0;border-radius:8px;padding:10px 16px;min-height:44px;background:#fffdf8;color:var(--brand-primary);cursor:pointer;transition:background .18s ease,color .18s ease}.ds-secondary:hover{background:var(--surface-cream)}.ds-secondary:focus-visible{outline:var(--focus);outline-offset:3px} .ds-secondary:disabled{opacity:.48;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-secondary{transition:none}}"
+    },
+    {
+      "refersTo": "admin-field",
+      "kind": "input",
+      "description": "Campo sincronizado com a seleção e o texto no site; rótulo explícito e ação Restaurar.",
+      "html": "<label class=\"ds-field\">Título<input type=\"text\" value=\"Texto da campanha\" /><small>Confira o texto na prévia.</small></label>",
+      "name": "Campo de edição",
+      "css": ".ds-field{font-family:var(--font-sans),sans-serif; display:grid;gap:8px;color:var(--ink-warm);font-size:14px;line-height:1.55;font-weight:600}.ds-field input{font:inherit;font-weight:400;font-size:15px;color:var(--ink-warm);background:#fffdf8;border:1px solid #bba99a;border-radius:7px;padding:12px;width:100%;min-height:46px;caret-color:var(--brand-primary)}.ds-field input:focus-visible{outline:var(--focus);outline-offset:3px} .ds-field small{color:#6b554c;font-size:13px;font-weight:400}"
+    },
+    {
+      "description": "Navegação de gestão com ícone SVG e seleção creme rosado; lateral 248px/80px.",
+      "kind": "nav",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Navegação do painel\"><button aria-current=\"page\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" aria-hidden=\"true\"><path d=\"m14 4 6 6M4 20l4-1L20 7a2.8 2.8 0 0 0-4-4L4 15z\"/></svg>Editar no site</button><button>Visão geral</button></nav>",
+      "css": ".ds-nav{font-family:var(--font-sans),sans-serif;display:grid;gap:5px;padding:16px 12px;background:#efe4d5}.ds-nav button{font:inherit;font-size:14px;line-height:1.4;display:flex;align-items:center;gap:14px;border:0;border-radius:8px;padding:12px 14px;text-align:left;min-height:48px;background:transparent;color:var(--brand-primary);font-weight:500;cursor:pointer;transition:background .18s ease,color .18s ease}.ds-nav button:hover{background:var(--surface-cream)}.ds-nav button[aria-current=page]{background:#e8d4c6;color:var(--brand-primary);font-weight:600}.ds-nav button:focus-visible{outline:var(--focus);outline-offset:3px}@media(prefers-reduced-motion:reduce){.ds-nav button{transition:none}}",
+      "name": "Navegação de seções",
+      "refersTo": "admin-navigation-selected"
+    },
+    {
+      "refersTo": "visual-editor-selection",
+      "kind": "card",
+      "description": "Campo selecionado em fundo quente e contorno vinho; complementa a edição direta no canvas.",
+      "html": "<section class=\"ds-selection\"><strong>Você selecionou</strong><label>Título<textarea rows=\"3\">Texto da campanha</textarea></label><button>Destacar na página</button></section>",
+      "name": "Seleção sincronizada",
+      "css": ".ds-selection{font-family:var(--font-sans),sans-serif;margin:0 12px 18px;padding:12px 16px 16px;border:1px solid #64121f;border-radius:12px;background:#fcf0e6;color:var(--ink-warm);font-size:14px;line-height:1.55}.ds-selection>strong{display:block;font-size:13px;color:var(--brand-primary);margin-bottom:16px}.ds-selection label{display:grid;gap:8px;font-weight:600}.ds-selection textarea{font:inherit;font-size:15px;font-weight:400;background:#fffdf8;border:1px solid #bba99a;border-radius:7px;padding:12px;color:var(--ink-warm);resize:vertical}.ds-selection button{font:inherit;font-size:13px;margin-top:12px;border:1px solid #dbcfc0;border-radius:8px;padding:10px 16px;min-height:44px;color:var(--brand-primary);background:#fffdf8;cursor:pointer}.ds-selection button:hover{background:var(--surface-cream)}.ds-selection textarea:focus-visible,.ds-selection button:focus-visible{outline:var(--focus);outline-offset:3px}"
+    },
+    {
+      "refersTo": "landing-cta",
+      "kind": "button",
+      "description": "Cápsula creme sobre superfícies vinho.",
+      "html": "<a class=\"ds-cta\" href=\"#contato\">Entrar em contato</a>",
+      "name": "CTA da landing",
+      "css": ".ds-cta{font-family:var(--font-sans),sans-serif; display:flex;align-items:center;justify-content:center;min-height:3.5rem;padding:.9rem 1.25rem;border:0;border-radius:999px;background:var(--surface-cream);color:var(--brand-dark);font-weight:800;line-height:1.2;text-decoration:none;box-shadow:0 .75rem 2rem rgb(26 0 6 / 28%),inset 0 1px 0 rgb(255 255 255 / 85%),inset 0 0 0 1px rgb(100 18 31 / 16%);transition:box-shadow 140ms var(--ease-out),transform 140ms var(--ease-out)}.ds-cta:hover{box-shadow:0 1rem 2.4rem rgb(26 0 6 / 34%),inset 0 1px 0 rgb(255 255 255 / 90%);transform:translateY(-2px)}.ds-cta:active{box-shadow:0 .35rem .9rem rgb(26 0 6 / 26%),inset 0 2px 4px rgb(100 18 31 / 10%);transform:translateY(2px) scale(.975)}.ds-cta:focus-visible{outline:var(--focus);outline-offset:3px} @media(prefers-reduced-motion:reduce){.ds-cta{transform:none!important;transition:none!important}}"
+    },
+    {
+      "refersTo": "visual-editor-toolbar",
+      "kind": "custom",
+      "name": "Toolbar do editor visual",
+      "description": "Página, visualização, zoom e modo de edição acima do canvas.",
+      "html": "<div class=\"ds-toolbar\"><label>Página em edição<select><option>Forró do zero</option><option>Evolua no forró</option><option>Forró roots</option></select></label><label>Visualização<select><option>Computador</option><option>Celular</option></select></label><label>Zoom<select><option>Ajustar à tela</option><option>100% · tamanho real</option></select></label><button aria-pressed=\"true\">Editar conteúdo</button></div>",
+      "css": ".ds-toolbar{font-family:var(--font-sans),sans-serif;display:flex;flex-wrap:wrap;align-items:end;gap:12px;padding:16px;border:1px solid #e6d9c9;background:#fffaf3;border-radius:16px 16px 0 0;color:#786252}.ds-toolbar label{display:grid;gap:8px;font-size:13px;font-weight:600;min-width:140px}.ds-toolbar label:first-child{min-width:180px}.ds-toolbar select{font:inherit;font-size:14px;color:var(--ink-warm);background:#fffdf8;border:1px solid #bba99a;border-radius:7px;padding:8px 12px;min-height:46px}.ds-toolbar button{font:inherit;font-size:14px;font-weight:600;min-height:46px;padding:9px 12px;border:1px solid var(--brand-primary);border-radius:8px;background:#fffdf8;color:var(--brand-primary);cursor:pointer}.ds-toolbar button:hover{background:var(--surface-cream)}.ds-toolbar select:focus-visible,.ds-toolbar button:focus-visible{outline:var(--focus);outline-offset:3px}"
+    },
+    {
+      "refersTo": "publication-visit",
+      "kind": "button",
+      "name": "Visitar publicação confirmada",
+      "description": "Ação terracota exibida após resposta confirmada de publicação.",
+      "html": "<a class=\"ds-visit\" href=\"#site\">Visitar site</a>",
+      "css": ".ds-visit{font-family:var(--font-sans),sans-serif;display:inline-flex;align-items:center;justify-content:center;min-height:44px;gap:10px;border:1px solid #a65134;border-radius:9px;background:#a65134;padding:11px 16px;color:#fffaf3;font-size:16px;line-height:1.6;font-weight:600;text-decoration:none}.ds-visit:focus-visible{outline:3px solid #64121f;outline-offset:3px}@media(hover:hover) and (pointer:fine){.ds-visit:hover{background:#864129}}"
+    },
+    {
+      "kind": "chip",
+      "name": "Preset de enquadramento",
+      "description": "Cápsula que posiciona o foco da foto; estado selecionado vinho.",
+      "html": "<div class=\"ds-presets\"><button aria-pressed=\"true\">Centro</button><button aria-pressed=\"false\">Topo</button></div>",
+      "css": ".ds-presets{font-family:var(--font-sans),sans-serif;display:flex;flex-wrap:wrap;gap:6px}.ds-presets button{font:inherit;font-size:12px;font-weight:600;min-height:36px;padding:7px 10px;border:1px solid #dbcfc0;border-radius:20px;background:#fffdf8;color:var(--brand-primary);cursor:pointer}.ds-presets button:hover{background:var(--surface-cream)}.ds-presets button[aria-pressed=true]{background:var(--brand-primary);color:white}.ds-presets button:focus-visible{outline:var(--focus);outline-offset:3px}"
+    }
+  ],
+  "narrative": {
+    "dos": [
+      "**Do** reutilizar os tokens de vinho, creme, papel e tinta quente.",
+      "**Do** preservar a família principal e distinguir títulos, rótulos e orientação pelo tamanho e peso.",
+      "**Do** manter foco visível e preferências de movimento reduzido nos controles documentados.",
+      "**Do** manter o site como área principal, os controles sincronizados e a adaptação de navegação e inspetor conforme os breakpoints da superfície."
+    ],
+    "keyCharacteristics": [
+      "Vinho como cor de identidade e ação.",
+      "Creme e papel como superfícies de leitura.",
+      "Plus Jakarta Sans como voz principal.",
+      "Landing expressiva; painel com canvas vivo, inspetor sincronizado e navegação recolhível."
+    ],
+    "rules": [
+      {
+        "body": "Novas áreas do painel reutilizam os vinhos e neutros existentes; uma nova tela não estabelece uma identidade independente.",
+        "section": "colors",
+        "name": "The Identidade Herdada Rule"
+      },
+      {
+        "body": "A extensão administrativa conserva a família principal e reduz a escala para dar prioridade ao conteúdo editável.",
+        "section": "typography",
+        "name": "The Uma Voz Rule"
+      }
+    ],
+    "northStar": "Vinho, creme e papel",
+    "donts": [
+      "**Don't** substituir a identidade da landing para acomodar o painel.",
+      "**Don't** promover detalhes decorativos isolados a tokens globais.",
+      "**Don't** tratar Newsreader carregada como evidência de aplicação no painel.",
+      "**Don't** copiar eyebrows existentes para novas superfícies: aparecem na landing, mas não são canonizados como padrão reutilizável.",
+      "**Don't** substituir o canvas por uma área principal de formulários ou acrescentar Edição avançada às três campanhas."
+    ],
+    "overview": "Nome descritivo dos materiais já presentes, sem introduzir uma nova marca. O vinho dá identidade aos cabeçalhos, fundos escuros e ações; creme e papel oferecem superfícies quentes para leitura. Fotografias e retratos pertencem à landing e convivem com títulos fortes e cantos arredondados.\n\nO painel estende essa identidade com o próprio site como área de edição: a composição pública permanece visível, textos recebem escrita direta e fotos recebem seleção e enquadramento. O inspetor sincronizado complementa o canvas; campos isolados e uma coluna de orientação não constituem a área principal de trabalho. A estrutura e as interações seguem a referência aprovada de Iasmin para as três campanhas, sem Edição avançada. A organização específica está em `.impeccable/surfaces/admin.md`."
+  }
+}
