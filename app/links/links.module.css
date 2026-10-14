@@ -1,0 +1,130 @@
+.page {
+  --wine: #64121f;
+  --cream: #f1e2c9;
+  --white: #faf5ec;
+  --ease: cubic-bezier(.16, 1, .3, 1);
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
+  overflow: clip;
+  background: #280b12;
+  color: var(--white);
+  line-height: 1.4;
+  padding: 0 24px;
+}
+.page ::selection { background: var(--cream); color: var(--wine); }
+.page a { text-decoration: none; }
+.page a:focus-visible { outline: 3px solid var(--cream); outline-offset: 5px; }
+.glass:has(a:focus-visible) { outline: 3px solid var(--cream); outline-offset: 4px; }
+.glass a:focus-visible { outline-offset: -5px; border-radius: inherit; }
+.ambient {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 20%, #7a2638 0, #4b1421 38%, #280b12 75%);
+}
+.watermark {
+  position: absolute;
+  z-index: -1;
+  width: min(85vw, 1100px);
+  height: 1000px;
+  left: 50%;
+  top: 50px;
+  transform: translateX(-50%) rotate(-13deg);
+  background: var(--cream);
+  mask: url('/brand/priscilla-castao-mark.svg') center / contain no-repeat;
+  opacity: .025;
+  pointer-events: none;
+}
+.shell { width: min(100%, 500px); margin: 0 auto; container-type: inline-size; }
+.hero { position: relative; height: 295px; }
+.heroScene { position: absolute; inset: 0 -50px; overflow: hidden; mask-image: linear-gradient(#000 70%, transparent 100%), linear-gradient(90deg, transparent, #000 17%, #000 83%, transparent); mask-composite: intersect; }
+.heroScene::before { content: ''; position: absolute; inset: -30px 0 0; background: radial-gradient(ellipse at 30% 30%, #c66d6270, transparent 52%), radial-gradient(ellipse at 85% 42%, #9f294e90, transparent 55%); filter: blur(22px); }
+.sceneShade { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 45%, #4b142140 65%, #4b1421e6 90%, #4b1421); }
+.portrait { position: absolute; width: min(82%, 330px); max-width: none; height: auto; left: 50%; top: -28px; transform: translateX(-50%); filter: saturate(.82); mask-image: radial-gradient(ellipse at 50% 43%, #000 31%, #000c 44%, transparent 72%); }
+.identity { position: absolute; bottom: 0; width: 100%; text-align: center; }
+.identity h1 { margin: 0; }
+.logo { display: block; width: 344px; max-width: 95%; height: 86px; margin: auto; background: var(--white); mask: url('/brand/priscilla-castao-logo.svg') center / contain no-repeat; }
+.welcome { text-align: center; padding: 7px 0 33px; }
+.welcomePill { display: inline-block; border: 1px solid #f1e2c938; background: #f1e2c90b; padding: 8px 22px; border-radius: 30px; font-size: 13px; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+.welcome p { font-size: 12px; color: var(--cream); margin: 9px 0 0; }
+.usefulLinks { display: flex; align-items: center; justify-content: center; gap: 7px; }
+.usefulLinks svg { width: 13px; height: 13px; }
+.links { display: grid; gap: 14px; }
+.glass {
+  position: relative;
+  isolation: isolate;
+  border-radius: 16px;
+  background: linear-gradient(120deg, #faf5ec1a, #faf5ec06 55%, #faf5ec12);
+  box-shadow: 0 14px 36px #13060c40, inset 0 1px 0 #faf5ec59, inset 1px 0 0 #faf5ec25, inset -1px -1px 0 #faf5ec15;
+  backdrop-filter: blur(22px) saturate(125%);
+  -webkit-backdrop-filter: blur(22px) saturate(125%);
+  transition: transform .5s var(--ease), background-color .5s var(--ease);
+}
+.glass::after { content: ''; position: absolute; z-index: 2; inset: 0; pointer-events: none; border-radius: inherit; background: radial-gradient(280px circle at var(--glass-x, 30%) var(--glass-y, 0%), #faf5ec1c, transparent 80%); opacity: 0; transition: opacity .5s var(--ease); }
+.whatsapp { min-height: 182px; overflow: visible; background-color: #912c4140; }
+.whatsappLink { display: block; min-height: inherit; position: relative; }
+.whatsappContent { position: relative; z-index: 1; width: 65%; padding: 20px 25px 23px; }
+.whatsappContent > svg { width: 22px; height: 22px; margin-bottom: 9px; color: var(--cream); }
+.whatsapp h2 { font-size: clamp(26px, 7.5cqi, 30px); font-weight: 400; line-height: 1.05; letter-spacing: -.03em; margin: 0 0 16px; overflow-wrap: normal; }
+.whatsapp h2 span { font-weight: 600; color: var(--cream); }
+.action { display: inline-flex; gap: 17px; align-items: center; background: var(--cream); color: #4b0d17; border-radius: 7px; padding: 9px 12px; font-size: 12px; font-weight: 500; }
+.action svg { height: 14px; width: 14px; transition: transform .5s var(--ease); }
+.cardPortraitWindow { position: absolute; inset: -32px 0 0; overflow: hidden; border-radius: 0 0 16px 16px; pointer-events: none; }
+.cardPortrait { position: absolute; right: 1px; top: 0; width: clamp(200px, 57cqi, 240px); max-width: none; height: auto; filter: drop-shadow(-7px 8px 12px #280b1240); }
+.editorialGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.editorial { overflow: hidden; }
+.editorialLink { display: flex; position: relative; min-height: 204px; align-items: end; }
+.editorialPhoto { object-fit: cover; transform: scale(1.06); transition: transform .8s var(--ease); }
+.editorialShade { position: absolute; inset: 0; background: linear-gradient(180deg, #280b1200 10%, #280b1250 35%, #280b12e8 100%); }
+.editorialText { position: relative; z-index: 1; width: 100%; padding: 15px; }
+.editorial h2 { margin: 0 0 13px; font-size: clamp(17px, 5cqi, 20px); font-weight: 400; line-height: 1.13; letter-spacing: -.025em; }
+.editorial h2 span { color: var(--cream); font-weight: 500; }
+.cardBottom { display: flex; align-items: center; justify-content: space-between; gap: 7px; font-size: 11px; color: var(--cream); padding-top: 10px; border-top: 1px solid #f1e2c933; }
+.cardBottom svg { width: 14px; height: 14px; flex-shrink: 0; }
+.editorialLink[aria-disabled] .cardBottom svg { opacity: .45; }
+.instagramLink { display: flex; align-items: center; gap: 17px; padding: 19px 22px; min-height: 80px; }
+.instagramLink > svg { width: 25px; height: 25px; flex-shrink: 0; color: var(--cream); }
+.instagramLink strong { display: block; font-size: 14px; font-weight: 500; }
+.instagramLink span span { display: block; font-size: 11px; margin-top: 3px; color: var(--cream); }
+.instagramLink .instagramArrow { width: 18px; height: 18px; margin-left: auto; }
+.footer { padding: 28px 0 26px; display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--cream); }
+.footerMark { width: 30px; height: 35px; background: var(--cream); mask: url('/brand/priscilla-castao-mark.svg') center / contain no-repeat; }
+.footer p { font-size: 11px; margin: 0; }
+.footer p span { display: block; font-size: 9px; margin-top: 2px; }
+.srOnly { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; clip-path: inset(50%); overflow: hidden; white-space: nowrap; }
+@media (hover: hover) and (pointer: fine) {
+  .glass:has(a):hover { transform: translateY(-3px); background-color: #faf5ec12; }
+  .glass:has(a):hover::after { opacity: 1; }
+  .whatsapp:hover .action svg { transform: translate(2px, -2px); }
+  .editorial:has(a):hover .editorialPhoto { transform: scale(1.1); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero { animation: arrive 1s var(--ease) both; }
+  .welcome { animation: arrive 1s .09s var(--ease) both; }
+  .links { animation: arrive 1.1s .16s var(--ease) both; }
+  @keyframes arrive { from { transform: translateY(16px); opacity: .65; filter: blur(5px); } to { transform: translateY(0); opacity: 1; filter: blur(0); } }
+}
+@media (max-width: 560px) {
+  .page { padding: 0 20px; }
+  .hero { height: 280px; }
+  .heroScene { inset-inline: -35px; }
+  .portrait { width: min(82%, 310px); top: -23px; }
+  .logo { width: 320px; height: 80px; }
+  .welcome { padding: 4px 0 33px; }
+  .whatsappContent { padding: 18px 20px; }
+  .cardPortrait { right: -20px; }
+  .editorialLink { min-height: 190px; }
+  .editorialText { padding: 13px; }
+  .instagramLink { gap: 13px; padding: 17px; }
+  .instagramLink strong { font-size: 13px; }
+}
+@media (max-width: 359px) {
+  .page { padding-inline: 16px; }
+  .editorialGrid { gap: 10px; }
+  .cardPortrait { right: -32px; }
+  .action { gap: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .page *, .page *::after { animation: none !important; transition: none !important; }
+}
