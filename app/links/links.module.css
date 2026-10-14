@@ -142,43 +142,33 @@
   .cardBottom { font-size: 12px; }
 }
 @media (min-width: 960px) {
-  .page { display: grid; align-items: center; padding: 56px clamp(32px, 4vw, 80px); }
-  .ambient { background: radial-gradient(ellipse at 26% 40%, #7a2638 0, #4b1421 38%, #280b12 78%); }
-  .watermark { left: 25%; top: 50%; width: 900px; height: 850px; transform: translate(-50%, -50%) rotate(-13deg); }
-  .shell {
-    display: grid;
-    width: min(100%, 1160px);
-    grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
-    grid-template-areas: 'hero links' 'welcome links' 'footer links';
-    column-gap: clamp(36px, 5vw, 80px);
-    align-items: start;
-  }
-  .hero { grid-area: hero; height: clamp(350px, 32vw, 425px); }
-  .heroScene { inset: -35px -50px 0; }
-  .portrait { width: min(100%, 460px); top: -25px; }
+  .page { padding: 12px 32px 0; }
+  .shell { width: min(100%, 600px); }
+  .hero { height: 330px; }
+  .heroScene { inset: 0 -50px; mask-image: linear-gradient(transparent, #000 12%, #000 70%, transparent 100%), linear-gradient(90deg, transparent, #000 17%, #000 83%, transparent); }
+  .portrait { width: 370px; top: -18px; }
   .sceneShade { background: linear-gradient(180deg, transparent 46%, #4b142140 66%, #4b1421e6 90%, #4b1421); }
-  .logo { width: min(100%, 440px); height: 110px; }
-  .welcome { grid-area: welcome; padding: 12px 0 0; }
+  .logo { width: 380px; height: 95px; }
+  .welcome { padding: 8px 0 40px; }
   .welcomePill { font-size: 14px; padding: 10px 24px; }
   .welcome p { margin-top: 13px; font-size: 13px; }
-  .usefulLinks svg { transform: rotate(-90deg); }
-  .links { grid-area: links; align-self: center; gap: 18px; container-type: inline-size; }
-  .whatsapp { min-height: 220px; }
+  .links { gap: 16px; container-type: inline-size; }
+  .whatsapp { min-height: 215px; }
   .whatsappContent { padding: 26px 30px; }
   .whatsappContent > svg { width: 26px; height: 26px; margin-bottom: 11px; }
-  .whatsapp h2 { font-size: clamp(32px, 7.5cqi, 40px); margin-bottom: 20px; }
+  .whatsapp h2 { font-size: 35px; margin-bottom: 18px; }
   .action { font-size: 13px; min-height: 42px; padding-inline: 15px; }
-  .cardPortraitWindow { top: -38px; }
-  .cardPortrait { width: clamp(245px, 55cqi, 285px); right: -8px; }
-  .editorialGrid { gap: 18px; }
-  .editorialLink { min-height: clamp(215px, 19vw, 260px); }
+  .cardPortraitWindow { top: -32px; }
+  .cardPortrait { width: 270px; right: 5px; }
+  .editorialGrid { gap: 16px; }
+  .editorialLink { min-height: 235px; }
   .editorialText { padding: 19px; }
-  .editorial h2 { font-size: clamp(20px, 4.5cqi, 25px); margin-bottom: 16px; }
+  .editorial h2 { font-size: 23px; margin-bottom: 16px; }
   .cardBottom { font-size: 12px; }
   .instagramLink { min-height: 88px; padding: 21px 26px; gap: 18px; }
   .instagramLink strong { font-size: 16px; }
   .instagramLink span span { font-size: 12px; }
-  .footer { grid-area: footer; padding: 32px 0 0; }
+  .footer { padding: 28px 0 32px; }
   .footer p { font-size: 12px; }
   .footer p span { font-size: 10px; }
 }

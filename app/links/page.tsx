@@ -57,7 +57,7 @@ export default function LinksPage() {
       <div className={styles.shell}>
         <header className={styles.hero}>
           <div className={styles.heroScene}>
-            <Image src="/images/priscilla-castao-instagram-DYf07MJEQ9z-01.webp" alt="Retrato de frente de Priscilla Castão" width={900} height={1200} sizes="(min-width: 960px) 460px, (min-width: 640px) 370px, 330px" className={styles.portrait} priority />
+            <Image src="/images/priscilla-castao-instagram-DYf07MJEQ9z-01.webp" alt="Retrato de frente de Priscilla Castão" width={900} height={1200} sizes="(min-width: 640px) 370px, 330px" className={styles.portrait} priority />
             <div className={styles.sceneShade} />
           </div>
           <div className={styles.identity}>

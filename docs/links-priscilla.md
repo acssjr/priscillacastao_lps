@@ -104,3 +104,7 @@ A partir de 960px, o conteúdo passa a uma grade de duas colunas com largura má
 Entre 640 e 959px, a coluna única usa até 600px, com imagens e cartões em escala intermediária. Abaixo disso, mantém-se a composição mobile. Imagens têm `sizes` próprios para cada faixa, evitando usar o tamanho mobile no desktop.
 
 Revisão visual em 390, 768, 960, 1024, 1366, 1440 e 1920px, com imagens carregadas e movimento reduzido durante as capturas. Título comercial preservado, aguardando escolha do usuário entre as opções de copy.
+
+### Correção da direção desktop
+
+O usuário rejeitou as duas colunas e confirmou explicitamente que a composição deve ser vertical e centralizada também no computador. Esta decisão substitui a seção anterior: a partir de 960px, a coluna possui até 600px, com retrato e marca no topo, boas-vindas, cartões e assinatura nessa ordem. O topo da cena fotográfica recebe uma máscara suave para eliminar o corte horizontal perceptível. Mobile preservado. Fluxo vertical e ausência de transbordamento verificados em 390, 768, 1024, 1440 e 1920px.
