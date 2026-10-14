@@ -8,7 +8,7 @@ O painel controla Forró do zero, Evolua no forró e Forró roots. A tela inicia
 2. Clique em um texto no site e escreva ali mesmo. O campo correspondente aparece em Você selecionou. Também é possível escrever nesse campo; o site acompanha a alteração. A edição preserva maiúsculas/minúsculas e quebras de linha do conteúdo, aceita apenas texto ao colar e mantém o cursor durante a sincronização.
 3. Use Parte do site para escolher/localizar uma seção. Mensagem principal, botões, listas e fotos têm grupos próprios. Textos, contato, configurações para busca e rótulos não visíveis também podem ser alterados nos controles.
 4. Use Alterar foto sobre a imagem ou Trocar imagem no controle para escolher uma original ou enviar uma nova. Arraste o ponto de foco, use as setas do teclado ou os presets para ajustar o enquadramento; confira também no celular. Descreva a foto no campo de descrição acessível.
-5. Perguntas e pilares ficam abertos enquanto você edita seus textos. Explorar prévia desativa a edição e permite experimentar os acordéons, carrosséis e menu. Os links externos permanecem bloqueados no canvas.
+5. Perguntas e pilares ficam abertos enquanto você edita seus textos. Testar navegação desativa a edição e permite experimentar os acordéons, carrosséis e menu. Os links externos permanecem bloqueados no canvas.
 6. Desfazer/Refazer recuperam alterações desta sessão. Restaurar em um campo recupera seu conteúdo original. Salvar rascunho guarda as alterações para continuar depois.
 
 Ver prévia mostra as alterações privadas, ainda não publicadas, em computador ou celular. Salvar rascunho permite continuar depois. Publicar pede a revisão das páginas e seções alteradas e confirma o sucesso somente após resposta do servidor.
@@ -28,7 +28,7 @@ Altere variáveis apenas na configuração privada da hospedagem. Não versione 
 Faça backup periódico das duas tabelas. A alteração de conteúdo usa controle otimista de revisão; em conflito, atualize o painel antes de continuar.
 
 ## Base reutilizada
-Edição visual, comunicação entre canvas e controles, enquadramento, navegação GSAP, estados de acesso/publicação, sorteio de forró, autenticação, persistência, controle de revisão, gestão de usuários e diálogo adaptados do painel autorizado em https://github.com/acssjr/iasmin-psi (156c38d).
+Edição visual, comunicação entre canvas e controles, enquadramento, navegação GSAP, estados de acesso/publicação, autenticação, persistência, controle de revisão, gestão de usuários e diálogo adaptados do painel autorizado em https://github.com/acssjr/iasmin-psi (156c38d).
 O editor foi adaptado à estrutura das campanhas de Priscilla. Não inclui edição avançada, edição de código ou os módulos específicos de psicologia.
 
 

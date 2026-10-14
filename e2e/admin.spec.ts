@@ -42,10 +42,10 @@ test("visual editing, inspector, three campaigns, publication, history, photos a
   await page.getByLabel("Resposta",{exact:true}).last().fill("Entre em contato para combinar uma nova data.");
   await expect(inline("faq.items.6.question")).toHaveText("Posso remarcar minha aula?");
   // Explore mode retains working disclosures, while external links stay inside the preview.
-  await page.getByRole("button",{name:"Editar conteúdo",exact:true}).click();
+  await page.getByRole("button",{name:"Testar navegação",exact:true}).click();
   await frame.locator("#duvidas summary").last().click();
   await expect(frame.getByText("Entre em contato para combinar uma nova data.",{exact:true})).toBeVisible();
-  await page.getByRole("button",{name:"Explorar prévia",exact:true}).click();
+  await page.getByRole("button",{name:"Voltar à edição",exact:true}).click();
   await page.getByRole("button",{name:"Salvar rascunho",exact:true}).click();
   await expect(page.getByRole("status").filter({hasText:"Rascunho salvo"})).toBeVisible();
   expect(await (await page.request.get("/")).text()).not.toContain("Dúvidas editadas pelo painel");
@@ -76,6 +76,18 @@ test("visual editing, inspector, three campaigns, publication, history, photos a
   await expect(frame.locator('img[data-cms-image="hero.image"]')).toHaveCSS("object-position","37% 50%");
   await page.getByRole("button",{name:"Limpar seleção"}).click();
   await page.getByRole("button",{name:"Usuários",exact:true}).click(); await page.getByRole("button",{name:"Adicionar usuário",exact:true}).click();
+  // Different help-text lengths must never stretch the controls or offset paired inputs.
+  const originalViewport = page.viewportSize()!;
+  for (const width of [1440,1159,768,767,390,320]) {
+    await page.setViewportSize({width,height:900});
+    const bounds = await page.locator('form input:not([type=hidden]), form select').evaluateAll(nodes => nodes.map(node => {const box=node.getBoundingClientRect();return {height:box.height,top:box.top,left:box.left,right:box.right};}));
+    expect(bounds.every(box=>Math.abs(box.height-46)<1)).toBe(true);
+    expect(Math.abs(bounds[0].top-bounds[1].top) < 1).toBe(width>=768);
+    expect(Math.abs(bounds[3].top-bounds[4].top) < 1).toBe(width>=768);
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);
+  }
+  await page.setViewportSize(originalViewport);
+  await expect(page.getByRole("button",{name:"Estou com sorte",exact:true})).toHaveCount(0);
   await page.getByLabel("Nome da pessoa").fill("Editora"); await page.getByLabel("Usuário de acesso").fill("editora");
   await page.getByLabel(/^Senha/).fill("editor-password"); await page.getByLabel("Repita a senha").fill("editor-password"); await page.getByRole("button",{name:"Criar acesso",exact:true}).click();
   await expect(page.getByText("@editora")).toBeVisible();

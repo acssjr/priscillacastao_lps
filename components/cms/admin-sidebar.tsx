@@ -8,7 +8,6 @@ import { gsap } from 'gsap'
 import { CustomEase } from 'gsap/CustomEase'
 
 
-import { LuckyForro } from './lucky-forro'
 import styles from './admin-panel.module.css'
 
 gsap.registerPlugin(useGSAP, CustomEase)
@@ -94,7 +93,7 @@ export function AdminSidebar({ compact, toggle, mobileOpen, onClose, view, navig
     <Link className={styles.sidebarBrand} href="/" aria-label="Priscilla Castão — abrir site"><span data-brand-full=""><img src="/brand/priscilla-castao-logo.svg" alt="" /></span><span data-brand-monogram=""><img src="/favicon.svg" alt="" /></span></Link>
     <button className={styles.collapseToggle} type="button" aria-label={compact ? 'Expandir menu de gestão' : 'Recolher menu de gestão'} aria-expanded={!compact} aria-controls="admin-navigation" title={compact ? 'Expandir menu' : 'Recolher menu'} onClick={toggle}><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/><path d={compact ? 'm13 9 3 3-3 3' : 'm16 9-3 3 3 3'}/></svg></button>
     <p className={styles.sidebarCaption} data-nav-label="">Espaço de gestão</p>
-    <nav aria-label="Navegação do painel">{links.map(([key,label]) => <button key={key} aria-label={label} title={compact ? label : undefined} aria-current={view === key ? 'page' : undefined} onClick={() => navigate(key)}><span className={styles.navIcon}><AdminIcon name={key}/></span><span className={styles.navLabel} data-nav-label="">{label}</span></button>)}<LuckyForro /></nav>
+    <nav aria-label="Navegação do painel">{links.map(([key,label]) => <button key={key} aria-label={label} title={compact ? label : undefined} aria-current={view === key ? 'page' : undefined} onClick={() => navigate(key)}><span className={styles.navIcon}><AdminIcon name={key}/></span><span className={styles.navLabel} data-nav-label="">{label}</span></button>)}</nav>
     <div className={styles.sidebarBottom}><a href="/" target="_blank" rel="noreferrer" aria-label="Abrir site em outra aba" title={compact ? 'Abrir site' : undefined}><AdminIcon name="external"/><span data-nav-label="">Abrir site</span></a><button disabled={busy} aria-label="Sair da conta" title={compact ? 'Sair da conta' : undefined} onClick={onLogout}><AdminIcon name="logout"/><span data-nav-label="">Sair da conta</span></button></div>
   </aside>
 }

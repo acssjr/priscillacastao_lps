@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-13T20:47:26.613709Z",
+  "generatedAt": "2026-10-14T14:22:55.075Z",
   "title": "Design System: Priscilla Castão",
   "extensions": {
     "colorMeta": {
@@ -304,7 +304,7 @@
       "kind": "custom",
       "name": "Toolbar do editor visual",
       "description": "Página, visualização, zoom e modo de edição acima do canvas.",
-      "html": "<div class=\"ds-toolbar\"><label>Página em edição<select><option>Forró do zero</option><option>Evolua no forró</option><option>Forró roots</option></select></label><label>Visualização<select><option>Computador</option><option>Celular</option></select></label><label>Zoom<select><option>Ajustar à tela</option><option>100% · tamanho real</option></select></label><button aria-pressed=\"true\">Editar conteúdo</button></div>",
+      "html": "<div class=\"ds-toolbar\"><label>Página em edição<select><option>Forró do zero</option><option>Evolua no forró</option><option>Forró roots</option></select></label><label>Visualização<select><option>Computador</option><option>Celular</option></select></label><label>Zoom<select><option>Ajustar à tela</option><option>100% · tamanho real</option></select></label><button>Testar navegação</button><button aria-expanded=\"true\">Ocultar campos</button></div>",
       "css": ".ds-toolbar{font-family:var(--font-sans),sans-serif;display:flex;flex-wrap:wrap;align-items:end;gap:12px;padding:16px;border:1px solid #e6d9c9;background:#fffaf3;border-radius:16px 16px 0 0;color:#786252}.ds-toolbar label{display:grid;gap:8px;font-size:13px;font-weight:600;min-width:140px}.ds-toolbar label:first-child{min-width:180px}.ds-toolbar select{font:inherit;font-size:14px;color:var(--ink-warm);background:#fffdf8;border:1px solid #bba99a;border-radius:7px;padding:8px 12px;min-height:46px}.ds-toolbar button{font:inherit;font-size:14px;font-weight:600;min-height:46px;padding:9px 12px;border:1px solid var(--brand-primary);border-radius:8px;background:#fffdf8;color:var(--brand-primary);cursor:pointer}.ds-toolbar button:hover{background:var(--surface-cream)}.ds-toolbar select:focus-visible,.ds-toolbar button:focus-visible{outline:var(--focus);outline-offset:3px}"
     },
     {
