@@ -36,7 +36,7 @@ function Icon({ type }: { type: "whatsapp" | "instagram" }) {
 
 function EditorialCard({ href, title, image, position, children }: { href: string | null; title: string; image: string; position: string; children: ReactNode }) {
   const content = <>
-    <Image src={image} alt="" fill sizes="(max-width: 560px) 46vw, 250px" style={{ objectPosition: position }} className={styles.editorialPhoto} />
+    <Image src={image} alt="" fill sizes="(min-width: 1280px) 275px, (min-width: 960px) 25vw, (min-width: 640px) 290px, (max-width: 560px) 46vw, 250px" style={{ objectPosition: position }} className={styles.editorialPhoto} />
     <div className={styles.editorialShade} />
     <div className={styles.editorialText}>
       <h2>{children}</h2>
@@ -57,7 +57,7 @@ export default function LinksPage() {
       <div className={styles.shell}>
         <header className={styles.hero}>
           <div className={styles.heroScene}>
-            <Image src="/images/priscilla-castao-instagram-DYf07MJEQ9z-01.webp" alt="Retrato de frente de Priscilla Castão" width={900} height={1200} sizes="330px" className={styles.portrait} priority />
+            <Image src="/images/priscilla-castao-instagram-DYf07MJEQ9z-01.webp" alt="Retrato de frente de Priscilla Castão" width={900} height={1200} sizes="(min-width: 960px) 460px, (min-width: 640px) 370px, 330px" className={styles.portrait} priority />
             <div className={styles.sceneShade} />
           </div>
           <div className={styles.identity}>
@@ -73,7 +73,7 @@ export default function LinksPage() {
         <nav className={styles.links} aria-label="Links da Priscilla">
           <GlassSurface className={styles.whatsapp}>
             <a href={profileLinks.whatsapp} target="_blank" rel="noopener noreferrer" className={styles.whatsappLink}>
-              <span className={styles.cardPortraitWindow}><Image src="/images/cutouts/priscilla-castao-ensaio-01-cutout.webp" alt="" width={1086} height={1449} sizes="240px" className={styles.cardPortrait} /></span>
+              <span className={styles.cardPortraitWindow}><Image src="/images/cutouts/priscilla-castao-ensaio-01-cutout.webp" alt="" width={1086} height={1449} sizes="(min-width: 640px) 280px, 240px" className={styles.cardPortrait} /></span>
               <div className={styles.whatsappContent}>
                 <Icon type="whatsapp" />
                 <h2>Vamos<br /><span>dançar?</span></h2>

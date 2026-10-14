@@ -96,3 +96,11 @@ Novo refinamento: retrato em escala menor, contorno suave e iluminação vinho d
 Os cartões agora navegam na mesma aba para áreas já existentes: portfólio em `/#aulas` e trajetória em `/#sobre`. Isso substitui a configuração nula descrita anteriormente. Não foram criados documentos de release nem fatos biográficos novos. Cliques e presença dos destinos verificados no navegador.
 
 Lint, tipos e build aprovados; zero violações Axe em 430px e nenhum transbordamento em 320, 390, 430, 768 e 1440px. Recorte superior de 32px confirmado em todas essas larguras.
+
+### Composição para computador
+
+A partir de 960px, o conteúdo passa a uma grade de duas colunas com largura máxima de 1160px: retrato, identidade, boas-vindas e assinatura à esquerda; links à direita. A composição é centralizada verticalmente, com espaço para rolagem em janelas baixas. A ordem semântica e de teclado é preservada. O grupo de links tem seu próprio contêiner para calcular os tamanhos fluidos; a tipografia não depende da largura total da tela.
+
+Entre 640 e 959px, a coluna única usa até 600px, com imagens e cartões em escala intermediária. Abaixo disso, mantém-se a composição mobile. Imagens têm `sizes` próprios para cada faixa, evitando usar o tamanho mobile no desktop.
+
+Revisão visual em 390, 768, 960, 1024, 1366, 1440 e 1920px, com imagens carregadas e movimento reduzido durante as capturas. Título comercial preservado, aguardando escolha do usuário entre as opções de copy.
