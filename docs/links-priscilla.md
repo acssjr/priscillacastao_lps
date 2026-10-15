@@ -108,3 +108,9 @@ Revisão visual em 390, 768, 960, 1024, 1366, 1440 e 1920px, com imagens carrega
 ### Correção da direção desktop
 
 O usuário rejeitou as duas colunas e confirmou explicitamente que a composição deve ser vertical e centralizada também no computador. Esta decisão substitui a seção anterior: a partir de 960px, a coluna possui até 600px, com retrato e marca no topo, boas-vindas, cartões e assinatura nessa ordem. O topo da cena fotográfica recebe uma máscara suave para eliminar o corte horizontal perceptível. Mobile preservado. Fluxo vertical e ausência de transbordamento verificados em 390, 768, 1024, 1440 e 1920px.
+
+### Escala desktop por altura de janela — 15/10/2026
+
+Composição vertical preservada. Desktop agora usa até 640px, com retrato de 330px e cartões mais proporcionais. Em janelas de PC de até 900px de altura, a coluna usa até 580px e recebe espaçamento e cartões compactos. O ponto focal das fotografias editoriais muda apenas no desktop, preservando rostos e mãos nos cartões baixos. Mobile mantém suas regras anteriores.
+
+Verificado sem rolagem horizontal e com todo o conteúdo cabendo na altura em 1366×768, 1440×900 e 1920×1080. Axe sem violações em 1366×768. Capturas com as quatro imagens carregadas. Arquivo gerado `next-env.d.ts` já estava modificado pelo servidor; não faz parte deste ajuste.

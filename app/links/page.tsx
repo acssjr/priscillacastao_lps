@@ -36,7 +36,7 @@ function Icon({ type }: { type: "whatsapp" | "instagram" }) {
 
 function EditorialCard({ href, title, image, position, children }: { href: string | null; title: string; image: string; position: string; children: ReactNode }) {
   const content = <>
-    <Image src={image} alt="" fill sizes="(min-width: 1280px) 275px, (min-width: 960px) 25vw, (min-width: 640px) 290px, (max-width: 560px) 46vw, 250px" style={{ objectPosition: position }} className={styles.editorialPhoto} />
+    <Image src={image} alt="" fill sizes="(min-width: 960px) 315px, (min-width: 640px) 290px, (max-width: 560px) 46vw, 250px" style={{ objectPosition: `var(--editorial-position, ${position})` }} className={styles.editorialPhoto} />
     <div className={styles.editorialShade} />
     <div className={styles.editorialText}>
       <h2>{children}</h2>
