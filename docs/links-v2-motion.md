@@ -32,3 +32,9 @@ Refinamento posterior solicitado pelo usuário: as quatro áreas usam apenas mar
 Limpeza final dos cartões: removidos o ícone pequeno do WhatsApp, as quatro setas dos cartões e o rodapé “Salvador, Bahia”. A marca-d'água da trajetória foi reduzida, deslocada para a direita e suavizada na borda esquerda. Links e marcas-d'água principais preservados. Conferido em 430 e 1440px; lint, tipos e build aprovados.
 
 O notch passou a usar seta estritamente decorativa (`span`, `aria-hidden`, sem eventos de ponteiro), sem link, círculo ou área de clique. A marca-d'água do cartão Instagram agora usa o ícone da plataforma, a partir da mesma geometria usada na primeira versão; o loader inclui esse SVG. Conferido em 430 e 1398px: quatro links nos cartões, seta fora da navegação por teclado e nenhum transbordamento horizontal.
+
+## Abertura de 1,25 s
+
+Com recursos prontos, 750 ms de preparação e 500 ms de transição. O P gira com CSS durante a preparação; GSAP preserva sua posição angular e move a mesma marca até as coordenadas reais do monograma do cabeçalho, que só reaparece no fim da transferência. Fundo e progresso desaparecem separadamente. Recursos lentos podem prolongar a preparação; movimento reduzido continua sem giro ou deslocamento. Textos dos cartões atualizados conforme revisão, com quebra natural do convite para agendar a aula.
+
+Validação desta revisão: lint, tipos, 85 testes e build aprovados; cartões sem cortes ou rolagem horizontal em 320, 430, 560, 900 e 1440 px. Giro e transferência conferidos por amostragem no navegador, com diferença inferior a 1 px entre a marca animada e a marca do cabeçalho no fim. Recurso retardado manteve o progresso abaixo de 100% até a liberação. Sem erros JavaScript.

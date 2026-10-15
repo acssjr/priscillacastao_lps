@@ -33,8 +33,8 @@ function Arrow({ down = false }: { down?: boolean }) {
 }
 
 const cards = [
-  { title: "Aulas de forró", action: "Converse comigo", href: profileLinks.whatsapp, kind: "aulas", external: true },
-  { title: "Meu portfólio", action: "Explore meu trabalho", href: profileLinks.portfolio || "/#aulas", kind: "portfolio", external: false },
+  { title: "Aulas e Cursos", action: "Já sabe o que procura? Agende a sua aula comigo", href: profileLinks.whatsapp, kind: "aulas", external: true },
+  { title: "Meu portfólio", action: "Conheça mais da minha dança", href: profileLinks.portfolio || "/#aulas", kind: "portfolio", external: false },
   { title: "Minha trajetória", action: "Conheça minha história", href: profileLinks.release || "/#sobre", kind: "trajectory", external: false },
   { title: "A dança continua", action: "Volte ao Instagram", href: profileLinks.instagram, kind: "instagram", external: true },
 ];
