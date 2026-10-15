@@ -4,6 +4,7 @@ import Link from "next/link";
 import localFont from "next/font/local";
 import { profileLinks } from "@/content/profile-links";
 import styles from "./page.module.css";
+import { Entrance } from "./Entrance";
 
 const saans = localFont({
   src: [
@@ -32,11 +33,11 @@ const cards = [
 
 export default function LinksVersionTwo() {
   return <main id="conteudo" className={`${saans.className} ${styles.page}`}>
+    <Entrance />
+    <div className={styles.pageWatermark} aria-hidden="true" />
     <div className={styles.canvas}>
       <header className={styles.topbar}>
         <Link href="/links" className={styles.back} aria-label="Abrir a versão original da página de links"><span className={styles.brandMark} aria-hidden="true" /></Link>
-        <span>Priscilla Castão</span>
-        <a href={profileLinks.instagram} target="_blank" rel="noopener noreferrer" className={styles.handle}>@priscillacastao_danca <Arrow /></a>
       </header>
 
       <div className={styles.composition}>
