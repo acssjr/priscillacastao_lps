@@ -3,6 +3,7 @@ import Image from "next/image";
 import localFont from "next/font/local";
 import { profileLinks } from "@/content/profile-links";
 import styles from "./page.module.css";
+import { Entrance } from "./Entrance";
 
 const saans = localFont({
   src: [
@@ -37,6 +38,8 @@ const cards = [
 
 export default function LinksPage() {
   return <main id="conteudo" className={`${saans.className} ${styles.page}`}>
+    <Entrance />
+    <noscript><style>{`.${styles.entrance}{display:none!important}`}</style></noscript>
     <div className={styles.pageWatermark} aria-hidden="true" />
     <div className={styles.canvas}>
       <header className={styles.topbar}>

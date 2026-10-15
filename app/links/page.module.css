@@ -74,3 +74,13 @@
   .notchButton svg,.linksHint svg { transform:none; }
 }
 @media (prefers-reduced-motion:reduce) { .heroAction,.card { transition:none; } }
+.entrance { position:fixed; z-index:300; inset:0; overflow:hidden; display:grid; place-items:center; background:radial-gradient(ellipse at 65% 30%,#8b2540,#64121f 45%,#3e0c1b); animation:loaderSafety 1ms 14s step-end forwards; }
+.entrance[hidden] { display:none; }
+@keyframes loaderSafety { to { visibility:hidden; opacity:0; } }
+.entranceWatermark { position:absolute; inset:-20%; background:var(--cream); opacity:.065; mask:url('/brand/priscilla-castao-logo.svg') center / min(150vw,1700px) auto no-repeat; transform:rotate(-12deg); }
+.entranceIdentity { position:relative; display:grid; justify-items:center; gap:24px; }
+.entranceMonogram { display:block; width:86px; height:90px; background:var(--cream); mask:url('/brand/priscilla-castao-monogram.svg') center / contain no-repeat; }
+.progress { width:110px; height:2px; background:#f1e2c940; overflow:hidden; }
+.progressLine { display:block; height:100%; background:var(--cream); transform:scaleX(.01); transform-origin:left; }
+.progressNumber { font-size:14px; font-variant-numeric:tabular-nums; color:var(--cream); min-width:4ch; text-align:center; }
+@media (prefers-reduced-motion:reduce) { .entrance { display:none; } }

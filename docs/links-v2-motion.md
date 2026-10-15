@@ -44,3 +44,5 @@ Revisão posterior: removido o giro do P a pedido do usuário. O monograma perma
 ## Estado atual: sem abertura
 
 O usuário retirou a animação de abertura integralmente. Entrance.tsx, loader, progresso, giro, deslocamento do P e entrada dos cartões foram removidos da rota. O histórico acima documenta decisões anteriores. Responsividade e medições atuais estão em docs/links-priscilla.md.
+
+Correção de escopo: a abertura foi restaurada após esclarecimento do usuário. Apenas o movimento do P até o cabeçalho permanece removido, assim como o giro retirado anteriormente. Progresso e entrada dos cartões permanecem; P estático no loader e no cabeçalho. Implementação nativa em Entrance.tsx, com limpeza de frames, temporizadores e animações. Ver docs/links-priscilla.md para estado atual.

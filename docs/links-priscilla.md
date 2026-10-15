@@ -2,7 +2,7 @@
 
 ## Versão ativa
 
-Em 15/10/2026, o usuário escolheu manter apenas o layout antes chamado v2 para desktop e mobile. Ele agora reside em `app/links/`, na rota `/links`, com estilos e fontes locais, sem loader ou animação de entrada. `/links-v2` redireciona permanentemente para `/links`. O monograma do topo é decorativo, sem clique. A primeira implementação foi retirada das rotas e seus arquivos sem uso removidos; permanece recuperável no Git. As seções abaixo registram o histórico anterior à consolidação. Os refinamentos atuais estão em `docs/links-v2-motion.md`.
+Em 15/10/2026, o usuário escolheu manter apenas o layout antes chamado v2 para desktop e mobile. Ele agora reside em `app/links/`, na rota `/links`, com estilos e fontes locais e abertura com monograma estático. `/links-v2` redireciona permanentemente para `/links`. O monograma do topo é decorativo, sem clique. A primeira implementação foi retirada das rotas e seus arquivos sem uso removidos; permanece recuperável no Git. As seções abaixo registram o histórico anterior à consolidação. Os refinamentos atuais estão em `docs/links-v2-motion.md`.
 
 ### Catálogo, ícones e compartilhamento
 
@@ -133,6 +133,10 @@ Abertura removida integralmente, incluindo o componente cliente Entrance, porcen
 
 Fontes Saans limitadas aos pesos efetivamente usados (400 e 700). Os cartões usam links nativos para evitar pré-busca da landing page e carregar os destinos apenas mediante clique. Retrato mantém carregamento imediato com prioridade alta e tamanhos responsivos; catálogo PDF não entra na carga inicial.
 
-Comparação local em build de produção, Chromium 768×1024 com DPR 2 e contexto sem cache: recursos comprimidos passaram de 544.291 para 390.555 bytes (28% a menos; soma de recursos, exclui o HTML principal). JavaScript: 173.132 → 141.134 bytes; fontes: 305.424 → 194.772 bytes. Medição pontual local, sem representar velocidade em dispositivos ou redes reais. CLS observado: 0.
+Comparação histórica da revisão sem loader em build de produção, Chromium 768×1024 com DPR 2 e contexto sem cache: recursos comprimidos passaram de 544.291 para 390.555 bytes (28% a menos; soma de recursos, exclui o HTML principal). JavaScript: 173.132 → 141.134 bytes; fontes: 305.424 → 194.772 bytes. Medição pontual local, sem representar velocidade em dispositivos ou redes reais. CLS observado: 0.
 
 Validação: 15 dimensões de 320 a 1920px, incluindo tablets em ambas as orientações, sem cortes ou rolagem horizontal; texto a 200% e links sem JavaScript aprovados. Axe sem violações em 390, 768, 1024 e 1440px. Lint, tipos, 85 testes e build aprovados. GSAP permanece instalado para outras superfícies que o utilizam.
+
+### Correção do escopo da abertura
+
+O usuário esclareceu que queria retirar apenas o deslocamento do P até o topo. Abertura restaurada com P estático, fundo vinho/bordô, logo translúcida e progresso de 1 a 100%. O overlay desaparece em 250ms após 1000ms de preparação mínima, total nominal de 1,25s; recursos lentos podem prolongar a preparação. Retrato e cartões retomam a entrada suave. Implementação usa animações nativas do navegador, sem voltar a importar GSAP nem duplicar downloads dos SVGs. Os ajustes de responsividade, pesos de fonte e navegação permanecem. A medição histórica acima corresponde à revisão sem loader; não é uma nova medição desta correção. Lint, tipos e build aprovados; navegador confirmou P imóvel, saída completa, movimento reduzido e conteúdo disponível sem JavaScript.
