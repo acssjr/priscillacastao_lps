@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import localFont from "next/font/local";
 import { profileLinks } from "@/content/profile-links";
 import styles from "./page.module.css";
-import { Entrance } from "./Entrance";
 
 const saans = localFont({
   src: [
     { path: "./fonts/Saans-TRIAL-Regular.woff2", weight: "400" },
-    { path: "./fonts/Saans-TRIAL-Medium.woff2", weight: "500" },
-    { path: "./fonts/Saans-TRIAL-SemiBold.woff2", weight: "600" },
     { path: "./fonts/Saans-TRIAL-Bold.woff2", weight: "700" },
   ], display: "swap",
 });
@@ -41,8 +37,6 @@ const cards = [
 
 export default function LinksPage() {
   return <main id="conteudo" className={`${saans.className} ${styles.page}`}>
-    <Entrance />
-    <noscript><style>{`.${styles.entrance}{display:none!important}`}</style></noscript>
     <div className={styles.pageWatermark} aria-hidden="true" />
     <div className={styles.canvas}>
       <header className={styles.topbar}>
@@ -51,7 +45,7 @@ export default function LinksPage() {
 
       <div className={styles.composition}>
         <section className={styles.portraitPanel} aria-label="Priscilla Castão, professora de forró">
-          <Image src="/images/priscilla-castao-instagram-DYf07MJEQ9z-01.webp" alt="Retrato de Priscilla Castão" fill sizes="(min-width: 1280px) 640px, (min-width: 900px) 52vw, 100vw" priority className={styles.mainPhoto} />
+          <Image src="/images/priscilla-castao-instagram-DYf07MJEQ9z-01.webp" alt="Retrato de Priscilla Castão" fill sizes="(min-width: 1360px) 664px, (min-width: 1024px) calc((100vw - 104px) * .5283), (min-width: 720px) 672px, calc(100vw - 32px)" fetchPriority="high" loading="eager" className={styles.mainPhoto} />
           <div className={styles.photoVeil} />
           <div className={styles.signature}>
             <h1><span className={styles.srOnly}>Priscilla Castão</span><span className={styles.logo} aria-hidden="true" /></h1>
@@ -63,11 +57,11 @@ export default function LinksPage() {
         <span className={styles.notchButton} aria-hidden="true"><Arrow down /></span>
 
         <nav id="links-rapidos" tabIndex={-1} className={styles.cardStack} aria-label="Links da Priscilla">
-          {cards.map(card => <Link key={card.kind} href={card.href} target={card.external ? "_blank" : undefined} rel={card.external ? "noopener noreferrer" : undefined} className={`${styles.card} ${styles[card.kind]}`}>
+          {cards.map(card => <a key={card.kind} href={card.href} target={card.external ? "_blank" : undefined} rel={card.external ? "noopener noreferrer" : undefined} className={`${styles.card} ${styles[card.kind]}`}>
             <span className={styles.cardWatermark} aria-hidden="true" />
             <div className={styles.cardVeil} />
             <div className={styles.cardText}><h2>{card.title}</h2><span>{card.action}</span></div>
-          </Link>)}
+          </a>)}
         </nav>
       </div>
     </div>

@@ -2,11 +2,11 @@
 
 ## Versão ativa
 
-Em 15/10/2026, o usuário escolheu manter apenas o layout antes chamado v2 para desktop e mobile. Ele agora reside em `app/links/`, na rota `/links`, incluindo loader GSAP, estilos e fontes locais. `/links-v2` redireciona permanentemente para `/links`. O monograma do topo é decorativo, sem clique. A primeira implementação foi retirada das rotas e seus arquivos sem uso removidos; permanece recuperável no Git. As seções abaixo registram o histórico anterior à consolidação. Os refinamentos atuais estão em `docs/links-v2-motion.md`.
+Em 15/10/2026, o usuário escolheu manter apenas o layout antes chamado v2 para desktop e mobile. Ele agora reside em `app/links/`, na rota `/links`, com estilos e fontes locais, sem loader ou animação de entrada. `/links-v2` redireciona permanentemente para `/links`. O monograma do topo é decorativo, sem clique. A primeira implementação foi retirada das rotas e seus arquivos sem uso removidos; permanece recuperável no Git. As seções abaixo registram o histórico anterior à consolidação. Os refinamentos atuais estão em `docs/links-v2-motion.md`.
 
 ### Catálogo, ícones e compartilhamento
 
-O botão “Conheça as aulas” abre `/materiais/catalogo-de-aulas-priscilla-castao.pdf` em nova aba, com indicação de PDF e rótulo acessível. Fonte confirmada pelo usuário: `outputs/pdf/priscilla-castao-catalogo-de-aulas-v15.pdf`, 7 páginas de 640×800pt (não A4). Arquivo copiado sem alterações: SHA-256 `7b1ac12bfd67b512b956fb2734a67083200ca60f4dc63921f924bc235ac58513`. HTTP 200 com `application/pdf`, resposta idêntica à fonte. Não pré-carregar esse documento no loader; transferir somente quando solicitado.
+O botão “Conheça as aulas” abre `/materiais/catalogo-de-aulas-priscilla-castao.pdf` em nova aba, com indicação de PDF e rótulo acessível. Fonte confirmada pelo usuário: `outputs/pdf/priscilla-castao-catalogo-de-aulas-v15.pdf`, 7 páginas de 640×800pt (não A4). Arquivo copiado sem alterações: SHA-256 `7b1ac12bfd67b512b956fb2734a67083200ca60f4dc63921f924bc235ac58513`. HTTP 200 com `application/pdf`, resposta idêntica à fonte. Transferir esse documento somente quando solicitado.
 
 Adicionada a indicação “Veja todos os meus links” abaixo do botão, com seta direcional de acordo com a composição. Favicon SVG/ICO, PNG 96px, Apple 180px e ícones web-app 192/512px agora usam o P sobre vinho, gerados de forma reprodutível com `node scripts/update-brand-icons.mjs`. Ícones declarados no layout têm versão na URL para evitar reutilização do favicon antigo. Metadados Open Graph e cartão de compartilhamento configurados para `/links`, com nome, descrição e retrato existentes. Política de indexação preservada.
 
@@ -126,3 +126,13 @@ O usuário rejeitou as duas colunas e confirmou explicitamente que a composiçã
 Composição vertical preservada. Desktop agora usa até 640px, com retrato de 330px e cartões mais proporcionais. Em janelas de PC de até 900px de altura, a coluna usa até 580px e recebe espaçamento e cartões compactos. O ponto focal das fotografias editoriais muda apenas no desktop, preservando rostos e mãos nos cartões baixos. Mobile mantém suas regras anteriores.
 
 Verificado sem rolagem horizontal e com todo o conteúdo cabendo na altura em 1366×768, 1440×900 e 1920×1080. Axe sem violações em 1366×768. Capturas com as quatro imagens carregadas. Arquivo gerado `next-env.d.ts` já estava modificado pelo servidor; não faz parte deste ajuste.
+
+## Responsividade e performance — revisão de 15/10/2026
+
+Abertura removida integralmente, incluindo o componente cliente Entrance, porcentagem, temporizadores e importação GSAP nesta rota. HTML e links disponíveis imediatamente, inclusive sem JavaScript. Estilos partem de 320px, ampliam espaçamentos em 421px e 600px, limitam a coluna vertical a 672px em tablets e passam a duas colunas a partir de 1024px. Cartões têm altura mínima e acomodam texto ampliado; botão do catálogo tem alvo mínimo de 48px. Vidro preservado com desfoque de 12px. Marca de fundo acompanha a página sem superfície fixa durante a rolagem.
+
+Fontes Saans limitadas aos pesos efetivamente usados (400 e 700). Os cartões usam links nativos para evitar pré-busca da landing page e carregar os destinos apenas mediante clique. Retrato mantém carregamento imediato com prioridade alta e tamanhos responsivos; catálogo PDF não entra na carga inicial.
+
+Comparação local em build de produção, Chromium 768×1024 com DPR 2 e contexto sem cache: recursos comprimidos passaram de 544.291 para 390.555 bytes (28% a menos; soma de recursos, exclui o HTML principal). JavaScript: 173.132 → 141.134 bytes; fontes: 305.424 → 194.772 bytes. Medição pontual local, sem representar velocidade em dispositivos ou redes reais. CLS observado: 0.
+
+Validação: 15 dimensões de 320 a 1920px, incluindo tablets em ambas as orientações, sem cortes ou rolagem horizontal; texto a 200% e links sem JavaScript aprovados. Axe sem violações em 390, 768, 1024 e 1440px. Lint, tipos, 85 testes e build aprovados. GSAP permanece instalado para outras superfícies que o utilizam.

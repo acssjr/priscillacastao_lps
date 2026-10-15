@@ -40,3 +40,7 @@ Com recursos prontos, 750 ms de preparação e 500 ms de transição. O P gira c
 Validação desta revisão: lint, tipos, 85 testes e build aprovados; cartões sem cortes ou rolagem horizontal em 320, 430, 560, 900 e 1440 px. Giro e transferência conferidos por amostragem no navegador, com diferença inferior a 1 px entre a marca animada e a marca do cabeçalho no fim. Recurso retardado manteve o progresso abaixo de 100% até a liberação. Sem erros JavaScript.
 
 Revisão posterior: removido o giro do P a pedido do usuário. O monograma permanece estático durante a preparação e mantém apenas o deslocamento até o cabeçalho. Duração de 1,25 s e demais transições preservadas.
+
+## Estado atual: sem abertura
+
+O usuário retirou a animação de abertura integralmente. Entrance.tsx, loader, progresso, giro, deslocamento do P e entrada dos cartões foram removidos da rota. O histórico acima documenta decisões anteriores. Responsividade e medições atuais estão em docs/links-priscilla.md.
