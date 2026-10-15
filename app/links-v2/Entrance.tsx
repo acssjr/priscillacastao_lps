@@ -63,7 +63,7 @@ export function Entrance() {
       return image.decode();
     });
     resources.push(document.fonts.ready);
-    for (const source of ["/brand/priscilla-castao-logo.svg", "/brand/priscilla-castao-monogram.svg", "/brand/priscilla-castao-mark.svg", "/brand/whatsapp-simple-icons.svg"]) {
+    for (const source of ["/brand/priscilla-castao-logo.svg", "/brand/priscilla-castao-monogram.svg", "/brand/instagram.svg", "/brand/whatsapp-simple-icons.svg"]) {
       const image = new window.Image();
       image.src = source;
       resources.push(image.decode());

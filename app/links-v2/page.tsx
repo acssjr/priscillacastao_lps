@@ -52,7 +52,7 @@ export default function LinksVersionTwo() {
           </div>
         </section>
 
-        <a href="#links-rapidos" className={styles.notchButton} aria-label="Explorar os links da Priscilla"><Arrow down /></a>
+        <span className={styles.notchButton} aria-hidden="true"><Arrow down /></span>
 
         <nav id="links-rapidos" tabIndex={-1} className={styles.cardStack} aria-label="Links da Priscilla">
           {cards.map(card => <Link key={card.kind} href={card.href} target={card.external ? "_blank" : undefined} rel={card.external ? "noopener noreferrer" : undefined} className={`${styles.card} ${styles[card.kind]}`}>
