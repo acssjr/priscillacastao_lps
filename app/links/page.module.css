@@ -6,7 +6,6 @@
 .pageWatermark { position:fixed; z-index:-1; inset:0; pointer-events:none; background:var(--cream); opacity:.035; mask:url('/brand/priscilla-castao-logo.svg') center / min(130vw,1600px) auto no-repeat; transform:rotate(-12deg); }
 .topbar { height:clamp(76px,11svh,104px); display:flex; align-items:center; justify-content:center; }
 .brandMark { display:block; width:36px; height:38px; background:var(--cream); mask:url('/brand/priscilla-castao-monogram.svg') center / contain no-repeat; }
-.back { padding:8px; border-radius:8px; }
 .composition { --gutter:24px; position:relative; display:grid; grid-template-columns:1.12fr 1fr; gap:var(--gutter); height:clamp(540px,76svh,780px); }
 .portraitPanel { position:relative; overflow:hidden; border-radius:18px; background:var(--wine); mask-image:radial-gradient(circle at 100% 50%,transparent 0 18px,#000 19px); }
 .mainPhoto { object-fit:cover; object-position:50% 35%; }

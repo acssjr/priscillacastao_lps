@@ -1,5 +1,7 @@
 # Movimento e vidro — revisão de 15/10/2026
 
+**Consolidação:** o código descrito aqui agora reside em `app/links/`. O usuário aprovou este layout como única versão para desktop e mobile. `/links-v2` redireciona para `/links`, e o monograma do topo é decorativo. As menções à preservação da primeira versão abaixo descrevem etapas anteriores; a versão inicial continua no histórico Git.
+
 ## Oportunidades selecionadas
 
 | Local | Propósito | Frequência | Receita |

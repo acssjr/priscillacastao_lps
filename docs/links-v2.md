@@ -1,5 +1,7 @@
 # Alternativa desktop com notch
 
+**Estado atual:** layout aprovado como versão única em `/links`, para desktop e mobile. Código movido para `app/links/`. `/links-v2` é somente um redirecionamento permanente. O monograma do topo não é mais um link. O texto abaixo documenta a criação da alternativa antes dessa escolha.
+
 Rota: `/links-v2`. A versão original `/links` permanece intacta. Novo layout baseado na referência enviada pelo usuário: retrato grande à esquerda, quatro cartões empilhados à direita e recortes semicirculares nas bordas internas. O botão circular entre os blocos é um link real para a navegação `#links-rapidos`.
 
 Identidade: Saans local já fornecida, vinho #64121f, fundo #280b12, creme #f1e2c9 e branco #faf5ec; rosa nas superfícies secundárias. Fotografias existentes sem repetição entre as cinco áreas. Textos limitados a título e ação por cartão, mais a assinatura no retrato. Destinos importados de `content/profile-links.ts`.

@@ -1,5 +1,9 @@
 # Página de links de Priscilla Castão
 
+## Versão ativa
+
+Em 15/10/2026, o usuário escolheu manter apenas o layout antes chamado v2 para desktop e mobile. Ele agora reside em `app/links/`, na rota `/links`, incluindo loader GSAP, estilos e fontes locais. `/links-v2` redireciona permanentemente para `/links`. O monograma do topo é decorativo, sem clique. A primeira implementação foi retirada das rotas e seus arquivos sem uso removidos; permanece recuperável no Git. As seções abaixo registram o histórico anterior à consolidação. Os refinamentos atuais estão em `docs/links-v2-motion.md`.
+
 ## Overview
 
 A rota `/links` reúne contato, portfólio, trajetória e Instagram em uma composição compacta, com foto e logo no topo. O cartão de WhatsApp recebe a maior área e prioridade visual. A rota tem título e descrição próprios e metadados `noindex, nofollow`.
