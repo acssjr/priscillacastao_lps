@@ -15,6 +15,10 @@
 .logo { display:block; width:min(100%,460px); height:clamp(70px,8vw,115px); margin-inline:auto; background:var(--paper); mask:url('/brand/priscilla-castao-logo.svg') center / contain no-repeat; }
 .heroAction { display:inline-flex; align-items:center; gap:22px; min-height:44px; padding:12px 18px; border-radius:30px; background:#faf5ec15; box-shadow:inset 0 1px 0 #faf5ec55; backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px); font-size:13px; transition:background 200ms ease; }
 .heroAction svg { width:15px; height:15px; }
+.pdfBadge { font-size:9px; font-weight:600; letter-spacing:.04em; color:var(--cream); }
+.linksHint { display:flex; justify-content:center; align-items:center; gap:8px; margin:16px 0 0; color:var(--cream); font-size:12px; }
+.linksHint span { display:flex; }
+.linksHint svg { width:13px; height:13px; }
 .cardStack { display:grid; grid-template-rows:repeat(4,minmax(0,1fr)); gap:15px; min-width:0; }
 .cardStack:focus { outline:none; }
 .cardStack:focus-visible { outline:2px solid var(--cream); outline-offset:6px; }
@@ -49,3 +53,4 @@
 @media (max-width:899px) { .page { padding:0 22px 20px; } .topbar { height:76px; } .composition { display:flex; flex-direction:column; height:auto; gap:20px; } .portraitPanel { height:480px; mask-image:radial-gradient(circle at 50% 100%,transparent 0 18px,#000 19px); } .mainPhoto { object-position:center 32%; } .signature { bottom:38px; } .logo { height:85px; width:340px; } .notchButton { left:50%; top:480px; } .notchButton svg { transform:rotate(90deg); } .cardStack { grid-template-rows:repeat(4,155px); gap:13px; } .cardText h2 { font-size:27px; } .cardText { width:76%; } .cardText > span { font-size:15px; } }
 @media (max-width:420px) { .page { padding-inline:16px; } .topbar { height:68px; } .portraitPanel { height:420px; } .signature { inset-inline:16px; bottom:35px; } .logo { width:100%; height:76px; } .notchButton { top:420px; } .cardStack { grid-template-rows:repeat(4,145px); } .card { padding:18px 20px; } .cardText h2 { font-size:24px; } .cardText > span { font-size:14px; } }
 @media (prefers-reduced-motion:reduce) { .heroAction,.card,.notchButton { transition:none; } .entrance { display:none; } }
+@media (max-width:899px) { .linksHint svg { transform:rotate(90deg); } }

@@ -4,6 +4,14 @@
 
 Em 15/10/2026, o usuário escolheu manter apenas o layout antes chamado v2 para desktop e mobile. Ele agora reside em `app/links/`, na rota `/links`, incluindo loader GSAP, estilos e fontes locais. `/links-v2` redireciona permanentemente para `/links`. O monograma do topo é decorativo, sem clique. A primeira implementação foi retirada das rotas e seus arquivos sem uso removidos; permanece recuperável no Git. As seções abaixo registram o histórico anterior à consolidação. Os refinamentos atuais estão em `docs/links-v2-motion.md`.
 
+### Catálogo, ícones e compartilhamento
+
+O botão “Conheça as aulas” abre `/materiais/catalogo-de-aulas-priscilla-castao.pdf` em nova aba, com indicação de PDF e rótulo acessível. Fonte confirmada pelo usuário: `outputs/pdf/priscilla-castao-catalogo-de-aulas-v15.pdf`, 7 páginas de 640×800pt (não A4). Arquivo copiado sem alterações: SHA-256 `7b1ac12bfd67b512b956fb2734a67083200ca60f4dc63921f924bc235ac58513`. HTTP 200 com `application/pdf`, resposta idêntica à fonte. Não pré-carregar esse documento no loader; transferir somente quando solicitado.
+
+Adicionada a indicação “Veja todos os meus links” abaixo do botão, com seta direcional de acordo com a composição. Favicon SVG/ICO, PNG 96px, Apple 180px e ícones web-app 192/512px agora usam o P sobre vinho, gerados de forma reprodutível com `node scripts/update-brand-icons.mjs`. Ícones declarados no layout têm versão na URL para evitar reutilização do favicon antigo. Metadados Open Graph e cartão de compartilhamento configurados para `/links`, com nome, descrição e retrato existentes. Política de indexação preservada.
+
+Verificação: 85 testes em 20 arquivos, lint, tipos e build aprovados. Axe sem violações; sem transbordamento em 430 e 1440px. Alias `/links-v2` continua redirecionando para `/links`.
+
 ## Overview
 
 A rota `/links` reúne contato, portfólio, trajetória e Instagram em uma composição compacta, com foto e logo no topo. O cartão de WhatsApp recebe a maior área e prioridade visual. A rota tem título e descrição próprios e metadados `noindex, nofollow`.

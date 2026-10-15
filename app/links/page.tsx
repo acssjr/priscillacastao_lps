@@ -19,6 +19,13 @@ export const metadata: Metadata = {
   title: "Priscilla Castão | Meus links",
   description: "Aulas, portfólio e trajetória de Priscilla Castão.",
   robots: { index: false, follow: false },
+  openGraph: {
+    title: "Priscilla Castão | Meus links",
+    description: "Catálogo de aulas, contato e trajetória de Priscilla Castão.",
+    url: "/links", type: "website", locale: "pt_BR", siteName: "Priscilla Castão",
+    images: [{ url: "/images/priscilla-castao-instagram-DYf07MJEQ9z-01.webp", width: 900, height: 1200, alt: "Priscilla Castão, professora de forró" }],
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 function Arrow({ down = false }: { down?: boolean }) {
@@ -48,7 +55,8 @@ export default function LinksPage() {
           <div className={styles.photoVeil} />
           <div className={styles.signature}>
             <h1><span className={styles.srOnly}>Priscilla Castão</span><span className={styles.logo} aria-hidden="true" /></h1>
-            <a href={profileLinks.whatsapp} target="_blank" rel="noopener noreferrer" className={styles.heroAction}>Conheça as aulas <Arrow /></a>
+            <a href={profileLinks.catalog} target="_blank" rel="noopener noreferrer" aria-label="Conheça as aulas — catálogo PDF (abre em nova aba)" className={styles.heroAction}>Conheça as aulas <span className={styles.pdfBadge}>PDF</span><Arrow /></a>
+            <p className={styles.linksHint}>Veja todos os meus links <span aria-hidden="true"><Arrow down /></span></p>
           </div>
         </section>
 
