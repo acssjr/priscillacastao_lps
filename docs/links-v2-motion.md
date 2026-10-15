@@ -22,3 +22,7 @@ Topo: altura própria com monograma no centro exato do intervalo até o início 
 ## Validação
 
 Lint, tipos e build aprovados. Teste com imagem retardada: progresso permaneceu abaixo de 100 até sua liberação e terminou em 100. Sem botão de pular, sem erros JS. Sem transbordamento de 320 a 1920px, incluindo a mudança de composição entre 899/900px. Axe sem violações em 1398px. Versão original `/links` não alterada.
+
+## Cartões sem fotografias
+
+Refinamento posterior solicitado pelo usuário: as quatro áreas usam apenas marcas-d'água, mantendo a foto principal. Aulas usa o símbolo do WhatsApp em verde profundo translúcido; portfólio usa o monograma P; trajetória usa a logo horizontal inclinada; Instagram usa a logo empilhada. Vidro, títulos, subtítulos e navegação preservados. A preparação do loader inclui o SVG adicional da logo empilhada. Capturas de 430 e 1398px confirmam quatro marcas, nenhuma foto nos cartões, nenhuma rolagem horizontal e zero violações Axe.

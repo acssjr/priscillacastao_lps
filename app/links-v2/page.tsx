@@ -26,10 +26,10 @@ function Arrow({ down = false }: { down?: boolean }) {
 }
 
 const cards = [
-  { title: "Aulas de forró", action: "Converse comigo", href: profileLinks.whatsapp, image: "/images/priscilla-castao-ensaio-03.webp", kind: "aulas", external: true },
-  { title: "Meu portfólio", action: "Explore meu trabalho", href: profileLinks.portfolio || "/#aulas", image: null, kind: "portfolio", external: false },
-  { title: "Minha trajetória", action: "Conheça minha história", href: profileLinks.release || "/#sobre", image: "/images/priscilla-castao-ensaio-01.webp", kind: "trajectory", external: false },
-  { title: "A dança continua", action: "Volte ao Instagram", href: profileLinks.instagram, image: "/images/priscilla-castao-forro-roots-capa.webp", kind: "instagram", external: true },
+  { title: "Aulas de forró", action: "Converse comigo", href: profileLinks.whatsapp, kind: "aulas", external: true },
+  { title: "Meu portfólio", action: "Explore meu trabalho", href: profileLinks.portfolio || "/#aulas", kind: "portfolio", external: false },
+  { title: "Minha trajetória", action: "Conheça minha história", href: profileLinks.release || "/#sobre", kind: "trajectory", external: false },
+  { title: "A dança continua", action: "Volte ao Instagram", href: profileLinks.instagram, kind: "instagram", external: true },
 ];
 
 export default function LinksVersionTwo() {
@@ -56,7 +56,7 @@ export default function LinksVersionTwo() {
 
         <nav id="links-rapidos" tabIndex={-1} className={styles.cardStack} aria-label="Links da Priscilla">
           {cards.map(card => <Link key={card.kind} href={card.href} target={card.external ? "_blank" : undefined} rel={card.external ? "noopener noreferrer" : undefined} className={`${styles.card} ${styles[card.kind]}`}>
-            {card.image ? <Image src={card.image} alt="" fill sizes="(min-width: 900px) 310px, 50vw" className={styles.cardPhoto} /> : <span className={styles.portfolioMark} aria-hidden="true" />}
+            <span className={styles.cardWatermark} aria-hidden="true" />
             <div className={styles.cardVeil} />
             <div className={styles.cardText}>{card.kind === "aulas" && <span className={styles.whatsappIcon} aria-hidden="true" />}<h2>{card.title}</h2><span>{card.action}</span></div>
             <span className={styles.cardArrow}><Arrow /></span>

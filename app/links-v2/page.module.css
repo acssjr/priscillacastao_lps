@@ -21,7 +21,7 @@
 .cardStack:focus-visible { outline:2px solid var(--cream); outline-offset:6px; }
 .card { position:relative; isolation:isolate; overflow:hidden; display:flex; align-items:center; padding:22px 28px; border-radius:16px; background:linear-gradient(125deg,#faf5ec1e,#faf5ec05 60%,#faf5ec12); color:var(--paper); backdrop-filter:blur(24px) saturate(130%); -webkit-backdrop-filter:blur(24px) saturate(130%); box-shadow:0 12px 28px #16070d33,inset 0 1px 0 #faf5ec65,inset 1px 0 0 #faf5ec22,inset -1px -1px 0 #faf5ec20; transition:background-color 200ms ease; }
 .card::after { content:''; position:absolute; z-index:2; inset:0; border-radius:inherit; pointer-events:none; background:linear-gradient(115deg,#faf5ec15,transparent 38%,transparent 70%,#faf5ec08); }
-.cardPhoto { left:auto !important; right:0 !important; width:51% !important; object-fit:cover; object-position:50% 16%; transform:scale(1.07); mask-image:linear-gradient(90deg,transparent,#000 38%); transition:transform 250ms var(--ease); opacity:.84; }
+.cardWatermark { position:absolute; right:27px; top:15%; height:70%; aspect-ratio:1; background:var(--cream); opacity:.12; mask:url('/brand/priscilla-castao-monogram.svg') center / contain no-repeat; transform:rotate(-10deg); pointer-events:none; }
 .cardVeil { position:absolute; inset:0; background:linear-gradient(90deg,#64121f8c,#64121f66 36%,#64121f0a 78%,transparent); }
 .cardText { position:relative; z-index:3; width:75%; }
 .cardText h2 { margin:0 0 12px; font-size:clamp(24px,2.3vw,32px); font-weight:700; line-height:1.08; letter-spacing:-.03em; }
@@ -29,12 +29,15 @@
 .whatsappIcon { display:block; width:23px; height:23px; margin-bottom:9px; background:var(--cream); mask:url('/brand/whatsapp-simple-icons.svg') center / contain no-repeat; }
 .cardArrow { position:absolute; z-index:3; right:20px; bottom:17px; width:30px; height:30px; display:grid; place-items:center; border-radius:50%; background:#faf5ec25; color:var(--cream); backdrop-filter:blur(12px); }
 .cardArrow svg { width:15px; height:15px; }
-.aulas { background-color:#ae66642b; }
-.aulas .cardPhoto { object-position:50% 12%; }
+.aulas { background:linear-gradient(115deg,#244638c9,#15513e91 65%,#34785966); }
+.aulas .cardVeil { background:linear-gradient(90deg,#18372c99,#18372c40 50%,transparent); }
+.aulas .cardWatermark { mask-image:url('/brand/whatsapp-simple-icons.svg'); background:#d0f5da; opacity:.16; height:94%; top:3%; right:24px; transform:rotate(-13deg); }
+.aulas .whatsappIcon { background:#d0f5da; }
+.aulas .cardArrow { background:#d0f5da22; }
 .portfolio { background-color:#64121f55; }
-.portfolioMark { position:absolute; right:27px; top:15%; height:70%; aspect-ratio:1; background:var(--cream); opacity:.12; mask:url('/brand/priscilla-castao-monogram.svg') center / contain no-repeat; transform:rotate(-10deg); }
 .trajectory { background-color:#ae66641f; }
-.instagram .cardPhoto { object-position:50% 20%; }
+.trajectory .cardWatermark { mask-image:url('/brand/priscilla-castao-logo.svg'); aspect-ratio:4; height:82%; top:15%; right:-30px; transform:rotate(-14deg); opacity:.095; }
+.instagram .cardWatermark { mask-image:url('/brand/priscilla-castao-mark.svg'); aspect-ratio:2; height:110%; top:-5%; right:-8px; transform:rotate(9deg); opacity:.11; }
 .notchButton { position:absolute; z-index:4; top:50%; left:calc((100% - var(--gutter)) * .5283); transform:translate(-50%,-50%); width:26px; height:26px; display:grid; place-items:center; border:1px solid #f1e2c950; border-radius:50%; background:#3b111d; color:var(--cream); transition:background 200ms ease; }
 .notchButton::before { content:''; position:absolute; inset:-9px; border-radius:50%; }
 .notchButton svg { width:12px; height:12px; }
@@ -48,9 +51,9 @@
 .progress { width:110px; height:2px; background:#f1e2c940; overflow:hidden; }
 .progressLine { display:block; height:100%; background:var(--cream); transform:scaleX(.01); transform-origin:left; }
 .progressNumber { font-size:14px; font-variant-numeric:tabular-nums; color:var(--cream); min-width:4ch; text-align:center; }
-@media (hover:hover) and (pointer:fine) { .card:hover { background-color:#faf5ec16; } .card:hover .cardPhoto { transform:scale(1.1); } .heroAction:hover,.notchButton:hover { background:#7a2638; } }
+@media (hover:hover) and (pointer:fine) { .card:hover { background-color:#faf5ec16; } .heroAction:hover,.notchButton:hover { background:#7a2638; } }
 .card:active,.heroAction:active { filter:brightness(1.06); }
 @media (min-width:900px) and (max-height:760px) { .page { padding-inline:32px; } .topbar { height:76px; } .composition { height:max(480px,76svh); } .signature { bottom:28px; } .card { padding:16px 24px; } .cardText h2 { font-size:25px; margin-bottom:8px; } .cardText > span:not(.whatsappIcon) { font-size:15px; } .whatsappIcon { width:19px; height:19px; margin-bottom:6px; } }
 @media (max-width:899px) { .page { padding:0 22px 20px; } .topbar { height:76px; } .composition { display:flex; flex-direction:column; height:auto; gap:20px; } .portraitPanel { height:480px; mask-image:radial-gradient(circle at 50% 100%,transparent 0 18px,#000 19px); } .mainPhoto { object-position:center 32%; } .signature { bottom:38px; } .logo { height:85px; width:340px; } .notchButton { left:50%; top:480px; } .notchButton svg { transform:rotate(90deg); } .cardStack { grid-template-rows:repeat(4,155px); gap:13px; } .cardText h2 { font-size:27px; } .cardText { width:76%; } .cardText > span:not(.whatsappIcon) { font-size:15px; } }
 @media (max-width:420px) { .page { padding-inline:16px; } .topbar { height:68px; } .portraitPanel { height:420px; } .signature { inset-inline:16px; bottom:35px; } .logo { width:100%; height:76px; } .notchButton { top:420px; } .cardStack { grid-template-rows:repeat(4,145px); } .card { padding:18px 20px; } .cardText h2 { font-size:24px; } .cardText > span:not(.whatsappIcon) { font-size:14px; } }
-@media (prefers-reduced-motion:reduce) { .cardPhoto,.heroAction,.card,.notchButton { transition:none; } .entrance { display:none; } }
+@media (prefers-reduced-motion:reduce) { .heroAction,.card,.notchButton { transition:none; } .entrance { display:none; } }
