@@ -58,12 +58,10 @@ export default function LinksVersionTwo() {
           {cards.map(card => <Link key={card.kind} href={card.href} target={card.external ? "_blank" : undefined} rel={card.external ? "noopener noreferrer" : undefined} className={`${styles.card} ${styles[card.kind]}`}>
             <span className={styles.cardWatermark} aria-hidden="true" />
             <div className={styles.cardVeil} />
-            <div className={styles.cardText}>{card.kind === "aulas" && <span className={styles.whatsappIcon} aria-hidden="true" />}<h2>{card.title}</h2><span>{card.action}</span></div>
-            <span className={styles.cardArrow}><Arrow /></span>
+            <div className={styles.cardText}><h2>{card.title}</h2><span>{card.action}</span></div>
           </Link>)}
         </nav>
       </div>
-      <footer className={styles.footer}><span>Salvador, Bahia</span></footer>
     </div>
   </main>;
 }

@@ -26,3 +26,5 @@ Lint, tipos e build aprovados. Teste com imagem retardada: progresso permaneceu 
 ## Cartões sem fotografias
 
 Refinamento posterior solicitado pelo usuário: as quatro áreas usam apenas marcas-d'água, mantendo a foto principal. Aulas usa o símbolo do WhatsApp em verde profundo translúcido; portfólio usa o monograma P; trajetória usa a logo horizontal inclinada; Instagram usa a logo empilhada. Vidro, títulos, subtítulos e navegação preservados. A preparação do loader inclui o SVG adicional da logo empilhada. Capturas de 430 e 1398px confirmam quatro marcas, nenhuma foto nos cartões, nenhuma rolagem horizontal e zero violações Axe.
+
+Limpeza final dos cartões: removidos o ícone pequeno do WhatsApp, as quatro setas dos cartões e o rodapé “Salvador, Bahia”. A marca-d'água da trajetória foi reduzida, deslocada para a direita e suavizada na borda esquerda. Links e marcas-d'água principais preservados. Conferido em 430 e 1440px; lint, tipos e build aprovados.
