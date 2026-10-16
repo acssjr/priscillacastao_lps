@@ -27,15 +27,16 @@ export function Entrance() {
     const animations: Animation[] = [];
     const easing = getComputedStyle(page).getPropertyValue("--ease").trim();
     const pending = new Map<Element, Animation>();
+    const accents = new Map<Element, Animation[]>();
     let entranceStarted = false;
     const portrait = page.querySelector(`.${styles.portraitPanel}`);
     const cards = Array.from(page.querySelectorAll(`.${styles.card}`));
     // Hold each surface at its first frame before the loader uncovers it.
     // Without JS these styles never apply, so every link remains available.
-    const prepare = (element: Element, duration: number, distance: number) => {
+    const prepare = (element: Element, duration: number, distance: number, depth = false) => {
       const animation = element.animate([
-        { opacity: 0, transform: `translateY(${distance}px) scale(.97)` },
-        { opacity: 1, transform: "translateY(0) scale(1)" },
+        { opacity: 0, transform: depth ? `perspective(1000px) translateX(-${distance}px) rotateY(-6deg) scale(.97)` : `translateX(-${distance}px)` },
+        { opacity: 1, transform: depth ? "perspective(1000px) translateX(0) rotateY(0deg) scale(1)" : "translateX(0)" },
       ], { duration, easing, fill: "both" });
       animation.pause();
       animation.currentTime = 0;
@@ -43,7 +44,11 @@ export function Entrance() {
       return animation;
     };
     const portraitEntrance = portrait ? prepare(portrait, 450, 14) : undefined;
-    cards.forEach(card => pending.set(card, prepare(card, 450, 18)));
+    cards.forEach(card => {
+      pending.set(card, prepare(card, 650, 48, true));
+      const text = card.querySelector(`.${styles.cardText}`);
+      accents.set(card, text ? [prepare(text, 450, 12)] : []);
+    });
     const showCard = (card: Element, delay = 0) => {
       const animation = pending.get(card);
       if (!animation) return;
@@ -52,23 +57,29 @@ export function Entrance() {
       animation.effect?.updateTiming({ delay });
       animation.play();
       void animation.finished.then(() => animation.cancel()).catch(() => undefined);
+      accents.get(card)?.forEach(accent => {
+        accent.effect?.updateTiming({ delay: delay + 90 });
+        accent.play();
+        void accent.finished.then(() => accent.cancel()).catch(() => undefined);
+      });
     };
     const showFocusedCard = (event: FocusEvent) => {
       if (!(event.target instanceof Element)) return;
       const card = event.target.closest(`.${styles.card}`);
       if (!card) return;
       // Keyboard navigation never waits for a decorative reveal.
-      const animation = animations.find(item => (item.effect as KeyframeEffect | null)?.target === card);
       pending.delete(card);
       observer?.unobserve(card);
-      animation?.cancel();
+      animations.forEach(animation => {
+        const target = (animation.effect as KeyframeEffect | null)?.target;
+        if (target instanceof Element && (target === card || card.contains(target))) animation.cancel();
+      });
     };
     page.addEventListener("focusin", showFocusedCard);
     const observer = new IntersectionObserver(entries => {
       if (!entranceStarted) return;
       entries.filter(entry => entry.isIntersecting)
-        .sort((a, b) => cards.indexOf(a.target) - cards.indexOf(b.target))
-        .forEach((entry, index) => showCard(entry.target, index * 80));
+        .forEach(entry => showCard(entry.target));
     }, { threshold: .08 });
     const started = performance.now();
     // Reuse resources already requested by HTML/CSS; no duplicate brand downloads.
@@ -92,11 +103,10 @@ export function Entrance() {
           portraitEntrance?.play();
           if (portraitEntrance) void portraitEntrance.finished.then(() => portraitEntrance.cancel()).catch(() => undefined);
           entranceStarted = true;
-          let visibleIndex = 0;
           cards.forEach(card => {
             const bounds = card.getBoundingClientRect();
             if (bounds.top < window.innerHeight && bounds.bottom > 0) {
-              showCard(card, 180 + visibleIndex++ * 80);
+              showCard(card, 180);
             } else observer?.observe(card);
           });
         }

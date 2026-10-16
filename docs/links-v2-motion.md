@@ -61,3 +61,9 @@ Orçamento: entrada de apresentação permite 450ms; sequência curta, somente t
 Candidatos rejeitados: giro/deslocamento do P (sem propósito atual e retirado pelo usuário); animação repetida a cada passagem pela tela (prejudica leitura); movimento em saltos de foco por teclado (reprovado na frequência/função). Maior benefício: guardar os cartões fora da tela para sua primeira aparição, em vez de terminar a animação antes que o visitante os veja. Diagnóstico pela skill find-animation-opportunities; implementação pela skill animate.
 
 Validação em Chromium: intervalos registrados de 180/260/340/420ms no desktop, cartões abaixo da dobra com opacidade zero até a rolagem, revelação completa e sem repetição. Foco no último cartão o revela imediatamente. Sem rolagem horizontal em 320/768/1024/1440px, sem erros de página; movimento reduzido e versão sem JavaScript aprovados. Lint, tipos e build aprovados. Localhost ativo na porta 3002.
+
+## Entrada lateral — revisão de 16/10/2026
+
+A pedido do usuário, substituída a cascata vertical por movimento horizontal sincronizado. Superfícies: 650ms, opacity 0 → 1, perspective(1000px) translateX(-48px) rotateY(-6deg) scale(.97) → estado final, curva compartilhada --ease-out. Texto: deslocamento horizontal de 12px, 450ms, começa 90ms após sua superfície. Todos os cartões visíveis usam o mesmo atraso de 180ms após a saída do loader, sem escalonamento entre linhas. O retrato também entra lateralmente (14px, 450ms). Cartões abaixo da dobra mantêm entrada única ao rolar, sem cascata. Movimento reduzido, foco imediato por teclado e limpeza ao desmontar preservados. Não foi adicionada biblioteca.
+
+Validação: keyframes e temporização conferidos no navegador (quatro atrasos iguais de 180ms, nenhuma translação Y); sem transbordamento em 320/768/1024/1440px. Entrada ao rolar, foco e movimento reduzido aprovados. Lint, tipos e build aprovados. P permanece estático.
