@@ -83,7 +83,7 @@ export default function CatalogPage() {
     <footer className={styles.footer}>
       <div><h2>Obrigada pelo<br />seu interesse.</h2><p>Me conte qual aula ou curso chamou sua atenção.</p></div>
       <div><p>Envie uma mensagem dizendo qual opção você escolheu e o que gostaria de aprender ou aprimorar. Se já dança, conte um pouco da sua experiência.</p><p>Se ainda não sabe qual formato escolher, podemos conversar sobre o que você busca e tirar suas dúvidas.</p><Contact option="aulas ou cursos">Fale com Priscilla</Contact></div>
-      <div className={styles.download}><span>Prefere guardar o catálogo?</span><FeedbackLink href={profileLinks.catalogPdf} download feedback="Preparando o download do PDF…">Baixar em PDF <span>(1,9 MB)</span><Arrow /></FeedbackLink></div>
+      <div className={styles.download}><span>Prefere guardar o catálogo?</span><FeedbackLink href={profileLinks.catalogPdf} download feedback="Preparando o download do PDF…">Baixar em PDF <span>(2,1 MB)</span><Arrow /></FeedbackLink></div>
     </footer>
     </div>
   </main>;

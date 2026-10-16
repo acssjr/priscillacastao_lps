@@ -89,3 +89,9 @@ SHA-256 novo: 7a1cd71598550812fd1bb4c608a511db04cb6da94e7d34740a14ba6c8bbdafb8. 
 A pedido do usuário, capa vermelha trocada pela foto public/images/priscilla-catalogo-retrato.webp usada no catálogo web, em suas cores naturais, sem o filtro vinho aplicado por CSS na página. Fundo substituído sem recriar o texto ou o logo vetorial. Painel vinho com transparência de28%, contorno creme translúcido e sombra discreta ocupa a área de leitura; véu graduado no topo mantém a assinatura legível. Rosto preservado acima do painel. Fonte v16 preservada e novo arquivo v17 na pasta outputs/pdf do projeto principal.
 
 Sete páginas, textos e links iguais ao v16; páginas2–7 renderizam com pixels idênticos. Capa renderizada e conferida visualmente. PDF público substituído na mesma URL, tamanho1.889.952bytes; indicação do download atualizada para1,9MB. SHA256: 12e92d3744d07d04d53c14fd83e68f0c852962d65e59b175234849bed58eef94. Script scripts/update-catalog-cover.py reproduz a composição sem alterar as demais páginas.
+
+## Capa PDF v18 — vidro fosco creme
+
+Revisão solicitada pelo usuário: zoomout na fotografia, ambiente mais creme e esmaecido, painel com blur de liquid glass em vez de simples camada translúcida. Material de fundo gerado por edição da mesma fotografia, com rosto acima do painel. Arquivo de produção em assets/catalogo/capa-creme-glass.webp; enquadramento e vidro compõem apenas o fundo da capa. Fonte de7páginas baseada no v16 com preços já atualizados; textos, posições tipográficas e assinatura vetorial preservados e recoloridos em vinho para contraste no vidro claro. Script update-catalog-cover.py --frosted reproduz a montagem.
+
+Saída v18 em outputs/pdf do projeto principal e cópia pública substituída. Textos e links iguais ao v17; páginas2–7 pixel-idênticas; capa renderizada e conferida. Valores439,90/149,90/52,70 validados. Tamanho aproximado2,1MB, indicado no download. HashSHA256: 2D73AC2DDDD72D064B5C85415C2C51236E47028B1070598DB8BA82543FBD9103.
