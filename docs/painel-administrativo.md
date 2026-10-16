@@ -34,6 +34,8 @@ O editor foi adaptado à estrutura das campanhas de Priscilla. Não inclui ediç
 
 
 ## Validação da edição visual
+Ao alternar as seções do menu, a edição visual fica oculta sem desmontar o iframe. Assim, retornar ao editor preserva o documento, a visualização escolhida e o estado dos controles, sem novo carregamento da prévia. O teste de navegação verifica essa continuidade no desktop e no celular e rejeita novas requisições de documento.
+
 O teste npm run test:admin usa armazenamento temporário e uma porta própria, sem editar os dados locais do usuário. Exercita escrita direta com teclado, sincronização nos dois sentidos, destaque do título, desfazer/refazer, perguntas, prévia, três campanhas, rascunho separado do publicado, publicação confirmada, recuperação de histórico, upload, posição de foto com teclado, novo usuário, navegação móvel e acessibilidade. Testes do catálogo rejeitam caminhos protegidos ou desconhecidos recebidos por mensagens do canvas.
 
 A lateral tem preferência de recolhimento independente da de Iasmin, transição GSAP e suporte a movimento reduzido. O carregamento informa verificação de acesso e abertura do painel; a publicação mostra confirmação, operação pendente e sucesso real. O editor não reproduz as animações de entrada do site durante a escrita, seguindo o comportamento do editor de Iasmin; a landing pública continua com suas animações.

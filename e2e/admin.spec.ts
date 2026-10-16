@@ -2,6 +2,32 @@ import { test, expect } from "@playwright/test";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import AxeBuilder from "@axe-core/playwright";
+test("menu navigation keeps the visual preview and editing controls alive", async ({ page }) => {
+  await page.goto("/admin");
+  execFileSync(process.execPath,["scripts/create-admin.mjs"],{env:{...process.env,CMS_DATA_DIRECTORY:process.env.CMS_TEST_DIRECTORY,DATABASE_URL:"",ADMIN_INITIAL_PASSWORD:"test-password-123"}});
+  await page.getByLabel("Usuário",{exact:true}).fill("admin");
+  await page.getByLabel("Senha",{exact:true}).fill("test-password-123");
+  await page.getByRole("button",{name:"Entrar no painel",exact:true}).click();
+  await expect(page.locator('[data-editor-ready="true"]')).toBeVisible();
+  const preview = page.frameLocator('iframe[title="Site com edição visual"]');
+  await preview.locator("body").evaluate(node => { node.dataset.navigationTest = "same-document"; });
+  await page.getByRole("combobox",{name:"Visualização",exact:true}).selectOption("mobile");
+  await page.getByRole("button",{name:"Ocultar campos",exact:true}).click();
+  let requests = 0;
+  page.on("request", request => { if (request.resourceType() === "document") requests++; });
+  for (const width of [1440,390]) {
+    await page.setViewportSize({width,height:1000});
+    for (const name of ["Minha conta","Como usar","Editar no site"]) {
+      if (width < 768) await page.getByRole("button",{name:"Menu",exact:true}).click();
+      await page.getByRole("button",{name,exact:true}).click();
+    }
+    await expect(page.locator('[data-editor-ready="true"]')).toBeVisible();
+    await expect(preview.locator("body")).toHaveAttribute("data-navigation-test","same-document");
+    await expect(page.getByRole("combobox",{name:"Visualização",exact:true})).toHaveValue("mobile");
+    await expect(page.getByRole("button",{name:"Mostrar campos",exact:true})).toBeVisible();
+    expect(requests).toBe(0);
+  }
+});
 test("visual editing, inspector, three campaigns, publication, history, photos and users", async ({ page }) => {
   test.setTimeout(150000);
   const errors: string[] = []; page.on("pageerror",error => errors.push(error.message));
