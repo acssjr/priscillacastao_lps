@@ -56,7 +56,7 @@
 .course { display:flex; align-items:start; justify-content:space-between; gap:1.5rem; padding-block:1.5rem; border-top:1px solid #64121f33; }
 .course h3 { font-size:1.25rem; }
 .course p { font-size:.9375rem; margin-bottom:0; }
-.coursePrice { font-size:1.125rem; font-weight:700; white-space:nowrap; }
+.coursePrice { display:block; margin:-.25rem 0 .875rem; font-size:1.125rem; font-weight:700; white-space:nowrap; }
 .combo { display:grid; gap:1.25rem; margin-top:1.5rem; padding:1.5rem; background:var(--wine); color:var(--paper); border-radius:16px; }
 .combo h3 { font-size:1.75rem; }
 .combo p { color:var(--cream); max-width:43ch; }

@@ -75,8 +75,8 @@ export default function CatalogPage() {
     <div className={styles.coursesBand}>
     <section id="cursos" className={styles.courses} aria-labelledby="courses-title">
       <div className={styles.sectionHead} data-catalog-reveal><h2 id="courses-title">Cursos livres</h2><p>Encontros práticos para aprofundar um aspecto da sua dança.<br />Você escolhe o tema que deseja trabalhar.</p></div>
-      <div>{freeCourses.map(course => <article key={course.title} className={styles.course}><div><h3>{course.title}</h3><p>{course.text}</p></div><span className={styles.coursePrice}>{course.amount}</span></article>)}</div>
-      <div className={styles.combo}><div><h3>Combo dos 3 cursos</h3><p>Adquira os três conteúdos para aprofundar sua dança de forma contínua.</p></div><div className={styles.comboPrice}><span>Valor promocional</span><strong>R$ 397</strong><span>R$ 53 de desconto</span></div><Contact option="combo dos 3 cursos">Quero fazer os três cursos</Contact></div>
+      <div>{freeCourses.map(course => <article key={course.title} className={styles.course}><div><h3>{course.title}</h3><span className={styles.coursePrice}>{course.amount}</span><p>{course.text}</p></div></article>)}</div>
+      <div className={styles.combo}><div><h3>Combo dos 3 cursos</h3><p>Adquira os três conteúdos para aprofundar sua dança de forma contínua.</p></div><div className={styles.comboPrice}><span>Valor promocional</span><strong>R$ 397</strong><span>R$ 52,70 de desconto</span></div><Contact option="combo dos 3 cursos">Quero fazer os três cursos</Contact></div>
     </section>
     </div>
 

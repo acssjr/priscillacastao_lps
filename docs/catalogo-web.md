@@ -59,3 +59,9 @@ Atalho “Aulas e valores” renomeado para “Descrições e valores”. Os tr�
 Foto fornecida pelo usuário em recorte de captura263×254 foi restaurada com imagegen, removendo elementos do navegador e produzindo uma derivação de melhor definição, sem alegar recuperação do arquivo original. Arquivo otimizado em public/images/priscilla-catalogo-retrato.webp. A foto e o P aparecem à direita como ambientação da abertura; foto decorativa com alt vazio/aria-hidden, responsiva por Next Image, filtro CSS sepia(.25), saturate(.55), contrast(.92), luminosidade sobre vinho e opacidade reduzida. Degradê papel sob a área de leitura e sombra papel no título e parágrafos mantêm contraste. Sem voltar ao antigo bloco fotográfico separado.
 
 Validado em320/430/768/1440px: imagem decodificada, nenhuma rolagem horizontal, Axe sem violações, atalho leva a#formatos e rótulo correto. Lint (sem erros), tipos e build aprovados. Não houve alteração no PDF, nos valores ou no fluxo de contato. Capturas em .impeccable/review/catalog-photo-430.png e catalog-photo-1440.png.
+
+## Valores e posição dos preços — 16/10/2026
+
+Atualização expressa do usuário no catálogo web: três cursos individuais de R$149,90 cada; preço imediatamente abaixo do nome e antes da descrição, alinhado à esquerda em todos os breakpoints. Pacote de quatro aulas individuais agora R$439,90. Economia recalculada em relação a quatro avulsas de R$120: R$40,10. Retirada a equivalência anterior de R$110 por aula para evitar divergência de arredondamento. Combo mantido em R$397, com economia corrigida para R$52,70 sobre três cursos de R$149,90. PDF original não alterado nesta revisão.
+
+Verificação em320/430/768/1440px confirmou os três preços abaixo e alinhados aos títulos, novo valor do pacote e ausência de rolagem horizontal. Typecheck e build aprovados.

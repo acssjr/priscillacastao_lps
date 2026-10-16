@@ -1,4 +1,4 @@
-/** Transcription of the user-approved class catalogue v15. Prices are per format. */
+/** Based on catalogue v15, with subsequent user-approved web pricing updates. */
 export const lessonMethod = [
   { title: "Priscilla começa dançando com você", text: "Ao dançar com você, Priscilla observa os passos que já conhece e como os executa. Isso ajuda a identificar o que precisa de ajuste e quais movimentos podem entrar no seu repertório." },
   { title: "Ajustes nos passos que você já usa", text: "Vocês refinam a execução dos movimentos, com atenção à limpeza dos passos. O objetivo é diminuir a insegurança ao executá-los e melhorar a aparência da sua dança." },
@@ -8,7 +8,7 @@ export const lessonMethod = [
 export const lessonFormats = [
   {
     id: "individual", title: "Aula individual", description: "1 hora com Priscilla, sem precisar levar um par.",
-    prices: [{ label: "Aula individual · 1 hora", amount: "R$ 120,00" }, { label: "Pacote individual · 4 aulas de 1h", amount: "R$ 440,00", saving: "Economize R$ 40 no pacote · R$ 110 por aula" }],
+    prices: [{ label: "Aula individual · 1 hora", amount: "R$ 120,00" }, { label: "Pacote individual · 4 aulas de 1h", amount: "R$ 439,90", saving: "Economize R$ 40,10 em relação a 4 aulas avulsas" }],
     sections: [
       { title: "Para quem é indicada", text: "Para quem quer começar sozinho ou já dança e deseja corrigir a execução dos passos e aprender outros. Priscilla acompanha você como par durante a aula." },
       { title: "Como funciona", text: "Você dança com Priscilla para que ela entenda seu nível. Depois, vocês trabalham os ajustes que ela identificou e praticam novos movimentos no universitário ou no roots." },
@@ -36,7 +36,7 @@ export const lessonFormats = [
 ];
 
 export const freeCourses = [
-  { title: "Consciência corporal", text: "Desenvolva a percepção dos seus movimentos e identifique o que pode ajustar. O foco é dançar com mais controle e clareza na execução.", amount: "R$ 150" },
-  { title: "Musicalidade", text: "Desenvolva a escuta para variar sua dança acompanhando o que a música pede. Experimente movimentos que expressem o que você ouve.", amount: "R$ 150" },
-  { title: "Autonomia e criatividade", text: "Combine os passos que você já conhece e experimente variações. Desenvolva repertório para escolher movimentos e criar sequências na dança.", amount: "R$ 150" },
+  { title: "Consciência corporal", text: "Desenvolva a percepção dos seus movimentos e identifique o que pode ajustar. O foco é dançar com mais controle e clareza na execução.", amount: "R$ 149,90" },
+  { title: "Musicalidade", text: "Desenvolva a escuta para variar sua dança acompanhando o que a música pede. Experimente movimentos que expressem o que você ouve.", amount: "R$ 149,90" },
+  { title: "Autonomia e criatividade", text: "Combine os passos que você já conhece e experimente variações. Desenvolva repertório para escolher movimentos e criar sequências na dança.", amount: "R$ 149,90" },
 ];
