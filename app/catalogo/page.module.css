@@ -80,3 +80,19 @@
 .action:active { transform:scale(.98); }
 .footer .download { color:var(--cream); }
 @media (prefers-reduced-motion:reduce) { .action:active { transform:none; } .details summary span { transition:none; } }
+/* Catalogue navigation and photographic watermark, scoped to the introduction. */
+.heroPhoto { position:absolute; z-index:-2; inset:0 -1rem 0 auto; width:76%; overflow:hidden; opacity:.48; background:var(--wine); mask-image:linear-gradient(90deg,transparent,#000 35%,#000 88%,transparent); pointer-events:none; }
+.heroPhoto img { object-fit:cover; object-position:58% 30%; filter:sepia(.25) saturate(.55) contrast(.92); mix-blend-mode:luminosity; }
+.hero::after { content:''; position:absolute; z-index:-1; inset:0 -1rem; pointer-events:none; background:linear-gradient(90deg,#faf5ec 0%,#faf5eced 23%,#faf5ec66 58%,#faf5ec1a 85%,#faf5ec66); }
+.heroWatermark { z-index:0; opacity:.09; mask-position:100% 30%; }
+.intro { position:relative; z-index:1; }
+.intro h1 { text-shadow:0 2px 16px #faf5ec,0 1px 3px #faf5ec; }
+.intro>p { text-shadow:0 1px 8px #faf5ec,0 1px 2px #faf5ec; }
+.index { gap:.75rem; margin-top:1.5rem; }
+.index a,.index a:last-child { border:0; padding:.875rem 1rem; min-height:56px; border-radius:10px; background:var(--cream); box-shadow:0 5px 14px #4b0d1712; font-weight:700; }
+.index .primaryIndex { color:var(--paper); background:var(--wine); }
+.index a:active { background:#e8d4c6; transform:translateX(2px); }
+.index .primaryIndex:active { background:#4b0d17; }
+@media (min-width:800px) { .heroPhoto { width:54%; right:0; opacity:.65; mask-image:linear-gradient(90deg,transparent,#000 22%,#000 90%,transparent); } .heroPhoto img { object-position:50% 37%; } .hero::after { background:linear-gradient(90deg,#faf5ec 28%,#faf5ece0 44%,#faf5ec1a 70%,#faf5ec33); } .heroWatermark { mask-position:100% 50%; opacity:.1; } }
+@media (hover:hover) and (pointer:fine) { .index a:hover { background:#e8d4c6; transform:translateX(3px); } .index .primaryIndex:hover { background:#4b0d17; } }
+@media (prefers-reduced-motion:reduce) { .index a:hover,.index a:active { transform:none; } }

@@ -51,3 +51,11 @@ Rejeitados: números de preços animados (atrapalham leitura funcional); monogra
 Verificação: foto ausente; botões menores que o contêiner, altura≥48px; Axe sem violações em320/430/768/1440; movimento reduzido, detalhes e ausência de overflow conferidos. Lint, tipos e build aprovados. Evidência .impeccable/review/catalog-refined-{430,1440}.png. Sistema global preservado; refinamento local de Saans/vinho/creme existente.
 
 Revisão independente de acabamento: aprovada sem bloqueadores. Os85 testes em20 arquivos também passaram nesta revisão.
+
+## Fotografia ambiente e atalhos — 16/10/2026
+
+Atalho “Aulas e valores” renomeado para “Descrições e valores”. Os três atalhos da abertura agora têm fundo creme, raio de10px, sombra discreta e área mínima de56px; o atalho de descrições/valores usa vinho e texto papel para indicar sua importância. Ancoragem e foco visível preservados.
+
+Foto fornecida pelo usuário em recorte de captura263×254 foi restaurada com imagegen, removendo elementos do navegador e produzindo uma derivação de melhor definição, sem alegar recuperação do arquivo original. Arquivo otimizado em public/images/priscilla-catalogo-retrato.webp. A foto e o P aparecem à direita como ambientação da abertura; foto decorativa com alt vazio/aria-hidden, responsiva por Next Image, filtro CSS sepia(.25), saturate(.55), contrast(.92), luminosidade sobre vinho e opacidade reduzida. Degradê papel sob a área de leitura e sombra papel no título e parágrafos mantêm contraste. Sem voltar ao antigo bloco fotográfico separado.
+
+Validado em320/430/768/1440px: imagem decodificada, nenhuma rolagem horizontal, Axe sem violações, atalho leva a#formatos e rótulo correto. Lint (sem erros), tipos e build aprovados. Não houve alteração no PDF, nos valores ou no fluxo de contato. Capturas em .impeccable/review/catalog-photo-430.png e catalog-photo-1440.png.
