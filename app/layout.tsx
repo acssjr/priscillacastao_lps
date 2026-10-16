@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Newsreader, Plus_Jakarta_Sans } from "next/font/google";
 import type { ReactNode } from "react";
 import { PageTransition } from "@/components/navigation/PageTransition";
+import { CatalogTransition } from "@/components/navigation/CatalogTransition";
 import "./globals.css";
 
 const sans = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
@@ -38,6 +39,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
       <body>
         <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
         <PageTransition />
+        <CatalogTransition />
         {children}
       </body>
     </html>

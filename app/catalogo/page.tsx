@@ -32,7 +32,7 @@ function Contact({ option, children }: { option: string; children: React.ReactNo
 export default function CatalogPage() {
   return <main id="conteudo" className={`${saans.className} ${styles.page}`}>
     <CatalogMotion />
-    <header className={styles.header}>
+    <header className={styles.header} data-catalog-enter>
       <FeedbackLink href="/links" feedback="Voltando aos links…" className={styles.back}>Voltar aos links</FeedbackLink>
       <span className={styles.logo} role="img" aria-label="Priscilla Castão, professora de forró" />
       <a className={styles.headerContact} href="#formatos">Ver valores <Arrow /></a>
@@ -40,16 +40,16 @@ export default function CatalogPage() {
 
     <section className={styles.hero} aria-labelledby="catalog-title">
       <div className={styles.intro}>
-        <h1 id="catalog-title">Catálogo<br />de aulas<span>.</span></h1>
-        <p className={styles.lede}>Forró universitário e roots.<br />Aulas individuais, em dupla e em grupo.</p>
-        <p>Entenda o funcionamento das aulas e os valores.</p>
-        <nav className={styles.index} aria-label="Neste catálogo">
+        <h1 id="catalog-title" data-catalog-enter>Catálogo<br />de aulas<span>.</span></h1>
+        <p className={styles.lede} data-catalog-enter>Forró universitário e roots.<br />Aulas individuais, em dupla e em grupo.</p>
+        <p data-catalog-enter>Entenda o funcionamento das aulas e os valores.</p>
+        <nav data-catalog-enter className={styles.index} aria-label="Neste catálogo">
           <a href="#como-sao">Como são as aulas <Arrow /></a>
           <a href="#formatos">Descrições e valores <Arrow /></a>
           <a href="#cursos">Cursos livres <Arrow /></a>
         </nav>
       </div>
-      <div className={styles.heroPhoto} aria-hidden="true"><Image src="/images/priscilla-catalogo-retrato.webp" alt="" fill sizes="(min-width: 1200px) 600px, (min-width: 800px) 52vw, 75vw" fetchPriority="high" loading="eager" /></div>
+      <div data-catalog-enter className={styles.heroPhoto} aria-hidden="true"><Image src="/images/priscilla-catalogo-retrato.webp" alt="" fill sizes="(min-width: 1200px) 600px, (min-width: 800px) 52vw, 75vw" fetchPriority="high" loading="eager" /></div>
     </section>
 
     <div className={styles.methodBand}>

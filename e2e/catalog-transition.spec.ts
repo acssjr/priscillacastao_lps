@@ -1,0 +1,42 @@
+import { expect, test } from "@playwright/test";
+
+test("catalogue transition preserves the document and does not replay the initial loader", async ({ page }) => {
+  await page.goto("/links");
+  await expect(page.getByRole("progressbar")).toBeHidden();
+  await page.evaluate(() => document.body.dataset.navigationProof = "same-document");
+  await page.getByRole("link", { name: "Conheça as aulas", exact: true }).click();
+  const overlay = page.locator("[data-catalog-overlay]");
+  await expect(overlay).toHaveAttribute("data-phase", "covering");
+  await expect(page).toHaveURL(/\/catalogo$/);
+  await expect(overlay).toHaveAttribute("data-phase", "idle");
+  await expect(page.locator("body")).toHaveAttribute("data-navigation-proof", "same-document");
+  await expect(page.locator("main")).toHaveCount(1);
+  await page.getByRole("link", { name: "Voltar aos links", exact: true }).click();
+  await expect(page).toHaveURL(/\/links$/);
+  await expect(overlay).toHaveAttribute("data-phase", "idle");
+  await expect(page.getByRole("progressbar")).toBeHidden();
+});
+
+test("a slow catalogue stays covered until the route becomes available", async ({ page }) => {
+  let release!: () => void;
+  const gate = new Promise<void>(resolve => { release = resolve; });
+  await page.route("**/catalogo**", async route => { await gate; await route.continue(); });
+  await page.goto("/links");
+  await expect(page.getByRole("progressbar")).toBeHidden();
+  await page.getByRole("link", { name: "Conheça as aulas", exact: true }).click();
+  await page.waitForTimeout(1700);
+  await expect(page.locator("[data-catalog-overlay]")).toHaveAttribute("data-phase", "covering");
+  release();
+  await expect(page).toHaveURL(/\/catalogo$/);
+  await expect(page.locator("[data-catalog-overlay]")).toHaveAttribute("data-phase", "idle");
+});
+
+test("keyboard navigation does not wait for decorative route motion", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/links");
+  const link = page.getByRole("link", { name: "Conheça as aulas", exact: true });
+  await link.focus();
+  await link.press("Enter");
+  await expect(page).toHaveURL(/\/catalogo$/);
+  await expect(page.locator("[data-catalog-overlay]")).toHaveAttribute("data-phase", "idle");
+});

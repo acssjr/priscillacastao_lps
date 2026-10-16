@@ -13,6 +13,10 @@ export function Entrance() {
     const overlay = root.current;
     const page = overlay?.closest("main");
     if (!overlay || !page) return;
+    if (document.documentElement.dataset.catalogTransition) {
+      overlay.hidden = true;
+      return;
+    }
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       overlay.hidden = true;
       return;

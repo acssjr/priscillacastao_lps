@@ -21,7 +21,9 @@ export function CatalogMotion() {
         ], { duration: reduced.matches ? 150 : 450, easing }));
       });
     }, { threshold: .2 });
-    page.querySelectorAll("[data-catalog-reveal]").forEach(element => observer.observe(element));
+    const observeSections = () => page.querySelectorAll("[data-catalog-reveal]").forEach(element => observer.observe(element));
+    if (document.documentElement.dataset.catalogTransition === "covering") window.addEventListener("catalog:arrive", observeSections, { once: true });
+    else observeSections();
     const disclosures = Array.from(page.querySelectorAll("details"));
     const opening = new Map<Element, Animation>();
     const revealDetails = (event: Event) => {
@@ -39,6 +41,7 @@ export function CatalogMotion() {
     disclosures.forEach(details => details.addEventListener("toggle", revealDetails));
     return () => {
       observer.disconnect();
+      window.removeEventListener("catalog:arrive", observeSections);
       disclosures.forEach(details => details.removeEventListener("toggle", revealDetails));
       animations.forEach(animation => animation.cancel());
     };

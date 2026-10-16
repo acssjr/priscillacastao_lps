@@ -136,3 +136,6 @@
     transform: translateX(40%);
   }
 }
+.overlay[data-catalog-overlay] { z-index:400; }
+.overlay[data-catalog-overlay] .monogram { mask-image:url('/brand/priscilla-castao-monogram.svg'); -webkit-mask-image:url('/brand/priscilla-castao-monogram.svg'); }
+.overlay[data-catalog-overlay][data-phase='idle'] { visibility:hidden; }

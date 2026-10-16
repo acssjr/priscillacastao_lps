@@ -67,3 +67,13 @@ Atualização expressa do usuário no catálogo web: três cursos individuais de
 Verificação em320/430/768/1440px confirmou os três preços abaixo e alinhados aos títulos, novo valor do pacote e ausência de rolagem horizontal. Typecheck e build aprovados.
 
 Revisão posterior: retirado o P da abertura para não misturar com a foto. Os três atalhos voltaram à lista simples com divisórias, sem fundos de botão, sombra ou destaque preenchido. Rótulo Descrições e valores e fotografia tratada preservados. Conferido em430/768/1440px, sem overflow; tipos e build aprovados.
+
+## Transição entre links e catálogo — 16/10/2026
+
+CatalogTransition fica no layout compartilhado, preservado entre /links e /catalogo. Clique normal é capturado antes do Link: saída do main em280ms com translateX(-20px), scale(.99) e opacity1→.65; painéis vinho fecham em320ms; router.push após360ms, sem recarregar o documento. P estático e linha de preparação reutilizam o vocabulário da transição existente. A transição antiga de campanhas não foi modificada.
+
+Após a rota de destino montar, cobertura aguarda document.fonts.ready e decodificação da imagem, com limite de4s para recursos. Título, descrição, atalhos e foto ficam preparados sob a cobertura. Ela abre em320ms; conteúdo entra com translateX(22px)→0 e fade,500ms, atrasos80ms +60ms por elemento. Opacidade final da foto preserva seu tratamento CSS, evitando salto para opacidade total. Não há clone/snapshot da página. O root persiste, apenas o destino monta pela navegação do Next.
+
+Na volta pelo link do catálogo, Entrance detecta a transição e não repete o loader inicial. Observador das seções do catálogo começa após a chegada, sem consumir a animação sob a cobertura. Movimento reduzido usa fades curtos sem deslocamento. Teclado/ctrl/cmd/shift e links externos mantêm navegação nativa sem espera decorativa. Histórico cancela uma passagem em andamento. Timers e animações são limpos; uma segurança de15s destrava o conteúdo caso o destino não chegue. Navegação utiliza href original, inclusive hash, e prefetch.
+
+Validação: seis testes e2e em mobile/desktop aprovados, incluindo documento preservado (marcador JS continua presente), somente um main, ausência de loader duplicado na volta, rota retardada mantendo a cobertura por mais de1,7s e teclado sem bloqueio. Checagem adicional com movimento reduzido passou, sem erros de página. Tipos e build aprovados. Captura real do estado coberto em .impeccable/review/catalog-transition-covered.png e chegada em catalog-transition-arrival.png.
