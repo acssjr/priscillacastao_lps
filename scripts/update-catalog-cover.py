@@ -10,6 +10,63 @@ from pathlib import Path
 
 import pymupdf as fitz
 from PIL import Image
+from fontTools.ttLib import TTFont
+
+
+def update_burgundy(source: Path, output: Path) -> None:
+    """Compose the signature inside wine-tinted frosted glass; retain pages 2-7."""
+    root = Path(__file__).resolve().parents[1]
+    photo = Image.open(root / "assets/catalogo/capa-creme-glass.webp").convert("RGB")
+    encoded = io.BytesIO()
+    photo.save(encoded, format="JPEG", quality=94, subsampling=0)
+    material = fitz.open(stream=encoded.getvalue(), filetype="jpeg")
+    material_pdf = fitz.open("pdf", material.convert_to_pdf())
+    bounds = material_pdf[0].rect
+    crop = fitz.Rect(bounds.width * .043, bounds.height * .47, bounds.width * .957, bounds.height * .877)
+    document = fitz.open(source)
+    signature = fitz.open(source)
+    signature[0].delete_image(signature[0].get_images(full=True)[0][0])
+    replacement = fitz.open()
+    page = replacement.new_page(width=640, height=800)
+    page.insert_image(page.rect, stream=encoded.getvalue())
+    wine = (.30, .035, .085)
+    cream = (.985, .955, .91)
+    # PDF-native tint leaves the photograph intact and the frosted material visible.
+    page.draw_rect(page.rect, color=None, fill=wine, fill_opacity=.24)
+    panel = fitz.Rect(27, 370, 613, 754)
+    page.show_pdf_page(panel, material_pdf, 0, clip=crop, keep_proportion=False)
+    # Clip the frosted material itself so its cream corners do not escape glass.
+    glass_stream = page.get_contents()[-1]
+    rounded_clip = (b"q 49 46 m 591 46 l 603 46 613 56 613 68 c "
+                    b"613 408 l 613 420 603 430 591 430 c 49 430 l "
+                    b"37 430 27 420 27 408 c 27 68 l 27 56 37 46 49 46 c h W n\n")
+    replacement.update_stream(glass_stream, rounded_clip + replacement.xref_stream(glass_stream) + b"\nQ")
+    page.draw_rect(panel, color=(.74, .43, .47), stroke_opacity=.60,
+                   width=.9, fill=wine, fill_opacity=.78, radius=.055)
+    page.show_pdf_page(fitz.Rect(65, 402, 419, 490), signature, 0,
+                       clip=fitz.Rect(38, 32.125, 333, 105.875))
+    fonts = {}
+    for weight in ("Regular", "Bold"):
+        font = TTFont(root / f"app/links/fonts/Saans-TRIAL-{weight}.woff2")
+        font.flavor = None
+        buffer = io.BytesIO()
+        font.save(buffer)
+        fonts[weight] = fitz.Font(fontbuffer=buffer.getvalue())
+    lines = [
+        ("Catálogo de aulas", 65, 551, 48, "Bold"),
+        ("Forró universitário e roots", 65, 602, 23, "Regular"),
+        ("Aulas individuais, em dupla e em grupo", 65, 638, 22, "Regular"),
+        ("Entenda o funcionamento das aulas e os valores", 65, 703, 20, "Regular"),
+    ]
+    for text, x, y, size, weight in lines:
+        writer = fitz.TextWriter(page.rect)
+        writer.append((x, y), text, font=fonts[weight], fontsize=size)
+        writer.write_text(page, color=cream)
+    document.delete_page(0)
+    document.insert_pdf(replacement, start_at=0)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    document.save(output, garbage=4, deflate=True)
+    document.close()
 
 
 def update_frosted(source: Path, output: Path) -> None:
@@ -86,7 +143,9 @@ def update(source: Path, output: Path) -> None:
 
 
 if __name__ == "__main__":
-    if "--frosted" in sys.argv[3:]:
+    if "--burgundy" in sys.argv[3:]:
+        update_burgundy(Path(sys.argv[1]), Path(sys.argv[2]))
+    elif "--frosted" in sys.argv[3:]:
         update_frosted(Path(sys.argv[1]), Path(sys.argv[2]))
     else:
         update(Path(sys.argv[1]), Path(sys.argv[2]))
