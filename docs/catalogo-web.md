@@ -83,3 +83,9 @@ Validação: seis testes e2e em mobile/desktop aprovados, incluindo documento pr
 PDF de download atualizado com cinco substituições pontuais: pacote R$439,90; três cursos a R$149,90; economia do combo R$52,70. Demais preços mantidos. Sete páginas de640×800pt, mesmos textos, links e diagramação. Fonte v15 preservada; cópia v16 em outputs/pdf na pasta principal do projeto e arquivo público substituído na URL estável.
 
 SHA-256 novo: 7a1cd71598550812fd1bb4c608a511db04cb6da94e7d34740a14ba6c8bbdafb8. Tamanho3.898.210bytes; indicação de download ajustada para3,9MB. Script scripts/update-catalog-pdf.py permite reproduzir a edição sobre o v15, usando as fontes existentes. Verificação textual: três ocorrências de149,90, pacote439,90 e desconto52,70; preços antigos ausentes. Cinco páginas sem alterações renderizaram com pixels idênticos; links preservados nas sete. Páginas3e6 renderizadas e conferidas visualmente, sem cortes ou sobreposição.
+
+## Capa PDF v17 — 16/10/2026
+
+A pedido do usuário, capa vermelha trocada pela foto public/images/priscilla-catalogo-retrato.webp usada no catálogo web, em suas cores naturais, sem o filtro vinho aplicado por CSS na página. Fundo substituído sem recriar o texto ou o logo vetorial. Painel vinho com transparência de28%, contorno creme translúcido e sombra discreta ocupa a área de leitura; véu graduado no topo mantém a assinatura legível. Rosto preservado acima do painel. Fonte v16 preservada e novo arquivo v17 na pasta outputs/pdf do projeto principal.
+
+Sete páginas, textos e links iguais ao v16; páginas2–7 renderizam com pixels idênticos. Capa renderizada e conferida visualmente. PDF público substituído na mesma URL, tamanho1.889.952bytes; indicação do download atualizada para1,9MB. SHA256: 12e92d3744d07d04d53c14fd83e68f0c852962d65e59b175234849bed58eef94. Script scripts/update-catalog-cover.py reproduz a composição sem alterar as demais páginas.
