@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import { profileLinks } from "@/content/profile-links";
 import styles from "./page.module.css";
 import { Entrance } from "./Entrance";
+import { FeedbackLink } from "@/components/navigation/FeedbackLink";
 
 const saans = localFont({
   src: [
@@ -52,7 +53,7 @@ export default function LinksPage() {
           <div className={styles.photoVeil} />
           <div className={styles.signature}>
             <h1><span className={styles.srOnly}>Priscilla Castão</span><span className={styles.logo} aria-hidden="true" /></h1>
-            <a href={profileLinks.catalog} target="_blank" rel="noopener noreferrer" aria-label="Conheça as aulas — catálogo PDF (abre em nova aba)" className={styles.heroAction}>Conheça as aulas <span className={styles.pdfBadge}>PDF</span><Arrow /></a>
+            <FeedbackLink href={profileLinks.catalog} feedback="Abrindo o catálogo de aulas…" prefetch className={styles.heroAction}>Conheça as aulas <Arrow /></FeedbackLink>
             <p className={styles.linksHint}>Veja todos os meus links <span aria-hidden="true"><Arrow down /></span></p>
           </div>
         </section>
@@ -60,11 +61,11 @@ export default function LinksPage() {
         <span className={styles.notchButton} aria-hidden="true"><Arrow down /></span>
 
         <nav id="links-rapidos" tabIndex={-1} className={styles.cardStack} aria-label="Links da Priscilla">
-          {cards.map(card => <a key={card.kind} href={card.href} target={card.external ? "_blank" : undefined} rel={card.external ? "noopener noreferrer" : undefined} className={`${styles.card} ${styles[card.kind]}`}>
+          {cards.map(card => <FeedbackLink key={card.kind} href={card.href} feedback={card.kind === "aulas" ? "Abrindo o WhatsApp…" : card.kind === "instagram" ? "Abrindo o Instagram…" : "Abrindo a página…"} target={card.external ? "_blank" : undefined} rel={card.external ? "noopener noreferrer" : undefined} className={`${styles.card} ${styles[card.kind]}`}>
             <span className={styles.cardWatermark} aria-hidden="true" />
             <div className={styles.cardVeil} />
             <div className={styles.cardText}><h2>{card.title}</h2><span>{card.action}</span></div>
-          </a>)}
+          </FeedbackLink>)}
         </nav>
       </div>
     </div>

@@ -6,7 +6,7 @@ Em 15/10/2026, o usuário escolheu manter apenas o layout antes chamado v2 para 
 
 ### Catálogo, ícones e compartilhamento
 
-O botão “Conheça as aulas” abre `/materiais/catalogo-de-aulas-priscilla-castao.pdf` em nova aba, com indicação de PDF e rótulo acessível. Fonte confirmada pelo usuário: `outputs/pdf/priscilla-castao-catalogo-de-aulas-v15.pdf`, 7 páginas de 640×800pt (não A4). Arquivo copiado sem alterações: SHA-256 `7b1ac12bfd67b512b956fb2734a67083200ca60f4dc63921f924bc235ac58513`. HTTP 200 com `application/pdf`, resposta idêntica à fonte. Transferir esse documento somente quando solicitado.
+O botão “Conheça as aulas” agora abre `/catalogo` na mesma aba, com feedback de navegação nas cores da marca. A página web preserva o conteúdo do catálogo v15 e oferece download opcional de `/materiais/catalogo-de-aulas-priscilla-castao.pdf` no final. Fonte confirmada pelo usuário: `outputs/pdf/priscilla-castao-catalogo-de-aulas-v15.pdf`, 7 páginas de 640×800pt (não A4). PDF mantido sem alterações: SHA-256 `7b1ac12bfd67b512b956fb2734a67083200ca60f4dc63921f924bc235ac58513`. Transferir o documento somente quando solicitado. Implementação e validação em `docs/catalogo-web.md`.
 
 Adicionada a indicação “Veja todos os meus links” abaixo do botão, com seta direcional de acordo com a composição. Favicon SVG/ICO, PNG 96px, Apple 180px e ícones web-app 192/512px agora usam o P sobre vinho, gerados de forma reprodutível com `node scripts/update-brand-icons.mjs`. Ícones declarados no layout têm versão na URL para evitar reutilização do favicon antigo. Metadados Open Graph e cartão de compartilhamento configurados para `/links`, com nome, descrição e retrato existentes. Política de indexação preservada.
 

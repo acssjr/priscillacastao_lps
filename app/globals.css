@@ -74,6 +74,7 @@ a {
 button,
 a {
   touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 @media (hover: none) and (pointer: coarse) {
