@@ -25,6 +25,51 @@ export function Entrance() {
     let ready = false;
     let lastValue = 0;
     const animations: Animation[] = [];
+    const easing = getComputedStyle(page).getPropertyValue("--ease").trim();
+    const pending = new Map<Element, Animation>();
+    let entranceStarted = false;
+    const portrait = page.querySelector(`.${styles.portraitPanel}`);
+    const cards = Array.from(page.querySelectorAll(`.${styles.card}`));
+    // Hold each surface at its first frame before the loader uncovers it.
+    // Without JS these styles never apply, so every link remains available.
+    const prepare = (element: Element, duration: number, distance: number) => {
+      const animation = element.animate([
+        { opacity: 0, transform: `translateY(${distance}px) scale(.97)` },
+        { opacity: 1, transform: "translateY(0) scale(1)" },
+      ], { duration, easing, fill: "both" });
+      animation.pause();
+      animation.currentTime = 0;
+      animations.push(animation);
+      return animation;
+    };
+    const portraitEntrance = portrait ? prepare(portrait, 450, 14) : undefined;
+    cards.forEach(card => pending.set(card, prepare(card, 450, 18)));
+    const showCard = (card: Element, delay = 0) => {
+      const animation = pending.get(card);
+      if (!animation) return;
+      pending.delete(card);
+      observer?.unobserve(card);
+      animation.effect?.updateTiming({ delay });
+      animation.play();
+      void animation.finished.then(() => animation.cancel()).catch(() => undefined);
+    };
+    const showFocusedCard = (event: FocusEvent) => {
+      if (!(event.target instanceof Element)) return;
+      const card = event.target.closest(`.${styles.card}`);
+      if (!card) return;
+      // Keyboard navigation never waits for a decorative reveal.
+      const animation = animations.find(item => (item.effect as KeyframeEffect | null)?.target === card);
+      pending.delete(card);
+      observer?.unobserve(card);
+      animation?.cancel();
+    };
+    page.addEventListener("focusin", showFocusedCard);
+    const observer = new IntersectionObserver(entries => {
+      if (!entranceStarted) return;
+      entries.filter(entry => entry.isIntersecting)
+        .sort((a, b) => cards.indexOf(a.target) - cards.indexOf(b.target))
+        .forEach((entry, index) => showCard(entry.target, index * 80));
+    }, { threshold: .08 });
     const started = performance.now();
     // Reuse resources already requested by HTML/CSS; no duplicate brand downloads.
     const resources = [document.fonts.ready, ...Array.from(page.querySelectorAll("img"), image => image.decode())];
@@ -37,25 +82,23 @@ export function Entrance() {
 
     const reveal = () => {
       window.clearTimeout(timeout);
-      const easing = getComputedStyle(page).getPropertyValue("--ease").trim();
       const exit = overlay.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 250, easing, fill: "forwards" });
       animations.push(exit);
       // The loader P only fades with its screen; the header P stays in place.
-      const portrait = page.querySelector(`.${styles.portraitPanel}`);
-      if (portrait) animations.push(portrait.animate([
-        { opacity: .65, transform: "translateY(14px) scale(.985)" },
-        { opacity: 1, transform: "translateY(0) scale(1)" },
-      ], { duration: 450, easing }));
-      page.querySelectorAll(`.${styles.card}`).forEach((card, index) => {
-        animations.push(card.animate([
-          { opacity: .45, transform: "translateY(22px) scale(.97)" },
-          { opacity: 1, transform: "translateY(0) scale(1)" },
-        ], { duration: 350, delay: index * 50, easing, fill: "backwards" }));
-      });
       void exit.finished.then(() => {
         if (!cancelled) {
           overlay.hidden = true;
           if (canvas) canvas.inert = false;
+          portraitEntrance?.play();
+          if (portraitEntrance) void portraitEntrance.finished.then(() => portraitEntrance.cancel()).catch(() => undefined);
+          entranceStarted = true;
+          let visibleIndex = 0;
+          cards.forEach(card => {
+            const bounds = card.getBoundingClientRect();
+            if (bounds.top < window.innerHeight && bounds.bottom > 0) {
+              showCard(card, 180 + visibleIndex++ * 80);
+            } else observer?.observe(card);
+          });
         }
       }).catch(() => undefined);
     };
@@ -77,6 +120,8 @@ export function Entrance() {
       cancelled = true;
       cancelAnimationFrame(frame);
       window.clearTimeout(timeout);
+      observer?.disconnect();
+      page.removeEventListener("focusin", showFocusedCard);
       animations.forEach(animation => animation.cancel());
       if (canvas) canvas.inert = false;
     };

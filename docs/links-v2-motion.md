@@ -46,3 +46,18 @@ Revisão posterior: removido o giro do P a pedido do usuário. O monograma perma
 O usuário retirou a animação de abertura integralmente. Entrance.tsx, loader, progresso, giro, deslocamento do P e entrada dos cartões foram removidos da rota. O histórico acima documenta decisões anteriores. Responsividade e medições atuais estão em docs/links-priscilla.md.
 
 Correção de escopo: a abertura foi restaurada após esclarecimento do usuário. Apenas o movimento do P até o cabeçalho permanece removido, assim como o giro retirado anteriormente. Progresso e entrada dos cartões permanecem; P estático no loader e no cabeçalho. Implementação nativa em Entrance.tsx, com limpeza de frames, temporizadores e animações. Ver docs/links-priscilla.md para estado atual.
+
+## Entrada progressiva — 16/10/2026
+
+Reconhecimento: React/Next.js, WAAPI já existente, curva compartilhada --ease-out. Frequência: chegada ocasional à página de apresentação. Sem alteração de layout ou comportamento sticky.
+
+| # | Local | Antes | Propósito | Frequência | Movimento escolhido |
+| --- | --- | --- | --- | --- | --- |
+| 1 | app/links/Entrance.tsx, reveal/showCard | Cartões começavam parcialmente visíveis e animavam sob o loader, inclusive fora da tela | Evitar mudança abrupta | Entrada ocasional | WAAPI: opacity 0 → 1 e translateY(18px) scale(.97) → translateY(0) scale(1), 450ms, --ease-out cubic-bezier(.23,1,.32,1). Primeiro cartão após 180ms, intervalo de 80ms. IntersectionObserver threshold .08 revela uma vez os cartões abaixo da dobra. |
+| 2 | app/links/Entrance.tsx, portraitEntrance | Retrato surgia junto com todos os cartões | Estabelecer hierarquia na chegada | Entrada ocasional | Após a saída do loader: opacity 0 → 1, translateY(14px) scale(.97) → estado final, 450ms com a mesma curva. |
+
+Orçamento: entrada de apresentação permite 450ms; sequência curta, somente transform/opacity. Teclado cancela a animação do cartão focado imediatamente. Movimento reduzido conserva a apresentação estática existente. Sem JS não há superfícies ocultas. Observador, animações e listener são limpos ao desmontar.
+
+Candidatos rejeitados: giro/deslocamento do P (sem propósito atual e retirado pelo usuário); animação repetida a cada passagem pela tela (prejudica leitura); movimento em saltos de foco por teclado (reprovado na frequência/função). Maior benefício: guardar os cartões fora da tela para sua primeira aparição, em vez de terminar a animação antes que o visitante os veja. Diagnóstico pela skill find-animation-opportunities; implementação pela skill animate.
+
+Validação em Chromium: intervalos registrados de 180/260/340/420ms no desktop, cartões abaixo da dobra com opacidade zero até a rolagem, revelação completa e sem repetição. Foco no último cartão o revela imediatamente. Sem rolagem horizontal em 320/768/1024/1440px, sem erros de página; movimento reduzido e versão sem JavaScript aprovados. Lint, tipos e build aprovados. Localhost ativo na porta 3002.
