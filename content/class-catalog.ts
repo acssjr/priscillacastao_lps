@@ -8,7 +8,7 @@ export const lessonMethod = [
 export const lessonFormats = [
   {
     id: "individual", title: "Aula individual", description: "1 hora com Priscilla, sem precisar levar um par.",
-    prices: [{ label: "Aula individual · 1 hora", amount: "R$ 120,00" }, { label: "Pacote individual · 4 aulas de 1h", amount: "R$ 440,00" }],
+    prices: [{ label: "Aula individual · 1 hora", amount: "R$ 120,00" }, { label: "Pacote individual · 4 aulas de 1h", amount: "R$ 440,00", saving: "Economize R$ 40 no pacote · R$ 110 por aula" }],
     sections: [
       { title: "Para quem é indicada", text: "Para quem quer começar sozinho ou já dança e deseja corrigir a execução dos passos e aprender outros. Priscilla acompanha você como par durante a aula." },
       { title: "Como funciona", text: "Você dança com Priscilla para que ela entenda seu nível. Depois, vocês trabalham os ajustes que ela identificou e praticam novos movimentos no universitário ou no roots." },

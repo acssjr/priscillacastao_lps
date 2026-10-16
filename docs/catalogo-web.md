@@ -29,3 +29,25 @@ Destaque azul de toque removido dos links e botões. Estado pressionado usa core
 - Navegação `/links` → `/catalogo`, abertura de detalhes, mensagens contextuais e download do PDF conferidos no navegador.
 - Conferência automática de 29 trechos de descrição, texto e preço contra o PDF: todos encontrados na fonte.
 - Não foi medida uma nova velocidade de carregamento em produção; tamanho da imagem não equivale ao peso total da página.
+
+## Revisão visual e de CTA — 16/10/2026
+
+Foto retirada da página; monograma P translúcido ocupa o fundo da abertura sem criar um bloco vazio. Seções agora alternam papel, vinho (método), papel (aulas), creme (cursos) e vinho (encerramento), com conteúdo em contêiner comum e faixas de largura total. Espaçamento mobile unificado em 2,5rem por seção, gap de fechamento 1rem, sem soma de grandes margens vazias. CTAs têm largura intrínseca e mínimo de 48px de altura.
+
+Schwartz: visitante do catálogo é predominantemente consciente da oferta (nível 2; quem já escolheu o formato aproxima-se do nível 1). Sofisticação 2 é hipótese de trabalho para a microcopy, não conclusão de pesquisa competitiva. Estratégia: oferta direta e próximo passo explícito sem urgência inventada. CTAs: “Quero marcar minha aula”, “Quero uma aula em dupla”, “Quero uma aula em grupo” e “Quero fazer os três cursos”. Links continuam abrindo uma conversa, sem prometer agendamento confirmado.
+
+Pacote individual: quatro aulas avulsas de R$120 custariam R$480. Pacote R$440: economia de R$40 e R$110 por aula. Acrescentada a explicação ao investimento sem mudar os preços; desconto de R$53 do combo preservado. PDF original não alterado.
+
+### Oportunidades de animação selecionadas
+
+| Local | Antes | Propósito | Frequência | Movimento |
+| --- | --- | --- | --- | --- |
+| Cabeçalhos das seções | Aparecimento sem orientação | Evitar mudança abrupta ao entrar na seção | Leitura ocasional | WAAPI opacity .65→1 e translateX(-16px)→0,450ms, curva compartilhada --ease-out, observador .2, uma vez. Movimento reduzido: fade150ms sem deslocamento. |
+| Detalhes nativos | Conteúdo abre instantaneamente | Indicação de estado | Ocasional | WAAPI opacity0→1 e translateY(-4px)→0,200ms na abertura; fechamento nativo. Movimento reduzido:fade150ms. Aberturas rápidas cancelam a animação anterior. |
+| Pressão do CTA | Cor apenas | Feedback | Eventual | scale(.98),160ms --ease-out, sem deslocamento em movimento reduzido. |
+
+Rejeitados: números de preços animados (atrapalham leitura funcional); monograma com movimento contínuo (sem propósito); repetir animação ao subir/descer (distração). A maior oportunidade é orientar a chegada dos títulos. A skill find-animation-opportunities foi usada para diagnóstico; a implementação segue animate, sem nova biblioteca e sem ocultar conteúdo antes do JavaScript.
+
+Verificação: foto ausente; botões menores que o contêiner, altura≥48px; Axe sem violações em320/430/768/1440; movimento reduzido, detalhes e ausência de overflow conferidos. Lint, tipos e build aprovados. Evidência .impeccable/review/catalog-refined-{430,1440}.png. Sistema global preservado; refinamento local de Saans/vinho/creme existente.
+
+Revisão independente de acabamento: aprovada sem bloqueadores. Os85 testes em20 arquivos também passaram nesta revisão.

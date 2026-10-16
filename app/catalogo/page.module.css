@@ -1,4 +1,4 @@
-.page { --wine:#64121f; --paper:#faf5ec; --cream:#f1e2c9; background:var(--paper); color:var(--wine); min-height:100svh; overflow:clip; padding-inline:1rem; line-height:1.65; }
+.page { --wine:#64121f; --paper:#faf5ec; --cream:#f1e2c9; background:var(--paper); color:var(--wine); min-height:100svh; overflow:clip; line-height:1.65; }
 .page ::selection { background:var(--wine); color:var(--paper); }
 .page a { text-decoration:none; -webkit-tap-highlight-color:transparent; }
 .page a:focus-visible,.page summary:focus-visible { outline:3px solid var(--wine); outline-offset:5px; }
@@ -8,31 +8,31 @@
 .page h2 { font-size:clamp(2rem,4vw,3.25rem); margin:0 0 1rem; }
 .page h3 { font-size:1.25rem; margin:0 0 1rem; }
 .page svg { flex:none; }
-.header,.hero,.method,.formats,.courses,.footer { width:min(100%,72rem); margin-inline:auto; }
+.header,.hero,.method,.formats,.courses,.footer { width:min(calc(100% - 2rem),72rem); margin-inline:auto; }
 .header { display:grid; grid-template-columns:1fr auto; align-items:center; gap:1rem; min-height:6rem; }
 .logo { display:block; width:9rem; height:3rem; background:var(--wine); mask:url('/brand/priscilla-castao-logo.svg') center / contain no-repeat; }
 .back { justify-self:start; font-size:.875rem; min-height:48px; display:flex; align-items:center; text-decoration:underline!important; text-underline-offset:5px; }
 .headerContact { display:none; }
-.hero { display:grid; gap:2rem; padding-block:1.5rem 3rem; }
+.hero { position:relative; isolation:isolate; display:block; padding-block:1.5rem 2.5rem; }
 .intro h1 { font-size:clamp(3.25rem,8vw,6rem); margin:0 0 1.5rem; line-height:1; }
 .intro h1 span { color:#ae6664; }
 .intro .lede { font-size:clamp(1.125rem,2vw,1.375rem); line-height:1.5; margin-bottom:1rem; }
 .index { display:grid; margin-top:2rem; }
-.index a { display:flex; align-items:center; justify-content:space-between; gap:1rem; min-height:56px; border-top:1px solid #64121f33; transition:background-color 160ms ease; }
+.index a { display:flex; align-items:center; justify-content:space-between; gap:1rem; min-height:56px; border-top:1px solid #64121f33; transition:background-color 160ms ease,transform 160ms var(--ease-out); }
 .index a:last-child { border-bottom:1px solid #64121f33; }
 .index a:active { background:#64121f12; }
-.cover { position:relative; width:100%; aspect-ratio:4/5; max-width:32.5rem; margin-inline:auto; overflow:hidden; border-radius:16px; background:var(--wine); }
-.cover img { object-fit:cover; }
-.coverCaption { position:absolute; left:11%; right:11%; bottom:12%; color:var(--paper); }
-.coverCaption p { font-size:clamp(1.75rem,4vw,3rem); line-height:1.15; letter-spacing:-.03em; margin-bottom:1rem; }
-.coverCaption span { font-size:.875rem; }
-.method { padding-block:3rem; border-block:1px solid #64121f33; }
-.sectionHead { margin-bottom:2rem; }
+.heroWatermark { position:absolute; z-index:-1; inset:0 -1rem; background:var(--wine); opacity:.07; pointer-events:none; mask:url('/brand/priscilla-castao-monogram.svg') 90% 30% / min(65vw,30rem) auto no-repeat; transform:rotate(-10deg); }
+.methodBand,.footerBand { background:var(--wine); color:var(--paper); }
+.coursesBand { background:var(--cream); }
+.methodBand .sectionHead>p { color:var(--cream); }
+.method { padding-block:2.5rem; }
+.sectionHead { margin-bottom:1.5rem; }
+.sectionHead>p:last-child,.methodColumns p:last-child { margin-bottom:0; }
 .sectionHead>p { color:#7a1d2a; }
 .methodColumns { display:grid; gap:1.5rem; }
 .methodColumns p { font-size:.9375rem; }
-.formats { padding-top:3rem; }
-.format { display:grid; gap:1.5rem; padding-block:2rem; border-top:1px solid #64121f33; }
+.formats { padding-block:2.5rem; }
+.format { display:grid; gap:1rem; padding-block:1.75rem; border-top:1px solid #64121f33; }
 .format h3 { font-size:clamp(1.75rem,3vw,2.5rem); margin-bottom:.75rem; }
 .formatLede { font-size:1.125rem; }
 .formatDescription>p:not(.formatLede) { font-size:.9375rem; }
@@ -49,24 +49,34 @@
 .investment dt { color:var(--cream); font-size:.8125rem; }
 .investment dd { margin:.5rem 0 0; font-size:2.25rem; line-height:1.1; font-weight:700; letter-spacing:-.03em; font-variant-numeric:tabular-nums; }
 .action { display:inline-flex; align-items:center; justify-content:space-between; gap:1.25rem; min-height:48px; padding:.875rem 1rem; border-radius:8px; background:var(--cream); color:var(--wine); font-size:.875rem; font-weight:700; transition:background-color 160ms ease; }
-.investment .action { width:100%; margin-top:1.5rem; }
+.investment .action { width:fit-content; max-width:100%; margin-top:1.25rem; }
+.investment .saving { margin:.75rem 0 0; font-size:.8125rem; font-weight:400; letter-spacing:0; color:var(--cream); line-height:1.5; }
 .investment a:focus-visible,.combo a:focus-visible { outline-color:var(--paper); }
-.courses { padding-block:3rem; border-top:1px solid #64121f33; margin-top:1rem; }
+.courses { padding-block:2.5rem; }
 .course { display:flex; align-items:start; justify-content:space-between; gap:1.5rem; padding-block:1.5rem; border-top:1px solid #64121f33; }
 .course h3 { font-size:1.25rem; }
 .course p { font-size:.9375rem; margin-bottom:0; }
 .coursePrice { font-size:1.125rem; font-weight:700; white-space:nowrap; }
-.combo { display:grid; gap:2rem; margin-top:1.5rem; padding:1.5rem; background:var(--wine); color:var(--paper); border-radius:16px; }
+.combo { display:grid; gap:1.25rem; margin-top:1.5rem; padding:1.5rem; background:var(--wine); color:var(--paper); border-radius:16px; }
 .combo h3 { font-size:1.75rem; }
 .combo p { color:var(--cream); max-width:43ch; }
+.combo .action { justify-self:start; }
+.combo p:last-child { margin-bottom:0; }
 .comboPrice { display:flex; flex-direction:column; color:var(--cream); font-size:.875rem; }
 .comboPrice strong { color:var(--paper); font-size:3.5rem; letter-spacing:-.03em; line-height:1.25; }
-.footer { display:grid; gap:2rem; padding-block:3rem 1.5rem; border-top:1px solid #64121f33; }
+.footer { display:grid; gap:1rem; padding-block:2.5rem 1rem; }
+.footer>div:first-child>p { margin-bottom:0; }
+.footer a:focus-visible { outline-color:var(--cream); }
 .footer p { font-size:.9375rem; }
-.download { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem; border-top:1px solid #64121f33; padding-top:1.5rem; font-size:.875rem; }
+.download { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem; border-top:1px solid #f1e2c94d; padding-top:1rem; margin-top:1rem; font-size:.875rem; }
 .download a { min-height:48px; display:inline-flex; align-items:center; gap:.75rem; text-decoration:underline; text-underline-offset:5px; }
 .download a span { font-size:.75rem; }
-@media (min-width:600px) { .page { padding-inline:2rem; } .header { grid-template-columns:1fr auto 1fr; } .headerContact { display:flex; align-items:center; justify-content:flex-end; gap:.5rem; font-size:.875rem; min-height:48px; } .method,.courses,.footer { padding-block:4rem; } .formats { padding-top:4rem; } .course h3 { font-size:1.5rem; } .combo { grid-template-columns:1fr auto; align-items:center; padding:2rem; } }
-@media (min-width:800px) { .hero { grid-template-columns:1fr 1fr; align-items:center; gap:4rem; padding-block:2rem 4rem; } .index { max-width:25rem; } .intro>p { max-width:31ch; } .methodColumns { grid-template-columns:repeat(3,minmax(0,1fr)); gap:2rem; } .format { grid-template-columns:minmax(0,1.4fr) minmax(0,1fr); gap:4rem; padding-block:2.5rem; } .footer { grid-template-columns:1fr 1fr; gap:3rem 4rem; } .download { grid-column:1/-1; } .course { gap:4rem; } }
+@media (min-width:600px) { .header,.hero,.method,.formats,.courses,.footer { width:min(calc(100% - 4rem),72rem); } .header { grid-template-columns:1fr auto 1fr; } .headerContact { display:flex; align-items:center; justify-content:flex-end; gap:.5rem; font-size:.875rem; min-height:48px; } .method,.courses,.formats,.footer { padding-block:3rem; } .course h3 { font-size:1.5rem; } .combo { grid-template-columns:1fr auto; align-items:center; padding:2rem; } .combo .action { grid-column:1/-1; } }
+@media (min-width:800px) { .hero { padding-block:3rem; } .heroWatermark { mask-size:25rem auto; mask-position:90% 50%; opacity:.08; } .index { max-width:25rem; } .intro>p { max-width:31ch; } .methodColumns { grid-template-columns:repeat(3,minmax(0,1fr)); gap:2rem; } .format { grid-template-columns:minmax(0,1.4fr) minmax(0,1fr); gap:4rem; padding-block:2.5rem; } .footer { grid-template-columns:1fr 1fr; gap:1.5rem 4rem; } .download { grid-column:1/-1; } .course { gap:4rem; } }
 @media (hover:hover) and (pointer:fine) { .action:hover { background:#fff4de; } .index a:hover { background:#64121f08; } .back:hover,.download a:hover { color:#a65134; } }
 @media (prefers-reduced-motion:reduce) { .page a { transition:none; } }
+
+.details summary span { transition:transform 160ms var(--ease-out); }
+.action:active { transform:scale(.98); }
+.footer .download { color:var(--cream); }
+@media (prefers-reduced-motion:reduce) { .action:active { transform:none; } .details summary span { transition:none; } }
