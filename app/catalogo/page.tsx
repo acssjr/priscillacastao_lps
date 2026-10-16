@@ -45,12 +45,11 @@ export default function CatalogPage() {
         <p>Entenda o funcionamento das aulas e os valores.</p>
         <nav className={styles.index} aria-label="Neste catálogo">
           <a href="#como-sao">Como são as aulas <Arrow /></a>
-          <a href="#formatos" className={styles.primaryIndex}>Descrições e valores <Arrow /></a>
+          <a href="#formatos">Descrições e valores <Arrow /></a>
           <a href="#cursos">Cursos livres <Arrow /></a>
         </nav>
       </div>
       <div className={styles.heroPhoto} aria-hidden="true"><Image src="/images/priscilla-catalogo-retrato.webp" alt="" fill sizes="(min-width: 1200px) 600px, (min-width: 800px) 52vw, 75vw" fetchPriority="high" loading="eager" /></div>
-      <span className={styles.heroWatermark} aria-hidden="true" />
     </section>
 
     <div className={styles.methodBand}>

@@ -65,3 +65,5 @@ Validado em320/430/768/1440px: imagem decodificada, nenhuma rolagem horizontal, 
 Atualização expressa do usuário no catálogo web: três cursos individuais de R$149,90 cada; preço imediatamente abaixo do nome e antes da descrição, alinhado à esquerda em todos os breakpoints. Pacote de quatro aulas individuais agora R$439,90. Economia recalculada em relação a quatro avulsas de R$120: R$40,10. Retirada a equivalência anterior de R$110 por aula para evitar divergência de arredondamento. Combo mantido em R$397, com economia corrigida para R$52,70 sobre três cursos de R$149,90. PDF original não alterado nesta revisão.
 
 Verificação em320/430/768/1440px confirmou os três preços abaixo e alinhados aos títulos, novo valor do pacote e ausência de rolagem horizontal. Typecheck e build aprovados.
+
+Revisão posterior: retirado o P da abertura para não misturar com a foto. Os três atalhos voltaram à lista simples com divisórias, sem fundos de botão, sombra ou destaque preenchido. Rótulo Descrições e valores e fotografia tratada preservados. Conferido em430/768/1440px, sem overflow; tipos e build aprovados.
