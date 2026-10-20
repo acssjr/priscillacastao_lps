@@ -97,19 +97,27 @@ test("terracotta price cards retain readable values and a reduced-motion-safe be
 
 test("hybrid explanation opens without shifting catalogue content", async ({ page }) => {
   await page.goto("/catalogo");
+  await page.evaluate(() => document.fonts.ready);
   const section = page.locator("#como-sao");
   const before = await section.boundingBox();
   const height = await page.evaluate(() => document.documentElement.scrollHeight);
+  const viewport = await page.evaluate(() => ({ width:document.documentElement.clientWidth,scroll:scrollY,scale:visualViewport?.scale }));
   const trigger = page.getByRole("button", { name: "dança híbrida*" });
   await trigger.click();
   await expect(page.locator("#hybrid-explanation")).toBeVisible();
   expect((await section.boundingBox())?.y).toBe(before?.y);
   expect(await page.evaluate(() => document.documentElement.scrollHeight)).toBe(height);
+  expect(await page.evaluate(() => ({ width:document.documentElement.clientWidth,scroll:scrollY,scale:visualViewport?.scale }))).toEqual(viewport);
+  const popup = page.locator("#hybrid-explanation");
+  await expect(popup).toHaveCSS("opacity", "1");
+  expect(await popup.evaluate(node => getComputedStyle(node).transitionDuration.split(",")[0])).toBe("0.18s");
+  expect(await popup.evaluate(node => node.parentElement?.tagName)).toBe("MAIN");
   await page.keyboard.press("Escape");
   await expect(page.locator("#hybrid-explanation")).toBeHidden();
   await trigger.focus();
   await page.keyboard.press("Enter");
   await expect(page.locator("#hybrid-explanation")).toBeVisible();
+  await expect(popup).toHaveAttribute("data-keyboard", "");
   await page.getByRole("button", { name: "Entendi", exact: true }).click();
   await expect(page.locator("#hybrid-explanation")).toBeHidden();
 });

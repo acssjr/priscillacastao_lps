@@ -63,11 +63,10 @@ export function CatalogMotion() {
     };
     disclosures.forEach(details => details.addEventListener("toggle", revealDetails));
     const explanation = page.querySelector<HTMLElement>("[popover]");
-    const revealExplanation = () => {
-      if (!explanation?.matches(":popover-open") || keyboard) return;
-      animations.push(explanation.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 150, easing }));
+    const prepareExplanation = () => {
+      explanation?.toggleAttribute("data-keyboard", keyboard);
     };
-    explanation?.addEventListener("toggle", revealExplanation);
+    explanation?.addEventListener("beforetoggle", prepareExplanation);
     return () => {
       observer.disconnect();
       beamObserver.disconnect();
@@ -75,7 +74,7 @@ export function CatalogMotion() {
       disclosures.forEach(details => details.removeEventListener("toggle", revealDetails));
       page.removeEventListener("keydown", onKeyboard, true);
       page.removeEventListener("pointerdown", onPointer, true);
-      explanation?.removeEventListener("toggle", revealExplanation);
+      explanation?.removeEventListener("beforetoggle", prepareExplanation);
       animations.forEach(animation => animation.cancel());
     };
   }, []);

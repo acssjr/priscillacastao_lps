@@ -21,11 +21,18 @@
 .hybridLink { display:inline; padding:0; border:0; background:none; color:inherit; font:inherit; cursor:pointer; text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:4px; -webkit-tap-highlight-color:transparent; }
 .hybridLink sup { font-size:.7em; margin-left:2px; }
 .hybridLink:focus-visible,.hybridExplanation button:focus-visible { outline:3px solid var(--primary); outline-offset:4px; }
-.hybridExplanation { position:fixed; inset:0; margin:auto; width:min(calc(100% - 2rem),24rem); height:fit-content; padding:1.5rem; border:1px solid #86412940; border-radius:12px; background:var(--paper); color:var(--primary); box-shadow:0 16px 60px #42291d33; font-size:1rem; line-height:1.6; }
+.hybridExplanation { position:fixed; inset:0; margin:auto; box-sizing:border-box; width:min(calc(100vw - 2rem),24rem); max-width:calc(100vw - 2rem); height:fit-content; max-height:calc(100dvh - 2rem); overflow:auto; padding:1.5rem; border:1px solid #86412940; border-radius:16px; background:var(--paper); color:var(--primary); box-shadow:0 16px 60px #42291d33; font-size:1rem; line-height:1.6; opacity:0; transform:scale(.97); transition:opacity 180ms var(--ease-out),transform 180ms var(--ease-out),display 180ms allow-discrete,overlay 180ms allow-discrete; }
+.hybridExplanation:popover-open { opacity:1; transform:none; }
+@starting-style { .hybridExplanation:popover-open { opacity:0; transform:scale(.97); } }
+.hybridExplanation[data-keyboard] { transition:none; }
+@media (prefers-reduced-motion:reduce) { .hybridExplanation { transform:none; transition:opacity 150ms var(--ease-out),display 150ms allow-discrete,overlay 150ms allow-discrete; } @starting-style { .hybridExplanation:popover-open { transform:none; } } }
 .hybridExplanation strong { display:block; margin-bottom:.5rem; font-size:1.125rem; }
 .hybridExplanation p { margin:0 0 1rem; }
 .hybridExplanation button { border:0; padding:.5rem 0; min-height:44px; background:none; color:inherit; font:inherit; font-weight:700; cursor:pointer; text-decoration:underline; text-underline-offset:4px; }
-.hybridExplanation::backdrop { background:#42291d15; }
+.hybridExplanation::backdrop { background:#42291d15; opacity:0; transition:opacity 180ms var(--ease-out),display 180ms allow-discrete,overlay 180ms allow-discrete; }
+.hybridExplanation:popover-open::backdrop { opacity:1; }
+.hybridExplanation[data-keyboard]::backdrop { transition:none; }
+@starting-style { .hybridExplanation:popover-open::backdrop { opacity:0; } }
 .index { display:grid; margin-top:2rem; }
 .index a { display:flex; align-items:center; justify-content:space-between; gap:1rem; min-height:56px; border-top:1px solid #86412933; transition:background-color 160ms ease,transform 160ms var(--ease-out); }
 .index a:last-child { border-bottom:1px solid #86412933; }
@@ -53,8 +60,8 @@
 .details[open] summary span { transform:rotate(45deg); }
 .details>div { padding-top:1rem; font-size:.9375rem; }
 .details h4 { font-size:1rem; margin:1rem 0 .75rem; }
-.investment,.combo { position:relative; isolation:isolate; border:1px solid #faf5ec55; border-radius:28px; background:linear-gradient(135deg,#bb84621a,transparent 55%),linear-gradient(155deg,#864129f2,#79432ff5); color:var(--paper); box-shadow:inset 0 1px 0 #fffaf380,inset 0 -1px 0 #45291c55,0 16px 36px #45291c1f; -webkit-backdrop-filter:blur(20px) saturate(120%); backdrop-filter:blur(20px) saturate(120%); }
-.investment::before,.combo::before { content:''; position:absolute; z-index:-1; inset:0; border-radius:inherit; pointer-events:none; background:radial-gradient(ellipse at 105% -10%,#f1e2c940,transparent 65%); }
+.investment,.combo { position:relative; isolation:isolate; border:1px solid #faf5ec40; border-radius:28px; background:linear-gradient(135deg,#a6643e0d,transparent 55%),linear-gradient(155deg,#79402cf7,#713d29fa); color:var(--paper); box-shadow:inset 0 1px 0 #fffaf34d,inset 0 -1px 0 #45291c55,0 16px 36px #45291c1f; -webkit-backdrop-filter:blur(20px) saturate(120%); backdrop-filter:blur(20px) saturate(120%); }
+.investment::before,.combo::before { content:''; position:absolute; z-index:-1; inset:0; border-radius:inherit; pointer-events:none; background:radial-gradient(ellipse at 105% -10%,#f1e2c91a,transparent 65%); }
 .investment { align-self:start; padding:clamp(1.25rem,3vw,2rem); }
 .priceMark { display:block; width:38px; height:42px; margin-bottom:1.5rem; background:var(--cream); mask:url('/brand/priscilla-castao-monogram.svg') center / contain no-repeat; }
 .investment dl { margin:0; }

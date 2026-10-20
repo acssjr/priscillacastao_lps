@@ -46,10 +46,6 @@ export default function CatalogPage() {
       <div className={styles.intro}>
         <h1 id="catalog-title" data-catalog-enter>Catálogo<br />de aulas<span>.</span></h1>
         <p className={styles.modalities} data-catalog-enter>Forró universitário, roots e <button type="button" className={styles.hybridLink} popoverTarget="hybrid-explanation">dança híbrida<sup>*</sup></button>.</p>
-        <div id="hybrid-explanation" popover="auto" className={styles.hybridExplanation} role="note" aria-label="Sobre dança híbrida">
-          <strong>Dança híbrida</strong><p>Ensino de forró roots junto com o universitário, combinando os dois estilos na sua prática.</p>
-          <button type="button" popoverTarget="hybrid-explanation" popoverTargetAction="hide">Entendi</button>
-        </div>
         <p className={styles.lede} data-catalog-enter>Aulas individuais, em dupla e em grupo.</p>
         <p data-catalog-enter>Entenda o funcionamento das aulas e os valores.</p>
         <nav data-catalog-enter className={styles.index} aria-label="Neste catálogo">
@@ -93,6 +89,10 @@ export default function CatalogPage() {
       <div><h2>Obrigada pelo<br />seu interesse.</h2><p>Me conte qual aula ou curso chamou sua atenção.</p></div>
       <div><p>Envie uma mensagem dizendo qual opção você escolheu e o que gostaria de aprender ou aprimorar. Se já dança, conte um pouco da sua experiência.</p><p>Se ainda não sabe qual formato escolher, podemos conversar sobre o que você busca e tirar suas dúvidas.</p><Contact option="aulas ou cursos">Fale com Priscilla</Contact></div>
     </footer>
+    </div>
+    <div id="hybrid-explanation" popover="auto" className={styles.hybridExplanation} role="note" aria-label="Sobre dança híbrida">
+      <strong>Dança híbrida</strong><p>Ensino de forró roots junto com o universitário, combinando os dois estilos na sua prática.</p>
+      <button type="button" popoverTarget="hybrid-explanation" popoverTargetAction="hide">Entendi</button>
     </div>
   </main>;
 }
