@@ -8,6 +8,7 @@ import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import styles from "./page.module.css";
 import { CatalogMotion } from "./CatalogMotion";
 import beam from "@/components/ui/WhatsAppLink.module.css";
+import { HybridExplanation } from "./HybridExplanation";
 
 const saans = localFont({ src: [
   { path: "../links/fonts/Saans-TRIAL-Regular.woff2", weight: "400" },
@@ -45,7 +46,7 @@ export default function CatalogPage() {
     <section className={styles.hero} aria-labelledby="catalog-title">
       <div className={styles.intro}>
         <h1 id="catalog-title" data-catalog-enter>Catálogo<br />de aulas<span>.</span></h1>
-        <p className={styles.modalities} data-catalog-enter>Forró universitário, roots e <button type="button" className={styles.hybridLink} popoverTarget="hybrid-explanation">dança híbrida<sup>*</sup></button>.</p>
+        <p className={styles.modalities} data-catalog-enter>Forró universitário, roots e <HybridExplanation fontClassName={saans.className} />.</p>
         <p className={styles.lede} data-catalog-enter>Aulas individuais, em dupla e em grupo.</p>
         <p data-catalog-enter>Entenda o funcionamento das aulas e os valores.</p>
         <nav data-catalog-enter className={styles.index} aria-label="Neste catálogo">
@@ -60,7 +61,13 @@ export default function CatalogPage() {
     <div className={styles.methodBand}>
     <section id="como-sao" className={styles.method} aria-labelledby="method-title">
       <div className={styles.sectionHead} data-catalog-reveal><h2 id="method-title">Como são as aulas</h2><p>1 hora de prática em forró universitário, roots ou dança híbrida.</p></div>
-      <div className={styles.methodColumns}>{lessonMethod.map(item => <div key={item.title}><h3>{item.title}</h3><p>{item.text}</p></div>)}</div>
+      <ol className={styles.methodSteps}>{lessonMethod.map((item, index) => <li key={item.title}>
+        <div className={styles.stepCard} data-catalog-reveal>
+          <span className={styles.stepNumber} aria-hidden="true">0{index + 1}</span>
+          <h3>{item.title}</h3>
+          <ul>{item.points.map(point => <li key={point}>{point}</li>)}</ul>
+        </div>
+      </li>)}</ol>
     </section>
     </div>
 
@@ -89,10 +96,6 @@ export default function CatalogPage() {
       <div><h2>Obrigada pelo<br />seu interesse.</h2><p>Me conte qual aula ou curso chamou sua atenção.</p></div>
       <div><p>Envie uma mensagem dizendo qual opção você escolheu e o que gostaria de aprender ou aprimorar. Se já dança, conte um pouco da sua experiência.</p><p>Se ainda não sabe qual formato escolher, podemos conversar sobre o que você busca e tirar suas dúvidas.</p><Contact option="aulas ou cursos">Fale com Priscilla</Contact></div>
     </footer>
-    </div>
-    <div id="hybrid-explanation" popover="auto" className={styles.hybridExplanation} role="note" aria-label="Sobre dança híbrida">
-      <strong>Dança híbrida</strong><p>Ensino de forró roots junto com o universitário, combinando os dois estilos na sua prática.</p>
-      <button type="button" popoverTarget="hybrid-explanation" popoverTargetAction="hide">Entendi</button>
     </div>
   </main>;
 }

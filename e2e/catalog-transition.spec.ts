@@ -111,15 +111,37 @@ test("hybrid explanation opens without shifting catalogue content", async ({ pag
   const popup = page.locator("#hybrid-explanation");
   await expect(popup).toHaveCSS("opacity", "1");
   expect(await popup.evaluate(node => getComputedStyle(node).transitionDuration.split(",")[0])).toBe("0.18s");
-  expect(await popup.evaluate(node => node.parentElement?.tagName)).toBe("MAIN");
+  expect(await popup.evaluate(node => node.closest("main"))).toBeNull();
+  await expect(page.locator('[class*="hybridBackdrop"]')).toHaveCSS("backdrop-filter", "blur(7px)");
+  await page.mouse.move(5,5);
+  await page.mouse.wheel(0,500);
+  expect(await page.evaluate(() => scrollY)).toBe(viewport.scroll);
+  await page.keyboard.press("Tab");
+  await expect.poll(() => popup.evaluate(node => node.contains(document.activeElement))).toBe(true);
   await page.keyboard.press("Escape");
   await expect(page.locator("#hybrid-explanation")).toBeHidden();
   await trigger.focus();
   await page.keyboard.press("Enter");
   await expect(page.locator("#hybrid-explanation")).toBeVisible();
-  await expect(popup).toHaveAttribute("data-keyboard", "");
+  await expect(popup).toHaveAttribute("data-keyboard", "true");
   await page.getByRole("button", { name: "Entendi", exact: true }).click();
   await expect(page.locator("#hybrid-explanation")).toBeHidden();
+});
+
+test("lesson method is a three-step sticky sequence with a reduced-motion fallback", async ({ page }) => {
+  await page.setViewportSize({width:430,height:932});
+  await page.goto("/catalogo");
+  const steps = page.locator('[class*="methodSteps"]>li');
+  await expect(steps).toHaveCount(3);
+  for (const step of await steps.all()) {
+    await expect(step.locator("ul>li")).toHaveCount(3);
+    await expect(step).toHaveCSS("position", "sticky");
+  }
+  const top = await page.locator('[class*="methodSteps"]').evaluate(node => node.getBoundingClientRect().top + scrollY);
+  await page.evaluate(y => scrollTo({top:y+350,behavior:"instant"}),top);
+  expect(Math.abs((await steps.first().boundingBox())!.y-20)).toBeLessThan(1);
+  await page.emulateMedia({reducedMotion:"reduce"});
+  for (const step of await steps.all()) await expect(step).toHaveCSS("position", "relative");
 });
 
 test("catalogue transition preserves the document and does not replay the initial loader", async ({ page }) => {

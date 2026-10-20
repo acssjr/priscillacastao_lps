@@ -1,8 +1,8 @@
 /** Based on catalogue v15, with subsequent user-approved web pricing updates. */
 export const lessonMethod = [
-  { title: "Priscilla começa dançando com você", text: "Ao dançar com você, Priscilla observa os passos que já conhece e como os executa. Isso ajuda a identificar o que precisa de ajuste e quais movimentos podem entrar no seu repertório." },
-  { title: "Ajustes nos passos que você já usa", text: "Vocês refinam a execução dos movimentos, com atenção à limpeza dos passos. O objetivo é diminuir a insegurança ao executá-los e melhorar a aparência da sua dança." },
-  { title: "Novos passos e pedidos específicos", text: "Priscilla ensina novos movimentos a partir da sua experiência e do estilo escolhido. Você também pode pedir um passo que queira aprender ou mostrar uma dificuldade para trabalhar na aula." },
+  { title: "Priscilla começa dançando com você", points: ["Você começa dançando com Priscilla.", "Ela observa os passos que você conhece e como os executa.", "Juntos, identificam ajustes e possibilidades para seu repertório."] },
+  { title: "Ajustes nos passos que você já usa", points: ["Refine a execução e a limpeza dos movimentos.", "Trabalhe os ajustes com atenção às suas dificuldades.", "O foco é dançar com mais segurança e clareza."] },
+  { title: "Novos passos e pedidos específicos", points: ["Aprenda movimentos a partir da sua experiência e do estilo escolhido.", "Peça um passo que queira aprender.", "Mostre uma dificuldade para trabalhar na aula."] },
 ];
 
 export const lessonFormats = [

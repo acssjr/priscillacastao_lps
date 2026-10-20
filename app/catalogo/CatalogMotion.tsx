@@ -62,11 +62,6 @@ export function CatalogMotion() {
       animations.push(animation);
     };
     disclosures.forEach(details => details.addEventListener("toggle", revealDetails));
-    const explanation = page.querySelector<HTMLElement>("[popover]");
-    const prepareExplanation = () => {
-      explanation?.toggleAttribute("data-keyboard", keyboard);
-    };
-    explanation?.addEventListener("beforetoggle", prepareExplanation);
     return () => {
       observer.disconnect();
       beamObserver.disconnect();
@@ -74,7 +69,6 @@ export function CatalogMotion() {
       disclosures.forEach(details => details.removeEventListener("toggle", revealDetails));
       page.removeEventListener("keydown", onKeyboard, true);
       page.removeEventListener("pointerdown", onPointer, true);
-      explanation?.removeEventListener("beforetoggle", prepareExplanation);
       animations.forEach(animation => animation.cancel());
     };
   }, []);
