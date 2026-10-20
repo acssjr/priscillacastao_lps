@@ -7,16 +7,16 @@
 .status h1 { font-size:clamp(26px,4vw,34px); font-weight:500; letter-spacing:-.04em; line-height:1.2; margin:0 0 12px; }
 .status p { font-size:16px; line-height:1.6; color:#796555; margin:0; min-height:52px; }
 .track { height:3px; border-radius:10px; overflow:hidden; background:#e4d9cf; margin:28px 0; }
-.track span { display:block; width:40%; height:100%; background:#64121f; border-radius:inherit; animation:travel 1800ms linear infinite; }
+.track span { display:block; width:40%; height:100%; background:#864129; border-radius:inherit; animation:travel 1800ms linear infinite; }
 .steps { display:flex; justify-content:space-between; gap:16px; padding:0; margin:0; list-style:none; font-size:13px; color:#85796e; }
 .steps li { display:flex; align-items:center; gap:8px; }
 .steps li>span { display:grid; place-items:center; width:24px; height:24px; border:1px solid #c9b9aa; border-radius:50%; font-size:12px; }
-.steps li[data-current=true],.steps li[data-complete=true] { color:#64121f; }
-.steps li[data-current=true]>span { border-color:#64121f; }
-.steps li[data-complete=true]>span { background:#64121f; color:#fff; border-color:#64121f; }
+.steps li[data-current=true],.steps li[data-complete=true] { color:#864129; }
+.steps li[data-current=true]>span { border-color:#864129; }
+.steps li[data-complete=true]>span { background:#864129; color:#fff; border-color:#864129; }
 .slow { margin-top:28px; font-size:14px; line-height:1.6; color:#796555; }
 .slow button { min-height:44px; padding:10px 18px; background:transparent; border:1px solid #bca797; border-radius:8px; font:inherit; color:#342522; cursor:pointer; }
-.slow button:focus-visible { outline:2px solid #64121f; outline-offset:4px; }
+.slow button:focus-visible { outline:2px solid #864129; outline-offset:4px; }
 @keyframes appear { from { opacity:0; } to { opacity:1; } }
 @keyframes travel { from { transform:translateX(-100%); } to { transform:translateX(350%); } }
 @media(prefers-reduced-motion:reduce) { .track span { animation:none; width:100%; opacity:.65; } }

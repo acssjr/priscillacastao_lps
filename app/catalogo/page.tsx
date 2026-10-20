@@ -7,6 +7,7 @@ import { forroDoZeroCampaign } from "@/content/landing-pages/forro-do-zero";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import styles from "./page.module.css";
 import { CatalogMotion } from "./CatalogMotion";
+import beam from "@/components/ui/WhatsAppLink.module.css";
 
 const saans = localFont({ src: [
   { path: "../links/fonts/Saans-TRIAL-Regular.woff2", weight: "400" },
@@ -24,8 +25,11 @@ function Arrow() {
   return <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" /></svg>;
 }
 
-function Contact({ option, children }: { option: string; children: React.ReactNode }) {
-  return <FeedbackLink href={buildWhatsAppUrl(forroDoZeroCampaign.whatsapp.phone, `Oi, Priscilla! Vi seu catálogo e tenho interesse em ${option}. Podemos conversar sobre como funciona, locais e horários?`)} target="_blank" rel="noopener noreferrer" feedback="Abrindo o WhatsApp…" className={styles.action}>{children}<Arrow /></FeedbackLink>;
+function Contact({ option, children, highlight = false }: { option: string; children: React.ReactNode; highlight?: boolean }) {
+  return <FeedbackLink href={buildWhatsAppUrl(forroDoZeroCampaign.whatsapp.phone, `Oi, Priscilla! Vi seu catálogo e tenho interesse em ${option}. Podemos conversar sobre como funciona, locais e horários?`)} target="_blank" rel="noopener noreferrer" feedback="Abrindo o WhatsApp…" className={`${styles.action} ${highlight ? styles.beamAction : ""}`}>
+    {highlight && <span className={beam.glow} aria-hidden="true"><span className={beam.rim} /></span>}
+    <span className={styles.actionText}>{children}</span><Arrow />
+  </FeedbackLink>;
 }
 
 export default function CatalogPage() {
@@ -71,7 +75,7 @@ export default function CatalogPage() {
           <p>{format.sections[0].text}</p>
           <details className={styles.details}><summary>Saiba como funciona <span aria-hidden="true">+</span></summary><div>{format.sections.slice(1).map(section => <div key={section.title}><h4>{section.title}</h4><p>{section.text}</p></div>)}</div></details>
         </div>
-        <div className={styles.investment}><dl>{format.prices.map(price => <div key={price.label}><dt>{price.label}</dt><dd>{price.amount}</dd>{"saving" in price && <dd className={styles.saving}>{price.saving}</dd>}</div>)}</dl><Contact option={format.title.toLowerCase()}>{format.id === "individual" ? "Quero marcar minha aula" : format.id === "dupla" ? "Quero uma aula em dupla" : "Quero uma aula em grupo"}</Contact></div>
+        <div className={styles.investment} data-catalog-reveal><span className={styles.priceMark} aria-hidden="true" /><dl>{format.prices.map(price => <div key={price.label}><dt>{price.label}</dt><dd>{price.amount}</dd>{"saving" in price && <dd className={styles.saving}>{price.saving}</dd>}</div>)}</dl><Contact option={format.title.toLowerCase()} highlight={format.id === "individual"}>{format.id === "individual" ? "Quero marcar minha aula" : format.id === "dupla" ? "Quero uma aula em dupla" : "Quero uma aula em grupo"}</Contact></div>
       </article>)}
     </section>
 
@@ -79,7 +83,7 @@ export default function CatalogPage() {
     <section id="cursos" className={styles.courses} aria-labelledby="courses-title">
       <div className={styles.sectionHead} data-catalog-reveal><h2 id="courses-title">Cursos livres</h2><p>Encontros práticos para aprofundar um aspecto da sua dança.<br />Você escolhe o tema que deseja trabalhar.</p></div>
       <div>{freeCourses.map(course => <article key={course.title} className={styles.course}><div><h3>{course.title}</h3><span className={styles.coursePrice}>{course.amount}</span><p>{course.text}</p></div></article>)}</div>
-      <div className={styles.combo}><div><h3>Combo dos 3 cursos</h3><p>Adquira os três conteúdos para aprofundar sua dança de forma contínua.</p></div><div className={styles.comboPrice}><span>Valor promocional</span><strong>R$ 397</strong><span>R$ 52,70 de desconto</span></div><Contact option="combo dos 3 cursos">Quero fazer os três cursos</Contact></div>
+      <div className={styles.combo} data-catalog-reveal><div><h3>Combo dos 3 cursos</h3><p>Adquira os três conteúdos para aprofundar sua dança de forma contínua.</p></div><div className={styles.comboPrice}><span>Valor promocional</span><strong>R$ 397</strong><span>R$ 52,70 de desconto</span></div><Contact option="combo dos 3 cursos">Quero fazer os três cursos</Contact></div>
     </section>
     </div>
 

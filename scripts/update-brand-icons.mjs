@@ -4,7 +4,7 @@ import sharp from "sharp";
 // All icon formats share the approved P extracted from the supplied brand SVG.
 const mark = await readFile("public/brand/priscilla-castao-monogram.svg", "utf8");
 const paths = mark.replace(/<svg[^>]*>/, "").replace(/<\/svg>\s*$/, "");
-const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" color="#faf5ec"><rect width="512" height="512" rx="112" fill="#64121f"/><g transform="translate(76 78) scale(1.09) translate(-45 -65)">${paths}</g></svg>`;
+const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" color="#faf5ec"><rect width="512" height="512" rx="112" fill="#864129"/><g transform="translate(76 78) scale(1.09) translate(-45 -65)">${paths}</g></svg>`;
 await writeFile("public/favicon.svg", svg);
 for (const [name, size] of [["favicon-96x96.png", 96], ["apple-touch-icon.png", 180], ["web-app-manifest-192x192.png", 192], ["web-app-manifest-512x512.png", 512]]) {
   await sharp(Buffer.from(svg)).resize(size, size).png().toFile(`public/${name}`);

@@ -3,8 +3,8 @@
   min-height: 100svh;
   overflow: hidden;
   background:
-    radial-gradient(circle at 82% 18%, rgb(174 102 100 / 28%), transparent 30rem),
-    linear-gradient(145deg, #4b0d17 0%, #64121f 52%, #7a1d2a 100%);
+    radial-gradient(circle at 82% 18%, rgb(187 132 98 / 28%), transparent 30rem),
+    linear-gradient(145deg, #45291c 0%, #864129 52%, #995232 100%);
   color: var(--surface-paper);
 }
 

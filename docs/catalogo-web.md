@@ -102,3 +102,18 @@ PDF v19: assinatura Priscilla Castão dentro do painel de vidro fosco, título C
 Refinamento posterior: removida a oferta de download do PDF no rodapé do catálogo. O arquivo continua preservado. A foto de /links passa a usar o mesmo retrato do catálogo, sem filtro cromático; apenas um degradê preto transparente na parte inferior protege a leitura da assinatura. O card WhatsApp adota o terracota dos demais cards, incluindo a marca-d'água creme, sem verde.
 
 O catálogo web usa marrom terracota `#864129`, derivado do acento existente `#a65134`, como cor principal local. Mantém as superfícies creme e papel. As modalidades aparecem em texto corrido: forró universitário, roots e dança híbrida. Apenas dança híbrida tem sublinhado e asterisco; abre uma explicação em popover nativo, sem deslocar seções nem alterar a altura da página. Pode ser fechado por Escape, clique fora ou Entendi. As descrições dos formatos e os metadados incluem a modalidade híbrida. Valores preservados. Conferidos 320, 430, 768 e 1440 px sem transbordamento e sem violações WCAG A/AA no Axe. A página /links, sua abertura e a transição para o catálogo adotam a paleta marrom terracota; o card WhatsApp mantém o verde.
+## Paleta universal terrosa e cards de preço — 20/10/2026
+
+Direção aprovada: o site passa de vinho/bordô para marrom terracota. Tokens globais: primary #864129, dark #45291c, mid #995232, soft #bb8462; creme #f1e2c9 e papel #faf5ec preservados. Campanhas, seletor de versões, apresentação comercial, painel, transições, theme-color, manifest e favicons acompanham a direção. As cores de fotografias e estados semânticos de erro/sucesso são preservadas.
+
+Os cards de investimento e combo usam contorno claro, reflexo em terracota e backdrop-filter blur(20px) saturate(120%), com fallback de fundos legíveis. Não há filtros SVG nem bibliotecas novas. Botões do catálogo têm cápsula, largura intrínseca, fonte 15px/1.35 e alvo mínimo de 48px; hover com preenchimento por transform, restrito a mouse. Border beam reaproveita a implementação existente, apenas no CTA individual, começa ao entrar na tela e completa dois ciclos de 4s. Movimento reduzido mantém a borda estática.
+
+### Avaliação find-animation-opportunities; implementação animate
+
+| Local | Hoje / objetivo | Frequência | Receita aprovada e gates |
+| --- | --- | --- | --- |
+| app/catalogo/page.tsx, cards de investimento | Entrada antes simultânea; orientar descoberta da oferta | Primeira leitura | Prevenir mudança brusca: translateX(16px) e opacity .65 para posição final/1, 450ms com --ease-out cubic-bezier(.23,1,.32,1), uma vez por card. Marketing; preços não contam nem pulsam. Reduce: fade150ms. |
+| app/catalogo/page.module.css, .action | CTA retangular sem preenchimento | Várias interações | Feedback: camada scaleX(0) para 1 em200ms --ease-out, apenas hover:hover/pointer:fine; pressão scale(.98)160ms. Texto fica parado. Reduce: preenchimento por opacity150ms. |
+| app/catalogo/CatalogMotion.tsx, popover e entrada | Abertura ocasional da explicação | Ocasional | Estado legível: opacity0 para1 em150ms --ease-out; sem deslocar layout. Abertura por teclado instantânea. Chegada direta com translateX(-12px)/opacity.7 para0/1 em450ms, intervalo40ms; chegada a partir de links continua pertencendo à transição existente, sem duplicar. |
+
+Rejeitados: animação dos números de preço (gate função: são dados para ler); parallax na foto (gate propósito: sem utilidade nesta leitura); brilho contínuo em todos os botões (gates frequência e função). O maior ganho é a chegada pontual de cada card, com interação disponível durante todo o movimento. A etapa de levantamento é somente diagnóstico; as mudanças foram realizadas pela etapa de implementação animate.

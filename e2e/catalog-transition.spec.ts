@@ -1,5 +1,22 @@
 import { expect, test } from "@playwright/test";
 
+test("terracotta price cards retain readable values and a reduced-motion-safe beam", async ({ page }) => {
+  await page.goto("/catalogo");
+  const card = page.locator("#aula-individual [data-catalog-reveal]");
+  await card.scrollIntoViewIfNeeded();
+  await expect(card).toHaveAttribute("data-revealed", "true");
+  await expect(card).toHaveCSS("backdrop-filter", "blur(20px) saturate(1.2)");
+  await expect(card).toContainText("R$ 439,90");
+  const cta = page.getByRole("link", { name: "Quero marcar minha aula", exact: true });
+  await expect(cta).toHaveCSS("border-radius", "999px");
+  expect(await page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue("--brand-primary").trim())).toBe("#864129");
+  const rim = cta.locator('span[aria-hidden="true"]>span');
+  expect(await rim.evaluate(node => getComputedStyle(node, "::before").animationPlayState)).toBe("running");
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  expect(await rim.evaluate(node => getComputedStyle(node, "::before").animationName)).toBe("none");
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
 test("hybrid explanation opens without shifting catalogue content", async ({ page }) => {
   await page.goto("/catalogo");
   const section = page.locator("#como-sao");

@@ -1,8 +1,8 @@
 :root {
-  --brand-primary: #64121f;
-  --brand-dark: #4b0d17;
-  --brand-mid: #7a1d2a;
-  --brand-soft: #ae6664;
+  --brand-primary: #864129;
+  --brand-dark: #45291c;
+  --brand-mid: #995232;
+  --brand-soft: #bb8462;
   --surface-cream: #f1e2c9;
   --surface-paper: #faf5ec;
   --ink-warm: #342522;
@@ -23,7 +23,7 @@
   --radius-sm: 0.5rem;
   --radius-md: 1rem;
   --radius-lg: 1.5rem;
-  --focus: 3px solid #7a1d2a;
+  --focus: 3px solid #995232;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }

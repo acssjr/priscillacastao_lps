@@ -2,10 +2,10 @@
 name: Priscilla Castão
 description: Identidade existente das campanhas de forró e sua extensão ao painel de edição.
 colors:
-  brand-primary: "#64121f"
-  brand-dark: "#4b0d17"
-  brand-mid: "#7a1d2a"
-  brand-soft: "#ae6664"
+  brand-primary: "#864129"
+  brand-dark: "#45291c"
+  brand-mid: "#995232"
+  brand-soft: "#bb8462"
   surface-cream: "#f1e2c9"
   surface-paper: "#faf5ec"
   ink-warm: "#342522"
@@ -155,7 +155,7 @@ components:
 
 **Creative North Star: "Vinho, creme e papel"**
 
-Nome descritivo dos materiais já presentes, sem introduzir uma nova marca. O vinho dá identidade aos cabeçalhos, fundos escuros e ações; creme e papel oferecem superfícies quentes para leitura. Fotografias e retratos pertencem à landing e convivem com títulos fortes e cantos arredondados.
+Nome descritivo dos materiais já presentes, sem introduzir uma nova marca. O marrom terracota dá identidade aos cabeçalhos, fundos escuros e ações; creme e papel oferecem superfícies quentes para leitura. Fotografias e retratos pertencem à landing e convivem com títulos fortes e cantos arredondados.
 
 O painel estende essa identidade com o próprio site como área de edição: a composição pública permanece visível, textos recebem escrita direta e fotos recebem seleção e enquadramento. O inspetor sincronizado complementa o canvas; campos isolados e uma coluna de orientação não constituem a área principal de trabalho. A estrutura e as interações seguem a referência aprovada de Iasmin para as três campanhas, sem Edição avançada. A organização específica está em `.impeccable/surfaces/admin.md`.
 
@@ -167,7 +167,7 @@ O painel estende essa identidade com o próprio site como área de edição: a c
 
 ## Colors
 
-A paleta combina vinhos profundos com neutros quentes; o frontmatter mantém os valores canônicos do código.
+A paleta combina marrons e terracotas profundos com neutros quentes; o frontmatter mantém os valores canônicos do código.
 
 ### Primary
 - **Vinho principal:** cabeçalho público, identificação, texto da navegação e ação principal de publicação.
@@ -176,17 +176,17 @@ A paleta combina vinhos profundos com neutros quentes; o frontmatter mantém os 
 - **Vinho suave:** detalhes e transições visuais da landing.
 
 ### Neutral
-- **Creme:** seções alternadas, CTAs sobre vinho e fundos de imagens no painel.
-- **Papel:** fundo global e texto sobre vinho.
+- **Creme:** seções alternadas, CTAs sobre marrom terracota e fundos de imagens no painel.
+- **Papel:** fundo global e texto sobre marrom terracota.
 - **Tinta quente:** texto principal sobre fundos claros.
 - **Papel do painel:** campos, barra de ações e grupos de edição.
 - **Linha do painel:** separadores e contornos de grupos.
 - **Texto secundário do painel:** orientação e estado complementar.
-- **Neutros do editor:** lateral em `admin-sidebar`, seleção de navegação em `admin-nav-selected`; toolbar e inspetor em `editor-paper`, contornos em `editor-line`, canvas em `editor-canvas` e legenda em `editor-caption`. O campo selecionado usa `editor-selection` com contorno vinho; `editor-muted` orienta os seletores. São valores locais efetivamente usados, não uma substituição da paleta pública.
+- **Neutros do editor:** lateral em `admin-sidebar`, seleção de navegação em `admin-nav-selected`; toolbar e inspetor em `editor-paper`, contornos em `editor-line`, canvas em `editor-canvas` e legenda em `editor-caption`. O campo selecionado usa `editor-selection` com contorno terracota; `editor-muted` orienta os seletores. São valores locais efetivamente usados, não uma substituição da paleta pública.
 - **Estados operacionais:** acesso usa `access-background`; barras de progresso usam `progress-track`. A confirmação de publicação usa terracota `publication-accent` e seu hover; o resultado confirmado usa `publication-success` sobre `publication-success-surface`. O enquadramento usa `photo-background` quando a foto não cobre a superfície. Esses papéis não mudam a cor primária da marca.
 
 ### Named Rules
-**The Identidade Herdada Rule.** Novas áreas do painel reutilizam os vinhos e neutros existentes; uma nova tela não estabelece uma identidade independente.
+**The Identidade Herdada Rule.** Novas áreas do painel reutilizam os tons terrosos e neutros existentes; uma nova tela não estabelece uma identidade independente.
 
 ## Typography
 
@@ -233,15 +233,15 @@ Cantos suaves usam a escala global; CTAs públicos têm silhueta de cápsula. O 
 
 ### Buttons
 
-Na landing, CTAs largos em creme sobre vinho usam peso 800, altura mínima de 3.5rem e cápsula; hover eleva 2px e active comprime suavemente. No painel, botões têm altura mínima de 44px, peso 600 e padding registrado no frontmatter. A publicação usa vinho; ações secundárias usam papel com contorno. Hover primário escurece, secundário fica creme; disabled reduz opacidade para 0.48. Foco visível herda o contorno global de 3px com afastamento de 3px.
+Na landing, CTAs largos em creme sobre marrom terracota usam peso 800, altura mínima de 3.5rem e cápsula; hover eleva 2px e active comprime suavemente. No painel, botões têm altura mínima de 44px, peso 600 e padding registrado no frontmatter. A publicação usa terracota; ações secundárias usam papel com contorno. Hover primário escurece, secundário fica creme; disabled reduz opacidade para 0.48. Foco visível herda o contorno global de 3px com afastamento de 3px.
 
 ### Cards / Containers
 
-A landing tem contêineres translúcidos e cartões com profundidade. O editor reúne toolbar, canvas e inspetor numa moldura clara com borda de 1px. Grupos de edição ficam transparentes, sem padding externo; summaries usam 18px 16px, conteúdo usa 0 16px 22px, e separadores delineiam as seções. A seleção tem contorno vinho e fundo quente próprio. Não transportar a composição de retratos ou brilhos da landing para campos do painel.
+A landing tem contêineres translúcidos e cartões com profundidade. O editor reúne toolbar, canvas e inspetor numa moldura clara com borda de 1px. Grupos de edição ficam transparentes, sem padding externo; summaries usam 18px 16px, conteúdo usa 0 16px 22px, e separadores delineiam as seções. A seleção tem contorno terracota e fundo quente próprio. Não transportar a composição de retratos ou brilhos da landing para campos do painel.
 
 ### Inputs / Fields
 
-Campos nativos têm largura total, altura mínima de 46px, borda `#bba99a`, fundo papel e caret vinho. Rótulos ficam acima com gap de 8px. Textareas permitem redimensionamento vertical; checkboxes e ranges usam accent vinho. A seleção na página abre o campo correspondente no inspetor; ambos atualizam o mesmo rascunho. Restaurar acompanha o rótulo e os grupos expõem controles adicionais por seção. Não existe estilo específico de erro por campo nas folhas examinadas; mensagens globais têm texto, fundo e semântica de alerta/status.
+Campos nativos têm largura total, altura mínima de 46px, borda `#bba99a`, fundo papel e caret terracota. Rótulos ficam acima com gap de 8px. Textareas permitem redimensionamento vertical; checkboxes e ranges usam accent vinho. A seleção na página abre o campo correspondente no inspetor; ambos atualizam o mesmo rascunho. Restaurar acompanha o rótulo e os grupos expõem controles adicionais por seção. Não existe estilo específico de erro por campo nas folhas examinadas; mensagens globais têm texto, fundo e semântica de alerta/status.
 
 ### Navigation
 
@@ -257,12 +257,12 @@ Acesso ocupa a tela com monograma circular, texto de status focalizado e etapas 
 
 ### Photo Framing
 
-Fotos mantêm o material existente. O enquadramento usa prévia com proporção do recorte real, grade de terços, ponto de foco circular e legenda de arraste. Arrastar/toque, setas de teclado em passos de 2%, presets e ranges horizontal/vertical atualizam o recorte visível no site; a descrição alternativa acompanha a imagem no inspetor. Presets usam cápsulas de 20px e estado selecionado vinho.
+Fotos mantêm o material existente. O enquadramento usa prévia com proporção do recorte real, grade de terços, ponto de foco circular e legenda de arraste. Arrastar/toque, setas de teclado em passos de 2%, presets e ranges horizontal/vertical atualizam o recorte visível no site; a descrição alternativa acompanha a imagem no inspetor. Presets usam cápsulas de 20px e estado selecionado terracota.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** reutilizar os tokens de vinho, creme, papel e tinta quente.
+- **Do** reutilizar os tokens terrosos, creme, papel e tinta quente.
 - **Do** preservar a família principal e distinguir títulos, rótulos e orientação pelo tamanho e peso.
 - **Do** manter foco visível e preferências de movimento reduzido nos controles documentados.
 - **Do** manter o site como área principal, os controles sincronizados e a adaptação de navegação e inspetor conforme os breakpoints da superfície.

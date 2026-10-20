@@ -12,7 +12,7 @@
 .actions { flex-wrap:wrap; }
 .actions>* { min-height:44px; }
 .visit { display:inline-flex; align-items:center; justify-content:center; gap:10px; border:1px solid #a65134; border-radius:9px; background:#a65134; padding:11px 16px; color:#fffaf3; font-size:16px; line-height:1.6; font-weight:600; text-decoration:none; }
-.visit:focus-visible { outline:3px solid #64121f; outline-offset:3px; }
+.visit:focus-visible { outline:3px solid #864129; outline-offset:3px; }
 @media(hover:hover) and (pointer:fine) { .visit:hover { background:#864129; } }
 @keyframes confirm { from { transform:scale(.95); opacity:0; } to { transform:scale(1); opacity:1; } }
 @keyframes travel { from { transform:translateX(-100%); } to { transform:translateX(350%); } }

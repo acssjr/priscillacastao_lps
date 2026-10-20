@@ -16,11 +16,11 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
   icons: {
     icon: [
-      { url: "/favicon-96x96.png?v=monogram-p", type: "image/png", sizes: "96x96" },
-      { url: "/favicon.svg?v=monogram-p", type: "image/svg+xml" },
+      { url: "/favicon-96x96.png?v=terracotta-p", type: "image/png", sizes: "96x96" },
+      { url: "/favicon.svg?v=terracotta-p", type: "image/svg+xml" },
     ],
-    shortcut: "/favicon.ico?v=monogram-p",
-    apple: [{ url: "/apple-touch-icon.png?v=monogram-p", type: "image/png", sizes: "180x180" }],
+    shortcut: "/favicon.ico?v=terracotta-p",
+    apple: [{ url: "/apple-touch-icon.png?v=terracotta-p", type: "image/png", sizes: "180x180" }],
   },
   appleWebApp: {
     capable: true,
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#64121F",
+  themeColor: "#864129",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {

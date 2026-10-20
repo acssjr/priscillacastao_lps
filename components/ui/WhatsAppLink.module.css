@@ -18,9 +18,9 @@
   border-radius: inherit;
   box-shadow:
     0 0 3px 1px rgb(250 245 236 / 65%),
-    0 0 9px 2px rgb(174 102 100 / 65%),
-    0 0 22px 3px rgb(100 18 31 / 24%),
-    inset 0 0 8px rgb(174 102 100 / 40%);
+    0 0 9px 2px rgb(187 132 98 / 65%),
+    0 0 22px 3px rgb(134 65 41 / 24%),
+    inset 0 0 8px rgb(187 132 98 / 40%);
 }
 
 /* The pill-shaped mask stays still; only its oversized light source rotates. */

@@ -9,7 +9,7 @@ export function SiteHeader({ campaign }: { campaign: LandingCampaign }) {
     <header className={styles.header}>
       <div className={styles.headerInner}>
         <a className={styles.brandLink} href="#inicio" aria-label="Priscilla Castão, início">
-          <span className={styles.brandLogo} role="img" aria-label="Priscilla Castão" data-brand-color="#64121f" />
+          <span className={styles.brandLogo} role="img" aria-label="Priscilla Castão" data-brand-color="#864129" />
         </a>
         <nav className={styles.desktopNav} aria-label="Navegação principal">
           {campaign.navigation.map((item, index) => <a href={item.target} key={item.target}><CmsText field={`navigation.${index}.label`} value={item.label} /></a>)}

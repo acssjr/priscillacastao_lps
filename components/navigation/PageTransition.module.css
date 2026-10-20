@@ -19,7 +19,7 @@
   bottom: 0;
   width: 50.5%;
   background:
-    radial-gradient(circle at 50% 45%, rgb(174 102 100 / 26%), transparent 25rem),
+    radial-gradient(circle at 50% 45%, rgb(187 132 98 / 26%), transparent 25rem),
     var(--brand-dark);
   transition: transform 320ms var(--ease-in-out);
   will-change: transform;
