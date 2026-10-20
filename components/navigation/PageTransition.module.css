@@ -25,6 +25,10 @@
   will-change: transform;
 }
 
+.overlay[data-catalog-overlay] .panel {
+  background:radial-gradient(circle at 50% 45%,#a6513442,transparent 25rem),#45291c;
+}
+
 .panelLeft {
   left: 0;
   transform: translateX(-101%);

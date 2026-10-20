@@ -1,5 +1,5 @@
-.page { --wine:#64121f; --paper:#faf5ec; --cream:#f1e2c9; --base:#280b12; --ease:var(--ease-out,cubic-bezier(.23,1,.32,1)); position:relative; isolation:isolate; overflow:clip; min-height:100svh; padding:0 1rem 1.25rem; background:radial-gradient(ellipse at 75% 45%,#64121f85,transparent 65%),var(--base); color:var(--paper); line-height:1.4; }
-.page ::selection { background:var(--cream); color:var(--wine); }
+.page { --primary:#864129; --paper:#faf5ec; --cream:#f1e2c9; --base:#2f1c14; --ease:var(--ease-out,cubic-bezier(.23,1,.32,1)); position:relative; isolation:isolate; overflow:clip; min-height:100svh; padding:0 1rem 1.25rem; background:radial-gradient(ellipse at 75% 45%,#86412985,transparent 65%),var(--base); color:var(--paper); line-height:1.4; }
+.page ::selection { background:var(--cream); color:var(--primary); }
 .page a { text-decoration:none; }
 .page a:focus-visible { outline:3px solid var(--cream); outline-offset:-6px; }
 .canvas { width:min(100%,42rem); margin-inline:auto; }
@@ -7,9 +7,9 @@
 .topbar { height:4.25rem; display:flex; align-items:center; justify-content:center; }
 .brandMark { display:block; width:36px; height:38px; background:var(--cream); mask:url('/brand/priscilla-castao-monogram.svg') center / contain no-repeat; }
 .composition { --gutter:1.25rem; --portrait-height:26.25rem; position:relative; display:grid; gap:var(--gutter); }
-.portraitPanel { position:relative; height:var(--portrait-height); overflow:hidden; border-radius:18px; background:var(--wine); mask-image:radial-gradient(circle at 50% 100%,transparent 0 18px,#000 19px); }
+.portraitPanel { position:relative; height:var(--portrait-height); overflow:hidden; border-radius:18px; background:var(--primary); mask-image:radial-gradient(circle at 50% 100%,transparent 0 18px,#000 19px); }
 .mainPhoto { object-fit:cover; object-position:50% 32%; }
-.photoVeil { position:absolute; inset:0; background:linear-gradient(180deg,#280b1200 30%,#64121f35 48%,#64121fe8 85%,#64121f 100%); }
+.photoVeil { position:absolute; inset:0; background:linear-gradient(180deg,#2f1c1400 30%,#86412935 48%,#864129e8 85%,#864129 100%); }
 .signature { position:absolute; bottom:2.1875rem; left:1rem; right:1rem; text-align:center; }
 .signature h1 { margin:0 0 18px; }
 .logo { display:block; width:min(100%,21.25rem); height:4.75rem; margin-inline:auto; background:var(--paper); mask:url('/brand/priscilla-castao-logo.svg') center / contain no-repeat; }
@@ -22,24 +22,24 @@
 .cardStack { display:grid; grid-template-rows:repeat(4,minmax(10rem,auto)); gap:.8125rem; min-width:0; }
 .cardStack:focus { outline:none; }
 .cardStack:focus-visible { outline:2px solid var(--cream); outline-offset:6px; }
-.card { position:relative; isolation:isolate; overflow:hidden; display:flex; align-items:center; padding:1.125rem 1.25rem; border-radius:16px; background:linear-gradient(125deg,#faf5ec1e,#faf5ec05 60%,#faf5ec12); color:var(--paper); backdrop-filter:blur(12px) saturate(130%); -webkit-backdrop-filter:blur(12px) saturate(130%); box-shadow:0 12px 28px #16070d33,inset 0 1px 0 #faf5ec65,inset 1px 0 0 #faf5ec22,inset -1px -1px 0 #faf5ec20; transition:background-color 200ms ease; }
+.card { position:relative; isolation:isolate; overflow:hidden; display:flex; align-items:center; padding:1.125rem 1.25rem; border-radius:16px; background:linear-gradient(125deg,#faf5ec1e,#faf5ec05 60%,#faf5ec12); color:var(--paper); backdrop-filter:blur(12px) saturate(130%); -webkit-backdrop-filter:blur(12px) saturate(130%); box-shadow:0 12px 28px #21140e33,inset 0 1px 0 #faf5ec65,inset 1px 0 0 #faf5ec22,inset -1px -1px 0 #faf5ec20; transition:background-color 200ms ease; }
 .card::after { content:''; position:absolute; z-index:2; inset:0; border-radius:inherit; pointer-events:none; background:linear-gradient(115deg,#faf5ec15,transparent 38%,transparent 70%,#faf5ec08); }
 .cardWatermark { position:absolute; right:27px; top:15%; height:70%; aspect-ratio:1; background:var(--cream); opacity:.12; mask:url('/brand/priscilla-castao-monogram.svg') center / contain no-repeat; transform:rotate(-10deg); pointer-events:none; }
-.cardVeil { position:absolute; inset:0; background:linear-gradient(90deg,#64121f8c,#64121f66 36%,#64121f0a 78%,transparent); }
+.cardVeil { position:absolute; inset:0; background:linear-gradient(90deg,#8641298c,#86412966 36%,#8641290a 78%,transparent); }
 .cardText { position:relative; z-index:3; width:76%; min-width:0; overflow-wrap:break-word; }
 .cardText h2 { margin:0 0 12px; font-size:1.5rem; font-weight:700; line-height:1.08; letter-spacing:-.03em; }
 .cardText > span { display:block; font-size:.875rem; color:var(--cream); }
 .aulas { background:linear-gradient(115deg,#244638c9,#15513e91 65%,#34785966); }
 .aulas .cardVeil { background:linear-gradient(90deg,#18372c99,#18372c40 50%,transparent); }
 .aulas .cardWatermark { mask-image:url('/brand/whatsapp-simple-icons.svg'); background:#d0f5da; opacity:.16; height:94%; top:3%; right:24px; transform:rotate(-13deg); }
-.portfolio { background-color:#64121f55; }
-.trajectory { background-color:#ae66641f; }
+.portfolio { background-color:#86412955; }
+.trajectory { background-color:#bb84621f; }
 .trajectory .cardWatermark { aspect-ratio:4; height:68%; top:22%; right:-24%; transform:rotate(-14deg); opacity:.085; mask-composite:intersect; mask-image:url('/brand/priscilla-castao-logo.svg'),linear-gradient(90deg,transparent,#000 45%); }
 .instagram .cardWatermark { mask-image:url('/brand/instagram.svg'); aspect-ratio:1; height:94%; top:3%; right:24px; transform:rotate(9deg); opacity:.14; }
 .notchButton { position:absolute; z-index:4; top:var(--portrait-height); left:50%; transform:translate(-50%,-50%); width:26px; height:26px; display:grid; place-items:center; color:var(--cream); pointer-events:none; }
 .notchButton svg { width:12px; height:12px; transform:rotate(90deg); }
 .srOnly { position:absolute; width:1px; height:1px; padding:0; margin:-1px; clip-path:inset(50%); overflow:hidden; white-space:nowrap; }
-@media (hover:hover) and (pointer:fine) { .card:hover { background-color:#faf5ec16; } .heroAction:hover { background:#7a2638; } }
+@media (hover:hover) and (pointer:fine) { .card:hover { background-color:#faf5ec16; } .heroAction:hover { background:#a65134; } }
 .card:active,.heroAction:active { filter:brightness(1.06); }
 
 @media (min-width:421px) {
@@ -74,7 +74,7 @@
   .notchButton svg,.linksHint svg { transform:none; }
 }
 @media (prefers-reduced-motion:reduce) { .heroAction,.card { transition:none; } }
-.entrance { position:fixed; z-index:300; inset:0; overflow:hidden; display:grid; place-items:center; background:radial-gradient(ellipse at 65% 30%,#8b2540,#64121f 45%,#3e0c1b); animation:loaderSafety 1ms 14s step-end forwards; }
+.entrance { position:fixed; z-index:300; inset:0; overflow:hidden; display:grid; place-items:center; background:radial-gradient(ellipse at 65% 30%,#a65134,#864129 45%,#45291c); animation:loaderSafety 1ms 14s step-end forwards; }
 .entrance[hidden] { display:none; }
 @keyframes loaderSafety { to { visibility:hidden; opacity:0; } }
 .entranceWatermark { position:absolute; inset:-20%; background:var(--cream); opacity:.065; mask:url('/brand/priscilla-castao-logo.svg') center / min(150vw,1700px) auto no-repeat; transform:rotate(-12deg); }

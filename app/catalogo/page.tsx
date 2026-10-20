@@ -41,9 +41,10 @@ export default function CatalogPage() {
     <section className={styles.hero} aria-labelledby="catalog-title">
       <div className={styles.intro}>
         <h1 id="catalog-title" data-catalog-enter>Catálogo<br />de aulas<span>.</span></h1>
-        <div className={styles.modalities} data-catalog-enter aria-label="Modalidades">
-          <span>Forró universitário</span><span>Roots</span>
-          <details className={styles.hybrid}><summary>Dança híbrida <span aria-hidden="true">+</span></summary><div>Ensino de forró roots junto com o universitário, combinando os dois estilos na sua prática.</div></details>
+        <p className={styles.modalities} data-catalog-enter>Forró universitário, roots e <button type="button" className={styles.hybridLink} popoverTarget="hybrid-explanation">dança híbrida<sup>*</sup></button>.</p>
+        <div id="hybrid-explanation" popover="auto" className={styles.hybridExplanation} role="note" aria-label="Sobre dança híbrida">
+          <strong>Dança híbrida</strong><p>Ensino de forró roots junto com o universitário, combinando os dois estilos na sua prática.</p>
+          <button type="button" popoverTarget="hybrid-explanation" popoverTargetAction="hide">Entendi</button>
         </div>
         <p className={styles.lede} data-catalog-enter>Aulas individuais, em dupla e em grupo.</p>
         <p data-catalog-enter>Entenda o funcionamento das aulas e os valores.</p>

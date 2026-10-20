@@ -17,17 +17,15 @@
 .intro h1 { font-size:clamp(3.25rem,8vw,6rem); margin:0 0 1.5rem; line-height:1; }
 .intro h1 span { color:#a65134; }
 .intro .lede { font-size:clamp(1.125rem,2vw,1.375rem); line-height:1.5; margin-bottom:1rem; }
-.modalities { display:flex; flex-wrap:wrap; align-items:flex-start; gap:.5rem; max-width:34rem; margin:0 0 1.25rem; font-size:.875rem; }
-.modalities>span,.hybrid summary { padding:.45rem .75rem; border:1px solid #86412940; border-radius:8px; background:#faf5eceb; }
-.modalities>span { display:inline-flex; align-items:center; min-height:44px; }
-.hybrid { flex:0 1 auto; min-width:0; max-width:100%; }
-.hybrid summary { display:flex; align-items:center; justify-content:space-between; gap:.75rem; min-height:44px; background:var(--primary); color:var(--paper); cursor:pointer; list-style:none; font-weight:700; }
-.hybrid summary::-webkit-details-marker { display:none; }
-.hybrid summary span { transition:transform 160ms var(--ease-out); }
-.hybrid[open] summary span { transform:rotate(45deg); }
-.hybrid>div { max-width:30ch; margin-top:.5rem; padding:.875rem 1rem; border:1px solid #86412933; border-radius:8px; background:var(--paper); line-height:1.55; }
-.hybrid summary:focus-visible { outline-color:var(--primary); }
-@media (prefers-reduced-motion:reduce) { .hybrid summary span { transition:none; } }
+.modalities { font-size:clamp(1.125rem,2vw,1.375rem); line-height:1.5; margin:0 0 1rem; }
+.hybridLink { display:inline; padding:0; border:0; background:none; color:inherit; font:inherit; cursor:pointer; text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:4px; -webkit-tap-highlight-color:transparent; }
+.hybridLink sup { font-size:.7em; margin-left:2px; }
+.hybridLink:focus-visible,.hybridExplanation button:focus-visible { outline:3px solid var(--primary); outline-offset:4px; }
+.hybridExplanation { position:fixed; inset:0; margin:auto; width:min(calc(100% - 2rem),24rem); height:fit-content; padding:1.5rem; border:1px solid #86412940; border-radius:12px; background:var(--paper); color:var(--primary); box-shadow:0 16px 60px #42291d33; font-size:1rem; line-height:1.6; }
+.hybridExplanation strong { display:block; margin-bottom:.5rem; font-size:1.125rem; }
+.hybridExplanation p { margin:0 0 1rem; }
+.hybridExplanation button { border:0; padding:.5rem 0; min-height:44px; background:none; color:inherit; font:inherit; font-weight:700; cursor:pointer; text-decoration:underline; text-underline-offset:4px; }
+.hybridExplanation::backdrop { background:#42291d15; }
 .index { display:grid; margin-top:2rem; }
 .index a { display:flex; align-items:center; justify-content:space-between; gap:1rem; min-height:56px; border-top:1px solid #86412933; transition:background-color 160ms ease,transform 160ms var(--ease-out); }
 .index a:last-child { border-bottom:1px solid #86412933; }

@@ -1,5 +1,24 @@
 import { expect, test } from "@playwright/test";
 
+test("hybrid explanation opens without shifting catalogue content", async ({ page }) => {
+  await page.goto("/catalogo");
+  const section = page.locator("#como-sao");
+  const before = await section.boundingBox();
+  const height = await page.evaluate(() => document.documentElement.scrollHeight);
+  const trigger = page.getByRole("button", { name: "dança híbrida*" });
+  await trigger.click();
+  await expect(page.locator("#hybrid-explanation")).toBeVisible();
+  expect((await section.boundingBox())?.y).toBe(before?.y);
+  expect(await page.evaluate(() => document.documentElement.scrollHeight)).toBe(height);
+  await page.keyboard.press("Escape");
+  await expect(page.locator("#hybrid-explanation")).toBeHidden();
+  await trigger.focus();
+  await page.keyboard.press("Enter");
+  await expect(page.locator("#hybrid-explanation")).toBeVisible();
+  await page.getByRole("button", { name: "Entendi", exact: true }).click();
+  await expect(page.locator("#hybrid-explanation")).toBeHidden();
+});
+
 test("catalogue transition preserves the document and does not replay the initial loader", async ({ page }) => {
   await page.goto("/links");
   await expect(page.getByRole("progressbar")).toBeHidden();
