@@ -58,7 +58,7 @@ export default function CatalogPage() {
           <a href="#cursos">Cursos livres <Arrow /></a>
         </nav>
       </div>
-      <div data-catalog-enter className={styles.heroPhoto} aria-hidden="true"><Image src="/images/priscilla-catalogo-retrato.webp" alt="" fill sizes="(min-width: 1200px) 520px, (min-width: 800px) 45vw, 33vw" fetchPriority="high" loading="eager" /></div>
+      <div data-catalog-enter className={styles.heroPhoto} aria-hidden="true"><Image src="/images/priscilla-catalogo-retrato.webp" alt="" fill sizes="(min-width: 1200px) 600px, (min-width: 800px) 52vw, 78vw" fetchPriority="high" loading="eager" /></div>
     </section>
 
     <div className={styles.methodBand}>

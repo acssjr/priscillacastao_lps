@@ -15,6 +15,7 @@ export function CatalogMotion() {
     // A direct visit gets a short introduction without hiding content first.
     if (!document.documentElement.dataset.catalogTransition) {
       page.querySelectorAll<HTMLElement>("[data-catalog-enter]").forEach((element, index) => {
+        if (element.tagName === "HEADER") return;
         const opacity = getComputedStyle(element).opacity;
         animations.push(element.animate([
           { opacity: Number(opacity) * .7, transform: reduced.matches ? "none" : "translateX(-12px)" },

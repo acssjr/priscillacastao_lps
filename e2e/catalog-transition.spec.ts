@@ -22,18 +22,18 @@ test("links show perimeter beams on hover and keep reduced motion static", async
   await expect(page.locator('[class*="signature"] [class*="logo"]')).toHaveCSS("background-color", "rgb(241, 226, 201)");
 });
 
-test("catalogue hero text stays clear of the portrait across responsive boundaries", async ({ page }) => {
+test("catalogue keeps a large watermark and wraps copy in its protected reading area", async ({ page }) => {
   for (const width of [320,393,430,600,767,799,800,834,1024,1440]) {
     await page.setViewportSize({width,height:932});
     await page.goto("/catalogo");
-    const overlap = await page.evaluate(() => {
+    const layout = await page.evaluate(() => {
+      const hero = document.querySelector('[class*="hero"]:has(#catalog-title)')!.getBoundingClientRect();
       const photo = document.querySelector('[class*="heroPhoto"]')!.getBoundingClientRect();
-      return Array.from(document.querySelectorAll('[class*="intro"] h1,[class*="intro"]>p,[class*="intro"]>nav')).some(node => {
-        const range = document.createRange(); range.selectNodeContents(node);
-        return Array.from(range.getClientRects()).some(box => Math.min(box.right,photo.right)-Math.max(box.left,photo.left)>1 && Math.min(box.bottom,photo.bottom)-Math.max(box.top,photo.top)>1);
-      });
+      const limit = innerWidth < 800 ? .59 : .45;
+      return { largePhoto: photo.width >= hero.width * (innerWidth < 800 ? .75 : .5) && photo.height >= hero.height * .75,
+        copyFits: Array.from(document.querySelectorAll('[class*="intro"]>p')).every(node => node.getBoundingClientRect().width <= hero.width * limit) };
     });
-    expect(overlap, `Text overlaps the portrait at ${width}px`).toBe(false);
+    expect(layout, `Watermark or reading area incorrect at ${width}px`).toEqual({largePhoto:true,copyFits:true});
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   }
 });

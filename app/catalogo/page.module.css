@@ -105,23 +105,21 @@
 @media (prefers-reduced-motion:reduce) { .action { transition:color 150ms ease; } .actionFill::before { transform:none; opacity:0; transition:opacity 150ms ease; } .beamFrame>span::before { animation:none; } }
 @media (prefers-reduced-motion:reduce) and (hover:hover) and (pointer:fine) { .action:hover .actionFill::before { transform:none; opacity:1; } }
 @media (forced-colors:active) { .investment,.combo { border:1px solid CanvasText; } .actionFill { display:none; } }
-/* The portrait never sits behind text: title/portrait row on phones, columns on desktop. */
-.hero { display:grid; grid-template-columns:minmax(0,1.8fr) minmax(0,1fr); gap:0 1rem; align-items:start; }
-.intro { display:contents; }
-.intro h1 { grid-column:1; grid-row:1; align-self:center; font-size:clamp(2rem,9vw,4.5rem); margin:0; text-shadow:none; overflow-wrap:anywhere; }
-.intro>p,.intro>.index { grid-column:1/-1; }
-.intro>.modalities { margin-top:1.5rem; }
-.intro>p { text-shadow:none; }
-.intro>.index { margin-top:1rem; }
-.heroPhoto { position:relative; grid-column:2; grid-row:1; width:100%; height:clamp(8rem,32vw,12rem); overflow:hidden; border-radius:16px; opacity:.8; pointer-events:none; mask-image:linear-gradient(180deg,#000 75%,transparent); }
-.heroPhoto img { object-fit:cover; object-position:58% 20%; filter:sepia(.15) saturate(.65) contrast(.95); }
-.hero::after { display:none; }
+/* Restore the full-height photographic watermark; copy stays on the protected left side. */
+.hero { display:block; }
+.intro { position:relative; z-index:1; display:block; }
+.intro h1 { max-width:78%; font-size:clamp(3.25rem,8vw,6rem); margin:0 0 1.5rem; overflow-wrap:anywhere; text-shadow:0 2px 16px var(--paper); }
+.intro>p { max-width:58%; text-shadow:0 1px 8px var(--paper); }
+.intro>.modalities { margin-top:0; }
+.intro>.index { margin-top:2rem; }
+.heroPhoto { position:absolute; z-index:-2; inset:0 -1rem 0 auto; width:78%; max-height:46rem; overflow:hidden; opacity:.6; pointer-events:none; mask-image:linear-gradient(90deg,transparent,#000 28%,#000 92%,transparent); }
+.heroPhoto img { object-fit:cover; object-position:62% 30%; filter:sepia(.2) saturate(.6) contrast(.95); }
+.hero::after { content:''; display:block; position:absolute; z-index:-1; inset:0 -1rem; pointer-events:none; background:linear-gradient(90deg,#faf5ec 0%,#faf5ecf5 32%,#faf5ecbd 58%,#faf5ec26 86%,#faf5ec66); }
+@media (min-width:600px) and (max-width:799px) { .intro>p { max-width:55%; } }
 @media (min-width:800px) {
- .hero { grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); gap:clamp(2rem,5vw,4rem); align-items:stretch; }
- .intro { display:block; grid-column:1; min-width:0; }
- .intro h1 { font-size:clamp(3.25rem,6.5vw,6rem); margin:0 0 1.5rem; }
- .intro>.modalities { margin-top:0; }
- .intro>p { max-width:none; }
- .heroPhoto { grid-column:2; grid-row:1; height:auto; min-height:100%; opacity:.65; mask-image:linear-gradient(180deg,#000 82%,transparent); }
- .heroPhoto img { object-position:58% 30%; }
+ .intro h1 { max-width:65%; }
+ .intro>p { max-width:44%; }
+ .heroPhoto { width:54%; right:0; opacity:.65; mask-image:linear-gradient(90deg,transparent,#000 22%,#000 92%,transparent); }
+ .heroPhoto img { object-position:50% 30%; }
+ .hero::after { background:linear-gradient(90deg,#faf5ec 28%,#faf5eceb 44%,#faf5ec33 68%,#faf5ec1a 86%,#faf5ec33); }
 }
