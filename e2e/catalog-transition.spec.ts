@@ -1,5 +1,28 @@
 import { expect, test } from "@playwright/test";
 
+test("profile links have a footer and a larger arrow centered in the mobile notch", async ({ page }) => {
+  await page.setViewportSize({width:430,height:932});
+  await page.emulateMedia({reducedMotion:"reduce"});
+  await page.goto("/links");
+  const portrait = page.locator('[class*="portraitPanel"]');
+  const picture = (await portrait.boundingBox())!;
+  expect(picture.height).toBe(456);
+  const arrow = (await page.locator('[class*="notchButton"] svg').boundingBox())!;
+  expect(arrow.width).toBe(18);
+  expect(Math.abs(arrow.x+arrow.width/2-(picture.x+picture.width/2))).toBeLessThan(1);
+  expect(Math.abs(arrow.y+arrow.height/2-picture.y-picture.height)).toBeLessThan(1);
+  const cards = page.locator('#links-rapidos>a');
+  for (const card of await cards.all()) expect((await card.boundingBox())!.height).toBeLessThan(160);
+  const last = (await cards.last().boundingBox())!;
+  const footer = page.locator('footer[aria-label="Rodapé"]');
+  await footer.scrollIntoViewIfNeeded();
+  await expect(footer).toContainText('Forró universitário, roots e dança híbrida.');
+  // Compare viewport positions after scrolling to avoid mixing coordinate spaces.
+  const end = (await cards.last().boundingBox())!;
+  expect((await footer.boundingBox())!.y).toBeGreaterThan(end.y+end.height+20);
+  expect(last.height).toBeGreaterThan(100);
+});
+
 test("links show perimeter beams on hover and keep reduced motion static", async ({ page, isMobile }) => {
   await page.goto("/links");
   await expect(page.getByRole("progressbar")).toBeHidden();

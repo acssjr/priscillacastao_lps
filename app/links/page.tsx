@@ -59,8 +59,8 @@ export default function LinksPage() {
           <div className={styles.signature}>
             <h1><span className={styles.srOnly}>Priscilla Castão</span><span className={styles.logo} aria-hidden="true" /></h1>
             <FeedbackLink href={profileLinks.catalog} feedback="Abrindo o catálogo de aulas…" prefetch className={styles.heroAction}><HoverBeam />Conheça as aulas <Arrow /></FeedbackLink>
-            <p className={styles.linksHint}>Veja todos os meus links <span aria-hidden="true"><Arrow down /></span></p>
           </div>
+          <p className={styles.linksHint}>Veja todos os meus links</p>
         </section>
 
         <span className={styles.notchButton} aria-hidden="true"><Arrow down /></span>
@@ -74,6 +74,10 @@ export default function LinksPage() {
           </FeedbackLink>)}
         </nav>
       </div>
+      <footer className={styles.footer} aria-label="Rodapé">
+        <span className={styles.footerBrand} role="img" aria-label="Priscilla Castão" />
+        <p>Forró universitário, roots e dança híbrida.</p>
+      </footer>
     </div>
   </main>;
 }
