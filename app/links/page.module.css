@@ -9,11 +9,11 @@
 .composition { --gutter:1.25rem; --portrait-height:26.25rem; position:relative; display:grid; gap:var(--gutter); }
 .portraitPanel { position:relative; height:var(--portrait-height); overflow:hidden; border-radius:18px; background:var(--primary); mask-image:radial-gradient(circle at 50% 100%,transparent 0 18px,#000 19px); }
 .mainPhoto { object-fit:cover; object-position:58% 30%; }
-.photoVeil { position:absolute; inset:0; background:linear-gradient(180deg,transparent 45%,#00000030 62%,#000000bd 100%); }
+.photoVeil { position:absolute; inset:0; background:linear-gradient(180deg,transparent 35%,#17100c38 46%,#17100cbf 64%,#17100cf2 100%); }
 .signature { position:absolute; bottom:2.1875rem; left:1rem; right:1rem; text-align:center; }
 .signature h1 { margin:0 0 18px; }
-.logo { display:block; width:min(100%,21.25rem); height:4.75rem; margin-inline:auto; background:var(--paper); mask:url('/brand/priscilla-castao-logo.svg') center / contain no-repeat; }
-.heroAction { display:inline-flex; align-items:center; gap:22px; min-height:48px; padding:12px 18px; border-radius:30px; background:#faf5ec15; box-shadow:inset 0 1px 0 #faf5ec55; -webkit-backdrop-filter:blur(18px); backdrop-filter:blur(18px); font-size:13px; transition:background 200ms ease; }
+.logo { display:block; width:min(100%,21.25rem); height:4.75rem; margin-inline:auto; background:var(--cream); mask:url('/brand/priscilla-castao-logo.svg') center / contain no-repeat; }
+.heroAction { position:relative; isolation:isolate; display:inline-flex; align-items:center; gap:22px; min-height:48px; padding:12px 18px; border-radius:30px; background:#faf5ec15; box-shadow:inset 0 1px 0 #faf5ec55; -webkit-backdrop-filter:blur(18px); backdrop-filter:blur(18px); font-size:13px; transition:background 200ms ease; }
 .heroAction svg { width:15px; height:15px; }
 .pdfBadge { font-size:9px; font-weight:700; letter-spacing:.04em; color:var(--cream); }
 .linksHint { display:flex; justify-content:center; align-items:center; gap:8px; margin:16px 0 0; color:var(--cream); font-size:12px; }
@@ -24,6 +24,15 @@
 .cardStack:focus-visible { outline:2px solid var(--cream); outline-offset:6px; }
 .card { position:relative; isolation:isolate; overflow:hidden; display:flex; align-items:center; padding:1.125rem 1.25rem; border-radius:16px; background:linear-gradient(125deg,#faf5ec1e,#faf5ec05 60%,#faf5ec12); color:var(--paper); -webkit-backdrop-filter:blur(12px) saturate(130%); backdrop-filter:blur(12px) saturate(130%); box-shadow:0 12px 28px #21140e33,inset 0 1px 0 #faf5ec65,inset 1px 0 0 #faf5ec22,inset -1px -1px 0 #faf5ec20; transition:background-color 200ms ease; }
 .card::after { content:''; position:absolute; z-index:2; inset:0; border-radius:inherit; pointer-events:none; background:linear-gradient(115deg,#faf5ec15,transparent 38%,transparent 70%,#faf5ec08); }
+.hoverBeam { z-index:4; opacity:0; padding:2px; pointer-events:none; transition:opacity 160ms var(--ease); }
+.hoverBeam::before { background:conic-gradient(from 215deg,transparent 0deg 260deg,#b87b4d 285deg,#fffaf3 310deg,#e7ad72 325deg,transparent 345deg); animation-play-state:paused; }
+.card:focus-visible>.hoverBeam,.heroAction:focus-visible>.hoverBeam,.card:active>.hoverBeam,.heroAction:active>.hoverBeam { opacity:1; }
+@media (hover:hover) and (pointer:fine) {
+ .card:hover>.hoverBeam,.heroAction:hover>.hoverBeam { opacity:1; }
+ .card:hover>.hoverBeam::before,.heroAction:hover>.hoverBeam::before { animation-play-state:running; }
+}
+@media (prefers-reduced-motion:reduce) { .hoverBeam { transition:opacity 150ms ease; } .hoverBeam::before { animation:none; } }
+@media (forced-colors:active) { .hoverBeam { display:none; } }
 .cardWatermark { position:absolute; right:27px; top:15%; height:70%; aspect-ratio:1; background:var(--cream); opacity:.12; mask:url('/brand/priscilla-castao-monogram.svg') center / contain no-repeat; transform:rotate(-10deg); pointer-events:none; }
 .cardVeil { position:absolute; inset:0; background:linear-gradient(90deg,#8641298c,#86412966 36%,#8641290a 78%,transparent); }
 .cardText { position:relative; z-index:3; width:76%; min-width:0; overflow-wrap:break-word; }

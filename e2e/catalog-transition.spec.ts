@@ -1,5 +1,27 @@
 import { expect, test } from "@playwright/test";
 
+test("links show perimeter beams on hover and keep reduced motion static", async ({ page, isMobile }) => {
+  await page.goto("/links");
+  await expect(page.getByRole("progressbar")).toBeHidden();
+  const beams = page.locator('span[class*="hoverBeam"]');
+  await expect(beams).toHaveCount(5);
+  for (const beam of await beams.all()) {
+    await expect(beam).toHaveCSS("pointer-events", "none");
+    if (!isMobile) {
+      await beam.locator("..").hover();
+      await expect(beam).toHaveCSS("opacity", "1");
+      expect(await beam.evaluate(node => getComputedStyle(node, "::before").animationPlayState)).toBe("running");
+      await page.mouse.move(0,0);
+      await expect(beam).toHaveCSS("opacity", "0");
+    }
+  }
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  for (const beam of await beams.all()) {
+    expect(await beam.evaluate(node => getComputedStyle(node, "::before").animationName)).toBe("none");
+  }
+  await expect(page.locator('[class*="signature"] [class*="logo"]')).toHaveCSS("background-color", "rgb(241, 226, 201)");
+});
+
 test("catalogue hero text stays clear of the portrait across responsive boundaries", async ({ page }) => {
   for (const width of [320,393,430,600,767,799,800,834,1024,1440]) {
     await page.setViewportSize({width,height:932});
