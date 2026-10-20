@@ -1,0 +1,13 @@
+# Local build caches, review artifacts and private development data.
+node_modules/
+.next/
+.next-admin/
+.artifacts/
+.cms/
+.impeccable/review/
+.impeccable/references/
+playwright-report/
+test-results/
+coverage/
+*.tsbuildinfo
+.env*
