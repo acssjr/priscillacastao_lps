@@ -9,9 +9,15 @@ test("terracotta price cards retain readable values and a reduced-motion-safe be
   await expect(card).toContainText("R$ 439,90");
   const cta = page.getByRole("link", { name: "Quero marcar minha aula", exact: true });
   await expect(cta).toHaveCSS("border-radius", "999px");
+  await expect(cta).toHaveAttribute("data-beam-visible", "");
+  const fill = cta.locator('span[class*="actionFill"]');
+  await expect(fill).toHaveCSS("overflow", "hidden");
+  await expect(fill).toHaveCSS("border-radius", "999px");
+  expect(await fill.evaluate(node => getComputedStyle(node, "::before").transitionDuration)).toBe("0.28s");
   expect(await page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue("--brand-primary").trim())).toBe("#864129");
   const rim = cta.locator('span[aria-hidden="true"]>span');
   expect(await rim.evaluate(node => getComputedStyle(node, "::before").animationPlayState)).toBe("running");
+  expect(await rim.evaluate(node => getComputedStyle(node, "::before").animationIterationCount)).toBe("infinite");
   await page.emulateMedia({ reducedMotion: "reduce" });
   expect(await rim.evaluate(node => getComputedStyle(node, "::before").animationName)).toBe("none");
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);

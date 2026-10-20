@@ -26,8 +26,9 @@ function Arrow() {
 }
 
 function Contact({ option, children, highlight = false }: { option: string; children: React.ReactNode; highlight?: boolean }) {
-  return <FeedbackLink href={buildWhatsAppUrl(forroDoZeroCampaign.whatsapp.phone, `Oi, Priscilla! Vi seu catálogo e tenho interesse em ${option}. Podemos conversar sobre como funciona, locais e horários?`)} target="_blank" rel="noopener noreferrer" feedback="Abrindo o WhatsApp…" className={`${styles.action} ${highlight ? styles.beamAction : ""}`}>
-    {highlight && <span className={beam.glow} aria-hidden="true"><span className={beam.rim} /></span>}
+  return <FeedbackLink href={buildWhatsAppUrl(forroDoZeroCampaign.whatsapp.phone, `Oi, Priscilla! Vi seu catálogo e tenho interesse em ${option}. Podemos conversar sobre como funciona, locais e horários?`)} target="_blank" rel="noopener noreferrer" feedback="Abrindo o WhatsApp…" data-catalog-beam={highlight || undefined} className={`${styles.action} ${highlight ? styles.beamAction : ""}`}>
+    <span className={styles.actionFill} aria-hidden="true" />
+    {highlight && <span className={`${beam.glow} ${styles.beamFrame}`} aria-hidden="true"><span className={beam.rim} /></span>}
     <span className={styles.actionText}>{children}</span><Arrow />
   </FeedbackLink>;
 }

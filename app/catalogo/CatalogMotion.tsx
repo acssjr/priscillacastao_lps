@@ -35,6 +35,10 @@ export function CatalogMotion() {
       });
     }, { threshold: .2 });
     const observeSections = () => page.querySelectorAll("[data-catalog-reveal]").forEach(element => observer.observe(element));
+    const beamObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => entry.target.toggleAttribute("data-beam-visible", entry.isIntersecting));
+    });
+    page.querySelectorAll("[data-catalog-beam]").forEach(element => beamObserver.observe(element));
     if (document.documentElement.dataset.catalogTransition === "covering") window.addEventListener("catalog:arrive", observeSections, { once: true });
     else observeSections();
     const disclosures = Array.from(page.querySelectorAll("details"));
@@ -65,6 +69,7 @@ export function CatalogMotion() {
     explanation?.addEventListener("toggle", revealExplanation);
     return () => {
       observer.disconnect();
+      beamObserver.disconnect();
       window.removeEventListener("catalog:arrive", observeSections);
       disclosures.forEach(details => details.removeEventListener("toggle", revealDetails));
       page.removeEventListener("keydown", onKeyboard, true);
