@@ -1,5 +1,6 @@
 :root {
   --brand-primary: #864129;
+  --catalog-card-background: radial-gradient(ellipse at 100% 5%,#b9774540,transparent 55%),linear-gradient(135deg,#9a5234f5 0%,#713d29fa 52%,#8d4b30f5 100%);
   --brand-dark: #45291c;
   --brand-mid: #995232;
   --brand-soft: #bb8462;

@@ -128,22 +128,29 @@ test("hybrid explanation opens without shifting catalogue content", async ({ pag
   await expect(page.locator("#hybrid-explanation")).toBeHidden();
 });
 
-test("lesson method is a three-step sticky sequence with a reduced-motion fallback", async ({ page }) => {
+test("catalogue header stays at the top and lesson steps preserve complete reading windows without spacers", async ({ page }) => {
   await page.setViewportSize({width:430,height:932});
   await page.goto("/catalogo");
+  const header = page.locator("main>header");
+  await expect(header).toHaveCSS("position","relative");
   const steps = page.locator('[class*="methodSteps"]>li');
   await expect(steps).toHaveCount(3);
-  for (const step of await steps.all()) {
-    await expect(step.locator("ul>li")).toHaveCount(3);
-    await expect(step).toHaveCSS("position", "sticky");
+  for(let index=0;index<3;index++) {
+    await steps.nth(index).evaluate(node=>scrollTo({top:scrollY+node.getBoundingClientRect().top-100,behavior:"instant"}));
+    const box=(await steps.nth(index).boundingBox())!;
+    expect(box.y).toBeGreaterThanOrEqual(90);
+    if(index<2)expect((await steps.nth(index+1).boundingBox())!.y).toBeGreaterThanOrEqual(box.y+box.height+20);
   }
-  const top = await page.locator('[class*="methodSteps"]').evaluate(node => node.getBoundingClientRect().top + scrollY);
-  await page.evaluate(y => scrollTo({top:y+350,behavior:"instant"}),top);
-  expect(Math.abs((await steps.first().boundingBox())!.y-20)).toBeLessThan(1);
+  await expect(header).not.toBeInViewport();
+  const excess=await page.locator('[class*="methodTrack"]').evaluate(node=>node.getBoundingClientRect().height-[...node.querySelectorAll("ol>li")].reduce((sum,card)=>sum+card.getBoundingClientRect().height,0));
+  expect(excess).toBeLessThan(80);
   await page.emulateMedia({reducedMotion:"reduce"});
-  for (const step of await steps.all()) await expect(step).toHaveCSS("position", "relative");
+  for(const step of await steps.all())await expect(step).toHaveCSS("position","relative");
+  const footer=page.getByRole("contentinfo");
+  await expect(footer).toHaveCSS("background-color","rgb(134, 65, 41)");
+  await footer.getByRole("link",{name:"Voltar ao topo"}).click();
+  await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(0);
 });
-
 test("catalogue transition preserves the document and does not replay the initial loader", async ({ page }) => {
   await page.goto("/links");
   await expect(page.getByRole("progressbar")).toBeHidden();

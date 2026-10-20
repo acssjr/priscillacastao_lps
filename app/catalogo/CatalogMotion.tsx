@@ -11,6 +11,19 @@ export function CatalogMotion() {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     const animations: Animation[] = [];
     const easing = getComputedStyle(page).getPropertyValue("--ease-out").trim();
+    const header = page.querySelector<HTMLElement>("header");
+    let frame = 0;
+    const renderHeader = () => {
+      frame = 0;
+      if (!header) return;
+      const progress = Math.max(0, Math.min(1, window.scrollY / 110));
+      header.style.opacity = String(1-progress);
+      header.style.transform = reduced.matches ? "none" : `translateY(${-24*progress}px)`;
+      header.inert = progress === 1;
+    };
+    const scrollHeader = () => { if (!frame) frame = requestAnimationFrame(renderHeader); };
+    renderHeader();
+    window.addEventListener("scroll", scrollHeader, { passive:true });
     // The persistent route transition owns arrival when coming from /links.
     // A direct visit gets a short introduction without hiding content first.
     if (!document.documentElement.dataset.catalogTransition) {
@@ -63,7 +76,12 @@ export function CatalogMotion() {
     };
     disclosures.forEach(details => details.addEventListener("toggle", revealDetails));
     return () => {
+      window.removeEventListener("scroll", scrollHeader);
+      cancelAnimationFrame(frame);
+      if(header){header.style.removeProperty("opacity");header.style.removeProperty("transform");header.inert=false;}
       observer.disconnect();
+
+
       beamObserver.disconnect();
       window.removeEventListener("catalog:arrive", observeSections);
       disclosures.forEach(details => details.removeEventListener("toggle", revealDetails));
