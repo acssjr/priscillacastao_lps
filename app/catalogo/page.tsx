@@ -3,7 +3,6 @@ import Image from "next/image";
 import localFont from "next/font/local";
 import { FeedbackLink } from "@/components/navigation/FeedbackLink";
 import { lessonMethod, lessonFormats, freeCourses } from "@/content/class-catalog";
-import { profileLinks } from "@/content/profile-links";
 import { forroDoZeroCampaign } from "@/content/landing-pages/forro-do-zero";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import styles from "./page.module.css";
@@ -88,7 +87,6 @@ export default function CatalogPage() {
     <footer className={styles.footer}>
       <div><h2>Obrigada pelo<br />seu interesse.</h2><p>Me conte qual aula ou curso chamou sua atenção.</p></div>
       <div><p>Envie uma mensagem dizendo qual opção você escolheu e o que gostaria de aprender ou aprimorar. Se já dança, conte um pouco da sua experiência.</p><p>Se ainda não sabe qual formato escolher, podemos conversar sobre o que você busca e tirar suas dúvidas.</p><Contact option="aulas ou cursos">Fale com Priscilla</Contact></div>
-      <div className={styles.download}><span>Prefere guardar o catálogo?</span><FeedbackLink href={profileLinks.catalogPdf} download feedback="Preparando o download do PDF…">Baixar em PDF <span>(2,3 MB)</span><Arrow /></FeedbackLink></div>
     </footer>
     </div>
   </main>;

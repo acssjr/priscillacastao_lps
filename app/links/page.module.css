@@ -8,8 +8,8 @@
 .brandMark { display:block; width:36px; height:38px; background:var(--cream); mask:url('/brand/priscilla-castao-monogram.svg') center / contain no-repeat; }
 .composition { --gutter:1.25rem; --portrait-height:26.25rem; position:relative; display:grid; gap:var(--gutter); }
 .portraitPanel { position:relative; height:var(--portrait-height); overflow:hidden; border-radius:18px; background:var(--primary); mask-image:radial-gradient(circle at 50% 100%,transparent 0 18px,#000 19px); }
-.mainPhoto { object-fit:cover; object-position:50% 32%; }
-.photoVeil { position:absolute; inset:0; background:linear-gradient(180deg,#2f1c1400 30%,#86412935 48%,#864129e8 85%,#864129 100%); }
+.mainPhoto { object-fit:cover; object-position:58% 30%; }
+.photoVeil { position:absolute; inset:0; background:linear-gradient(180deg,transparent 45%,#00000030 62%,#000000bd 100%); }
 .signature { position:absolute; bottom:2.1875rem; left:1rem; right:1rem; text-align:center; }
 .signature h1 { margin:0 0 18px; }
 .logo { display:block; width:min(100%,21.25rem); height:4.75rem; margin-inline:auto; background:var(--paper); mask:url('/brand/priscilla-castao-logo.svg') center / contain no-repeat; }
@@ -29,9 +29,8 @@
 .cardText { position:relative; z-index:3; width:76%; min-width:0; overflow-wrap:break-word; }
 .cardText h2 { margin:0 0 12px; font-size:1.5rem; font-weight:700; line-height:1.08; letter-spacing:-.03em; }
 .cardText > span { display:block; font-size:.875rem; color:var(--cream); }
-.aulas { background:linear-gradient(115deg,#244638c9,#15513e91 65%,#34785966); }
-.aulas .cardVeil { background:linear-gradient(90deg,#18372c99,#18372c40 50%,transparent); }
-.aulas .cardWatermark { mask-image:url('/brand/whatsapp-simple-icons.svg'); background:#d0f5da; opacity:.16; height:94%; top:3%; right:24px; transform:rotate(-13deg); }
+.aulas { background-color:#86412955; }
+.aulas .cardWatermark { mask-image:url('/brand/whatsapp-simple-icons.svg'); background:var(--cream); opacity:.16; height:94%; top:3%; right:24px; transform:rotate(-13deg); }
 .portfolio { background-color:#86412955; }
 .trajectory { background-color:#bb84621f; }
 .trajectory .cardWatermark { aspect-ratio:4; height:68%; top:22%; right:-24%; transform:rotate(-14deg); opacity:.085; mask-composite:intersect; mask-image:url('/brand/priscilla-castao-logo.svg'),linear-gradient(90deg,transparent,#000 45%); }
@@ -66,7 +65,7 @@
   .topbar { height:clamp(4.75rem,11svh,6.5rem); }
   .composition { grid-template-columns:minmax(0,1.12fr) minmax(0,1fr); min-height:clamp(43rem,76svh,48.75rem); }
   .portraitPanel { height:auto; mask-image:radial-gradient(circle at 100% 50%,transparent 0 18px,#000 19px); }
-  .mainPhoto { object-position:50% 35%; }
+  .mainPhoto { object-position:58% 30%; }
   .cardStack { grid-template-rows:repeat(4,minmax(10rem,1fr)); gap:.9375rem; }
   .cardText h2 { font-size:clamp(1.5625rem,2.3vw,2rem); }
   .logo { height:clamp(5rem,8vw,7.1875rem); }

@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     title: "Priscilla Castão | Meus links",
     description: "Catálogo de aulas, contato e trajetória de Priscilla Castão.",
     url: "/links", type: "website", locale: "pt_BR", siteName: "Priscilla Castão",
-    images: [{ url: "/images/priscilla-castao-instagram-DYf07MJEQ9z-01.webp", width: 900, height: 1200, alt: "Priscilla Castão, professora de forró" }],
+    images: [{ url: "/images/priscilla-catalogo-retrato.webp", width: 1000, height: 966, alt: "Priscilla Castão, professora de forró" }],
   },
   twitter: { card: "summary_large_image" },
 };
@@ -49,7 +49,7 @@ export default function LinksPage() {
 
       <div className={styles.composition}>
         <section className={styles.portraitPanel} aria-label="Priscilla Castão, professora de forró">
-          <Image src="/images/priscilla-castao-instagram-DYf07MJEQ9z-01.webp" alt="Retrato de Priscilla Castão" fill sizes="(min-width: 1360px) 664px, (min-width: 1024px) calc((100vw - 104px) * .5283), (min-width: 720px) 672px, calc(100vw - 32px)" fetchPriority="high" loading="eager" className={styles.mainPhoto} />
+          <Image src="/images/priscilla-catalogo-retrato.webp" alt="Priscilla Castão sorrindo em frente a um vitral" fill sizes="(min-width: 1360px) 664px, (min-width: 1024px) calc((100vw - 104px) * .5283), (min-width: 720px) 672px, calc(100vw - 32px)" fetchPriority="high" loading="eager" className={styles.mainPhoto} />
           <div className={styles.photoVeil} />
           <div className={styles.signature}>
             <h1><span className={styles.srOnly}>Priscilla Castão</span><span className={styles.logo} aria-hidden="true" /></h1>
