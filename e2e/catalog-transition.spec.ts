@@ -1,5 +1,32 @@
 import { expect, test } from "@playwright/test";
 
+test("catalogue hero text stays clear of the portrait across responsive boundaries", async ({ page }) => {
+  for (const width of [320,393,430,600,767,799,800,834,1024,1440]) {
+    await page.setViewportSize({width,height:932});
+    await page.goto("/catalogo");
+    const overlap = await page.evaluate(() => {
+      const photo = document.querySelector('[class*="heroPhoto"]')!.getBoundingClientRect();
+      return Array.from(document.querySelectorAll('[class*="intro"] h1,[class*="intro"]>p,[class*="intro"]>nav')).some(node => {
+        const range = document.createRange(); range.selectNodeContents(node);
+        return Array.from(range.getClientRects()).some(box => Math.min(box.right,photo.right)-Math.max(box.left,photo.left)>1 && Math.min(box.bottom,photo.bottom)-Math.max(box.top,photo.top)>1);
+      });
+    });
+    expect(overlap, `Text overlaps the portrait at ${width}px`).toBe(false);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  }
+});
+
+test("all five catalogue contact buttons have an active viewport-aware border beam", async ({ page }) => {
+  await page.goto("/catalogo");
+  const buttons = page.locator("[data-catalog-beam]");
+  await expect(buttons).toHaveCount(5);
+  for (const button of await buttons.all()) {
+    await button.scrollIntoViewIfNeeded();
+    await expect(button).toHaveAttribute("data-beam-visible", "");
+    await expect(button.locator('span[aria-hidden="true"]>span')).toHaveCount(1);
+  }
+});
+
 test("terracotta price cards retain readable values and a reduced-motion-safe beam", async ({ page }) => {
   await page.goto("/catalogo");
   const card = page.locator("#aula-individual [data-catalog-reveal]");

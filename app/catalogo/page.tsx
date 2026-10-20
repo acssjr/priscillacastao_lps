@@ -25,10 +25,10 @@ function Arrow() {
   return <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" /></svg>;
 }
 
-function Contact({ option, children, highlight = false }: { option: string; children: React.ReactNode; highlight?: boolean }) {
-  return <FeedbackLink href={buildWhatsAppUrl(forroDoZeroCampaign.whatsapp.phone, `Oi, Priscilla! Vi seu catálogo e tenho interesse em ${option}. Podemos conversar sobre como funciona, locais e horários?`)} target="_blank" rel="noopener noreferrer" feedback="Abrindo o WhatsApp…" data-catalog-beam={highlight || undefined} className={`${styles.action} ${highlight ? styles.beamAction : ""}`}>
+function Contact({ option, children }: { option: string; children: React.ReactNode }) {
+  return <FeedbackLink href={buildWhatsAppUrl(forroDoZeroCampaign.whatsapp.phone, `Oi, Priscilla! Vi seu catálogo e tenho interesse em ${option}. Podemos conversar sobre como funciona, locais e horários?`)} target="_blank" rel="noopener noreferrer" feedback="Abrindo o WhatsApp…" data-catalog-beam className={`${styles.action} ${styles.beamAction}`}>
     <span className={styles.actionFill} aria-hidden="true" />
-    {highlight && <span className={`${beam.glow} ${styles.beamFrame}`} aria-hidden="true"><span className={beam.rim} /></span>}
+    <span className={`${beam.glow} ${styles.beamFrame}`} aria-hidden="true"><span className={beam.rim} /></span>
     <span className={styles.actionText}>{children}</span><Arrow />
   </FeedbackLink>;
 }
@@ -58,7 +58,7 @@ export default function CatalogPage() {
           <a href="#cursos">Cursos livres <Arrow /></a>
         </nav>
       </div>
-      <div data-catalog-enter className={styles.heroPhoto} aria-hidden="true"><Image src="/images/priscilla-catalogo-retrato.webp" alt="" fill sizes="(min-width: 1200px) 600px, (min-width: 800px) 52vw, 75vw" fetchPriority="high" loading="eager" /></div>
+      <div data-catalog-enter className={styles.heroPhoto} aria-hidden="true"><Image src="/images/priscilla-catalogo-retrato.webp" alt="" fill sizes="(min-width: 1200px) 520px, (min-width: 800px) 45vw, 33vw" fetchPriority="high" loading="eager" /></div>
     </section>
 
     <div className={styles.methodBand}>
@@ -76,7 +76,7 @@ export default function CatalogPage() {
           <p>{format.sections[0].text}</p>
           <details className={styles.details}><summary>Saiba como funciona <span aria-hidden="true">+</span></summary><div>{format.sections.slice(1).map(section => <div key={section.title}><h4>{section.title}</h4><p>{section.text}</p></div>)}</div></details>
         </div>
-        <div className={styles.investment} data-catalog-reveal><span className={styles.priceMark} aria-hidden="true" /><dl>{format.prices.map(price => <div key={price.label}><dt>{price.label}</dt><dd>{price.amount}</dd>{"saving" in price && <dd className={styles.saving}>{price.saving}</dd>}</div>)}</dl><Contact option={format.title.toLowerCase()} highlight={format.id === "individual"}>{format.id === "individual" ? "Quero marcar minha aula" : format.id === "dupla" ? "Quero uma aula em dupla" : "Quero uma aula em grupo"}</Contact></div>
+        <div className={styles.investment} data-catalog-reveal><span className={styles.priceMark} aria-hidden="true" /><dl>{format.prices.map(price => <div key={price.label}><dt>{price.label}</dt><dd>{price.amount}</dd>{"saving" in price && <dd className={styles.saving}>{price.saving}</dd>}</div>)}</dl><Contact option={format.title.toLowerCase()}>{format.id === "individual" ? "Quero marcar minha aula" : format.id === "dupla" ? "Quero uma aula em dupla" : "Quero uma aula em grupo"}</Contact></div>
       </article>)}
     </section>
 
