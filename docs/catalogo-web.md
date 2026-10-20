@@ -97,3 +97,6 @@ Revisão solicitada pelo usuário: zoomout na fotografia, ambiente mais creme e 
 Saída v18 em outputs/pdf do projeto principal e cópia pública substituída. Textos e links iguais ao v17; páginas2–7 pixel-idênticas; capa renderizada e conferida. Valores439,90/149,90/52,70 validados. Tamanho aproximado2,1MB, indicado no download. HashSHA256: 2D73AC2DDDD72D064B5C85415C2C51236E47028B1070598DB8BA82543FBD9103.
 
 PDF v19: assinatura Priscilla Castão dentro do painel de vidro fosco, título Catálogo de aulas reduzido de 90 para 48 pt e vidro em bordô. Foto afastada preservada; páginas 2-7 verificadas idênticas à v18. Download atualizado (2,3 MB).
+## Atualização de modalidades e cor principal — 20/10/2026
+
+O catálogo web usa marrom terracota `#864129`, derivado do acento existente `#a65134`, como cor principal local. Mantém as superfícies creme e papel. No topo, as modalidades são Forró universitário, Roots e Dança híbrida. Esta última usa um disclosure nativo, acionável por clique ou teclado, explicando o ensino de roots junto com universitário. As descrições dos formatos e os metadados incluem a modalidade híbrida. Valores preservados. Conferidos 320, 430, 768 e 1440 px sem transbordamento e sem violações WCAG A/AA no Axe.

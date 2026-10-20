@@ -16,9 +16,9 @@ const saans = localFont({ src: [
 
 export const metadata: Metadata = {
   title: "Catálogo de aulas | Priscilla Castão",
-  description: "Conheça as aulas individuais, em dupla e em grupo, os cursos livres e os valores de Priscilla Castão. Forró universitário e roots.",
+  description: "Conheça as aulas individuais, em dupla e em grupo, os cursos livres e os valores de Priscilla Castão. Forró universitário, roots e dança híbrida.",
   robots: { index: false, follow: false },
-  openGraph: { title: "Catálogo de aulas | Priscilla Castão", description: "Forró universitário e roots. Formatos, cursos e valores.", url: "/catalogo", images: [{ url: "/images/priscilla-catalogo-capa.webp", width: 900, height: 1125 }] },
+  openGraph: { title: "Catálogo de aulas | Priscilla Castão", description: "Forró universitário, roots e dança híbrida. Formatos, cursos e valores.", url: "/catalogo", images: [{ url: "/images/priscilla-catalogo-capa.webp", width: 900, height: 1125 }] },
 };
 
 function Arrow() {
@@ -41,7 +41,11 @@ export default function CatalogPage() {
     <section className={styles.hero} aria-labelledby="catalog-title">
       <div className={styles.intro}>
         <h1 id="catalog-title" data-catalog-enter>Catálogo<br />de aulas<span>.</span></h1>
-        <p className={styles.lede} data-catalog-enter>Forró universitário e roots.<br />Aulas individuais, em dupla e em grupo.</p>
+        <div className={styles.modalities} data-catalog-enter aria-label="Modalidades">
+          <span>Forró universitário</span><span>Roots</span>
+          <details className={styles.hybrid}><summary>Dança híbrida <span aria-hidden="true">+</span></summary><div>Ensino de forró roots junto com o universitário, combinando os dois estilos na sua prática.</div></details>
+        </div>
+        <p className={styles.lede} data-catalog-enter>Aulas individuais, em dupla e em grupo.</p>
         <p data-catalog-enter>Entenda o funcionamento das aulas e os valores.</p>
         <nav data-catalog-enter className={styles.index} aria-label="Neste catálogo">
           <a href="#como-sao">Como são as aulas <Arrow /></a>
@@ -54,7 +58,7 @@ export default function CatalogPage() {
 
     <div className={styles.methodBand}>
     <section id="como-sao" className={styles.method} aria-labelledby="method-title">
-      <div className={styles.sectionHead} data-catalog-reveal><h2 id="method-title">Como são as aulas</h2><p>1 hora de prática no universitário ou no roots.</p></div>
+      <div className={styles.sectionHead} data-catalog-reveal><h2 id="method-title">Como são as aulas</h2><p>1 hora de prática em forró universitário, roots ou dança híbrida.</p></div>
       <div className={styles.methodColumns}>{lessonMethod.map(item => <div key={item.title}><h3>{item.title}</h3><p>{item.text}</p></div>)}</div>
     </section>
     </div>
