@@ -199,3 +199,7 @@ Conferidos os três cursos em430/535/1440px: fundos distintos, ausência do tra�
 Musicalidade passa de oliva para azul fechado, mantendo a superfície de vidro. Títulos dos três cursos em maiúsculas com espaçamento de0,045em e tamanho adaptado para preservar as quebras no mobile. Shimmer por recorte de uma camada clara sobre o texto, sem apagar ou deslocar as letras; ciclo de5s com pausa, apenas no card ativo e visível. Movimento reduzido desativa o brilho; nome acessível do título continua único.
 
 Hover dos CTAs acompanha o curso pela variável --course-action-hover: terracota #864129, azul #233e55 e marrom #45291c. Preservada a transição do preenchimento dentro da cápsula e o texto claro durante o hover. Conferidos os três estados em535/1440px, inclusive contraste Axe sem violações.
+
+### Abertura sem aguardar ilustrações fora da primeira tela
+CatalogTransition libera a revelação no primeiro frame após o commit da rota, sem aguardar document.fonts.ready ou decode de todas as imagens. A espera anterior incluía imagens lazy e chegava ao timeout de4s. Mantidos cobertura enquanto a rota não chega, animação de entrada, navegação no mesmo documento, retorno sem repetir loader e teclado imediato. Regressão bloqueia as ilustrações e exige abertura independente delas.
+Medição pontual em Chromium535×668 com atraso artificial de6s nas ilustrações: produção anterior5786ms até idle (rota871ms); correção local2077ms (rota1255ms). Não representa Core Web Vitals de usuários reais. Quatro regressões de navegação e ESLint aprovados.

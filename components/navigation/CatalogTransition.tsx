@@ -33,7 +33,6 @@ export function CatalogTransition() {
     if (!active.current || pathname !== destination.current) return;
     const main = document.querySelector<HTMLElement>("main#conteudo");
     if (!main) return;
-    let cancelled = false;
     main.inert = true;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const easing = getComputedStyle(document.documentElement).getPropertyValue("--ease-out").trim();
@@ -49,10 +48,10 @@ export function CatalogTransition() {
       animations.current.push(animation);
       return animation;
     });
-    const resources = [document.fonts.ready, ...Array.from(main.querySelectorAll("img"), image => image.decode().catch(() => undefined))];
-    const limit = new Promise<void>(resolve => { timers.current.push(setTimeout(resolve, 4000)); });
-    void Promise.race([Promise.allSettled(resources), limit]).then(() => {
-      if (cancelled || !active.current) return;
+    // Route commit is the readiness signal. Waiting for every image also waits
+    // for lazy artwork below the fold and needlessly holds the cover for seconds.
+    const frame = requestAnimationFrame(() => {
+      if (!active.current) return;
       setPhase("revealing");
       document.documentElement.dataset.catalogTransition = "revealing";
       main.inert = false;
@@ -66,7 +65,7 @@ export function CatalogTransition() {
         setPhase("idle");
       }, reduced ? 200 : 1000));
     });
-    return () => { cancelled = true; main.inert = false; };
+    return () => { cancelAnimationFrame(frame); main.inert = false; };
   }, [pathname]);
 
   useEffect(() => {

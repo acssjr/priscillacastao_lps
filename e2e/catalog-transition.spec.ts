@@ -182,6 +182,22 @@ test("a slow catalogue stays covered until the route becomes available", async (
   await expect(page.locator("[data-catalog-overlay]")).toHaveAttribute("data-phase", "idle");
 });
 
+test("catalogue opens without waiting for below-fold artwork", async ({ page }) => {
+  let release!: () => void;
+  const gate = new Promise<void>(resolve => { release = resolve; });
+  await page.route("**/images/catalogo-*.webp", async route => { await gate; await route.continue(); });
+  try {
+    await page.goto("/links");
+    await expect(page.getByRole("progressbar")).toBeHidden();
+    await page.getByRole("link", { name: "Conheça as aulas", exact: true }).click();
+    await expect(page).toHaveURL(/\/catalogo$/);
+    // Images stay blocked: opening must follow the route, not their downloads.
+    await expect(page.locator("[data-catalog-overlay]")).toHaveAttribute("data-phase", "revealing", { timeout: 1500 });
+    await expect(page.locator("main#conteudo")).not.toHaveAttribute("inert", "");
+    await expect(page.locator("[data-catalog-overlay]")).toHaveAttribute("data-phase", "idle", { timeout: 1500 });
+  } finally { release(); }
+});
+
 test("keyboard navigation does not wait for decorative route motion", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/links");
