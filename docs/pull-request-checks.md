@@ -6,6 +6,7 @@ A main exige pull request, branch atualizada, check Quality gate do GitHub Actio
 
 - **Code and behavior:** lint, TypeScript, validação de conteúdo, consentimento e links, autenticação e permissões do CMS, reserva/cancelamento, recuperação e sincronização da UI.
 - **Database integrity:** PostgreSQL 17 descartável do runner, sem segredo. Exercita migração real, disputa do mesmo horário, intervalos sobrepostos simultâneos, chave idempotente, cancelamento versionado e rollback do grupo. Falta de banco faz esse job falhar; não é um teste ignorado na CI.
+- O runner é fixado em Ubuntu 24.04 e Node 24; a instalação do Chromium usa somente o headless shell necessário, sem baixar navegadores extras.
 - **Production build and booking:** build Next.js e navegador Chromium sobre servidor de produção, com disponibilidade simulada e determinística. Cobre reserva, conflito, rede, resposta fora de ordem, recuperação, teclado/acessibilidade e três telas representativas (320, 390 e 1440 px), além de calendário de seis semanas.
 - **Quality gate:** sempre executa e só fica verde se os três jobs anteriores terminarem com sucesso, inclusive quando um deles falha ou é cancelado.
 
