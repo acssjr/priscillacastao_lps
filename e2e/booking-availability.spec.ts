@@ -15,10 +15,9 @@ test('mostra explicação e contato quando todos os horários estão indisponív
   await page.route('**/api/agendamento', route => route.fulfill({ json: { slots: [slot('09:00', true), slot('14:00', true)] } }))
   await page.goto('/agendar')
   await expect(page.getByText(/todos os horários cadastrados estão indisponíveis/)).toBeVisible()
-  await page.getByRole('button', { name: 'Ver horários' }).click()
-  await expect(page.getByText(/Os horários desta data estão indisponíveis/)).toBeVisible()
+  await expect(page.getByRole('button', { name: /8 de novembro de 2026, horários indisponíveis/ })).toBeDisabled()
   await expect(page.getByRole('link', { name: 'Conversar pelo WhatsApp' })).toBeVisible()
-  await expect(page.getByRole('button', { name: 'Continuar' })).toBeDisabled()
+  await expect(page.getByRole('button', { name: 'Ver horários' })).toBeDisabled()
 })
 
 test('orienta a pessoa quando ainda não existem datas', async ({ page }) => {
@@ -55,7 +54,7 @@ test('informa quando o mês consultado não possui horários', async ({ page }) 
   await page.route('**/api/agendamento', route => route.fulfill({ json: { slots: [slot('14:00')] } }))
   await page.goto('/agendar')
   await page.getByRole('button', { name: 'Próximo mês' }).click()
-  await expect(page.getByText('Não há horários cadastrados neste mês. Consulte outro mês.')).toBeVisible()
+  await expect(page.getByText('Não há horários disponíveis neste mês. Consulte outro mês.')).toBeVisible()
   await expect(page.getByRole('button', { name: 'Ver horários' })).toBeDisabled()
 })
 
@@ -92,4 +91,18 @@ test('confirma com nome e WhatsApp e prepara a mensagem sem enviá-la', async ({
   expect(url.hostname).toBe('wa.me')
   expect(url.searchParams.get('text')).toContain('Ana Lima')
   expect(url.searchParams.get('text')).toContain('08/11/2026, às 14:00')
+})
+
+
+test('abre no primeiro mês com vaga e identifica data esgotada', async ({ page }) => {
+  await page.route('**/api/agendamento', route => route.fulfill({ json: { slots: [
+    { slot: '2027-02-03T10:00', reserved: true },
+    { slot: '2027-03-04T15:00', reserved: false },
+    { slot: '2027-03-05T15:00', reserved: true },
+  ] } }))
+  await page.goto('/agendar')
+  await expect(page.getByText('março de 2027')).toBeVisible()
+  await expect(page.getByRole('button', { name: /4 de março de 2027, horários disponíveis/ })).toHaveAttribute('aria-pressed', 'true')
+  await expect(page.getByRole('button', { name: /5 de março de 2027, horários indisponíveis/ })).toBeDisabled()
+  await expect(page.getByText('Datas destacadas têm horários disponíveis.')).toBeVisible()
 })

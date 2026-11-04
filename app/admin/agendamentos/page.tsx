@@ -1,5 +1,5 @@
-import { redirect } from 'next/navigation'
 import { authenticated } from '@/lib/cms/auth'
 import Agenda from './view'
+import Login from './login'
 export const dynamic = 'force-dynamic'
-export default async function Page() { if (!await authenticated()) redirect('/admin'); return <Agenda /> }
+export default async function Page() { return await authenticated() ? <Agenda /> : <Login /> }
