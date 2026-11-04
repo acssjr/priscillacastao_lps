@@ -22,7 +22,7 @@ export default async function Image() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={logoSrc} alt="" width={274} height={69} style={{ objectFit:'contain', objectPosition:'left center' }} />
         <div style={{ display:'flex', flexDirection:'column', marginTop:76, fontSize:60, fontWeight:700, lineHeight:1.05, letterSpacing:-2.2 }}><span>Agende sua</span><span>aula de forró</span></div>
-        <div style={{ display:'flex', marginTop:24, fontSize:25, lineHeight:1.35, color:'#efd0b8' }}>Escolha sua data e horário</div>
+        <div style={{ display:'flex', marginTop:24, fontSize:25, lineHeight:1.35, color:'#efd0b8' }}>Escolha data e horário</div>
       </div>
     </div>,
     { ...size, fonts:[{ name:'Saans', data:font, style:'normal', weight:700 }] },
