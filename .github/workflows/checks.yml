@@ -71,7 +71,7 @@ jobs:
           node-version: '24'
           cache: npm
       - run: npm ci
-      - run: npx playwright install --with-deps --only-shell chromium
+      - run: npx playwright install --only-shell chromium
         timeout-minutes: 5
       - run: npm run build
       - run: npm run test:ci-browser
