@@ -22,3 +22,6 @@ assets/brand/
 .cms/
 .next-admin/
 .impeccable/review/
+
+# Local visual reviews and diagnostic files must never enter a PR.
+.impeccable/

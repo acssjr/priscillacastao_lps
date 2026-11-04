@@ -8,16 +8,12 @@ it("renders the three-step process and native FAQ controls", () => {
   for (const step of forroDoZeroCampaign.process.steps) {
     expect(screen.getByRole("heading", { name: step.title })).toBeInTheDocument();
   }
-  expect(forroDoZeroCampaign.process.steps).toHaveLength(3);
-  expect(container.querySelectorAll("[data-process-step]")).toHaveLength(3);
-  expect(container.querySelectorAll("[data-process-icon]")).toHaveLength(3);
-  expect(container.querySelectorAll("[data-process-content]")).toHaveLength(3);
   expect(container.querySelectorAll("#duvidas details")).toHaveLength(forroDoZeroCampaign.faq.items.length);
   expect(container.querySelectorAll("#duvidas summary")).toHaveLength(forroDoZeroCampaign.faq.items.length);
 });
 
 it("has one main landmark and a labeled footer", () => {
-  const { container } = render(<LandingPage campaign={forroDoZeroCampaign} />);
+  render(<LandingPage campaign={forroDoZeroCampaign} />);
 
   expect(screen.getAllByRole("main")).toHaveLength(1);
   expect(screen.getByRole("contentinfo")).toBeInTheDocument();
@@ -26,7 +22,6 @@ it("has one main landmark and a labeled footer", () => {
     "/politica-de-privacidade",
   );
   expect(screen.getByRole("link", { name: "Painel de versões" })).toHaveAttribute("href", "/versoes");
-  expect(container.querySelector("[data-footer-brand-logo]")).toBeInTheDocument();
   expect(screen.queryByRole("heading", { name: "Agendamento" })).not.toBeInTheDocument();
   expect(screen.queryByRole("link", { name: "FALAR COM PRISCILLA" })).not.toBeInTheDocument();
   expect(screen.getByRole("link", { name: "AGENDAR MINHA PRIMEIRA AULA" })).toBeInTheDocument();

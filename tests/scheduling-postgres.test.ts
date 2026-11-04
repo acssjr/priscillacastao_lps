@@ -1,14 +1,21 @@
 // @vitest-environment node
 import {afterAll,beforeAll,expect,it,vi} from 'vitest'
-import {readFileSync} from 'node:fs'
-import {parseEnv} from 'node:util'
 import {neon} from '@neondatabase/serverless'
 import {randomUUID} from 'node:crypto'
+import {closeTestDatabases} from './helpers/postgres-adapter'
+vi.mock('@neondatabase/serverless',async()=>({neon:(await import('./helpers/postgres-adapter')).postgresForTests}))
 const enabled=process.env.RUN_SCHEDULING_PG==='1'
 const schema='scheduling_test_'+randomUUID().replaceAll('-','')
 let admin:ReturnType<typeof neon>,service:typeof import('@/lib/scheduling-service')
-beforeAll(async()=>{if(!enabled)return;const env=parseEnv(readFileSync('.impeccable/scheduling-test.env','utf8'));admin=neon(env.DATABASE_URL!);await admin.query(`CREATE SCHEMA ${schema}`);const url=new URL(env.DATABASE_URL!);url.searchParams.set('options',`-c search_path=${schema},public`);vi.stubEnv('DATABASE_URL',env.DATABASE_URL!);vi.stubEnv('SCHEDULING_TEST_SCHEMA',schema);service=await import('@/lib/scheduling-service');await service.listSlots(true)},60000)
-afterAll(async()=>{if(enabled&&admin){await admin.query(`DROP SCHEMA IF EXISTS ${schema} CASCADE`);vi.unstubAllEnvs()}},30000)
+beforeAll(async()=>{
+ if(!enabled)return
+ const connectionString=process.env.TEST_DATABASE_URL
+ if(!connectionString)throw new Error('TEST_DATABASE_URL is required when RUN_SCHEDULING_PG=1; production credentials are never used.')
+ admin=neon(connectionString);await admin.query(`CREATE SCHEMA ${schema}`)
+ vi.stubEnv('DATABASE_URL',connectionString);vi.stubEnv('SCHEDULING_TEST_SCHEMA',schema)
+ service=await import('@/lib/scheduling-service');await service.listSlots(true)
+},60000)
+afterAll(async()=>{try{if(enabled&&admin)await admin.query(`DROP SCHEMA IF EXISTS ${schema} CASCADE`)}finally{vi.unstubAllEnvs();await closeTestDatabases()}},30000)
 it.skipIf(!enabled)('PostgreSQL: migração, concorrência, sobreposição, cancelamento versionado e recuperação',async()=>{
  const slot='2035-01-03T10:00';await service.manage('add',[slot],{name:null,phone:null},{})
  const keys=Array.from({length:6},()=>randomUUID());const results=await Promise.allSettled(keys.map(key=>service.reserve(slot,'Teste PG','71999999999',key)))

@@ -9,6 +9,6 @@ export default defineConfig({
     globals: true,
     setupFiles: ["./vitest.setup.ts"],
     css: true,
-    exclude: ["e2e/**", "node_modules/**", ".next/**", ".worktrees/**", ".artifacts/**"],
+    exclude: ["e2e/**", "node_modules/**", ".next*/**", ".impeccable/**", ".worktrees/**", ".artifacts/**"],
   },
 });
