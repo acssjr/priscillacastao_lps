@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import styles from "./page.module.css";
 
-export function Entrance() {
+export function Entrance({ booking = false }: { booking?: boolean } = {}) {
   const root = useRef<HTMLDivElement>(null);
   const number = useRef<HTMLSpanElement>(null);
   const progress = useRef<HTMLDivElement>(null);
@@ -29,7 +29,7 @@ export function Entrance() {
     let ready = false;
     let lastValue = 0;
     const animations: Animation[] = [];
-    const easing = getComputedStyle(page).getPropertyValue("--ease").trim();
+    const easing = getComputedStyle(page).getPropertyValue("--ease").trim() || "ease-out";
     const pending = new Map<Element, Animation>();
     const accents = new Map<Element, Animation[]>();
     let entranceStarted = false;
@@ -125,6 +125,7 @@ export function Entrance() {
         if (number.current) number.current.textContent = `${value}%`;
         progress.current?.setAttribute("aria-valuenow", String(value));
         if (line.current) line.current.style.transform = `scaleX(${value / 100})`;
+        if (overlay && booking) overlay.style.setProperty("--loader-progress", `${value}%`);
       }
       if (value === 100) reveal();
       else frame = requestAnimationFrame(tick);
@@ -139,16 +140,16 @@ export function Entrance() {
       animations.forEach(animation => animation.cancel());
       if (canvas) canvas.inert = false;
     };
-  }, []);
+  }, [booking]);
 
-  return <div ref={root} className={styles.entrance}>
+  return <><noscript><style>{`.${styles.entrance}{display:none!important}`}</style></noscript><div ref={root} className={`${styles.entrance} ${booking ? styles.bookingEntrance : ""}`}>
     <div className={styles.entranceWatermark} aria-hidden="true" />
     <div className={styles.entranceIdentity}>
-      <span className={styles.entranceMonogram} aria-hidden="true" />
+      <span className={styles.entranceMonogram} aria-hidden="true">{booking && <span className={styles.monogramFill} />}</span>
       <div ref={progress} role="progressbar" aria-label="Preparando imagens e fontes" aria-valuemin={1} aria-valuemax={100} aria-valuenow={1} className={styles.progress}>
         <span ref={line} className={styles.progressLine} />
       </div>
       <span ref={number} className={styles.progressNumber} aria-hidden="true">1%</span>
     </div>
-  </div>;
+  </div></>;
 }

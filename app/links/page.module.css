@@ -91,4 +91,10 @@
 .progress { width:110px; height:2px; background:#f1e2c940; overflow:hidden; }
 .progressLine { display:block; height:100%; background:var(--cream); transform:scaleX(.01); transform-origin:left; }
 .progressNumber { font-size:14px; font-variant-numeric:tabular-nums; color:var(--cream); min-width:4ch; text-align:center; }
+.bookingEntrance { --loader-progress:1%; font-family:Saans,sans-serif; }
+.bookingEntrance .entranceMonogram { position:relative; background: url('/brand/priscilla-castao-monogram-outline.svg') center / contain no-repeat; mask:none; }
+.monogramFill { position:absolute; inset:0; background:var(--cream); mask:url('/brand/priscilla-castao-monogram.svg') center / contain no-repeat; clip-path:inset(calc(100% - var(--loader-progress)) 0 0); }
+.bookingEntrance .progress { width:160px; height:7px; border-radius:999px; background:#f1e2c94d; }
+.bookingEntrance .progressLine { border-radius:inherit; }
+.bookingEntrance .progressNumber { font-family:Saans,sans-serif; font-size:16px; font-weight:700; }
 @media (prefers-reduced-motion:reduce) { .entrance { display:none; } }

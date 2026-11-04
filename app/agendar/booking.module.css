@@ -43,3 +43,24 @@
 
 /* Controles nativos usam a mesma família do conteúdo em todas as etapas. */
 .page :is(button,input,select,textarea){font-family:inherit}
+@media(max-width:760px){.layout .intro{margin-bottom:24px}}
+
+/* Calendário: diferenciar disponibilidade, seleção e resumo da escolha. */
+.calendarLegend{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;margin:16px 0 0;font-size:13px;color:#60473b}
+.calendarLegend span{display:inline-flex;align-items:center;gap:7px}
+.calendarLegend i{display:block;width:12px;height:12px;box-sizing:border-box;border-radius:50%}
+.legendAvailable{border:1.5px solid #a46c53;background:transparent}
+.legendSelected{background:#713320;border:1px solid #713320}
+.selectedDate{display:grid;grid-template-columns:1fr auto;gap:3px 10px;align-items:center;margin-top:16px;padding:13px 15px;border:1px solid #e1caba;border-radius:12px;background:#fffaf3;color:#45291c}
+.selectedDate span{grid-column:1/-1;font-size:12px;line-height:1.3;font-weight:700;color:#795a4a}
+.selectedDate strong{font-size:15px;line-height:1.35}
+.selectedDate small{font-size:12px;line-height:1.35;color:#60473b;text-align:right}
+.intro{grid-template-columns:minmax(0,1fr)}
+.page{--cream:#f1e2c9}
+.times{grid-template-columns:repeat(2,minmax(0,1fr))}
+.times button{white-space:nowrap}
+.celebration .check{background:linear-gradient(145deg,#bf7655 0%,#91452f 52%,#59291f 100%);border:1px solid #d5a27c;box-shadow:inset 0 2px 2px #fff1d58c,inset 0 -4px 5px #351a1366,0 5px 0 #582a1d,0 12px 20px #45291c40}
+.calendar button:disabled{background:transparent;border-color:transparent;box-shadow:none;cursor:default}
+@media(max-width:760px){.intro,.intro .portrait{grid-template-columns:minmax(0,1fr)}.intro{gap:0}.times{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.calendar button:disabled{color:#857568}
+@media(max-width:350px){.selectedDate{grid-template-columns:1fr}.selectedDate small{text-align:left}}
