@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Booking from './booking'
 const base = new URL('https://agendamento-priscilla.vercel.app')
-const shareImage = 'https://agendamento-priscilla.vercel.app/agendar/opengraph-image?v=2'
+const shareImage = 'https://agendamento-priscilla.vercel.app/brand/agendamento-preview-v3.jpg'
 export const metadata: Metadata = {
   metadataBase: base,
   title: 'Agende sua aula | Priscilla Castão',
