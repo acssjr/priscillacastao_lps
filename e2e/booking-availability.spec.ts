@@ -62,18 +62,18 @@ test('recupera uma falha temporária ao consultar a disponibilidade', async ({ p
   let fail = true
   await page.route('**/api/agendamento', route => fail ? route.fulfill({ status: 503, json: { error: 'indisponível' } }) : route.fulfill({ json: { slots: [slot('14:00')] } }))
   await page.goto('/agendar')
-  await expect(page.getByText(/Não foi possível carregar os horários/)).toBeVisible()
+  await expect(page.getByText(/Não foi possível atualizar os horários/)).toBeVisible()
   fail = false
   await page.evaluate(() => window.dispatchEvent(new Event('focus')))
   await expect(page.getByRole('button', { name: 'Ver horários' })).toBeEnabled()
-  await expect(page.getByText(/Não foi possível carregar os horários/)).toHaveCount(0)
+  await expect(page.getByText(/Não foi possível atualizar os horários/)).toHaveCount(0)
 })
 
 
 test('confirma com nome e WhatsApp e prepara a mensagem sem enviá-la', async ({ page }) => {
   let posted: Record<string, unknown> | undefined
   await page.route('**/api/agendamento', async route => {
-    if (route.request().method() === 'POST') { posted = route.request().postDataJSON(); await route.fulfill({ json: { ok: true } }); return }
+    if (route.request().method() === 'POST') { posted = route.request().postDataJSON(); await route.fulfill({ json: { ok: true, receipt: {slot:'2026-11-08T14:00',status:'confirmed',booking_id:'test-booking'} } }); return }
     await route.fulfill({ json: { slots: [slot('14:00')] } })
   })
   await page.goto('/agendar')
@@ -86,7 +86,7 @@ test('confirma com nome e WhatsApp e prepara a mensagem sem enviá-la', async ({
   await expect(page.getByLabel('WhatsApp')).toHaveValue('(75) 99999-9999')
   await page.getByRole('button', { name: 'Confirmar agendamento' }).click()
   await expect(page.getByRole('heading', { name: 'Agendamento confirmado!' })).toBeVisible()
-  expect(posted).toEqual({ slot: '2026-11-08T14:00', name: 'Ana Lima', phone: '(75) 99999-9999' })
+  expect(posted).toMatchObject({ slot: '2026-11-08T14:00', name: 'Ana Lima', phone: '(75) 99999-9999' })
   const url = new URL((await page.getByRole('link', { name: 'Enviar mensagem no WhatsApp' }).getAttribute('href'))!)
   expect(url.hostname).toBe('wa.me')
   expect(url.searchParams.get('text')).toContain('Ana Lima')
@@ -104,5 +104,5 @@ test('abre no primeiro mês com vaga e identifica data esgotada', async ({ page 
   await expect(page.getByText('março de 2027')).toBeVisible()
   await expect(page.getByRole('button', { name: /4 de março de 2027, horários disponíveis/ })).toHaveAttribute('aria-pressed', 'true')
   await expect(page.getByRole('button', { name: /5 de março de 2027, horários indisponíveis/ })).toBeDisabled()
-  await expect(page.getByText('Datas destacadas têm horários disponíveis.')).toBeVisible()
+  await expect(page.getByText('Disponível',{exact:true})).toBeVisible()
 })

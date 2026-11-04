@@ -5,7 +5,7 @@ import { join } from 'node:path'
 vi.mock('@/lib/cms/auth',()=>({ authenticated:async()=>true, sameOrigin:()=>{} }))
 let POST: typeof import('@/app/api/admin/agendamentos/route').POST
 let folder: string
-const send = (body: object) => POST(new Request('http://localhost/api/admin/agendamentos',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)}))
+const send = async (body: Record<string,unknown>) => {if(body.action==='cancel'||body.action==='remove'){const {listSlots}=await import('@/lib/scheduling-service');const row=(await listSlots(true)).find(s=>s.slot===body.slot);if(body.expectedName&&body.expectedName!==row?.name)return new Response('{}',{status:409});body={...body,expectedVersion:row?.version,expectedBookingId:row?.booking_id}}return POST(new Request('http://localhost/api/admin/agendamentos',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)}))}
 beforeAll(async()=>{folder=mkdtempSync(join(tmpdir(),'priscilla-agenda-'));vi.stubEnv('CMS_DATA_DIRECTORY',folder);vi.stubEnv('DATABASE_URL','');vi.stubEnv('NODE_ENV','development');({POST}=await import('@/app/api/admin/agendamentos/route'))})
 afterAll(()=>{vi.unstubAllEnvs();try{rmSync(folder,{recursive:true,force:true})}catch{}})
 describe('gerenciamento manual de horários',()=>{

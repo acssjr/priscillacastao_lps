@@ -13,3 +13,13 @@
 .clientFields{display:grid;gap:14px;margin:0 0 24px}.clientFields label{display:grid;grid-template-columns:1fr auto;gap:7px;font-size:15px;font-weight:700;color:#49362d}.clientFields label span{font-size:13px;font-weight:400;color:#6c5549}.clientFields input{grid-column:1/-1;width:100%;min-height:48px;border:1px solid #a99283;border-radius:9px;background:#fff;color:#342522;padding:11px 12px;font:400 16px SaansAgenda,sans-serif}.clientFields input::placeholder{color:#765f52;opacity:1}.clientFields p{font-size:14px;line-height:1.45;margin:0;color:#604b40}.time{display:flex;align-items:center;justify-content:center;padding:0;color:#655046;font-size:14px}.event strong{font-size:15px}.event span{font-size:13px}.dayHead span{font-size:12px;color:#624d41}.gap{font-size:14px;color:#634c40}.gap strong{font-size:14px}.mobileHint,.sidebarNote{font-size:14px;color:#6d574b}.timeLabel,.dateChoice span,.contact span{font-size:14px;color:#654f43}.dialogLabel{font-size:12px}.weekControl>button:not(.today),.miniHead button{min-width:44px;min-height:44px}.close{width:44px;height:44px;top:12px;right:12px}@media(max-width:850px){.event strong{font-size:16px}.dayHead span{font-size:12px}.gap{font-size:14px}.gap strong{font-size:14px}}
 
 .dialogLabel,.dateChoice small,.timeInputs small{color:#664336}
+
+.openFields{display:grid;gap:14px;margin:18px 0}.openFields label{display:grid;gap:7px;font-size:14px;font-weight:600}.openFields input,.openFields select{width:100%;min-height:46px;border:1px solid #b28b76;border-radius:10px;padding:10px 12px;background:#fff9ef;color:#492a20;font:inherit}.openFields p,.openPreview{font-size:13px;line-height:1.5;color:#765748}.openPreview{padding:12px;background:#f2e3d1;border-radius:10px}.successNotice{padding:12px 16px;background:#f1e3cd;color:#633b27;border-radius:10px}.syncStatus{font-size:12px;color:#785c4c;margin:0 0 12px}.dialog{max-height:90dvh;overflow-y:auto}.dialog button:disabled{opacity:.55;cursor:not-allowed}
+
+.page :is(input,select):focus{outline:none;box-shadow:none;border-color:#725c50}.page :is(button,a):focus-visible{outline:2px solid #725c50;outline-offset:2px}
+
+/* Padrão aprovado: nenhum anel, halo ou contorno externo ao focar. */
+.page :is(input,select,textarea,button,a,[tabindex]):focus,
+.page :is(input,select,textarea,button,a,[tabindex]):focus-visible{outline:none;box-shadow:none}
+.page :is(button,a):focus-visible{text-decoration:underline;text-underline-offset:3px;filter:brightness(.94)}
+.page :is(input,select,textarea):focus-visible{border-color:#725c50}

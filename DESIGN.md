@@ -275,3 +275,11 @@ Fotos mantêm o material existente. O enquadramento usa prévia com proporção 
 - **Don't** substituir o canvas por uma área principal de formulários ou acrescentar Edição avançada às três campanhas.
 
 Evidência: identidade em `app/globals.css`, `app/layout.tsx` e `components/landing/landing.module.css`; cascata efetiva em `components/cms/admin-panel.module.css` e `visual-editor.module.css`; comportamento em `admin-panel.tsx`, `admin-sidebar.tsx`, `visual-editor.tsx`, `section-editor.tsx`, `access-loading.tsx`, `publication-dialog.tsx`, `photo-framing.tsx` e seus estilos, além de `modal.tsx`. Capturas de revisão existentes: `.impeccable/review/desktop.png`, `mobile.png` e `user-1041.png`. Drift não canonizado: neutros e feedback próprios da área de usuários não são uma nova paleta global. Eyebrows existentes, inclusive o estilo residual no acesso, e ocultação global da scrollbar pública não são padrões a herdar. Regras antigas de lateral de 260px, coluna de orientação e grupos em cartões persistem no CSS, mas são anuladas ou não montadas na edição visual e não definem a experiência atual. Nenhum desses pontos foi reparado nesta documentação; nenhum raster foi criado.
+
+## Foco e interação — regra permanente do projeto
+
+Nunca aplicar anéis de foco externos, halos, sombras de seleção ou bordas duplas ao clicar/tocar em campos, seletores, horários, botões ou links. Não usar outline com offset positivo. Isso vale para as páginas públicas, painel e componentes novos. Manter apenas a borda única normal do campo.
+
+Na navegação por teclado, indicar o foco discretamente por mudança de cor da própria borda, sublinhado ou mudança tonal do controle, sem acrescentar outra borda. O estado selecionado de um horário/calendário continua sendo comunicado pelo preenchimento do próprio controle; não deve ganhar um anel externo.
+
+Verificação obrigatória: clicar e navegar com Tab nos campos de hora/minuto, data, selects e botões; conferir outline:none e ausência de box-shadow de foco.
