@@ -91,5 +91,5 @@ export default function Booking() {
         </>}
         </div>
       </section>
-    </div><footer className={styles.footer} aria-label="Rodapé"><button type="button" className={`${styles.footerBrand} ${styles.brandButton}`} onClick={restart} disabled={busy} aria-label="Priscilla Castão — início do agendamento"><img src="/brand/priscilla-castao-logo.svg" alt="" /></button><nav aria-label="Links do rodapé"><a className={styles.instagramLink} href={profileLinks.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram da Priscilla Castão"><img src="/brand/instagram.svg" alt="" /></a><Link href="/politica-de-privacidade">Política de privacidade</Link></nav><p>Feira de Santana, BA</p></footer></div></main>
+    </div><footer className={styles.footer} aria-label="Rodapé"><button type="button" className={`${styles.footerBrand} ${styles.brandButton}`} onClick={restart} disabled={busy} aria-label="Priscilla Castão — início do agendamento"><img src="/brand/priscilla-castao-logo.svg" alt="" /></button><nav aria-label="Links do rodapé"><a className={styles.instagramLink} href={profileLinks.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram da Priscilla Castão"><img src="/brand/instagram.svg" alt="" /></a><Link href="/politica-de-privacidade">Política de privacidade</Link></nav></footer></div></main>
 }
