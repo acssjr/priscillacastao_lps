@@ -41,7 +41,6 @@ test('permite trocar o horário se outra pessoa o reservar durante o preenchimen
   await page.getByRole('button', { name: 'Continuar' }).click()
   await page.getByLabel('Nome completo').fill('Teste Local')
   await page.getByLabel('WhatsApp').fill('11999999999')
-  await page.getByLabel('E-mail').fill('teste@example.com')
   await page.getByRole('button', { name: 'Confirmar agendamento' }).click()
   await expect(page.getByRole('alert').filter({ hasText: 'não está mais disponível' })).toBeVisible()
   await expect(page.getByRole('button', { name: 'Confirmar agendamento' })).toBeDisabled()
@@ -69,4 +68,28 @@ test('recupera uma falha temporária ao consultar a disponibilidade', async ({ p
   await page.evaluate(() => window.dispatchEvent(new Event('focus')))
   await expect(page.getByRole('button', { name: 'Ver horários' })).toBeEnabled()
   await expect(page.getByText(/Não foi possível carregar os horários/)).toHaveCount(0)
+})
+
+
+test('confirma com nome e WhatsApp e prepara a mensagem sem enviá-la', async ({ page }) => {
+  let posted: Record<string, unknown> | undefined
+  await page.route('**/api/agendamento', async route => {
+    if (route.request().method() === 'POST') { posted = route.request().postDataJSON(); await route.fulfill({ json: { ok: true } }); return }
+    await route.fulfill({ json: { slots: [slot('14:00')] } })
+  })
+  await page.goto('/agendar')
+  await page.getByRole('button', { name: 'Ver horários' }).click()
+  await page.getByRole('button', { name: '14:00' }).click()
+  await page.getByRole('button', { name: 'Continuar' }).click()
+  await expect(page.getByLabel('E-mail')).toHaveCount(0)
+  await page.getByLabel('Nome completo').fill('Ana Lima')
+  await page.getByLabel('WhatsApp').fill('+55 (75) 99999-9999')
+  await expect(page.getByLabel('WhatsApp')).toHaveValue('(75) 99999-9999')
+  await page.getByRole('button', { name: 'Confirmar agendamento' }).click()
+  await expect(page.getByRole('heading', { name: 'Agendamento confirmado!' })).toBeVisible()
+  expect(posted).toEqual({ slot: '2026-11-08T14:00', name: 'Ana Lima', phone: '(75) 99999-9999' })
+  const url = new URL((await page.getByRole('link', { name: 'Enviar mensagem no WhatsApp' }).getAttribute('href'))!)
+  expect(url.hostname).toBe('wa.me')
+  expect(url.searchParams.get('text')).toContain('Ana Lima')
+  expect(url.searchParams.get('text')).toContain('08/11/2026, às 14:00')
 })
