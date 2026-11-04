@@ -25,3 +25,13 @@ it('gestora abre uma sequência de aulas de 1h na data escolhida',async()=>{
  fireEvent.click(screen.getByRole('button',{name:'Abrir horários'}))
  await waitFor(()=>expect(posted?.slots).toEqual(['2035-05-01T14:00','2035-05-01T15:00','2035-05-01T16:00']))
 })
+
+it('abre no próximo dia com horários e respeita a navegação posterior',async()=>{
+ Object.defineProperty(window,'matchMedia',{configurable:true,value:()=>({matches:false,addEventListener(){},removeEventListener(){}})})
+ let refresh:()=>void=()=>{};const native=globalThis.setInterval;vi.spyOn(globalThis,'setInterval').mockImplementation(((cb:()=>void,ms:number)=>{if(ms===10000){refresh=cb;return 123}return native(cb,ms)}) as typeof setInterval)
+ vi.stubGlobal('fetch',vi.fn(async()=>new Response(JSON.stringify({slots:[{slot:'2099-11-10T14:00',name:null,enabled:true},{slot:'2099-11-08T14:00',name:'Reservado',enabled:true},{slot:'2099-11-07T14:00',name:null,enabled:false}]}))))
+ render(<Agenda/>);await screen.findByRole('button',{name:'14:00 · Reservado para Reservado'})
+ expect(screen.getByRole('heading',{level:2,name:/2099/})).toBeInTheDocument()
+ fireEvent.click(screen.getByRole('button',{name:'Hoje'}));await act(async()=>refresh())
+ expect(screen.queryByRole('heading',{level:2,name:/2099/})).not.toBeInTheDocument()
+})
