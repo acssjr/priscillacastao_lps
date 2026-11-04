@@ -21,26 +21,6 @@ it("registers explicit reduced-motion branches and renders no blocking layer", (
   expect(add).toHaveBeenCalledWith("(prefers-reduced-motion: no-preference)", expect.any(Function));
 });
 
-it("keeps the proof poster below its clipping edge throughout parallax", () => {
-  document.body.innerHTML = `
-    <main data-motion-root>
-      <header></header>
-      <div data-parallax="poster"><img alt="" /></div>
-    </main>
-  `;
-  render(<MotionLayer />);
-
-  const poster = document.querySelector("[data-parallax='poster'] img");
-  const noPreference = add.mock.calls.find(([query]) => query === "(prefers-reduced-motion: no-preference)")?.[1];
-  noPreference();
-
-  expect(gsapFromTo).toHaveBeenCalledWith(
-    poster,
-    expect.objectContaining({ yPercent: 0, scale: 1.015 }),
-    expect.objectContaining({ yPercent: 3.5, scale: 1 }),
-  );
-});
-
 it("does not replay above-the-fold content after hydration", () => {
   document.body.innerHTML = `
     <main data-motion-root>

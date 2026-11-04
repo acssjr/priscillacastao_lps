@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
 
 test('booking steps keep keyboard focus and have no serious automated accessibility violations', async ({ page }) => {
+  await page.route('**/api/agendamento',route=>route.fulfill({json:{slots:[{slot:'2035-11-08T14:00',reserved:false}]}}))
   await page.goto('/agendar')
   await expect(page.getByRole('button', { name: 'Ver horários' })).toBeEnabled()
   const finishTransition = () => page.locator('[class*=stepContent]').evaluate(el => Promise.all(el.getAnimations().map(animation => animation.finished.catch(() => undefined))))
