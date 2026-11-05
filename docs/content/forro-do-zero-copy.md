@@ -12,7 +12,7 @@ Status: copy aprovada para implementação em 7 de setembro de 2026. Os depoimen
 - O aluno da aula individual não precisa levar par.
 - Local: combinado conforme a necessidade da pessoa.
 - Investimento e horários: apresentados depois da conversa com Priscilla.
-- WhatsApp: `5575981234176`.
+- WhatsApp: `5577998422026`.
 - Linguagem pública da professora: conexão, comunicação, escuta, musicalidade, presença, consciência corporal e transferência de peso.
 - Estilos citados no perfil: forró universitário e roots.
 

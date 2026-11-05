@@ -13,7 +13,7 @@ describe("forro-do-zero campaign", () => {
     expect(campaign.route).toBe("/");
     expect(campaign.offers.map((offer) => offer.key)).toEqual(["individual", "dupla"]);
     expect(campaign.offers[0].primary).toBe(true);
-    expect(campaign.whatsapp.phone).toBe("5575981234176");
+    expect(campaign.whatsapp.phone).toBe("5577998422026");
   });
 
   it("uses benefit statements instead of fabricated testimonial attribution", () => {

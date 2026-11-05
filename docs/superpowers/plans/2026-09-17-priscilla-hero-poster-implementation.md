@@ -46,7 +46,7 @@ it("renders an accessible central-poster hero", () => {
   expect(screen.getByText(forroDoZeroCampaign.hero.body[0])).toBeInTheDocument();
   expect(screen.getByRole("link", { name: forroDoZeroCampaign.hero.cta })).toHaveAttribute(
     "href",
-    expect.stringContaining("wa.me/5575981234176"),
+    expect.stringContaining("wa.me/5577998422026"),
   );
 });
 ```

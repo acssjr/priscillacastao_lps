@@ -51,7 +51,7 @@ it("keeps individual first and provides prefilled WhatsApp paths for every forma
   expect(screen.getByRole("link", { name: "AGENDAR MINHA AULA PARTICULAR" })).toBeInTheDocument();
   expect(screen.getByRole("link", { name: "AGENDAR AULA EM DUPLA" })).toBeInTheDocument();
   expect(
-    screen.getAllByRole("link").every((link) => link.getAttribute("href")?.includes("wa.me/5575981234176")),
+    screen.getAllByRole("link").every((link) => link.getAttribute("href")?.includes("wa.me/5577998422026")),
   ).toBe(true);
   expect(screen.getByRole("heading", { name: "Precisa de uma aula em grupo ou workshop?" })).toBeInTheDocument();
   expect(decodeURIComponent(screen.getByRole("link", { name: /outro formato/i }).getAttribute("href") ?? "")).toContain("aula em grupo ou workshop");

@@ -27,7 +27,7 @@
 - A narrativa segue Revenue Centric Design: intenção do anúncio, reconhecimento, redução de risco, prova, escolha de formato e ação mensurável; cada seção precisa justificar sua presença nesse percurso.
 - A mensagem estratégica é aprender do zero com segurança, em ambiente reservado, com atenção individual e progressão no próprio ritmo.
 - A redação final depende de `schwartz-copy`, princípios de Ogilvy, `no-ai-slop` e aprovação do usuário.
-- O WhatsApp usa o número normalizado `5575981234176`.
+- O WhatsApp usa o número normalizado `5577998422026`.
 - Investimento e local em Salvador são combinados depois de uma conversa consultiva.
 - Google Ads, GA4 e Meta Ads são geridos por Google Tag Manager após consentimento.
 - Analytics nunca recebe nome, telefone ou conteúdo da conversa e nunca bloqueia o WhatsApp.
@@ -168,7 +168,7 @@ Crie o documento com esta estrutura e preencha cada evidência com URL pública,
 - Oferta complementar: aula particular em dupla
 - Ambiente: reservado
 - Preço e local: definidos após conversa
-- WhatsApp: 5575981234176
+- WhatsApp: 5577998422026
 
 ## Evidências e permissões
 | id | fonte | pessoa | texto original | uso autorizado | observação |
@@ -569,7 +569,7 @@ describe("forro-do-zero campaign", () => {
     expect(campaign.id).toBe("forro-do-zero");
     expect(campaign.offers[0].key).toBe("individual");
     expect(campaign.offers[0].primary).toBe(true);
-    expect(campaign.whatsapp.phone).toBe("5575981234176");
+    expect(campaign.whatsapp.phone).toBe("5577998422026");
   });
 
   it("has unique section ids and verified testimonial names", () => {
@@ -637,7 +637,7 @@ export const LandingCampaignSchema = z.object({
     items: z.array(z.object({ question: z.string(), answer: z.string() })).min(5).max(8),
   }),
   closing: RichSectionSchema.extend({ cta: z.string() }),
-  whatsapp: z.object({ phone: z.literal("5575981234176"), messages: z.record(OfferKeySchema, z.string().min(20)) }),
+  whatsapp: z.object({ phone: z.literal("5577998422026"), messages: z.record(OfferKeySchema, z.string().min(20)) }),
 });
 
 export type LandingCampaign = z.infer<typeof LandingCampaignSchema>;
@@ -739,12 +739,12 @@ import { buildWhatsAppUrl, normalizeWhatsAppPhone } from "./whatsapp";
 
 describe("WhatsApp URL", () => {
   it("normalizes the confirmed Brazilian number", () => {
-    expect(normalizeWhatsAppPhone("+55 (75) 98123-4176")).toBe("5575981234176");
+    expect(normalizeWhatsAppPhone("+55 (77) 99842-2026")).toBe("5577998422026");
   });
 
   it("encodes a visible editable message", () => {
-    const url = buildWhatsAppUrl("5575981234176", "Oi, Priscilla! Quero uma aula individual.");
-    expect(url).toBe("https://wa.me/5575981234176?text=Oi%2C%20Priscilla!%20Quero%20uma%20aula%20individual.");
+    const url = buildWhatsAppUrl("5577998422026", "Oi, Priscilla! Quero uma aula individual.");
+    expect(url).toBe("https://wa.me/5577998422026?text=Oi%2C%20Priscilla!%20Quero%20uma%20aula%20individual.");
   });
 
   it("rejects an invalid phone", () => {
@@ -877,12 +877,12 @@ import { WhatsAppLink } from "./WhatsAppLink";
 
 it("keeps a real href and does not prevent navigation", async () => {
   render(
-    <WhatsAppLink phone="5575981234176" message="Oi, Priscilla!" placement="hero" offer="individual">
+    <WhatsAppLink phone="5577998422026" message="Oi, Priscilla!" placement="hero" offer="individual">
       Conversar com Priscilla
     </WhatsAppLink>,
   );
   const link = screen.getByRole("link", { name: "Conversar com Priscilla" });
-  expect(link).toHaveAttribute("href", "https://wa.me/5575981234176?text=Oi%2C%20Priscilla!");
+  expect(link).toHaveAttribute("href", "https://wa.me/5577998422026?text=Oi%2C%20Priscilla!");
   await userEvent.click(link);
 });
 ```
@@ -1198,7 +1198,7 @@ describe("LandingPage core story", () => {
     expect(screen.getByText(/Salvador/i)).toBeInTheDocument();
     expect(screen.getByRole("link", { name: forroDoZeroCampaign.hero.cta })).toHaveAttribute(
       "href",
-      expect.stringContaining("wa.me/5575981234176"),
+      expect.stringContaining("wa.me/5577998422026"),
     );
   });
 
@@ -1386,7 +1386,7 @@ it("keeps individual first and links both formats", () => {
   render(<Formats campaign={forroDoZeroCampaign} />);
   const headings = screen.getAllByRole("heading", { level: 3 });
   expect(headings[0]).toHaveTextContent(forroDoZeroCampaign.offers[0].title);
-  expect(screen.getAllByRole("link").every((link) => link.getAttribute("href")?.includes("wa.me/5575981234176"))).toBe(true);
+  expect(screen.getAllByRole("link").every((link) => link.getAttribute("href")?.includes("wa.me/5577998422026"))).toBe(true);
 });
 ```
 
@@ -2351,7 +2351,7 @@ export default function PrivacyPage() {
       <p>Os links para WhatsApp e Instagram levam a serviços externos, sujeitos às políticas dessas plataformas. A mensagem sugerida no WhatsApp pode ser editada antes do envio.</p>
       <h2>Contato</h2>
       <p>Dúvidas sobre esta página podem ser enviadas diretamente a Priscilla pelo WhatsApp.</p>
-      <a href={buildWhatsAppUrl("5575981234176", "Oi, Priscilla! Tenho uma dúvida sobre a página e a privacidade.")}>Falar com Priscilla</a>
+      <a href={buildWhatsAppUrl("5577998422026", "Oi, Priscilla! Tenho uma dúvida sobre a página e a privacidade.")}>Falar com Priscilla</a>
     </main>
   );
 }
@@ -2413,7 +2413,7 @@ for (const width of widths) {
 
 test("primary actions use the real WhatsApp number and encoded context", async ({ page }) => {
   await page.goto("/");
-  const links = page.locator("a[href*='wa.me/5575981234176']");
+  const links = page.locator("a[href*='wa.me/5577998422026']");
   await expect(links.first()).toBeVisible();
   expect(await links.count()).toBeGreaterThanOrEqual(3);
   await expect(links.first()).toHaveAttribute("href", /text=.+/);
@@ -2457,7 +2457,7 @@ test("WhatsApp still opens when dataLayer is unavailable", async ({ page }) => {
   const link = page.locator("#hero-primary-cta");
   const href = await link.getAttribute("href");
   await link.click();
-  expect(href).toContain("wa.me/5575981234176");
+  expect(href).toContain("wa.me/5577998422026");
 });
 ```
 

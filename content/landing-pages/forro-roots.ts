@@ -233,7 +233,7 @@ export const forroRootsCampaign = LandingCampaignSchema.parse({
     cta: "AGENDAR AULA DE ROOTS",
   },
   whatsapp: {
-    phone: "5575981234176",
+    phone: "5577998422026",
     messages: {
       general: "Oi, Priscilla! Vi a página de aulas de roots e gostaria de agendar uma aula. Vou te contar minha experiência e quero saber sobre formatos, locais, horários e valores.",
       individual: "Oi, Priscilla! Vi a página de aulas de roots e tenho interesse em uma aula particular individual. Pode me explicar como funciona e informar locais, horários e valores?",

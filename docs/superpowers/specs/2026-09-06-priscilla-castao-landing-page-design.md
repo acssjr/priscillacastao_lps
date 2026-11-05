@@ -92,7 +92,7 @@ O tom combina acolhimento e autoridade. Priscilla deve parecer paciente, próxim
 
 ### Ação principal
 
-Abrir conversa com Priscilla no WhatsApp pelo número normalizado `5575981234176`.
+Abrir conversa com Priscilla no WhatsApp pelo número normalizado `5577998422026`.
 
 ### Caminhos
 

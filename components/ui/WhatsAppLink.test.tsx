@@ -10,13 +10,13 @@ beforeEach(() => {
 
 it("keeps a real WhatsApp href without requiring analytics", () => {
   render(
-    <WhatsAppLink phone="5575981234176" message="Oi, Priscilla!" placement="hero" offer="individual">
+    <WhatsAppLink phone="5577998422026" message="Oi, Priscilla!" placement="hero" offer="individual">
       Conversar com Priscilla
     </WhatsAppLink>,
   );
   expect(screen.getByRole("link", { name: "Conversar com Priscilla" })).toHaveAttribute(
     "href",
-    "https://wa.me/5575981234176?text=Oi%2C%20Priscilla!",
+    "https://wa.me/5577998422026?text=Oi%2C%20Priscilla!",
   );
 });
 
@@ -24,7 +24,7 @@ it("emits format selection before the WhatsApp click", async () => {
   writeConsent("accepted");
   render(
     <main data-campaign="forro-do-zero">
-      <WhatsAppLink phone="5575981234176" message="Oi, Priscilla!" placement="format" offer="dupla">
+      <WhatsAppLink phone="5577998422026" message="Oi, Priscilla!" placement="format" offer="dupla">
         Aula em dupla
       </WhatsAppLink>
     </main>,

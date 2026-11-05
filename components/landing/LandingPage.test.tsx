@@ -38,7 +38,7 @@ describe("LandingPage core story", () => {
     expect(screen.getByText(forroDoZeroCampaign.hero.body[0])).toBeInTheDocument();
     expect(screen.getByRole("link", { name: forroDoZeroCampaign.hero.cta })).toHaveAttribute(
       "href",
-      expect.stringContaining("wa.me/5575981234176"),
+      expect.stringContaining("wa.me/5577998422026"),
     );
     expect(screen.getByRole("link", { name: forroDoZeroCampaign.hero.cta }).querySelector('[aria-hidden="true"]')).toBeInTheDocument();
   });
