@@ -41,7 +41,7 @@ it('gestora personaliza mensagens, cidade e WhatsApp pelo painel com prévia em 
  let posted:Record<string,unknown>|undefined
  vi.stubGlobal('fetch',vi.fn(async(_url,options)=>{if(options?.method==='POST'){posted=JSON.parse(options.body);return new Response(JSON.stringify({ok:true,slots:[],settings:(posted as {settings?:unknown}).settings}))}return new Response(JSON.stringify({slots:[]}))}))
  render(<Agenda/>)
- fireEvent.click(screen.getByRole('button',{name:'Configurar mensagens e página'}))
+ fireEvent.click(screen.getByRole('button',{name:'Configurações'}))
  const cityInput=screen.getByLabelText('Cidade ou região das aulas')
  fireEvent.change(cityInput,{target:{value:'Salvador'}})
  const msgArea=screen.getByLabelText('Mensagem que o cliente envia após confirmar o agendamento')
