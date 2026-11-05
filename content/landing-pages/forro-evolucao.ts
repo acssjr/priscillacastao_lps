@@ -1,3 +1,4 @@
+import { DEFAULT_WHATSAPP_PHONE } from "@/lib/whatsapp";
 import { LandingCampaignSchema } from "./schema";
 
 const heroImage = {
@@ -233,7 +234,7 @@ export const forroEvolucaoCampaign = LandingCampaignSchema.parse({
     cta: "AGENDAR AULA",
   },
   whatsapp: {
-    phone: "5577998422026",
+    phone: DEFAULT_WHATSAPP_PHONE,
     messages: {
       general: "Oi, Priscilla! Vi a página para quem já dança forró e quero melhorar minha dança. Gostaria de agendar uma aula particular e saber os formatos, locais, horários e valores.",
       individual: "Oi, Priscilla! Vi a página para quem já dança forró e tenho interesse em uma aula particular individual para melhorar minha dança. Pode me explicar como funciona e informar locais, horários e valores?",
