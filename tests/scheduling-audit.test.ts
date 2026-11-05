@@ -50,3 +50,21 @@ it('limita tentativas persistentemente',async()=>{
  await limitAttempt('test-limit',1)
  await expect(limitAttempt('test-limit',1)).rejects.toMatchObject({status:429})
 })
+
+it('salva e valida mensagens, telefone e pausa de agendamentos sem quebrar o sistema',async()=>{
+ const {DEFAULT_BOOKING_SETTINGS,formatBookingMessage}=await import('@/lib/booking-settings')
+ const badRes=await admin(request({action:'settings',settings:{...DEFAULT_BOOKING_SETTINGS,whatsappPhone:'123'}}))
+ expect(badRes.status).toBe(400)
+ const okRes=await admin(request({action:'settings',settings:{...DEFAULT_BOOKING_SETTINGS,whatsappPhone:'(77) 99842-2026',city:'Salvador',confirmationMessage:'Olá Priscilla! Sou {nome}, agendei em {cidade} dia {data} às {hora}.',bookingEnabled:false}}))
+ expect(okRes.status).toBe(200)
+ const body=await okRes.json()
+ expect(body.settings.whatsappPhone).toBe('5577998422026')
+ expect(body.settings.city).toBe('Salvador')
+ expect(body.settings.bookingEnabled).toBe(false)
+ expect(formatBookingMessage(body.settings.confirmationMessage,{name:'Clara',date:'10/11/2026',time:'15:00',city:body.settings.city})).toBe('Olá Priscilla! Sou Clara, agendei em Salvador dia 10/11/2026 às 15:00.')
+ const pausedSlot='2035-09-01T10:00'
+ await admin(request({action:'add',slot:pausedSlot}))
+ expect((await book(request({slot:pausedSlot,name:'Clara',phone:'77999999999'}))).status).toBe(409)
+ await admin(request({action:'settings',settings:{...DEFAULT_BOOKING_SETTINGS,bookingEnabled:true}}))
+ expect((await book(request({slot:pausedSlot,name:'Clara',phone:'77999999999'}))).status).toBe(200)
+})

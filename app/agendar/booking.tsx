@@ -4,6 +4,13 @@ import Link from 'next/link'
 import { Entrance } from '@/app/links/Entrance'
 import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react'
 import { profileLinks } from '@/content/profile-links'
+import {
+  DEFAULT_BOOKING_SETTINGS,
+  buildBookingWhatsAppUrl,
+  formatBookingMessage,
+  sanitizeBookingSettings,
+  type BookingSettings,
+} from '@/lib/booking-settings'
 import styles from './booking.module.css'
 import beam from '@/components/ui/WhatsAppLink.module.css'
 type Receipt = {slot:string;booking_id:string;status:string}
@@ -29,6 +36,7 @@ function Icon({ name }: { name: 'pin' | 'clock' | 'arrow' | 'back' | 'check' }) 
 }
 export default function Booking() {
   const [slots, setSlots] = useState<Slot[]>([]), [date, setDate] = useState(initialDate), [selected, setSelected] = useState(''), [step, setStep] = useState<'date'|'time'|'form'|'done'>('date'), [error, setError] = useState(''), [loading, setLoading] = useState(true), [busy, setBusy] = useState(false), [month, setMonth] = useState('2026-11'), [name, setName] = useState(''), [phone, setPhone] = useState(''), [direction, setDirection] = useState<'forward'|'back'>('forward')
+  const [settings, setSettings] = useState<BookingSettings>(DEFAULT_BOOKING_SETTINGS)
   const stepRef = useRef<HTMLDivElement>(null)
   const transitioning = useRef(false)
   const focusNext = useRef(false)
@@ -62,9 +70,10 @@ export default function Booking() {
     try {
       const res = await fetch('/api/agendamento', { cache: 'no-store', signal:AbortSignal.timeout(15000) })
       if (!res.ok) throw new Error()
-      const data: { slots: Slot[] } = await res.json()
+      const data: { slots: Slot[]; settings?: unknown } = await res.json()
       if(version!==queryVersion.current)return
       setSlots(data.slots)
+      if (data.settings) setSettings(sanitizeBookingSettings(data.settings))
       if (!initialized.current) {
         const first = data.slots.filter(slot => !slot.reserved).sort((a, b) => a.slot.localeCompare(b.slot))[0]
         const initial = first?.slot.slice(0, 10) || new Date().toLocaleDateString('en-CA', { timeZone: 'America/Sao_Paulo' })
@@ -97,8 +106,28 @@ export default function Booking() {
   const monthLabel = new Intl.DateTimeFormat('pt-BR', { month:'long', year:'numeric', timeZone:'UTC' }).format(new Date(Date.UTC(year, monthNumber - 1, 1)))
   function changeMonth(offset: number) { const next = new Date(Date.UTC(year, monthNumber - 1 + offset, 1)); setMonth(`${next.getUTCFullYear()}-${String(next.getUTCMonth() + 1).padStart(2, '0')}`); setSelected('') }
   const selectedDay = selected.slice(8,10), selectedTime = selected.slice(11,16)
-  const whatsappLink = new URL(profileLinks.whatsapp)
-  whatsappLink.searchParams.set('text', `Oi, Priscilla! Sou ${name.trim()}. Acabei de agendar minha aula em Feira de Santana para ${selectedDay}/${selected.slice(5,7)}/${selected.slice(0,4)}, às ${selectedTime}.`)
+  const selectedDateBr = `${selectedDay}/${selected.slice(5,7)}/${selected.slice(0,4)}`
+  const currentDateBr = `${date.slice(8,10)}/${date.slice(5,7)}/${date.slice(0,4)}`
+  const whatsappUrl = buildBookingWhatsAppUrl(
+    settings.whatsappPhone,
+    formatBookingMessage(settings.confirmationMessage, {
+      name: name.trim(),
+      date: selectedDateBr,
+      time: selectedTime,
+      timeRange: selected ? timeRange(selected) : '',
+      city: settings.city,
+      locationNote: settings.locationNote,
+    }),
+  )
+  const inquiryWhatsappUrl = buildBookingWhatsAppUrl(
+    settings.whatsappPhone,
+    formatBookingMessage(settings.inquiryMessage, {
+      name: name.trim(),
+      date: currentDateBr,
+      city: settings.city,
+      locationNote: settings.locationNote,
+    }),
+  )
 
   const formattedDate = new Intl.DateTimeFormat('pt-BR', { weekday:'long', day:'numeric', month:'long', timeZone:'UTC' }).format(new Date(date + 'T12:00:00Z'))
   const daySlots = slots.filter(s => s.slot.startsWith(date))
@@ -113,10 +142,17 @@ export default function Booking() {
   return <main id="conteudo" className={styles.page}><Entrance booking /><div className={styles.shell}>
     <header className={styles.header}><button type="button" className={styles.brandButton} onClick={restart} disabled={navigationLocked} aria-label="Priscilla Castão — início do agendamento"><img src="/brand/priscilla-castao-logo.svg" alt="" /></button><span>AGENDA DE AULAS</span></header>
     <div className={styles.layout}>
-      <section className={styles.intro}><div><h1>Agende sua aula com Priscilla.</h1><p>Escolha uma data e um horário para sua aula de forró.</p></div></section>
+      <section className={styles.intro}><div><h1>{settings.welcomeTitle}</h1><p>{settings.welcomeSubtitle}</p>{settings.publicNotice && <p className={styles.publicNotice}>{settings.publicNotice}</p>}</div></section>
       <section className={styles.panel} aria-label="Agendamento">
         {syncError&&<div role="alert" className={styles.error}>{syncError}<button type="button" className={styles.back} onClick={()=>void refresh()}>Atualizar horários</button></div>}
         {pending&&<div role="alert" className={styles.availabilityNote}><p>{error||'Estamos verificando sua última tentativa de reserva.'}</p><button type="button" disabled={busy} onClick={()=>void recover()}>{busy?'Verificando…':'Verificar confirmação'}</button></div>}
+        {!settings.bookingEnabled && step !== 'done' ? (
+          <div className={styles.availabilityNote} role="status">
+            <div className={styles.heading}><h2 tabIndex={-1}>Agendamento pelo WhatsApp</h2><p>{settings.publicNotice || 'No momento, os horários estão sendo combinados diretamente com a Priscilla pelo WhatsApp.'}</p></div>
+            <a className={`${styles.primary} ${styles.whatsappButton}`} href={inquiryWhatsappUrl} target="_blank" rel="noopener noreferrer">Conversar pelo WhatsApp <Icon name="arrow" /></a>
+          </div>
+        ) : (
+        <>
         {step !== 'done' && <nav className={styles.stepper} aria-label="Etapas do agendamento">
           <ol>
             {([{ id: 'date', label: 'Data' }, { id: 'time', label: 'Horário' }, { id: 'form', label: 'Seus dados' }] as const).map((item, index) => {
@@ -130,13 +166,13 @@ export default function Booking() {
           </ol>
         </nav>}
         <div inert={pending} key={step} ref={node => { stepRef.current = node; if (node && focusNext.current) { focusNext.current = false; node.querySelector<HTMLElement>('h2')?.focus({ preventScroll: true }) } }} className={`${styles.stepContent} ${direction === 'back' ? styles.stepBack : styles.stepForward}`}>
-        {step === 'done' ? <div className={styles.success}><div className={styles.celebration} aria-hidden="true"><span className={styles.confetti}>{Array.from({ length: 12 }, (_, index) => <i key={index} />)}</span><span className={styles.check}><Icon name="check" /></span></div><h2 tabIndex={-1}>Agendamento confirmado!</h2><p>Sua aula está reservada para <strong>{selectedDay}/{selected.slice(5,7)}/{selected.slice(0,4)}, às {selectedTime}</strong>.</p><p>O local será combinado.</p><p className={styles.whatsappPrompt}>Sua reserva já está confirmada. Se quiser, continue a conversa com a Priscilla pelo WhatsApp com uma mensagem pronta.</p><a className={`${styles.primary} ${styles.whatsappButton}`} href={whatsappLink.toString()} target="_blank" rel="noopener noreferrer">Enviar mensagem no WhatsApp <Icon name="arrow" /></a><button type="button" className={styles.back} disabled={navigationLocked} onClick={restart}>Voltar ao início <Icon name="arrow" /></button></div> : step === 'date' ? <>
+        {step === 'done' ? <div className={styles.success}><div className={styles.celebration} aria-hidden="true"><span className={styles.confetti}>{Array.from({ length: 12 }, (_, index) => <i key={index} />)}</span><span className={styles.check}><Icon name="check" /></span></div><h2 tabIndex={-1}>Agendamento confirmado!</h2><p>Sua aula está reservada para <strong>{selectedDay}/{selected.slice(5,7)}/{selected.slice(0,4)}, às {selectedTime}</strong>.</p><p>{settings.confirmationNote}</p><p className={styles.whatsappPrompt}>Sua reserva já está confirmada. Se quiser, continue a conversa com a Priscilla pelo WhatsApp com uma mensagem pronta.</p><a className={`${styles.primary} ${styles.whatsappButton}`} href={whatsappUrl} target="_blank" rel="noopener noreferrer">Enviar mensagem no WhatsApp <Icon name="arrow" /></a><button type="button" className={styles.back} disabled={navigationLocked} onClick={restart}>Voltar ao início <Icon name="arrow" /></button></div> : step === 'date' ? <>
           <div className={styles.heading}><h2 tabIndex={-1}>Escolha uma data</h2><p>Selecione um dia disponível para ver os horários.</p></div>
           <div className={styles.month}><button type="button" onClick={() => changeMonth(-1)} aria-label="Mês anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg></button><strong>{monthLabel}</strong><button type="button" onClick={() => changeMonth(1)} aria-label="Próximo mês"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg></button></div>
           <div className={styles.calendar} role="group" aria-label="Escolha uma data">{['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'].map((day, index) => <span className={styles.weekday} key={day} aria-label={day}>{['D','S','T','Q','Q','S','S'][index]}</span>)}{Array.from({ length:firstWeekday }, (_, index) => <span key={`empty-${index}`} />)}{Array.from({ length:daysInMonth }, (_, index) => { const day = index + 1, key = `${month}-${String(day).padStart(2,'0')}`, dayItems = slots.filter(s => s.slot.startsWith(key)), hasSlots = dayItems.length > 0, available = dayItems.some(s => !s.reserved); return <button type="button" key={key} disabled={!available} aria-label={`${day} de ${monthLabel}${available ? ', horários disponíveis' : hasSlots ? ', horários indisponíveis' : ', sem horários cadastrados'}`} aria-pressed={available && date === key} className={available ? `${styles.availableDay} ${date === key ? styles.activeDay : ''}` : ''} onClick={() => { setDate(key); setSelected('') }}>{day}</button> })}</div>
           <div className={styles.calendarLegend} aria-label="Legenda do calendário"><span><i className={styles.legendAvailable} aria-hidden="true" />Disponível</span><span><i className={styles.legendSelected} aria-hidden="true" />Selecionada</span></div>
           {dateAvailable && !loading && <div className={styles.selectedDate} aria-live="polite"><span>Data escolhida</span><strong className={styles.scoreWindow}><span key={date} className={styles.scoreValue}>{formattedDate}</span></strong><small>{availableCount} {availableCount === 1 ? 'horário disponível' : 'horários disponíveis'}</small></div>}
-          {loading && <p className={styles.message} role="status">Carregando horários...</p>}{!loading && !error && slots.length > 0 && !slots.some(s => s.slot.startsWith(month) && !s.reserved) && <p className={styles.message} role="status">Não há horários disponíveis neste mês. Consulte outro mês.</p>}{!loading && !error && !anyAvailable && <div className={styles.availabilityNote} role="status"><p>{slots.length ? 'Por enquanto, todos os horários cadastrados estão indisponíveis.' : 'Ainda não há horários cadastrados na agenda.'} Você pode falar com a Priscilla para saber sobre novas datas.</p><a href={profileLinks.whatsapp} target="_blank" rel="noopener noreferrer">Conversar pelo WhatsApp <Icon name="arrow" /></a></div>}{error && <p className={styles.error} role="alert">{error}</p>}
+          {loading && <p className={styles.message} role="status">Carregando horários...</p>}{!loading && !error && slots.length > 0 && !slots.some(s => s.slot.startsWith(month) && !s.reserved) && <p className={styles.message} role="status">Não há horários disponíveis neste mês. Consulte outro mês.</p>}{!loading && !error && !anyAvailable && <div className={styles.availabilityNote} role="status"><p>{slots.length ? 'Por enquanto, todos os horários cadastrados estão indisponíveis.' : 'Ainda não há horários cadastrados na agenda.'} Você pode falar com a Priscilla para saber sobre novas datas.</p><a href={inquiryWhatsappUrl} target="_blank" rel="noopener noreferrer">Conversar pelo WhatsApp <Icon name="arrow" /></a></div>}{error && <p className={styles.error} role="alert">{error}</p>}
           <button type="button" className={styles.primary} disabled={!dateAvailable || loading} onClick={() => { void goTo('time', 'forward') }}>Ver horários <Icon name="arrow" /></button>
         </> : step === 'time' ? <>
           <button type="button" className={styles.back} disabled={navigationLocked} onClick={() => { void goTo('date', 'back') }}><Icon name="back" /> Voltar para datas</button>
@@ -144,17 +180,19 @@ export default function Booking() {
           <div className={styles.dateSummary}><strong>{formattedDate}</strong><span>Horário de Brasília</span></div>
           <div className={styles.times} role="group" aria-label="Horários disponíveis">{daySlots.map(s => <button key={s.slot} type="button" disabled={s.reserved} aria-pressed={selected === s.slot} className={selected === s.slot ? styles.activeTime : ''} onClick={() => setSelected(s.slot)}>{s.slot.slice(11)}{s.reserved && <small>Reservado</small>}</button>)}</div>
           {dayHasAvailability && periodMessages.length > 0 && <div className={styles.availabilityNote} role="status"><p>{periodMessages.join(' ')}</p><button type="button" onClick={() => { void goTo('date', 'back') }}>Consultar outra data <Icon name="arrow" /></button></div>}
-          {!dayHasAvailability && <div className={styles.availabilityNote} role="status"><p>Os horários desta data estão indisponíveis. Que tal consultar outro dia ou conversar com a Priscilla?</p><button type="button" onClick={() => { void goTo('date', 'back') }}>Consultar outra data <Icon name="arrow" /></button><a href={profileLinks.whatsapp} target="_blank" rel="noopener noreferrer">Conversar pelo WhatsApp <Icon name="arrow" /></a></div>}
+          {!dayHasAvailability && <div className={styles.availabilityNote} role="status"><p>Os horários desta data estão indisponíveis. Que tal consultar outro dia ou conversar com a Priscilla?</p><button type="button" onClick={() => { void goTo('date', 'back') }}>Consultar outra data <Icon name="arrow" /></button><a href={inquiryWhatsappUrl} target="_blank" rel="noopener noreferrer">Conversar pelo WhatsApp <Icon name="arrow" /></a></div>}
           {error && <p className={styles.error} role="alert">{error}</p>}
           <button type="button" className={styles.primary} disabled={!selected || !daySlots.some(s => s.slot === selected && !s.reserved)} onClick={() => { void goTo('form', 'forward') }}>Continuar <Icon name="arrow" /></button>
         </> : <>
           <button type="button" className={styles.back} disabled={navigationLocked} onClick={() => { setError(''); void goTo('time', 'back') }}><Icon name="back" /> Voltar para horários</button>
           <div className={styles.heading}><h2 tabIndex={-1}>Confirme sua aula</h2><p>Confira a data e o horário escolhidos e preencha seus dados para reservar.</p></div>
-          <div className={styles.summary}><span className={styles.summaryMark} aria-hidden="true" /><span className={`${beam.rim} ${styles.summaryBeam}`} aria-hidden="true" /><span>Sua aula em Feira de Santana</span><strong>{selectedDay}/{selected.slice(5,7)}/{selected.slice(0,4)} · {timeRange(selected)}</strong><small>Local a combinar</small></div>
+          <div className={styles.summary}><span className={styles.summaryMark} aria-hidden="true" /><span className={`${beam.rim} ${styles.summaryBeam}`} aria-hidden="true" /><span>Sua aula em {settings.city}</span><strong>{selectedDay}/{selected.slice(5,7)}/{selected.slice(0,4)} · {timeRange(selected)}</strong><small>{settings.locationNote}</small></div>
           {!daySlots.some(s => s.slot === selected && !s.reserved) && !error && <div className={styles.availabilityNote} role="status"><p>Esse horário não está mais disponível. Escolha outro para continuar.</p><button type="button" onClick={() => { void goTo('time', 'back') }}>Escolher outro horário <Icon name="arrow" /></button></div>}
           <form className={styles.form} onSubmit={submit}><label>Nome completo<input disabled={locked} name="name" value={name} onChange={event => setName(event.target.value)} required minLength={2} maxLength={100} autoComplete="name" placeholder="Seu nome" /></label><label>WhatsApp<input disabled={locked} name="phone" value={phone} onChange={event => setPhone(formatPhone(event.target.value))} type="tel" inputMode="tel" required minLength={14} autoComplete="tel" placeholder="(00) 00000-0000" /></label>{error && <><p className={styles.error} role="alert">{error}</p><button type="button" className={styles.back} disabled={navigationLocked} onClick={() => { setError(''); void goTo('time', 'back') }}>Escolher outro horário</button></>}<button className={styles.primary} disabled={locked || (!attempt.current && !daySlots.some(s => s.slot === selected && !s.reserved))}>{busy ? 'Confirmando...' : 'Confirmar agendamento'} <Icon name="arrow" /></button><p className={styles.footnote}>Todos os campos são obrigatórios. Ao confirmar, você concorda com nossa <a href="/politica-de-privacidade">política de privacidade</a>.</p></form>
         </>}
         </div>
+        </>
+        )}
       </section>
     </div><footer className={styles.footer} aria-label="Rodapé"><button type="button" className={`${styles.footerBrand} ${styles.brandButton}`} onClick={restart} disabled={navigationLocked} aria-label="Priscilla Castão — início do agendamento"><img src="/brand/priscilla-castao-logo.svg" alt="" /></button><nav aria-label="Links do rodapé"><a className={styles.instagramLink} href={profileLinks.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram da Priscilla Castão"><img src="/brand/instagram.svg" alt="" /></a><Link href="/politica-de-privacidade">Política de privacidade</Link></nav></footer></div></main>
 }

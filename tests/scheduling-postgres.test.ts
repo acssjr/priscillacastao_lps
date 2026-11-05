@@ -36,4 +36,8 @@ it.skipIf(!enabled)('PostgreSQL: migração, concorrência, sobreposição, canc
  await service.manage('add',['2035-07-01T10:00','2035-07-01T11:00'],{name:null,phone:null},{})
  const sameKey=randomUUID();await Promise.allSettled(['2035-07-01T10:00','2035-07-01T11:00'].map(slot=>service.reserve(slot,'Teste PG','71999999999',sameKey)))
  expect((await service.listSlots(true)).filter(r=>r.slot.startsWith('2035-07-01')&&r.name)).toHaveLength(1)
+ const defaults=await service.getBookingSettings()
+ const updated=await service.saveBookingSettings({...defaults,city:'Salvador',confirmationMessage:'Oi! Sou {nome}, aula em {cidade} dia {data} às {hora}.'})
+ expect(updated.city).toBe('Salvador')
+ expect((await service.getBookingSettings()).city).toBe('Salvador')
 },60000)

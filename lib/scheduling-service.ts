@@ -1,5 +1,6 @@
 import { randomUUID, createHash } from 'node:crypto'
 import { db, ready } from './scheduling'
+import { DEFAULT_BOOKING_SETTINGS, sanitizeBookingSettings, validateBookingSettingsInput, type BookingSettings } from './booking-settings'
 export class SchedulingError extends Error { constructor(public status:number, message:string, public code='INVALID_INPUT'){super(message)} }
 export const localMode=()=>process.env.NODE_ENV==='development'&&!process.env.DATABASE_URL
 export function validateSlot(value:unknown): asserts value is string {
@@ -23,6 +24,36 @@ export async function listSlots(admin=false):Promise<unknown[]>{
  if(localMode()){const {localDatabase,nowInBrazil}=await import('./scheduling-local');const rows=localDatabase().prepare('SELECT * FROM appointments ORDER BY slot').all();return admin?rows.map(r=>({...r,enabled:Boolean(r.enabled)})):rows.filter(r=>r.enabled).map(r=>({slot:r.slot,reserved:r.name!==null||String(r.slot)<=nowInBrazil()}))}
  await ready();const sql=db();return admin?await sql`SELECT slot,name,phone,email,created_at,enabled,version,booking_id FROM priscilla_appointments ORDER BY slot`:await sql`SELECT slot,(name IS NOT NULL OR (start_at AT TIME ZONE 'America/Sao_Paulo')<=now()) AS reserved FROM priscilla_appointments WHERE enabled=true ORDER BY slot`
 }
+export async function getBookingSettings():Promise<BookingSettings>{
+ try{
+  if(localMode()){
+   const {localDatabase}=await import('./scheduling-local')
+   const row=localDatabase().prepare('SELECT config FROM booking_settings WHERE id=?').get('default') as {config?:string}|undefined
+   if(!row?.config)return {...DEFAULT_BOOKING_SETTINGS}
+   return sanitizeBookingSettings(JSON.parse(row.config))
+  }
+  await ready();const sql=db()
+  const rows=await sql`SELECT config FROM priscilla_booking_settings WHERE id='default'`
+  if(!rows[0]?.config)return {...DEFAULT_BOOKING_SETTINGS}
+  const parsed=typeof rows[0].config==='string'?JSON.parse(rows[0].config):rows[0].config
+  return sanitizeBookingSettings(parsed)
+ }catch{
+  return {...DEFAULT_BOOKING_SETTINGS}
+ }
+}
+export async function saveBookingSettings(raw:unknown):Promise<BookingSettings>{
+ const checked=validateBookingSettingsInput(raw)
+ if(!checked.ok)throw new SchedulingError(400,checked.error)
+ const settings=checked.settings
+ if(localMode()){
+  const {localDatabase}=await import('./scheduling-local')
+  localDatabase().prepare('INSERT INTO booking_settings(id,config,updated_at) VALUES(?,?,?) ON CONFLICT(id) DO UPDATE SET config=excluded.config,updated_at=excluded.updated_at').run('default',JSON.stringify(settings),new Date().toISOString())
+  return settings
+ }
+ await ready();const sql=db()
+ await sql`INSERT INTO priscilla_booking_settings(id,config,updated_at) VALUES('default',${JSON.stringify(settings)}::jsonb,now()) ON CONFLICT(id) DO UPDATE SET config=EXCLUDED.config,updated_at=now()`
+ return settings
+}
 export async function receipt(requestId:string){
  validateKey(requestId)
  if(localMode()){const {localDatabase}=await import('./scheduling-local');return localDatabase().prepare('SELECT booking_id,slot,status FROM receipts WHERE request_id=?').get(requestId)||null}
@@ -35,6 +66,8 @@ export async function limitAttempt(identity:string,max=20){
 }
 export async function reserve(slot:string,name:string,phone:string,requestId:string){
  const existing=await receipt(requestId);if(existing){if(existing.slot!==slot)throw new SchedulingError(409,'Esta tentativa pertence a outro horário. Atualize a página.');return existing}
+ const settings=await getBookingSettings()
+ if(!settings.bookingEnabled)throw new SchedulingError(409,'Os agendamentos online estão pausados no momento. Fale com a Priscilla pelo WhatsApp.','BOOKING_PAUSED')
  validateFuture(slot);const bookingId=randomUUID();let changed=false
  if(localMode()){const {localDatabase,nowInBrazil}=await import('./scheduling-local');changed=Number(localDatabase().prepare('UPDATE appointments SET name=?,phone=?,created_at=?,booking_id=?,request_id=?,version=version+1 WHERE slot=? AND enabled=1 AND name IS NULL AND slot>?').run(name,phone,new Date().toISOString(),bookingId,requestId,slot,nowInBrazil()).changes)>0}
  else{await ready();const sql=db();changed=(await sql`UPDATE priscilla_appointments SET name=${name},phone=${phone},email=NULL,created_at=now(),booking_id=${bookingId},request_id=${requestId} WHERE slot=${slot} AND enabled=true AND name IS NULL AND (start_at AT TIME ZONE 'America/Sao_Paulo')>now() RETURNING slot`).length>0}
@@ -46,7 +79,7 @@ export async function manage(action:string,slots:string[],person:{name:string|nu
  if(!['add','cancel','remove'].includes(action))throw new SchedulingError(400,'Escolha uma ação válida.')
  if(action!=='add'&&(!Number.isInteger(expected.version)||(action==='cancel'&&!expected.bookingId)))throw new SchedulingError(409,'A reserva mudou. Atualize a agenda e abra os detalhes novamente.','STALE_RESERVATION')
  for(const slot of slots){validateSlot(slot);if(action==='add')validateFuture(slot)}
- if(slots.length<1||slots.length>24||new Set(slots).size!==slots.length)throw new SchedulingError(400,'Selecione de 1 a 24 horários diferentes.')
+ if(slots.length<1||slots.length>60||new Set(slots).size!==slots.length)throw new SchedulingError(400,'Selecione de 1 a 60 horários diferentes.')
  if(action!=='add'&&slots.length!==1)throw new SchedulingError(400,'Altere uma reserva de cada vez.')
  try{
  if(localMode()){

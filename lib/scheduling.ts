@@ -7,7 +7,7 @@ export function db() {
   const schema=process.env.NODE_ENV==='test'?process.env.SCHEDULING_TEST_SCHEMA:undefined
   if(!schema)return sql
   if(!/^scheduling_test_[a-f0-9]+$/.test(schema))throw new Error('Invalid test schema')
-  const qualify=(text:string)=>text.replace(/\bpriscilla_(appointments|booking_receipts|booking_events|booking_limits|booking_guard|booking_audit)\b/g,match=>`${schema}.${match}`)
+  const qualify=(text:string)=>text.replace(/\bpriscilla_(appointments|booking_receipts|booking_events|booking_limits|booking_settings|booking_guard|booking_audit)\b/g,match=>`${schema}.${match}`)
   return new Proxy(sql,{
     apply(target,thisArg,args){const parts=(args[0] as TemplateStringsArray).map(qualify);return Reflect.apply(target,thisArg,[Object.assign(parts,{raw:parts}),...args.slice(1)])},
     get(target,property){if(property==='query')return (text:string,...args:unknown[])=>Reflect.apply(target.query,target,[qualify(text),...args]);return Reflect.get(target,property)}
@@ -32,6 +32,7 @@ export async function ready() {
         id bigserial PRIMARY KEY, slot text NOT NULL, booking_id text,
         version integer NOT NULL, event text NOT NULL, created_at timestamptz NOT NULL DEFAULT now());
       CREATE TABLE IF NOT EXISTS priscilla_booking_limits (key text PRIMARY KEY, count integer NOT NULL, expires_at timestamptz NOT NULL);
+      CREATE TABLE IF NOT EXISTS priscilla_booking_settings (id text PRIMARY KEY, config jsonb NOT NULL, updated_at timestamptz NOT NULL DEFAULT now());
       CREATE OR REPLACE FUNCTION priscilla_booking_guard() RETURNS trigger LANGUAGE plpgsql AS $fn$
       BEGIN
         NEW.start_at := NEW.slot::timestamp;

@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server'
 import { sameOrigin } from '@/lib/cms/auth'
-import { listSlots,receipt,reserve,validateSlot,validatePerson,validateKey,limitAttempt,SchedulingError } from '@/lib/scheduling-service'
+import { listSlots,getBookingSettings,receipt,reserve,validateSlot,validatePerson,validateKey,limitAttempt,SchedulingError } from '@/lib/scheduling-service'
 import { failure,readBody } from '@/lib/scheduling-http'
 export const dynamic='force-dynamic'
-export async function GET(){try{return NextResponse.json({slots:await listSlots()},{headers:{'Cache-Control':'no-store'}})}catch(e){return failure(e)}}
+export async function GET(){try{const [slots,settings]=await Promise.all([listSlots(),getBookingSettings()]);return NextResponse.json({slots,settings},{headers:{'Cache-Control':'no-store'}})}catch(e){return failure(e)}}
 export async function POST(request:Request){try{
  try{sameOrigin(request)}catch{throw new SchedulingError(403,'Atualize a página para continuar.','INVALID_ORIGIN')}
  const body=await readBody(request);validateKey(body.requestId)
