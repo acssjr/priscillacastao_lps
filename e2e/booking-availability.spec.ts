@@ -106,3 +106,46 @@ test('abre no primeiro mês com vaga e identifica data esgotada', async ({ page 
   await expect(page.getByRole('button', { name: /5 de março de 2027, horários indisponíveis/ })).toBeDisabled()
   await expect(page.getByText('Disponível',{exact:true})).toBeVisible()
 })
+
+
+test('aplica mensagem personalizada, cidade e WhatsApp configurados pela gestora', async ({ page }) => {
+  await page.route('**/api/agendamento', async route => {
+    if (route.request().method() === 'POST') {
+      await route.fulfill({ json: { ok: true, receipt: { slot: '2026-11-08T14:00', status: 'confirmed', booking_id: 'custom-booking' } } })
+      return
+    }
+    await route.fulfill({
+      json: {
+        slots: [slot('14:00')],
+        settings: {
+          whatsappPhone: '5577998422026',
+          city: 'Salvador',
+          locationNote: 'Estúdio no Rio Vermelho',
+          confirmationNote: 'Te espero no estúdio no Rio Vermelho!',
+          confirmationMessage: 'Olá Priscilla! Aqui é {nome}. Reservei aula em {cidade} ({local}) para {data} às {hora}.',
+          inquiryMessage: 'Oi Priscilla! Quero saber sobre vagas em {cidade}.',
+          adminReplyMessage: 'Oi {nome}!',
+          welcomeTitle: 'Agende sua aula com Priscilla.',
+          welcomeSubtitle: 'Escolha uma data e um horário para sua aula de forró.',
+          publicNotice: '',
+          bookingEnabled: true,
+        },
+      },
+    })
+  })
+  await page.goto('/agendar')
+  await page.getByRole('button', { name: 'Ver horários' }).click()
+  await page.getByRole('button', { name: '14:00' }).click()
+  await page.getByRole('button', { name: 'Continuar' }).click()
+  await expect(page.getByText('Sua aula em Salvador')).toBeVisible()
+  await expect(page.getByText('Estúdio no Rio Vermelho')).toBeVisible()
+  await page.getByLabel('Nome completo').fill('Bruno Costa')
+  await page.getByLabel('WhatsApp').fill('77988887777')
+  await page.getByRole('button', { name: 'Confirmar agendamento' }).click()
+  await expect(page.getByText('Te espero no estúdio no Rio Vermelho!')).toBeVisible()
+  const url = new URL((await page.getByRole('link', { name: 'Enviar mensagem no WhatsApp' }).getAttribute('href'))!)
+  expect(url.pathname).toBe('/5577998422026')
+  expect(url.searchParams.get('text')).toBe(
+    'Olá Priscilla! Aqui é Bruno Costa. Reservei aula em Salvador (Estúdio no Rio Vermelho) para 08/11/2026 às 14:00.',
+  )
+})

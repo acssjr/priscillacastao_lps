@@ -35,3 +35,22 @@ it('abre no próximo dia com horários e respeita a navegação posterior',async
  fireEvent.click(screen.getByRole('button',{name:'Hoje'}));await act(async()=>refresh())
  expect(screen.queryByRole('heading',{level:2,name:/2099/})).not.toBeInTheDocument()
 })
+
+it('gestora personaliza mensagens, cidade e WhatsApp pelo painel com prévia em tempo real',async()=>{
+ Object.defineProperty(window,'matchMedia',{configurable:true,value:()=>({matches:false,addEventListener(){},removeEventListener(){}})})
+ let posted:Record<string,unknown>|undefined
+ vi.stubGlobal('fetch',vi.fn(async(_url,options)=>{if(options?.method==='POST'){posted=JSON.parse(options.body);return new Response(JSON.stringify({ok:true,slots:[],settings:(posted as {settings?:unknown}).settings}))}return new Response(JSON.stringify({slots:[]}))}))
+ render(<Agenda/>)
+ fireEvent.click(screen.getByRole('button',{name:'Configurar mensagens e página'}))
+ const cityInput=screen.getByLabelText('Cidade ou região das aulas')
+ fireEvent.change(cityInput,{target:{value:'Salvador'}})
+ const msgArea=screen.getByLabelText('Mensagem que o cliente envia após confirmar o agendamento')
+ fireEvent.focus(msgArea)
+ fireEvent.change(msgArea,{target:{value:'Oi Priscilla! Sou {nome} em {cidade} no dia {data}'}})
+ fireEvent.click(screen.getByRole('button',{name:'+ Horário'}))
+ expect((msgArea as HTMLTextAreaElement).value).toBe('Oi Priscilla! Sou {nome} em {cidade} no dia {data} {hora}')
+ expect(screen.getByText(/Oi Priscilla! Sou Maria Silva em Salvador no dia 08\/11\/2026 14:00/)).toBeInTheDocument()
+ fireEvent.click(screen.getByRole('button',{name:'Salvar configurações'}))
+ await waitFor(()=>expect(posted?.action).toBe('settings'))
+ expect((posted?.settings as {city?:string}).city).toBe('Salvador')
+})

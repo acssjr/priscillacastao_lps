@@ -23,3 +23,26 @@
 .page :is(input,select,textarea,button,a,[tabindex]):focus-visible{outline:none;box-shadow:none}
 .page :is(button,a):focus-visible{text-decoration:underline;text-underline-offset:3px;filter:brightness(.94)}
 .page :is(input,select,textarea):focus-visible{border-color:#725c50}
+
+.create{margin-bottom:10px}
+.settingsButton{width:100%;margin-bottom:28px;display:flex;align-items:center;justify-content:center;gap:9px;border:1px solid #cdb8a8;border-radius:999px;background:#fffaf4;color:#5a3b2e;font-weight:700;padding:12px 16px;transition:background-color 160ms ease}
+.settingsButton:hover,.configTrigger:hover{background:#f0e3d6}
+.headingActions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.configTrigger{display:inline-flex;align-items:center;gap:8px;border:1px solid #cdb8a8;border-radius:999px;background:#fffaf4;color:#5a3b2e;font-weight:700;padding:11px 16px;font-size:14px}
+.settingsDialog{width:min(100%,640px)}
+.settingsSection{border-top:1px solid var(--line);margin-top:20px;padding-top:18px}
+.settingsSection h3{font-size:16px;margin:0 0 8px;color:#492a20}
+.settingsHint{font-size:13px;margin:0 0 10px;color:#6d574b}
+.tokenBar{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
+.tokenChip{border:1px solid #c5a692;background:#f8efe4;color:#5c3424;border-radius:999px;padding:6px 12px;font-size:12px;font-weight:700}
+.tokenChip:hover{background:#ebd9c7}
+.openFields textarea{width:100%;border:1px solid #b28b76;border-radius:10px;padding:10px 12px;background:#fff9ef;color:#492a20;font:inherit;line-height:1.45;resize:vertical}
+.messagePreview{padding:12px 14px;background:#efe2d1;border-left:3px solid #793b29;border-radius:8px;display:grid;gap:4px}
+.messagePreview span{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#6e4b3a}
+.messagePreview p{margin:0;font-size:13px;color:#38241b;font-style:italic}
+.settingsFooter{display:grid;grid-template-columns:auto 1fr;gap:10px;margin-top:22px;align-items:center}
+.settingsFooter .today{margin:0;min-height:48px}
+.presetRow{display:grid;gap:7px;margin:12px 0 14px}
+.presetRow>span{font-size:13px;font-weight:600;color:#654f43}
+.presetRow>div{display:flex;flex-wrap:wrap;gap:7px}
+@media(max-width:600px){.settingsFooter{grid-template-columns:1fr}.configTrigger span{font-size:13px}}

@@ -6,7 +6,10 @@ import { initial } from './scheduling'
 let connection: DatabaseSync | undefined
 export function localDatabase() {
   if (process.env.NODE_ENV === 'production') throw new Error('Configure DATABASE_URL em produção.')
-  if (connection) return connection
+  if (connection) {
+    connection.exec('CREATE TABLE IF NOT EXISTS booking_settings(id TEXT PRIMARY KEY, config TEXT NOT NULL, updated_at TEXT DEFAULT CURRENT_TIMESTAMP)')
+    return connection
+  }
   const directory = process.env.CMS_DATA_DIRECTORY || path.join(process.cwd(), '.cms')
   mkdirSync(directory, { recursive: true })
   const db = new DatabaseSync(path.join(directory, 'appointments.sqlite'))
@@ -18,6 +21,7 @@ export function localDatabase() {
     CREATE TABLE IF NOT EXISTS receipts(request_id TEXT PRIMARY KEY, booking_id TEXT NOT NULL, slot TEXT NOT NULL, status TEXT NOT NULL);
     CREATE TABLE IF NOT EXISTS booking_events(id INTEGER PRIMARY KEY, slot TEXT, booking_id TEXT, version INTEGER, event TEXT, created_at TEXT DEFAULT CURRENT_TIMESTAMP);
     CREATE TABLE IF NOT EXISTS booking_limits(key TEXT PRIMARY KEY, count INTEGER, expires_at INTEGER);
+    CREATE TABLE IF NOT EXISTS booking_settings(id TEXT PRIMARY KEY, config TEXT NOT NULL, updated_at TEXT DEFAULT CURRENT_TIMESTAMP);
     CREATE TRIGGER IF NOT EXISTS prevent_overlap_insert BEFORE INSERT ON appointments WHEN NEW.enabled=1 BEGIN
       SELECT RAISE(ABORT,'overlap') WHERE EXISTS(SELECT 1 FROM appointments WHERE enabled=1 AND slot<>NEW.slot AND abs((julianday(slot)-julianday(NEW.slot))*24*60)<59.999); END;
     CREATE TRIGGER IF NOT EXISTS prevent_overlap_update BEFORE UPDATE ON appointments WHEN NEW.enabled=1 BEGIN
