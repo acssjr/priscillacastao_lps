@@ -1,0 +1,10 @@
+{
+  "strictness": 2,
+  "commentTypes": ["logic", "syntax"],
+  "autoReview": ["open"],
+  "triggerOnUpdates": false,
+  "triggerOnDrafts": false,
+  "disabledLabels": ["skip-review"],
+  "ignorePatterns": "package-lock.json\n**/*.css\n**/*.md\npublic/**\n.cms/**",
+  "instructions": "Responda sempre em Português do Brasil (pt-BR) de forma direta e objetiva. Foque exclusivamente em bugs reais de lógica, condições de corrida em banco de dados (PostgreSQL/SQLite), segurança de autenticação/sessão e integridade de dados conforme as regras do arquivo AGENTS.md. Ignore preferências estéticas de código ou formatação."
+}
