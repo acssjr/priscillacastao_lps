@@ -79,6 +79,7 @@ export function mutateState<T>(change: (state: CmsState) => T | Promise<T>, cont
   return operation
 }
 export async function publicContent() {
+  if (process.env.NODE_ENV === 'production' && !process.env.DATABASE_URL) return { ...defaults }
   try { return (await readState()).published } catch (error) {
     // Public defaults stay available when the CMS has not yet been provisioned.
     console.error('CMS indisponível:', error instanceof Error ? error.message : 'armazenamento')

@@ -1,9 +1,10 @@
+import { DEFAULT_INSTAGRAM_URL } from "@/lib/whatsapp";
 import { getCampaign, type CampaignId } from "@/content/landing-pages/registry";
 import { LandingCampaignSchema, type LandingCampaign } from "@/content/landing-pages/schema";
 export const campaignIds = ["forro-do-zero", "forro-evolucao", "forro-roots"] as const;
 export const campaignNames: Record<CampaignId, string> = { "forro-do-zero": "Forró do zero", "forro-evolucao": "Evolua no forró", "forro-roots": "Forró roots" };
 export type ContentValues = Record<CampaignId, LandingCampaign>;
-export const defaults = Object.fromEntries(campaignIds.map(id => [id, { ...getCampaign(id), instagram: "https://www.instagram.com/priscillacastao_danca/" }])) as ContentValues;
+export const defaults = Object.fromEntries(campaignIds.map(id => [id, { ...getCampaign(id), instagram: DEFAULT_INSTAGRAM_URL }])) as ContentValues;
 export const sections = [
   { id: "hero", title: "Abertura", note: "A primeira mensagem, a foto e o convite para agendar.", anchor: "inicio" },
   { id: "recognition", title: "Benefícios", note: "O que a pessoa encontra nas aulas.", anchor: "para-quem" },

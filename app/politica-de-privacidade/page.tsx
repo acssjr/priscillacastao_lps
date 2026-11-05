@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { DEFAULT_WHATSAPP_PHONE, buildWhatsAppUrl } from "@/lib/whatsapp";
+import { resolvePublicContact } from "@/lib/cms/public";
+import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import styles from "./privacy.module.css";
 
 export const metadata: Metadata = {
@@ -8,7 +9,8 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-export default function PrivacyPage() {
+export default async function PrivacyPage() {
+  const { whatsappPhone } = await resolvePublicContact();
   return (
     <main className={styles.page}>
       <Link href="/">Voltar para a página de aulas</Link>
@@ -20,7 +22,7 @@ export default function PrivacyPage() {
       <p>Os links para WhatsApp e Instagram levam a serviços externos, sujeitos às políticas dessas plataformas. A mensagem sugerida no WhatsApp pode ser editada antes do envio.</p>
       <h2>Contato</h2>
       <p>Dúvidas sobre esta página podem ser enviadas diretamente a Priscilla pelo WhatsApp.</p>
-      <a className={styles.contact} href={buildWhatsAppUrl(DEFAULT_WHATSAPP_PHONE, "Oi, Priscilla! Tenho uma dúvida sobre a página e a privacidade.")}>Falar com Priscilla</a>
+      <a className={styles.contact} href={buildWhatsAppUrl(whatsappPhone, "Oi, Priscilla! Tenho uma dúvida sobre a página e a privacidade.")}>Falar com Priscilla</a>
     </main>
   );
 }

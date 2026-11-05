@@ -1,7 +1,34 @@
-import { DEFAULT_WHATSAPP_PHONE } from './whatsapp'
+import {
+  DEFAULT_INSTAGRAM_URL,
+  DEFAULT_WHATSAPP_PHONE,
+  normalizeInstagramUrl,
+} from './whatsapp'
+
+export type CatalogPricingSettings = {
+  individualSingle: string
+  individualPackage: string
+  individualPackageSaving: string
+  dupla: string
+  grupo: string
+  courseSingle: string
+  courseCombo: string
+  courseComboSaving: string
+}
+
+export const DEFAULT_CATALOG_PRICES: CatalogPricingSettings = {
+  individualSingle: 'R$ 120,00',
+  individualPackage: 'R$ 439,90',
+  individualPackageSaving: 'Economize R$ 40,10 em relação a 4 aulas avulsas',
+  dupla: 'R$ 215,00',
+  grupo: 'R$ 420,00',
+  courseSingle: 'R$ 149,90',
+  courseCombo: 'R$ 397',
+  courseComboSaving: 'R$ 52,70 de desconto',
+}
 
 export type BookingSettings = {
   whatsappPhone: string
+  instagramUrl: string
   city: string
   locationNote: string
   confirmationNote: string
@@ -12,10 +39,12 @@ export type BookingSettings = {
   welcomeSubtitle: string
   publicNotice: string
   bookingEnabled: boolean
+  catalogPrices: CatalogPricingSettings
 }
 
 export const DEFAULT_BOOKING_SETTINGS: BookingSettings = {
   whatsappPhone: DEFAULT_WHATSAPP_PHONE,
+  instagramUrl: DEFAULT_INSTAGRAM_URL,
   city: 'Feira de Santana',
   locationNote: 'Local a combinar',
   confirmationNote: 'O local será combinado.',
@@ -29,6 +58,7 @@ export const DEFAULT_BOOKING_SETTINGS: BookingSettings = {
   welcomeSubtitle: 'Escolha uma data e um horário para sua aula de forró.',
   publicNotice: '',
   bookingEnabled: true,
+  catalogPrices: { ...DEFAULT_CATALOG_PRICES },
 }
 
 export function normalizeBookingPhone(value: string): string | null {
@@ -56,14 +86,45 @@ function cleanText(value: unknown, fallback: string, maxLength: number, allowEmp
   return trimmed.slice(0, maxLength)
 }
 
+export function sanitizeCatalogPrices(raw: unknown): CatalogPricingSettings {
+  if (!raw || typeof raw !== 'object') return { ...DEFAULT_CATALOG_PRICES }
+  const obj = raw as Record<string, unknown>
+  return {
+    individualSingle: cleanText(obj.individualSingle, DEFAULT_CATALOG_PRICES.individualSingle, 60),
+    individualPackage: cleanText(obj.individualPackage, DEFAULT_CATALOG_PRICES.individualPackage, 60),
+    individualPackageSaving: cleanText(
+      obj.individualPackageSaving,
+      DEFAULT_CATALOG_PRICES.individualPackageSaving,
+      140,
+    ),
+    dupla: cleanText(obj.dupla, DEFAULT_CATALOG_PRICES.dupla, 60),
+    grupo: cleanText(obj.grupo, DEFAULT_CATALOG_PRICES.grupo, 60),
+    courseSingle: cleanText(obj.courseSingle, DEFAULT_CATALOG_PRICES.courseSingle, 60),
+    courseCombo: cleanText(obj.courseCombo, DEFAULT_CATALOG_PRICES.courseCombo, 60),
+    courseComboSaving: cleanText(
+      obj.courseComboSaving,
+      DEFAULT_CATALOG_PRICES.courseComboSaving,
+      140,
+    ),
+  }
+}
+
 export function sanitizeBookingSettings(raw: unknown): BookingSettings {
-  if (!raw || typeof raw !== 'object') return { ...DEFAULT_BOOKING_SETTINGS }
+  if (!raw || typeof raw !== 'object') {
+    return {
+      ...DEFAULT_BOOKING_SETTINGS,
+      catalogPrices: { ...DEFAULT_CATALOG_PRICES },
+    }
+  }
   const obj = raw as Record<string, unknown>
   const normalizedPhone =
     typeof obj.whatsappPhone === 'string' ? normalizeBookingPhone(obj.whatsappPhone) : null
+  const normalizedInstagram =
+    typeof obj.instagramUrl === 'string' ? normalizeInstagramUrl(obj.instagramUrl) : null
 
   return {
     whatsappPhone: normalizedPhone || DEFAULT_BOOKING_SETTINGS.whatsappPhone,
+    instagramUrl: normalizedInstagram || DEFAULT_BOOKING_SETTINGS.instagramUrl,
     city: cleanText(obj.city, DEFAULT_BOOKING_SETTINGS.city, 80),
     locationNote: cleanText(obj.locationNote, DEFAULT_BOOKING_SETTINGS.locationNote, 120),
     confirmationNote: cleanText(obj.confirmationNote, DEFAULT_BOOKING_SETTINGS.confirmationNote, 200),
@@ -85,6 +146,7 @@ export function sanitizeBookingSettings(raw: unknown): BookingSettings {
       typeof obj.bookingEnabled === 'boolean'
         ? obj.bookingEnabled
         : DEFAULT_BOOKING_SETTINGS.bookingEnabled,
+    catalogPrices: sanitizeCatalogPrices(obj.catalogPrices),
   }
 }
 
@@ -99,6 +161,15 @@ export function validateBookingSettingsInput(
   const normalizedPhone = normalizeBookingPhone(rawPhone)
   if (!normalizedPhone) {
     return { ok: false, error: 'Informe um WhatsApp de atendimento válido com DDD (ex: 77 99842-2026).' }
+  }
+
+  let normalizedInstagram = DEFAULT_BOOKING_SETTINGS.instagramUrl
+  if (typeof obj.instagramUrl === 'string' && obj.instagramUrl.trim()) {
+    const validInstagram = normalizeInstagramUrl(obj.instagramUrl)
+    if (!validInstagram) {
+      return { ok: false, error: 'Informe um link do Instagram válido começando com https://.' }
+    }
+    normalizedInstagram = validInstagram
   }
 
   const requiredFields: Array<[keyof BookingSettings, string, number]> = [
@@ -126,11 +197,40 @@ export function validateBookingSettingsInput(
     return { ok: false, error: 'O aviso opcional deve ter no máximo 300 caracteres.' }
   }
 
+  if (obj.catalogPrices !== undefined) {
+    if (!obj.catalogPrices || typeof obj.catalogPrices !== 'object') {
+      return { ok: false, error: 'Os valores do catálogo enviados são inválidos.' }
+    }
+    const prices = obj.catalogPrices as Record<string, unknown>
+    const priceChecks: Array<[keyof CatalogPricingSettings, string, number]> = [
+      ['individualSingle', 'Informe o valor da aula individual avulsa.', 60],
+      ['individualPackage', 'Informe o valor do pacote individual (4 aulas).', 60],
+      ['individualPackageSaving', 'Informe o texto de economia do pacote individual.', 140],
+      ['dupla', 'Informe o valor da aula em dupla.', 60],
+      ['grupo', 'Informe o valor da aula em grupo.', 60],
+      ['courseSingle', 'Informe o valor individual dos cursos livres.', 60],
+      ['courseCombo', 'Informe o valor do combo dos 3 cursos.', 60],
+      ['courseComboSaving', 'Informe o texto de desconto do combo.', 140],
+    ]
+    for (const [key, errorMsg, maxLen] of priceChecks) {
+      if (prices[key] !== undefined) {
+        const val = prices[key]
+        if (typeof val !== 'string' || val.trim().length < 2) {
+          return { ok: false, error: errorMsg }
+        }
+        if (val.trim().length > maxLen) {
+          return { ok: false, error: `O valor do catálogo excede o limite de ${maxLen} caracteres.` }
+        }
+      }
+    }
+  }
+
   return {
     ok: true,
     settings: sanitizeBookingSettings({
       ...obj,
       whatsappPhone: normalizedPhone,
+      instagramUrl: normalizedInstagram,
     }),
   }
 }

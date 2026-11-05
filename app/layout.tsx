@@ -3,13 +3,14 @@ import { Newsreader, Plus_Jakarta_Sans } from "next/font/google";
 import type { ReactNode } from "react";
 import { PageTransition } from "@/components/navigation/PageTransition";
 import { CatalogTransition } from "@/components/navigation/CatalogTransition";
+import { DEFAULT_SITE_URL } from "@/lib/whatsapp";
 import "./globals.css";
 
 const sans = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
 const editorial = Newsreader({ subsets: ["latin"], variable: "--font-editorial", display: "swap" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3002"),
+  metadataBase: new URL(DEFAULT_SITE_URL),
   title: "Priscilla Castão | Aulas particulares de forró em Salvador",
   description: "Aulas particulares de forró com Priscilla Castão em Salvador.",
   applicationName: "Priscilla Castão",
