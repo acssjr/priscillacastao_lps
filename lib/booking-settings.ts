@@ -1,3 +1,5 @@
+import { DEFAULT_WHATSAPP_PHONE } from './whatsapp'
+
 export type BookingSettings = {
   whatsappPhone: string
   city: string
@@ -13,7 +15,7 @@ export type BookingSettings = {
 }
 
 export const DEFAULT_BOOKING_SETTINGS: BookingSettings = {
-  whatsappPhone: '5577998422026',
+  whatsappPhone: DEFAULT_WHATSAPP_PHONE,
   city: 'Feira de Santana',
   locationNote: 'Local a combinar',
   confirmationNote: 'O local será combinado.',
