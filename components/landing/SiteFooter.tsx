@@ -1,6 +1,7 @@
 import { CmsText } from "@/components/cms/edit-context";
 import Link from "next/link";
 import type { LandingCampaign } from "@/content/landing-pages/schema";
+import { DEFAULT_INSTAGRAM_URL } from "@/lib/whatsapp";
 import styles from "./landing.module.css";
 
 export function SiteFooter({ campaign }: { campaign: LandingCampaign }) {
@@ -17,7 +18,7 @@ export function SiteFooter({ campaign }: { campaign: LandingCampaign }) {
             <a href="#metodo"><CmsText field="ui.footerMethodLabel" value={campaign.ui.footerMethodLabel} /></a>
             <a href="#aulas">Formatos de aula</a>
             <a href="#duvidas">Dúvidas frequentes</a>
-            <a href={campaign.instagram || "https://www.instagram.com/priscillacastao_danca/"} target="_blank" rel="noreferrer">
+            <a href={campaign.instagram || DEFAULT_INSTAGRAM_URL} target="_blank" rel="noreferrer">
               Instagram
             </a>
             <Link href="/versoes" rel="nofollow">

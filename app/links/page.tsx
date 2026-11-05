@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import localFont from "next/font/local";
-import { profileLinks } from "@/content/profile-links";
+import { buildProfileLinks } from "@/content/profile-links";
+import { resolvePublicContact } from "@/lib/cms/public";
 import styles from "./page.module.css";
 import { Entrance } from "./Entrance";
 import { FeedbackLink } from "@/components/navigation/FeedbackLink";
@@ -35,14 +36,21 @@ function HoverBeam() {
   return <span className={`${beam.rim} ${styles.hoverBeam}`} aria-hidden="true" />;
 }
 
-const cards = [
-  { title: "Aulas e Cursos", action: "Já sabe o que procura? Agende a sua aula comigo", href: profileLinks.whatsapp, kind: "aulas", external: true },
-  { title: "Meu portfólio", action: "Conheça mais da minha dança", href: profileLinks.portfolio || "/#aulas", kind: "portfolio", external: false },
-  { title: "Minha trajetória", action: "Conheça minha história", href: profileLinks.release || "/#sobre", kind: "trajectory", external: false },
-  { title: "A dança continua", action: "Volte ao Instagram", href: profileLinks.instagram, kind: "instagram", external: true },
-];
+export default async function LinksPage() {
+  const contact = await resolvePublicContact();
+  const links = buildProfileLinks({
+    phone: contact.whatsappPhone,
+    instagram: contact.instagramUrl,
+    inquiryMessage: contact.inquiryMessage,
+  });
 
-export default function LinksPage() {
+  const cards = [
+    { title: "Aulas e Cursos", action: "Já sabe o que procura? Agende a sua aula comigo", href: links.whatsapp, kind: "aulas", external: true },
+    { title: "Meu portfólio", action: "Conheça mais da minha dança", href: links.portfolio || "/#aulas", kind: "portfolio", external: false },
+    { title: "Minha trajetória", action: "Conheça minha história", href: links.release || "/#sobre", kind: "trajectory", external: false },
+    { title: "A dança continua", action: "Volte ao Instagram", href: links.instagram, kind: "instagram", external: true },
+  ];
+
   return <main id="conteudo" className={`${saans.className} ${styles.page}`}>
     <Entrance />
     <noscript><style>{`.${styles.entrance}{display:none!important}`}</style></noscript>
@@ -58,7 +66,7 @@ export default function LinksPage() {
           <div className={styles.photoVeil} />
           <div className={styles.signature}>
             <h1><span className={styles.srOnly}>Priscilla Castão</span><span className={styles.logo} aria-hidden="true" /></h1>
-            <FeedbackLink href={profileLinks.catalog} feedback="Abrindo o catálogo de aulas…" prefetch className={styles.heroAction}><HoverBeam />Conheça as aulas <Arrow /></FeedbackLink>
+            <FeedbackLink href={links.catalog} feedback="Abrindo o catálogo de aulas…" prefetch className={styles.heroAction}><HoverBeam />Conheça as aulas <Arrow /></FeedbackLink>
           </div>
           <p className={styles.linksHint}>Veja todos os meus links</p>
         </section>

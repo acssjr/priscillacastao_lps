@@ -153,6 +153,9 @@ export default function Agenda(){
     <label>WhatsApp que recebe os agendamentos
      <input disabled={busy} type="tel" inputMode="tel" value={phoneInput} onChange={e=>setPhoneInput(formatBookingPhoneInput(e.target.value))} placeholder="(77) 99842-2026"/>
     </label>
+    <label>Link do Instagram
+     <input disabled={busy} type="url" maxLength={200} value={draftSettings.instagramUrl} onChange={e=>setDraftSettings(prev=>({...prev,instagramUrl:e.target.value}))} placeholder="https://www.instagram.com/priscillacastao_danca/"/>
+    </label>
     <label>Cidade ou região das aulas
      <input disabled={busy} maxLength={80} value={draftSettings.city} onChange={e=>setDraftSettings(prev=>({...prev,city:e.target.value}))} placeholder="Ex.: Feira de Santana"/>
     </label>
@@ -199,6 +202,35 @@ export default function Agenda(){
     </label>
     <label>Aviso opcional no topo da página (deixe em branco se não quiser exibir)
      <input disabled={busy} maxLength={300} value={draftSettings.publicNotice} onChange={e=>setDraftSettings(prev=>({...prev,publicNotice:e.target.value}))} placeholder="Ex.: Agenda especial aberta para esta semana!"/>
+    </label>
+   </div>
+  </div>
+  <div className={styles.settingsSection}>
+   <h3>4. Valores exibidos no Catálogo de Aulas (/catalogo)</h3>
+   <div className={styles.openFields}>
+    <label>Aula individual (avulsa)
+     <input disabled={busy} maxLength={60} value={draftSettings.catalogPrices.individualSingle} onChange={e=>setDraftSettings(prev=>({...prev,catalogPrices:{...prev.catalogPrices,individualSingle:e.target.value}}))}/>
+    </label>
+    <label>Pacote individual (4 aulas)
+     <input disabled={busy} maxLength={60} value={draftSettings.catalogPrices.individualPackage} onChange={e=>setDraftSettings(prev=>({...prev,catalogPrices:{...prev.catalogPrices,individualPackage:e.target.value}}))}/>
+    </label>
+    <label>Texto de economia do pacote individual
+     <input disabled={busy} maxLength={140} value={draftSettings.catalogPrices.individualPackageSaving} onChange={e=>setDraftSettings(prev=>({...prev,catalogPrices:{...prev.catalogPrices,individualPackageSaving:e.target.value}}))}/>
+    </label>
+    <label>Aula em dupla
+     <input disabled={busy} maxLength={60} value={draftSettings.catalogPrices.dupla} onChange={e=>setDraftSettings(prev=>({...prev,catalogPrices:{...prev.catalogPrices,dupla:e.target.value}}))}/>
+    </label>
+    <label>Aula em grupo (4 pessoas)
+     <input disabled={busy} maxLength={60} value={draftSettings.catalogPrices.grupo} onChange={e=>setDraftSettings(prev=>({...prev,catalogPrices:{...prev.catalogPrices,grupo:e.target.value}}))}/>
+    </label>
+    <label>Curso livre (valor individual)
+     <input disabled={busy} maxLength={60} value={draftSettings.catalogPrices.courseSingle} onChange={e=>setDraftSettings(prev=>({...prev,catalogPrices:{...prev.catalogPrices,courseSingle:e.target.value}}))}/>
+    </label>
+    <label>Combo dos 3 cursos livres
+     <input disabled={busy} maxLength={60} value={draftSettings.catalogPrices.courseCombo} onChange={e=>setDraftSettings(prev=>({...prev,catalogPrices:{...prev.catalogPrices,courseCombo:e.target.value}}))}/>
+    </label>
+    <label>Texto de desconto do combo
+     <input disabled={busy} maxLength={140} value={draftSettings.catalogPrices.courseComboSaving} onChange={e=>setDraftSettings(prev=>({...prev,catalogPrices:{...prev.catalogPrices,courseComboSaving:e.target.value}}))}/>
     </label>
    </div>
   </div>
