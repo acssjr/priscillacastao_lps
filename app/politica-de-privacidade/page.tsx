@@ -20,7 +20,7 @@ export default function PrivacyPage() {
       <p>Os links para WhatsApp e Instagram levam a serviços externos, sujeitos às políticas dessas plataformas. A mensagem sugerida no WhatsApp pode ser editada antes do envio.</p>
       <h2>Contato</h2>
       <p>Dúvidas sobre esta página podem ser enviadas diretamente a Priscilla pelo WhatsApp.</p>
-      <a className={styles.contact} href={buildWhatsAppUrl("5575981234176", "Oi, Priscilla! Tenho uma dúvida sobre a página e a privacidade.")}>Falar com Priscilla</a>
+      <a className={styles.contact} href={buildWhatsAppUrl("5577998422026", "Oi, Priscilla! Tenho uma dúvida sobre a página e a privacidade.")}>Falar com Priscilla</a>
     </main>
   );
 }

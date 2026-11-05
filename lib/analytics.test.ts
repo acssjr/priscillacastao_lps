@@ -25,6 +25,6 @@ describe("trackEvent", () => {
   it("never includes message, name or phone fields in an event", () => {
     writeConsent("accepted");
     trackEvent({ name: "proof_open", source: "instagram" });
-    expect(JSON.stringify(window.dataLayer)).not.toMatch(/message|name|phone|5575981234176/i);
+    expect(JSON.stringify(window.dataLayer)).not.toMatch(/message|name|phone|5577998422026/i);
   });
 });

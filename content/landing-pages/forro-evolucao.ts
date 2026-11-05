@@ -233,7 +233,7 @@ export const forroEvolucaoCampaign = LandingCampaignSchema.parse({
     cta: "AGENDAR AULA",
   },
   whatsapp: {
-    phone: "5575981234176",
+    phone: "5577998422026",
     messages: {
       general: "Oi, Priscilla! Vi a página para quem já dança forró e quero melhorar minha dança. Gostaria de agendar uma aula particular e saber os formatos, locais, horários e valores.",
       individual: "Oi, Priscilla! Vi a página para quem já dança forró e tenho interesse em uma aula particular individual para melhorar minha dança. Pode me explicar como funciona e informar locais, horários e valores?",

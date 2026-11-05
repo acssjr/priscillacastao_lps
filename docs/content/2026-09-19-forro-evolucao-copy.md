@@ -323,7 +323,7 @@ Manter o texto visível contido no nome acessível. Os CTAs dos formatos devem c
 
 ## Mensagens de WhatsApp
 
-Destino já configurado no projeto: `5575981234176`. O visitante revisa e envia a mensagem no WhatsApp; clicar no site não equivale a enviá-la.
+Destino já configurado no projeto: `5577998422026`. O visitante revisa e envia a mensagem no WhatsApp; clicar no site não equivale a enviá-la.
 
 ### Mensagem geral — hero, cabeçalho, menu, botão fixo e fechamento
 

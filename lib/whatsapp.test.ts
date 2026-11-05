@@ -3,12 +3,12 @@ import { buildWhatsAppUrl, normalizeWhatsAppPhone } from "./whatsapp";
 
 describe("WhatsApp URL", () => {
   it("normalizes the confirmed Brazilian number", () => {
-    expect(normalizeWhatsAppPhone("+55 (75) 98123-4176")).toBe("5575981234176");
+    expect(normalizeWhatsAppPhone("+55 (77) 99842-2026")).toBe("5577998422026");
   });
 
   it("encodes a visible editable message", () => {
-    expect(buildWhatsAppUrl("5575981234176", "Oi, Priscilla! Quero uma aula individual.")).toBe(
-      "https://wa.me/5575981234176?text=Oi%2C%20Priscilla!%20Quero%20uma%20aula%20individual.",
+    expect(buildWhatsAppUrl("5577998422026", "Oi, Priscilla! Quero uma aula individual.")).toBe(
+      "https://wa.me/5577998422026?text=Oi%2C%20Priscilla!%20Quero%20uma%20aula%20individual.",
     );
   });
 
@@ -17,6 +17,6 @@ describe("WhatsApp URL", () => {
   });
 
   it("rejects an empty message", () => {
-    expect(() => buildWhatsAppUrl("5575981234176", "   ")).toThrow("WhatsApp message cannot be empty");
+    expect(() => buildWhatsAppUrl("5577998422026", "   ")).toThrow("WhatsApp message cannot be empty");
   });
 });
