@@ -54,3 +54,17 @@ it('gestora personaliza mensagens, cidade e WhatsApp pelo painel com prévia em 
  await waitFor(()=>expect(posted?.action).toBe('settings'))
  expect((posted?.settings as {city?:string}).city).toBe('Salvador')
 })
+
+it('contato da reserva usa o telefone da pessoa e nunca o número configurado da professora',async()=>{
+ Object.defineProperty(window,'matchMedia',{configurable:true,value:()=>({matches:false,addEventListener(){},removeEventListener(){}})})
+ vi.stubGlobal('fetch',vi.fn(async()=>new Response(JSON.stringify({slots:[{slot:'2099-11-08T14:00',version:1,booking_id:'booking',name:'Cliente teste',phone:'71999998888',email:null,enabled:true}],settings:{whatsappPhone:'5575999990000'}}))))
+ render(<Agenda/>);fireEvent.click(await screen.findByRole('button',{name:'14:00 · Reservado para Cliente teste'}))
+ expect(screen.getByRole('link',{name:/Abrir conversa no WhatsApp/})).toHaveAttribute('href',expect.stringContaining('wa.me/5571999998888'))
+})
+it('não abre conversa com a professora se o telefone da reserva for inválido',async()=>{
+ Object.defineProperty(window,'matchMedia',{configurable:true,value:()=>({matches:false,addEventListener(){},removeEventListener(){}})})
+ vi.stubGlobal('fetch',vi.fn(async()=>new Response(JSON.stringify({slots:[{slot:'2099-11-08T14:00',version:1,booking_id:'booking',name:'Cliente teste',phone:'123',email:null,enabled:true}],settings:{whatsappPhone:'5575999990000'}}))))
+ render(<Agenda/>);fireEvent.click(await screen.findByRole('button',{name:'14:00 · Reservado para Cliente teste'}))
+ expect(screen.queryByRole('link',{name:/Abrir conversa no WhatsApp/})).not.toBeInTheDocument()
+ expect(screen.getByText(/Número inválido/)).toBeInTheDocument()
+})
