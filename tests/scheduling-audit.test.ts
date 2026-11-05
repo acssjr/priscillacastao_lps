@@ -90,3 +90,19 @@ it('salva e valida mensagens, telefone e pausa de agendamentos sem quebrar o sis
  expect(lp.instagram).toBe('https://www.instagram.com/priscilla_forro_oficial/')
  await admin(request({action:'settings',settings:DEFAULT_BOOKING_SETTINGS}))
 })
+
+it('WhatsApp informado pelo cliente é obrigatório e aparece corretamente na gestão',async()=>{
+ const slot='2035-09-12T14:00';expect((await admin(request({action:'add',slot}))).status).toBe(200)
+ for(const phone of ['', '123', undefined]){
+  const response=await book(request({slot,name:'Cliente teste',phone}))
+  expect(response.status).toBe(400)
+  expect((await response.json()).error).toMatch(/WhatsApp/)
+ }
+ const {listSlots}=await import('@/lib/scheduling-service')
+ expect((await listSlots(true)).find(row=>row.slot===slot)?.name).toBeNull()
+ const response=await book(request({slot,name:'Cliente teste',phone:'(71) 98888-7777'}))
+ expect(response.status).toBe(200)
+ const entry=(await listSlots(true)).find(row=>row.slot===slot)
+ expect(entry?.name).toBe('Cliente teste')
+ expect(entry?.phone).toBe('71988887777')
+})
