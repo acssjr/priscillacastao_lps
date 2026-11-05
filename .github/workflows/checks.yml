@@ -1,4 +1,4 @@
-name: PR checks
+name: Pipeline de Qualidade e Deploy (CI/CD)
 on:
   pull_request:
     branches: [main]
@@ -6,28 +6,36 @@ on:
     branches: [main]
 permissions:
   contents: read
+  deployments: read
+  statuses: read
 concurrency:
   group: checks-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 jobs:
   code:
-    name: Code and behavior
+    name: 1. Código, Tipagem e Segurança (Vitest)
     runs-on: ubuntu-24.04
     timeout-minutes: 12
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Baixar código do repositório
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      - name: Configurar Node.js 24
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: '24'
           cache: npm
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run typecheck
-      - run: npm test
+      - name: Instalar dependências (npm ci)
+        run: npm ci
+      - name: Validar boas práticas de código (ESLint)
+        run: npm run lint
+      - name: Verificar tipagem estrita (TypeScript)
+        run: npm run typecheck
+      - name: Executar testes de regras, segurança e UI (Vitest)
+        run: npm test
   postgres:
-    name: Database integrity
+    name: 2. Concorrência e Banco Real (PostgreSQL 17)
     runs-on: ubuntu-24.04
     timeout-minutes: 12
     services:
@@ -46,36 +54,47 @@ jobs:
     env:
       TEST_DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/priscilla_test
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Baixar código do repositório
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      - name: Configurar Node.js 24
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: '24'
           cache: npm
-      - run: npm ci
-      - run: npm run test:postgres
+      - name: Instalar dependências (npm ci)
+        run: npm ci
+      - name: Testar transações e reservas simultâneas no PostgreSQL
+        run: npm run test:postgres
   browser:
-    name: Production build and booking
+    name: 3. Build de Produção e Navegador Real (Playwright)
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     env:
       NEXT_TELEMETRY_DISABLED: '1'
       NEXT_PUBLIC_SITE_URL: http://127.0.0.1:3000
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Baixar código do repositório
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      - name: Configurar Node.js 24
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: '24'
           cache: npm
-      - run: npm ci
-      - run: npx playwright install --only-shell chromium
+      - name: Instalar dependências (npm ci)
+        run: npm ci
+      - name: Instalar navegador Google Chromium (Playwright)
+        run: npx playwright install --only-shell chromium
         timeout-minutes: 5
-      - run: npm run build
-      - run: npm run test:ci-browser
-      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+      - name: Gerar build de produção (Next.js)
+        run: npm run build
+      - name: Simular agendamento do aluno e painel da gestora no navegador
+        run: npm run test:ci-browser
+      - name: Salvar diagnóstico em caso de falha visual
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: failure()
         with:
           name: browser-failure
@@ -88,8 +107,100 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 2
     steps:
-      - name: Require every check to succeed
+      - name: Aprovar liberação para merge e deploy na Vercel
         env:
           RESULTS: ${{ toJSON(needs) }}
         run: |
           node -e 'const jobs=JSON.parse(process.env.RESULTS); for(const [name,job] of Object.entries(jobs)){if(job.result!=="success"){console.error(`${name}: ${job.result}`);process.exit(1)}}'
+  vercel:
+    name: 4. Publicação na Vercel (Deploy Ativo)
+    needs: [gate]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - name: Confirmar publicação e domínio ativo na Vercel
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          TARGET_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          IS_PR: ${{ github.event_name == 'pull_request' }}
+        run: |
+          node -e '
+            const fs = require("node:fs");
+            const repo = process.env.REPO;
+            const sha = process.env.TARGET_SHA;
+            const token = process.env.GH_TOKEN;
+            const headers = {
+              Accept: "application/vnd.github+json",
+              Authorization: `Bearer ${token}`,
+              "User-Agent": "priscilla-ci-vercel-verify",
+            };
+
+            async function fetchJson(url) {
+              const res = await fetch(url, { headers });
+              if (!res.ok) throw new Error(`HTTP ${res.status} on ${url}`);
+              return res.json();
+            }
+
+            async function checkVercel() {
+              const statusData = await fetchJson(`https://api.github.com/repos/${repo}/commits/${sha}/status`);
+              const vercelStatus = (statusData.statuses || []).find((s) => s.context === "Vercel");
+              const deployments = await fetchJson(`https://api.github.com/repos/${repo}/deployments?sha=${sha}&per_page=5`);
+
+              let deployState = null;
+              let envName = process.env.IS_PR === "true" ? "Preview" : "Production";
+              let envUrl = "";
+              let dashboardUrl = vercelStatus?.target_url || "";
+
+              if (Array.isArray(deployments) && deployments.length > 0) {
+                const latest = deployments[0];
+                envName = latest.environment || envName;
+                const statuses = await fetchJson(`https://api.github.com/repos/${repo}/deployments/${latest.id}/statuses?per_page=5`);
+                if (Array.isArray(statuses) && statuses.length > 0) {
+                  deployState = statuses[0].state;
+                  envUrl = statuses[0].environment_url || statuses[0].target_url || "";
+                  dashboardUrl = dashboardUrl || statuses[0].target_url || "";
+                }
+              }
+
+              const commitState = vercelStatus?.state || null;
+              if (commitState === "failure" || commitState === "error" || deployState === "failure" || deployState === "error") {
+                throw new Error(`Falha reportada pela Vercel (commit=${commitState}, deploy=${deployState})`);
+              }
+
+              if (commitState === "success" || deployState === "success") {
+                return { done: true, envName, envUrl, dashboardUrl, description: vercelStatus?.description || "Deployment has completed" };
+              }
+
+              return { done: false, commitState, deployState };
+            }
+
+            (async () => {
+              const maxAttempts = 48;
+              for (let i = 1; i <= maxAttempts; i++) {
+                const res = await checkVercel();
+                if (res.done) {
+                  console.log(`✅ Deploy confirmado na Vercel (${res.envName}): ${res.envUrl || res.dashboardUrl}`);
+                  if (process.env.GITHUB_STEP_SUMMARY) {
+                    const summary = [
+                      "### 🚀 Publicação na Vercel Confirmada",
+                      "",
+                      "| Item | Detalhe |",
+                      "| :--- | :--- |",
+                      `| **Status** | ✅ Publicado com sucesso (${res.description}) |`,
+                      `| **Ambiente** | \`${res.envName}\` |`,
+                      `| **Commit SHA** | \`${sha.slice(0, 7)}\` |`,
+                      res.envUrl ? `| **URL da Publicação** | [${res.envUrl}](${res.envUrl}) |` : "",
+                      res.dashboardUrl ? `| **Painel da Vercel** | [Ver detalhes do deploy](${res.dashboardUrl}) |` : "",
+                    ].filter(Boolean).join("\n");
+                    fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary + "\n");
+                  }
+                  process.exit(0);
+                }
+                console.log(`[Tentativa ${i}/${maxAttempts}] Aguardando confirmação final da Vercel (commit=${res.commitState ?? "pendente"}, deploy=${res.deployState ?? "pendente"})...`);
+                await new Promise((r) => setTimeout(r, 5000));
+              }
+              console.error("Tempo limite excedido aguardando confirmação de deploy da Vercel.");
+              process.exit(1);
+            })();
+          '
